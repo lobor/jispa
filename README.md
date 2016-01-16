@@ -6,4 +6,6 @@ J'ai utilisé ce [tuto](http://raspipress.com/2013/05/install-and-run-raspbian-f
 ![Image de l'usb](http://ecx.images-amazon.com/images/I/41hHsY5u-ZL.jpg)
 
 
-
+## Installation de Jasper
+[Jasper](http://jasperproject.github.io/) est un outil d'assistance vocal, comme Siri ou "Ok Google".
+Mais il faut transcrire la voix en texte, et le texte en voix
