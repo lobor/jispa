@@ -17,4 +17,4 @@ pico2wave -l fr-FR -w test.wav "Faites demi-tour dès que possible !" && aplay t
 
 ## Installation de Speech To Text (STT)
 Après reflexion, j'ai choisi d'avoir une interface utilisateur basé sur les techno web, et plus spécialement d'utiliser 
-[Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). Il existe [annyang](https://github.com/TalAter/annyang) qui permet d'en faire simplement. Or il faut lancer le navigateur web pour acceéder a l'interface. Alors une app [electron](http://electron.atom.io/) est donc crée, que se chargera automatiquement au redémarrage du raspberry pie
+[Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). Il existe [annyang](https://github.com/TalAter/annyang) qui permet d'en faire simplement. Or il faut lancer le navigateur web pour acceéder a l'interface. Alors une app [electron](http://electron.atom.io/) est donc crée, que se chargera automatiquement au redémarrage du raspberry pie et qui écoutera par le biais du micro le son.
