@@ -1,0 +1,42 @@
+{
+  "name": "server_web",
+  "version": "1.0.0",
+  "description": "Rasp",
+  "main": "electron.js",
+  "scripts": {
+    "start": "electron electron.js",
+    "compile": "browserify front/src/js/app.js -o front/assets/js/script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular-jwt": "0.0.9",
+    "angular-moment": "^1.0.0-beta.3",
+    "angular-socket-io": "^0.7.0",
+    "angular-ui-router": "^0.2.17",
+    "annyang": "^1.0.1",
+    "blessed": "^0.1.81",
+    "browserify": "^13.0.0",
+    "coffee-script": "^1.10.0",
+    "event-stream": "^3.3.2",
+    "express": "^4.13.4",
+    "express-jwt": "^3.3.0",
+    "express-session": "^1.13.0",
+    "express.io": "^1.1.13",
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "html-browserify": "0.0.6",
+    "jsonwebtoken": "^5.5.4",
+    "nib": "^1.1.0",
+    "picotts": "^0.1.1",
+    "q": "^1.4.1",
+    "require-dir": "^0.3.0",
+    "stylus": "^0.53.0",
+    "uglify": "^0.1.5",
+    "uglify-js": "^2.6.1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}

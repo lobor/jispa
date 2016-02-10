@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html  lang="fr" ng-app="raspberrypi">
+	<head>
+		<meta charset="utf-8">
+		<title>Raspberry pi</title>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<!--<script async src="../script/mespeak/mespeak.full.custom.js"></script>-->
+		<script async src="../app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+	</head>
+	<body class="ionic-body" ng-class="{'open-menu' : (openMenu),  'open-talk': openTalk}">
+    <div ui-view="header"></div>
+    
+    <div ui-view="content">
+    </div>
+    
+    
+    <div ui-view="footer"></div>
+	</body>
+</html>

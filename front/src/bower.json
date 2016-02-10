@@ -1,0 +1,22 @@
+{
+  "name": "src",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "directory": "./bower_components",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic-stylus": "MacNCheeze/ionic-stylus",
+    "angular-ui-router": "^0.2.17",
+    "annyang": "^2.2.1",
+    "animate.css": "^3.5.1"
+  }
+}
