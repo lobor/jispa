@@ -4,35 +4,29 @@
 		<meta charset="utf-8">
 		<title>Raspberry pi</title>
 
-		<script src="/socket.io/socket.io.js"></script>
+		<script async src="./node_modules/babel-polyfill/dist/polyfill.js"></script>
+		<script async src="./front/assets/js/script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="./front/assets/css/style.css">
+    <script>
+      // window.onload = function(){
+      //   var babelTransform = window.Babel.transform(require('fs').readFileSync('./front/src/js/app.js'), { presets: ['es2015'] });
+      //   var script = document.createElement('script');
+      //   script.innerHTML = babelTransform.code;
+      //   document.getElementsByTagName('body')[0].appendChild(script);
+      // }
+    </script>
 	</head>
 	<body class="ionic-body" ng-class="{'open-menu' : (openMenu),  'open-talk': openTalk}">
     <div ui-view="header"></div>
     
     <div ui-view="content">
     </div>
-    <button id="start">start</button>
-    <button id="stop">stop</button>
+    
     
     <div ui-view="footer"></div>
-    <script>
-      var socket = window.io.connect();
-      var start = document.getElementById('start');
-      start.onclick = function push(){
-        socket.emit('start', function(){
-        
-        });
-      };
-      var stop = document.getElementById('stop');
-      stop.onclick = function push(){
-        socket.emit('stop', function(){
-        
-        });
-      };
-    </script>
 	</body>
 </html>

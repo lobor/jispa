@@ -194,7 +194,6 @@
 
         invokeCallbacks(callbacks.result, results);
         
-        console.log(results);
         // var data = results;
         return vm.customCallCommands(results);
       };

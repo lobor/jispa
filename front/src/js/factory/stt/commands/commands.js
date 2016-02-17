@@ -34,115 +34,68 @@ module.exports = ['$state', '$http', 'moment', function($state, $http, moment){
   var _ = {
     random: random
   };
+  var synth = window.speechSynthesis,
+      voices;
+      
+  synth.onvoiceschanged = function(){
+    voices = synth.getVoices();
+  };
+  
+  
+      
   
   function createElement (msg, style){
-      var li = document.createElement('li');
-      li.className = "animated"
-      li.innerHTML = msg;
-      if(style){
-        li.className += " fadeInLeft"
-        li.style.textAlign = 'right';
+    var li = document.createElement('li');
+    li.className = "animated"
+    li.innerHTML = msg;
+    if(style){
+      li.className += " fadeInLeft"
+      li.style.textAlign = 'right';
+    }
+    else{
+      li.className += " fadeInRight";
+      if(undefined !== window.su){
+        window.su.lang = "fr";
+        window.su.text = msg;
+        synth.speak(window.su);
       }
       else{
-        li.className += " fadeInRight"
-        meSpeak.speak(msg);
-      }
-      service.talk.appendChild(li);
-    }
-  
-  var service = {
-    random: random,
-    talk : document.getElementsByClassName('talk-to-talk')[0],
-    createElement: createElement,
-    commands: {
-        // navigation site
-        'menu :page':  function(page){
-          var state = 'home';
-          if (false === /(accueil|home)/.test(page.toLowerCase())){
-            state += '.' + page;
-          }
-          $state.go(state);
-          createElement("page " + page, false);
-        },
         
-        // Api key google search: AIzaSyBrQy7Ju5oAndxcNQKP9kGqFvAeXcR3Yto
-        // "recherche des images de :subject": function(subject){
-        //   var search = require('image-search');
-        //   $http({
+      }
+      // meSpeak.speak(msg);
+    }
+    if(undefined === service.talk)
+      service.talk = document.getElementsByClassName('talk-to-talk')[0];
+    service.talk.appendChild(li);
+  }
+    var	service = {
+      random: random,
+      talk : document.getElementsByClassName('talk-to-talk')[0],
+      createElement: createElement,
+      commands: {
+          // navigation site
+          'menu *page':  function(page){
+            var state = 'home';
+            if (false === /(accueil|home)/.test(page.toLowerCase())){
+              state += '.' + page;
+            }
+            $state.go(state);
+            createElement("page " + page, false);
+          },
+          
+          // Api key google search: AIzaSyBrQy7Ju5oAndxcNQKP9kGqFvAeXcR3Yto
+          // "recherche des images de :subject": function(subject){
+          //   var search = require('image-search');
+            //   $http({
         //     url: 'https://www.googleapis.com/customsearch/v1?key=AIzaSyBrQy7Ju5oAndxcNQKP9kGqFvAeXcR3Yto&q=' + subject
         //   })
         // },
         
         // TODO : il manque la nomination des jours comme mercredi, lundi prochain etc...
-        'quel temps fait-il(:jour)': {
+        'donne-moi la météo': meteo,
+        'quel temps :temps (:jour)': {
           'regexp': /^quel temps (fait-il|il fait|fera-t-il|il fera) ?(aujourd'hui|demain)?$/, 
-          'callback': function(temps, jour){
-            $http({
-                url: 'http://www.infoclimat.fr/public-api/gfs/json?_ll=48.85341,2.3488&_auth=ARtXQAV7ACJfcgYxAHYELVY%2BVWAPeQUiCnYAYw5rUi8HbABhBWVUMlA%2BA34HKAcxVnsGZVphVGRWPQR8CnhSMwFrVzsFbgBnXzAGYwAvBC9WeFU0Dy8FIgphAGIOfVIwB2IAbQV4VDdQOQNnBykHMlZmBmFaelRzVjQEZwpiUjUBYFc0BWUAZV8zBm0ALwQvVmBVMw9hBWgKbgBjDjBSYwcwADAFblQyUD4DYQcpBzJWbQZiWmdUa1YwBGIKZ1IuAX1XSgUVAH9fcAYmAGUEdlZ4VWAPbgVp&_c=69d289c0d05daf6339b59db34cb984af',
-              })
-              .then(function(response){
-                var date = moment(),
-                    formatSearch,
-                    data = response.data,
-                    keys = Object.keys(data),
-                    length = keys.length,
-                    regexp,
-                    text = '',
-                    meteoDay;
-                    
-                if("aujourd'hui" === jour || "" === jour){
-                  formatSearch = date.format('YYYY-MM-DD');
-                }
-                else{
-                  text += '';
-                }
-                
-                if("demain" === jour){
-                  formatSearch = date.day(1).format('YYYY-MM-DD');
-                }
-                if("après-demain" === jour){
-                  formatSearch = date.day(2).format('YYYY-MM-DD');
-                }
-                else{
-                  
-                }
-                
-                var regexp = new RegExp(formatSearch);
-                for(var i = 0; length > i; i++){
-                  if(true === regexp.test(keys[i])){
-                    console.log(keys[i], data[keys[i]]);
-                    meteoDay = data[keys[i]];
-                    i = length;
-                  }
-                };
-                
-                // meteoDay.temperature
-                console.log(meteoDay);
-                if(meteoDay){
-                  if(meteoDay.pluie){
-                    text += 'Il va pleuvoir';
-                  }
-                  else {
-                    text += 'Il ne va pas pleuvoir';
-                  }
-                  
-                  if(meteoDay.pluie_convective){
-                    text += ' sous forme d\'averse'
-                  }
-                  
-                  if("oui" === meteoDay.risque_neige){
-                    text += ' Il y aura des risques de neige'
-                  }
-                }
-                else{
-                  text = "Cette commande m'est inconnue";
-                }
-                
-                createElement(text, false);
-              }, function(){
-                createElement("Je n'ai pas pu récuperer la météo", false);
-              });
-          }
+          'callback': meteo
         },
         
         
@@ -165,8 +118,9 @@ module.exports = ['$state', '$http', 'moment', function($state, $http, moment){
         
         
         // formule usuel
-        'salut (raspi)': {
-          "regexp":"(salut|bonjour) (raspi)",
+        'bonjour': createElement.bind(undefined, 'Salut comment vas-tu ?', false),
+        'salut( raspi)': {
+          "regexp":"(salut|bonjour)( raspi)?",
           "callback": function(){
             createElement('Salut comment vas-tu ?', false);
           }
@@ -259,16 +213,80 @@ module.exports = ['$state', '$http', 'moment', function($state, $http, moment){
     };
   
     function timeToday(){
-      createElement('Il est ' + moment().format('HH:mm:ss'), false);
+      createElement('Il est ' + moment().format('HH:mm'), false);
     }
     
     function dateToday(){
       createElement('Nous sommes le ' + moment().format('DD MM YYYY'), false);
     }
-    var su = new SpeechSynthesisUtterance();
-      console.log(su)
-      su.lang = "fr";
-      su.text = "Salut ça va ?";
-      speechSynthesis.speak(su);
+    
+    function meteo(temps, jour){
+            $http({
+                url: 'http://www.infoclimat.fr/public-api/gfs/json?_ll=48.85341,2.3488&_auth=ARtXQAV7ACJfcgYxAHYELVY%2BVWAPeQUiCnYAYw5rUi8HbABhBWVUMlA%2BA34HKAcxVnsGZVphVGRWPQR8CnhSMwFrVzsFbgBnXzAGYwAvBC9WeFU0Dy8FIgphAGIOfVIwB2IAbQV4VDdQOQNnBykHMlZmBmFaelRzVjQEZwpiUjUBYFc0BWUAZV8zBm0ALwQvVmBVMw9hBWgKbgBjDjBSYwcwADAFblQyUD4DYQcpBzJWbQZiWmdUa1YwBGIKZ1IuAX1XSgUVAH9fcAYmAGUEdlZ4VWAPbgVp&_c=69d289c0d05daf6339b59db34cb984af',
+              })
+              .then(function(response){
+                var date = moment(),
+                    formatSearch,
+                    data = response.data,
+                    keys = Object.keys(data),
+                    length = keys.length,
+                    regexp,
+                    text = '',
+                    meteoDay;
+                    
+                if("aujourd'hui" === jour || "" === jour){
+                  formatSearch = date.format('YYYY-MM-DD');
+                }
+                else{
+                  text += '';
+                }
+                
+                if("demain" === jour){
+                  formatSearch = date.day(1).format('YYYY-MM-DD');
+                }
+                if("après-demain" === jour){
+                  formatSearch = date.day(2).format('YYYY-MM-DD');
+                }
+                else{
+                  
+                }
+                
+                var regexp = new RegExp(formatSearch);
+                for(var i = 0; length > i; i++){
+                  if(true === regexp.test(keys[i])){
+                    console.log(keys[i], data[keys[i]]);
+                    meteoDay = data[keys[i]];
+                    i = length;
+                  }
+                };
+                
+                // meteoDay.temperature
+                console.log(meteoDay);
+                if(meteoDay){
+                  if(meteoDay.pluie){
+                    text += 'Il va pleuvoir';
+                  }
+                  else {
+                    text += 'Il ne va pas pleuvoir';
+                  }
+                  
+                  if(meteoDay.pluie_convective){
+                    text += ' sous forme d\'averse'
+                  }
+                  
+                  if("oui" === meteoDay.risque_neige){
+                    text += ' Il y aura des risques de neige'
+                  }
+                }
+                else{
+                  text = "Cette commande m'est inconnue";
+                }
+                
+                createElement(text, false);
+              }, function(){
+                createElement("Je n'ai pas pu récuperer la météo", false);
+              });
+          }
+    
     return service;
 }];

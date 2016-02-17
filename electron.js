@@ -1,7 +1,8 @@
 'use strict';
 
-require('./server');
+// require('./server');
 const electron = require('electron');
+const ipcMain = electron.ipcMain;
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
@@ -22,19 +23,34 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({
+    enableLargerThanScreen: true
+  });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/front/src/js/html/layout.html');
+  mainWindow.loadURL('file://' + __dirname + '/layout.html');
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  var webContents = mainWindow.webContents;
+  
+  webContents.openDevTools();
+  
+  ipcMain.on('launch-cmd', function(event, cmd) {
+    var exec = require('child_process').exec;
+    exec(cmd, function(error, stdout, stderr){
+      event.sender.send('launch-cmd-reply', {error:error, stdout:stdout, stderr:stderr});
+    });
+  });
 
+  ipcMain.on('restart', function(event) {
+    webContents.reload();
+  });
+ 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWindow = null;
+    // mainWindow = null;
   });
 });

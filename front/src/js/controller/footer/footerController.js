@@ -1,4 +1,5 @@
 module.exports = ['$scope', function footerController($scope) {
+  
   // $scope.$on('micro::start', function microStart() {
   //   stt.setDebug(true).start();
   // });

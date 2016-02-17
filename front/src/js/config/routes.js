@@ -9,11 +9,11 @@ module.exports = ['$stateProvider', '$urlRouterProvider', '$locationProvider', f
           url: "/login",
           views: {
             "content@": { 
-              template: require("./../controller/login/templates/login.html"),
+              template: require("html!./../controller/login/templates/login.html"),
               controller: 'loginController'
             },
             "header": { 
-              template: require("./../controller/login/templates/header.html"),
+              template: require("html!./../controller/login/templates/header.html"),
             },
           }
         })
@@ -21,11 +21,11 @@ module.exports = ['$stateProvider', '$urlRouterProvider', '$locationProvider', f
           url: "/",
           views: {
             "header": { 
-              template: require("./../controller/header/templates/header.html"),
+              template: require("html!./../controller/header/templates/header.html"),
               controller: 'headerController'
             },
             "footer": { 
-              template: require("./../controller/footer/templates/layout.html"),
+              template: require("html!./../controller/footer/templates/layout.html"),
               controller: "footerController"
             },
             "content@": { 
@@ -37,7 +37,7 @@ module.exports = ['$stateProvider', '$urlRouterProvider', '$locationProvider', f
           url: 'config',
           views: {
             "content@": {
-              template: require("./../controller/config/templates/config.html"),
+              template: require("html!./../controller/config/templates/config.html"),
               controller: 'configController'
             }
           }

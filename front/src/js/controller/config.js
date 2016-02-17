@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     name: 'headerController',
     controller: require('./header/headerController.js'),
@@ -15,4 +15,4 @@ module.exports = [
     name: 'footerController',
     controller: require('./footer/footerController.js'),
   }
-];
+]

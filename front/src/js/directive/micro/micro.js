@@ -1,5 +1,5 @@
 module.exports = ['stt', function(stt){
-  var template = require('./templates/micro.html');
+  var template = require('html!./templates/micro.html');
   
   var mobilecheck = function () {
     var check = false;
@@ -7,7 +7,7 @@ module.exports = ['stt', function(stt){
     return check;
   }()
   if(mobilecheck){
-    template = require('./templates/input.html');
+    template = require('html!./templates/input.html');
   }
   return {
     template: template,
