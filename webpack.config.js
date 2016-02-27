@@ -1,10 +1,10 @@
 var BrowserConsoleBuildErrorPlugin = require('browser-console-build-error-webpack-plugin');
  
 module.exports = {
-    entry: "./front/src/js/app.js",
+    entry: "./src/js/app.js",
     output: {
         path: __dirname,
-        filename: "./front/assets/js/script.js",
+        filename: "./assets/js/script.js",
     },
     devtool: 'source-map',
     module: {

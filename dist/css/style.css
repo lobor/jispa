@@ -1,0 +1,94 @@
+@import "../../node_modules/ionicons/dist/css/ionicons.css";
+@import "../../node_modules/animate.css/animate.css";
+body {
+  padding-top: 44px !important;
+  transition: margin-left;
+  transition-duration: 0.5s;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+body .side-bar-menu {
+  border-right: 1px solid #ddd;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+  left: 0;
+  z-index: 1;
+  width: 0;
+  overflow: hidden;
+  transition: width;
+  transition-duration: 0.5s;
+}
+body .bar-header {
+  transition: left;
+  transition-duration: 0.5s;
+}
+body.open-menu {
+  margin-left: calc(100% - 45px);
+}
+body.open-menu .bar-header {
+  left: calc(100% - 45px);
+  position: initial;
+  margin-top: -44px;
+}
+body.open-menu .side-bar-menu {
+  width: calc(100% - 45px);
+}
+.talk-to-talk {
+  display: none;
+  border: 1px solid #000;
+  width: 100%;
+}
+.tab-item.input-micro {
+  max-width: 100%;
+  flex-direction: row;
+  display: flex;
+}
+.tab-item.input-micro form {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.tab-item.input-micro form button {
+  height: 100%;
+}
+.bar-header .ion-close-round {
+  display: none;
+}
+.open-talk {
+  padding-top: 0px !important;
+}
+.open-talk .bar-header .ion-close-round {
+  display: block;
+}
+.open-talk [ui-view="footer"] {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.open-talk [ui-view="footer"] .tabs {
+  background: rgba(6,5,5,0.91);
+  color: #fff;
+  padding-top: 44px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+  justify-content: space-between;
+}
+.open-talk .tab-item {
+  flex: 0;
+  min-height: 70px;
+  min-width: 100%;
+  padding-top: 12px;
+}
+.open-talk .talk-to-talk {
+  display: block;
+  flex: 1;
+}
+.open-talk .input-micro {
+  min-height: 40px !important;
+  flex: 0;
+}

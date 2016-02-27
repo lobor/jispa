@@ -2,6 +2,7 @@
 
 // require('./server');
 const electron = require('electron');
+const server = require('./server.js');
 const ipcMain = electron.ipcMain;
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
@@ -28,7 +29,7 @@ app.on('ready', function() {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/layout.html');
+  mainWindow.loadURL('http://localhost:8080/');
 
   // Open the DevTools.
   var webContents = mainWindow.webContents;
