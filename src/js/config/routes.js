@@ -29,7 +29,8 @@ module.exports = ['$stateProvider', '$urlRouterProvider', '$locationProvider', f
               controller: "footerController"
             },
             "content@": { 
-              template: '',
+              template: require("html!./../controller/home/templates/home.html"),
+              controller: "homeController"
             },
           }
         })

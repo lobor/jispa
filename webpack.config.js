@@ -4,7 +4,7 @@ module.exports = {
     entry: "./src/js/app.js",
     output: {
         path: __dirname,
-        filename: "./assets/js/script.js",
+        filename: "./dist/js/script.js",
     },
     devtool: 'source-map',
     module: {
@@ -13,12 +13,14 @@ module.exports = {
       ],
       loaders: [
         { test: "\.html$", loader: "html" },
-        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}
+        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},
+        { test: /\.json$/, loader: "json-loader"}
       ]
     },
     node: {
       fs: "empty",
       child_process: "empty",
+      // jsdom: "empty",
     },
     "target": "atom",
     resolveLoader: {

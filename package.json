@@ -7,7 +7,7 @@
     "build": "npm run compileJS && npm start",
     "start": "electron electron.js",
     "compileJS": "webpack --config webpack.config.js",
-    "compileCSS": "stylus src/styl/style.styl --out assets/css/style.css"
+    "compileCSS": "stylus src/styl/style.styl --out dist/css/style.css"
   },
   "babel": {
     "presets": [
@@ -27,12 +27,18 @@
     "babel-core": "^6.5.2",
     "babel-preset-es2015": "^6.5.0",
     "browser-console-build-error-webpack-plugin": "0.0.1",
+    "connect": "^3.4.1",
     "event-stream": "^3.3.2",
     "express": "^4.13.4",
+    "express.io": "^1.1.13",
+    "hson-loader": "^1.0.0",
     "html-loader": "^0.4.0",
     "httpdispatcher": "^1.0.0",
-    "ionic": "^1.7.14",
+    "ionic-sdk": "github:driftyco/ionic",
     "ionicons": "^3.0.0-alpha.3",
+    "is-online": "^5.1.1",
+    "jsdom": "^8.0.4",
+    "json-loader": "^0.5.4",
     "moment": "^2.11.2",
     "natural": "^0.2.1",
     "picotts": "^0.1.1",

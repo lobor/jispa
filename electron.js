@@ -1,9 +1,12 @@
 'use strict';
 
 // require('./server');
-const electron = require('electron');
-const server = require('./server.js');
-const ipcMain = electron.ipcMain;
+const electron = require('electron'),
+      server = require('./server.js');
+
+require('./electron/event.js');
+
+
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
@@ -25,7 +28,14 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    enableLargerThanScreen: true
+    useContentSize: true,
+    title: 'Jaspi',
+    enableLargerThanScreen: true,
+    darkTheme: true,
+    width: 1500,
+    height: 700,
+    // kiosk: true
+    // fullscreen: true
   });
 
   // and load the index.html of the app.
@@ -36,16 +46,6 @@ app.on('ready', function() {
   
   webContents.openDevTools();
   
-  ipcMain.on('launch-cmd', function(event, cmd) {
-    var exec = require('child_process').exec;
-    exec(cmd, function(error, stdout, stderr){
-      event.sender.send('launch-cmd-reply', {error:error, stdout:stdout, stderr:stderr});
-    });
-  });
-
-  ipcMain.on('restart', function(event) {
-    webContents.reload();
-  });
  
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {

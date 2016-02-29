@@ -14,5 +14,9 @@ export default [
   {
     name: 'footerController',
     controller: require('./footer/footerController.js'),
+  },
+  {
+    name: 'homeController',
+    controller: require('./home/homeController.js'),
   }
 ]

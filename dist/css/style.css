@@ -1,5 +1,14 @@
-@import "../../node_modules/ionicons/dist/css/ionicons.css";
+@import "../../node_modules/ionic-sdk/release/css/ionic.css";
 @import "../../node_modules/animate.css/animate.css";
+html,
+body {
+  background-color: #f7f5f2;
+  height: 100%;
+}
+canvas {
+  margin: auto;
+  display: block;
+}
 body {
   padding-top: 44px !important;
   transition: margin-left;
