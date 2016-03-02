@@ -1,29 +1,12 @@
+import { PicoTTS } from './picoTTS.js';
 export class Speech{
   constructor(options){
     this.options = {};
     this.debug = false;
     Object.assign(this.options, options, {lang: "fr"});
-    var Speech = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
-    this.speech = new Speech();
-    this.synth = window.speechSynthesis;
     
     this._getVoice();
     this._setBeep();
-    
-    // this.synth.speak(window.su);
-    
-    // window.su.text = msg;
-      
-    // window.su.onstart = function(){
-    //   stt.stt.pause();
-    //   console.debug('start speech');
-    // }
-    
-    
-    this.speech.onstart = this.constructor._onSpeech.bind(this);
-    this.speech.onend = this.constructor._endSpeech.bind(this);
-    
-    // this.speaker = new 
   }
   
   on(event, cb){
@@ -66,16 +49,31 @@ export class Speech{
     this.log('start speech');
   }
   
+  initPicoTTS(){
+    this.log('init picoTTS')
+    this.synth = new PicoTTS();
+  }
+  
   _setVoices(){
-    if(undefined !== this.options.lang){
+    if(false){
+    // if(undefined !== this.options.lang && 0 !== this.options.lang.length){
       this.speech.lang = this.options.lang; 
+      
+      var Speech = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
+      this.speech = new Speech();
+      
+      this.speech.onstart = this.constructor._onSpeech.bind(this);
+      this.speech.onend = this.constructor._endSpeech.bind(this);
+    }
+    else if(0 !== this.options.lang.length){
+      this.initPicoTTS();
     }
   }
   
   _getVoice(){
+    this.synth = window.speechSynthesis;
     var vm = this;
     vm.synth.onvoiceschanged = function(){
-      console.log(vm.synth.getVoices());
       vm._setVoices(vm.synth.getVoices());
     };
   }

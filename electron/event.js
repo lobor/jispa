@@ -9,7 +9,6 @@ ipcMain.on('launch-cmd', function(event, cmd) {
   });
 });
 
-
 ipcMain.on('restart', function(event) {
   webContents.reload();
 });
