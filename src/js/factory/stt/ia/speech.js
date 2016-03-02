@@ -3,7 +3,8 @@ export class Speech{
     this.options = {};
     this.debug = false;
     Object.assign(this.options, options, {lang: "fr"});
-    this.speech = new SpeechSynthesisUtterance();
+    var Speech = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
+    this.speech = new Speech();
     this.synth = window.speechSynthesis;
     
     this._getVoice();
@@ -74,6 +75,7 @@ export class Speech{
   _getVoice(){
     var vm = this;
     vm.synth.onvoiceschanged = function(){
+      console.log(vm.synth.getVoices());
       vm._setVoices(vm.synth.getVoices());
     };
   }
