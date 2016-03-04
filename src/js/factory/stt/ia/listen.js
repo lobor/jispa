@@ -3,7 +3,26 @@ var name = /^(Jaspi|Jasper)/g;
 
 export class Listen {
   constructor() {
+    // window.navigator.getUserMedia = window.navigator.getUserMedia ||
+    //                      window.navigator.webkitGetUserMedia ||
+    //                      window.navigator.mozGetUserMedia;
+    // console.log(window.navigator.getUserMedia);
+    // if (window.navigator.getUserMedia) {
+    //   window.navigator.getUserMedia({ audio: true},
+    //       function(stream) {
+    //         console.log("ok");
+    //       },
+    //       function(err) {
+    //         console.log("The following error occurred: " + err.name);
+    //       }
+    //   );
+    // } else {
+    //   console.log("getUserMedia not supported");
+    // }
+    
+    
     this.stt = new webkitSpeechRecognition();
+    
     this.init = false;
     this.actif = false;
     this.lastStartedAt = false;

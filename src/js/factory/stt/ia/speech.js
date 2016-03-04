@@ -1,4 +1,5 @@
-import { PicoTTS } from './picoTTS.js';
+import { PicoTTS } from './picoTTS';
+
 export class Speech{
   constructor(options){
     this.options = {};
@@ -50,25 +51,27 @@ export class Speech{
   }
   
   initPicoTTS(){
-    this.log('init picoTTS')
+    this.log('init picoTTS');
     this.synth = new PicoTTS();
   }
   
-  _setVoices(){
-    // if(true){
-    if(undefined !== this.options.lang && 0 !== this.options.lang.length){
+  _setVoices(voices){
+    if(undefined !== this.options.lang && 0 !== voices.length){
       var Speech = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
       this.speech = new Speech();
       
       this.speech.lang = this.options.lang; 
       
-      
-      
       this.speech.onstart = this.constructor._onSpeech.bind(this);
       this.speech.onend = this.constructor._endSpeech.bind(this);
     }
-    else if(0 !== this.options.lang.length){
-      this.initPicoTTS();
+    else if(0 === voices.length){
+      this.log('init picoTTS');
+      this.synth = new PicoTTS();
+      this.speech = {};
+      // this.speech.lang = this.options.lang;
+      
+      // this.initPicoTTS();
     }
   }
   

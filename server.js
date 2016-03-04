@@ -25,6 +25,7 @@ app.io.route('launch-cmd', function(req) {
 });
 
 app.io.route('speak', function(req) {
+  console.log(req.data);
   exec('pico2wave -l fr-FR -w ./test.wav "' + req.data + '" && aplay ./test.wav', function(){
     
   });

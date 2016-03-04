@@ -65,6 +65,10 @@ module.exports = {
       "text": "cherche des photos de",
     },
     {
+      "label": "functionSearch",
+      "text": "cherche des videos de",
+    },
+    {
       "label": "functionCloseWindow",
       "text": "ferme la fenetre",
     },
