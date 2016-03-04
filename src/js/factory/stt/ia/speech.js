@@ -55,12 +55,14 @@ export class Speech{
   }
   
   _setVoices(){
-    if(false){
-    // if(undefined !== this.options.lang && 0 !== this.options.lang.length){
-      this.speech.lang = this.options.lang; 
-      
+    // if(true){
+    if(undefined !== this.options.lang && 0 !== this.options.lang.length){
       var Speech = window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
       this.speech = new Speech();
+      
+      this.speech.lang = this.options.lang; 
+      
+      
       
       this.speech.onstart = this.constructor._onSpeech.bind(this);
       this.speech.onend = this.constructor._endSpeech.bind(this);
