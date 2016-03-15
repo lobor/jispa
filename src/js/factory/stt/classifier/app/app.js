@@ -1,34 +1,5 @@
 var Q = require('q');
-    var responseRamdom = {
-      "usual": [
-        "On fait quoi aujourd'hui ?",
-        "Quoi de neuf ?",
-      ],
-      "state": [
-        "Ca va merci",
-        "Pas très bien aujourd'hui",
-        "Pas très bien",
-        "Bof bof",
-        "Super bien",
-        "Je pète la forme",
-      ],
-      "insulte": [
-        'Je vais être clair, je vais te taper',
-        'Laisse moi tranquil',
-        'Va là-bas',
-        'tchuuiiiip',
-        'tchuip',
-        'tchip',
-      ],
-      "comprehension":[
-        "Je n'ai pas compris",
-        "Tu peux répéter s'il de plait",
-        "Je ne comprends pas",
-        "Comment ?",
-        "Quoi ?",
-      ]
-    };
-    
+
 module.exports = {
   docs: [
     {
@@ -38,84 +9,125 @@ module.exports = {
       ]
     },
     {
-      "label": "salut",
+      "label": "hi",
       "text": [
-        "salut",
-        "bonjour"
+        "hi",
+        "hello"
       ]
+    },
+    {
+      "label": "fine thank you",
+      "text": "how are you"
+    },
+    {
+      "label": "functionAge",
+      "text": "how old are you"
     },
     {
       "label": "functionName",
-      "text": "comment tu t'appelles"
+      "text": [
+        "what's your name"
+      ]
     },
     {
-      "label": "je suis en développement",
-      "text": "dans quel etat es tu"
+      "label": "it's you",
+      "text": [
+        "ass hole",
+      ]
+    },
+    {
+      "label": "functionWeather",
+      "text": "give-me the weather"
     },
     {
       "label": "functionOnline",
-      "text": "il y a internet",
-    },
-    {
-      "label": "functionOnline",
-      "text": "test internet",
+      "text": "you are online",
     },
     {
       "label": "functionSearch",
-      "text": "cherche des photos de",
-    },
-    {
-      "label": "functionSearch",
-      "text": "cherche des videos de",
+      "text": "look for on internet"
     },
     {
       "label": "functionCloseWindow",
-      "text": "ferme la fenetre",
-    },
-    {
-      "label": "je suis en développement",
-      "text": "dans quel etat es tu"
+      "text": "close the window"
     },
     {
       "label": "functionCompile",
-      "text": [
-        "compil",
-        "compile",
-        "javascript"
-      ]
+      "text": "build the javascript"
     },
     {
       "label": "functionRestart",
-      "text": [
-        "reboot",
-        "restart",
-        "relance toi"
-      ]
+      "text": "reload the url"
     },
     {
       "label": "functionTime",
-      "text": [
-        "quelle heure il est",
-        "il est quelle heure"
-      ]
-    },
-    {
-      "label": "functionTime",
-      "text": "donne moi l'heure"
+      "text": "what time is it"
     },
   ],
   "function": {
+    functionAge(){
+      var result = moment.range(window.Settings.firstLoad, new Date());
+      var text = '';
+      
+      if(result.diff('years')){
+        text += result.diff('years') + ' ans';
+      }
+      else if(result.diff('months')){
+        text += result.diff('months') + ' mois';
+      }
+      else if(result.diff('days')){
+        text += result.diff('days') + ' jours';
+      }
+      else if(result.diff('hours')){
+        text += result.diff('hours') + ' heure';
+      }
+      else if(result.diff('minutes')){
+        text += result.diff('minutes') + ' minutes';
+      }
+      return "j'ai " + text;
+    },
+    
+    
+    
+    functionWeather(result, classifier){
+      var defer = Q.defer(),
+          ls = this.inject.get('ls'),
+          city = result;
+          
+      classifier = this.classifier.backClassify(classifier);
+      for(var i = 0; i < classifier.length; i++){
+        city = city.replace(classifier[i], '');
+      }
+      
+      city = city.replace(' à ', '');
+      if('' === city)
+        city = "chelles";
+        
+      ls
+        .get(`meteo::${city}`, {
+            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=fr&units=metric&appid=922acb7e29082fc1af198d2040aa4b3d`,
+          }, function(data){
+            defer.resolve(`Aujourd'hui il fait ${data.main.temp.toFixed(0)} degrés avec un temps ${data.weather[0].description}`);
+          }, function(){
+            defer.resolve("i could not retrieve weather");
+          });
+          
+      return defer.promise;
+    },
+    
+    
+    
     functionCloseWindow(result){
       if(this.win){
         this.win.destroy();
-        return 'je ferme la fenetre';
+        return 'i close the window';
       }
       else{
-        return 'aucune fenetre est ouverte';
+        return 'any window is open';
       }
     },
     functionSearch(result){
-      this.speech.speak('je lance la recherche');
+      this.speech.speak('i run search');
       
       if(!this.win){
         const BrowserWindow = require('electron').remote.BrowserWindow;
@@ -124,23 +136,55 @@ module.exports = {
           this.win = null;
         }.bind(this));
       }
-      console.log(result);
-      this.win.loadURL('https://www.google.com/search?hl=fr&site=imghp&tbm=isch&q=' + result.replace('affiche des photos de ', ''));
+      
+      var query = result.replace(/(affiche ?|affiches ?|cherche ?|recherche ?|va ?)?(-moi)?(des |les |la |le |de |une |un |sur )?(photos |images |vidéos |informations )?(de )?/g, '')
+      var params = '';
+      var siteName = '';
+      
+      if(/va/g.test(result)){
+        siteName = query;
+      }
+      else{
+        console.log(5);
+        siteName = 'google';
+        var tbm, site; 
+        if(/vidéo/g.test(result)){
+          site = 'imghp';
+          tbm = 'vid';
+        }
+        else if(/(photos|images)/g.test(result)){
+          site = 'imghp';
+          tbm = 'isch';
+        }
+        else{
+          site = '';
+          tbm = '';
+          query = result.replace(/^(affiche ?|affiches ?|cherche ?|recherche ?)?(-moi ?)/g, '');
+        }
+        console.log(siteName, tbm, site, query);
+        params = `search?hl=fr&site=${site}&tbm=${tbm}&q=${query}`;
+      }
+      
+      var url = `https://www.${siteName}.com/${params}`;
+      console.log(url);
+      // 'https://www.google.com/search?hl=fr&site=' + search.site + '&tbm=' + search.tbm + '&q=' + result
+      
+      this.win.loadURL(url);
       this.win.show();
       return '';
     },
     functionOnline() {
-      return navigator.onLine ? "Il y a internet" : "Il n'y a pas internet";
+      return navigator.onLine ? "yes" : "no";
     },
     functionCompile() {
       var defer = Q.defer();
-      this.speech.speak('je lance la compilation');
+      this.speech.speak('i run the compilation');
       io.emit('launch-cmd', 'npm run compileJS', function(arg){
         if(arg){
-          defer.resolve('La compilation est finit');
+          defer.resolve('the compilation is finished');
         }
         else{
-          defer.resolve('Une erreur est apparue lors de la compilation');
+          defer.resolve('an error occurred while compiling');
         }
       });
       return defer.promise;
@@ -157,7 +201,7 @@ module.exports = {
     },
     
     functionName(){
-      return "Je m'appelle Jaspi";
+      return "Je m'appelle " + window.Settings.name;
     }
   }
 };

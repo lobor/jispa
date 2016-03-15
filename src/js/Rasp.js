@@ -1,5 +1,6 @@
 import controller from './controller/config.js';
 import factory from './factory/config.js';
+
 export class Rasp{
   constructor(){
     console.log('Init RaspApp');

@@ -20,7 +20,6 @@ module.exports = {
     node: {
       fs: "empty",
       child_process: "empty",
-      // jsdom: "empty",
     },
     "target": "atom",
     resolveLoader: {
