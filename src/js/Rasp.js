@@ -1,24 +1,18 @@
-import controller from './controller/config.js';
 import factory from './factory/config.js';
 
 export class Rasp{
   constructor(){
     console.log('Init RaspApp');
-    require('angular-moment')
+    // require('angular-moment')
     this.angular = require('angular')
-      .module('raspberrypi', [require('angular-ui-router'), 'angularMoment'])
-      .run(['amMoment', 'stt', function(amMoment, stt){
-        amMoment.changeLocale('fr');
-        // stt.setDebug(true).start();
-        // $timeout(, 0);
-      }])
+      .module('raspberrypi', [require('angular-ui-router')]);
       // .directive('micro', require('./directive/micro/micro.js'))
-      .constant('angularMomentConfig', {
-          timezone: 'Europe/Paris' 
-      });
-    this.loadController()
-      .loadRoutes()
-      .loadFactory();
+      // .constant('angularMomentConfig', {
+      //     timezone: 'Europe/Paris' 
+      // });
+    // this.loadController()
+      this.loadFactory();
+      this.loadRoutes();
     return this;
   }
   

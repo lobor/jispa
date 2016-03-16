@@ -2,8 +2,7 @@
 
 // require('./server');
 const electron = require('electron'),
-      server = require('./server.js'),
-      ElectronSettings = require('electron-settings');;
+      server = require('./server.js');
 
 require('./electron/event.js');
 

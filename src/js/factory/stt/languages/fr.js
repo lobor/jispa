@@ -19,11 +19,14 @@ module.exports = {
     "il y a internet",
     "tu es connecté à internet"
   ],
+  "go to": [
+    "va sur"
+  ],
   "look for on internet": [
     "affiche",
     "cherche",
     "recherche",
-    "va sur"
+    "trouve"
   ],
   "how are you": [
     "comment vas-tu",
@@ -62,11 +65,21 @@ module.exports = {
   ],
   "i could not retrieve weather": "je n'ai pas pu récupérer la météo",
   "i close the window": "je ferme la fenêtre",
-  "any window is open": "aucune fenetre est ouverte",
+  "any window is open": "aucune fenêtre est ouverte",
   "i run search": "je lance la recherche",
   "yes":"oui",
   "no":"non",
   "i run the compilation":"je lance la compilation",
-  "the compilation is finished":"La compilation est finit",
+  "the compilation is finished": "La compilation est finit",
   "an error occurred while compiling":"Une erreur est apparue lors de la compilation",
-}
+  "i have ${text}":"j'ai ${text}",
+  "i don't understand":"je n'ai pas compris",
+  "close the look for":"ferme la recherche",
+  "leaves search":"quitte la recherche",
+  "let's go to ${query}":"affichage de ${query}",
+  "you are going to be late": "tu vas être en retard",
+  "i record your appointments":"j'enregistre votre rendez-vous de ",
+  "i am ${text}":"j'ai ${text}",
+  "i's me":"c'est moi",
+  "who's speak":"qui parle",
+};

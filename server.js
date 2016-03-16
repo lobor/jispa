@@ -1,8 +1,5 @@
 var app  = require('express.io')(),
-    exec = require('child_process').exec,
-    Q    = require('q'),
-    jsdom = require("jsdom"),
-    url = require('url');
+    exec = require('child_process').exec;
     
 app.http().io();
 

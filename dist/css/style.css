@@ -5,10 +5,6 @@ body {
   background-color: #f7f5f2;
   height: 100%;
 }
-canvas {
-  margin: auto;
-  display: block;
-}
 body {
   padding-top: 44px !important;
   transition: margin-left;
@@ -72,21 +68,6 @@ body.open-menu .side-bar-menu {
 .open-talk .bar-header .ion-close-round {
   display: block;
 }
-.open-talk [ui-view="footer"] {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-.open-talk [ui-view="footer"] .tabs {
-  background: rgba(6,5,5,0.91);
-  color: #fff;
-  padding-top: 44px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 100%;
-  justify-content: space-between;
-}
 .open-talk .tab-item {
   flex: 0;
   min-height: 70px;
@@ -100,4 +81,28 @@ body.open-menu .side-bar-menu {
 .open-talk .input-micro {
   min-height: 40px !important;
   flex: 0;
+}
+.height-100 {
+  height: 100%;
+}
+.display-flex {
+  display: flex;
+}
+.display-block {
+  display: block;
+}
+.display-inline-block {
+  display: inline-block;
+}
+.display-inline {
+  display: inline;
+}
+.flex-direction-row {
+  flex-direction: row;
+}
+.flex-direction-column {
+  flex-direction: column;
+}
+.flex-1 {
+  flex: 1;
 }

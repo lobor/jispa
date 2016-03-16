@@ -3,21 +3,24 @@ var Q = require('q');
 module.exports = {
   docs: [
     {
-      "label": "je n'ai pas compris",
-      "text": [
-        "vf"
-      ]
+      "label": "hi",
+      "text": "hi",
     },
     {
-      "label": "hi",
-      "text": [
-        "hi",
-        "hello"
-      ]
+      "label": "i's me",
+      "text": "who's speak",
+    },
+    {
+      "label": "hello",
+      "text": "hello"
     },
     {
       "label": "fine thank you",
       "text": "how are you"
+    },
+    {
+      "label": "functionMeet",
+      "text": "rappelle-moi que j'ai rendez-vous à "
     },
     {
       "label": "functionAge",
@@ -48,8 +51,16 @@ module.exports = {
       "text": "look for on internet"
     },
     {
-      "label": "functionCloseWindow",
-      "text": "close the window"
+      "label": "functionBrowseUrl",
+      "text": "go to"
+    },
+    {
+      "label": "functionCloseSearch",
+      "text": [
+        "close the window",
+        "close the look for",
+        "leaves search"
+      ]
     },
     {
       "label": "functionCompile",
@@ -65,6 +76,32 @@ module.exports = {
     },
   ],
   "function": {
+    functionMeet(result, classifier){
+      var defer = Q.defer(),
+          date = result;
+      
+      classifier = this.classifier.backClassify(classifier);
+      for(var i = 0; i < classifier.length; i++){
+        date = date.replace(classifier[i], '');
+      }
+      
+      this.speak({
+        template: "i record your appointments ${date}",
+        values: {
+          date: date
+        }
+      });
+      
+      date = date.replace('h', '');
+      
+      var t = 5 * 60 * 1000;
+      setTimeout(function() {
+        defer.resolve("you are going to be late");
+      }, t);
+      
+      return defer.promise;
+    },
+    
     functionAge(){
       var result = moment.range(window.Settings.firstLoad, new Date());
       var text = '';
@@ -79,12 +116,17 @@ module.exports = {
         text += result.diff('days') + ' jours';
       }
       else if(result.diff('hours')){
-        text += result.diff('hours') + ' heure';
+        text += result.diff('hours') + ' heures';
       }
       else if(result.diff('minutes')){
         text += result.diff('minutes') + ' minutes';
       }
-      return "j'ai " + text;
+      return {
+        template: "i am ${text}",
+        values: {
+          text: text
+        }
+      };
     },
     
     
@@ -92,22 +134,44 @@ module.exports = {
     functionWeather(result, classifier){
       var defer = Q.defer(),
           ls = this.inject.get('ls'),
-          city = result;
+          city = result,
+          dates = [{
+            reg: "demain",
+            
+          }],
+          date, reg;
           
+          console.log(city);
+      
       classifier = this.classifier.backClassify(classifier);
       for(var i = 0; i < classifier.length; i++){
         city = city.replace(classifier[i], '');
       }
       
       city = city.replace(' à ', '');
+      
       if('' === city)
         city = "chelles";
+      // for(var i = 0; i < dates.length; i++){
+      //   date = dates[i];
+      //   reg = new RegExp(date, 'g');
+      //   if(reg.test(city)){
+      //     date = 
+      //     i = dates.length;
+      //   }
+      // }
         
       ls
         .get(`meteo::${city}`, {
-            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&lang=fr&units=metric&appid=922acb7e29082fc1af198d2040aa4b3d`,
+            url: `http://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=fr&units=metric&appid=922acb7e29082fc1af198d2040aa4b3d`,
           }, function(data){
-            defer.resolve(`Aujourd'hui il fait ${data.main.temp.toFixed(0)} degrés avec un temps ${data.weather[0].description}`);
+            var coordination = 'un temps',
+                weather = data.list[0];
+                
+            if(/légères/.test(weather.weather[0].description)){
+              coordination = 'une';
+            }
+            defer.resolve(`Aujourd'hui il fait ${weather.main.temp.toFixed(0)} degrés avec ${coordination} ${weather.weather[0].description}`);
           }, function(){
             defer.resolve("i could not retrieve weather");
           });
@@ -117,27 +181,28 @@ module.exports = {
     
     
     
-    functionCloseWindow(result){
-      if(this.win){
-        this.win.destroy();
-        return 'i close the window';
-      }
-      else{
-        return 'any window is open';
-      }
+    functionCloseSearch(result){
+      this.inject.get('$state').go('home');
+      return 'i close the window';
     },
+    
+    functionBrowseUrl(result){
+      var query = result.replace(/(va ?)?(sur )?/g, '');
+      var siteName = query
+      
+      this.inject.get('$state').go('home.browse', {url: `https://www.${siteName}.com/`, result: query});
+      return {
+        template: "let's go to ${query}",
+        values: {
+          query: query
+        }
+      };
+    },
+    
     functionSearch(result){
-      this.speech.speak('i run search');
+      this.speak('i run search');
       
-      if(!this.win){
-        const BrowserWindow = require('electron').remote.BrowserWindow;
-        this.win = new BrowserWindow({ width: 800, height: 600, show: false });
-        this.win.on('closed', function() {
-          this.win = null;
-        }.bind(this));
-      }
-      
-      var query = result.replace(/(affiche ?|affiches ?|cherche ?|recherche ?|va ?)?(-moi)?(des |les |la |le |de |une |un |sur )?(photos |images |vidéos |informations )?(de )?/g, '')
+      var query = result.replace(/(affiche ?|affiches ?|cherche ?|recherche ?|trouve ?|va ?)?(-moi)?(des |les |la |le |de |une |un |sur )?(photos |images |vidéos |informations )?(de )?/g, '')
       var params = '';
       var siteName = '';
       
@@ -145,7 +210,6 @@ module.exports = {
         siteName = query;
       }
       else{
-        console.log(5);
         siteName = 'google';
         var tbm, site; 
         if(/vidéo/g.test(result)){
@@ -165,12 +229,7 @@ module.exports = {
         params = `search?hl=fr&site=${site}&tbm=${tbm}&q=${query}`;
       }
       
-      var url = `https://www.${siteName}.com/${params}`;
-      console.log(url);
-      // 'https://www.google.com/search?hl=fr&site=' + search.site + '&tbm=' + search.tbm + '&q=' + result
-      
-      this.win.loadURL(url);
-      this.win.show();
+      this.inject.get('$state').go('home.browse', {url: `https://www.${siteName}.com/${params}`, result: query});
       return '';
     },
     functionOnline() {
@@ -178,7 +237,7 @@ module.exports = {
     },
     functionCompile() {
       var defer = Q.defer();
-      this.speech.speak('i run the compilation');
+      this.speak('i run the compilation');
       io.emit('launch-cmd', 'npm run compileJS', function(arg){
         if(arg){
           defer.resolve('the compilation is finished');

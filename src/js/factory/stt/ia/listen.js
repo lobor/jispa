@@ -47,19 +47,27 @@ export class Listen {
     // }
   }
 
-  static _eventResult(event, cb, eventStt) {
-    var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex];
-    var results = [];
-    for (var k = 0; k < SpeechRecognitionResult.length; k++) {
-      results[k] = SpeechRecognitionResult[k].transcript.trim();
-    }
-    this.log(results);
-    cb(results, SpeechRecognitionResult);
-  }
+  // static _eventResult(event, cb, eventStt) {
+  //   var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex];
+  //   var results = [];
+  //   for (var k = 0; k < SpeechRecognitionResult.length; k++) {
+  //     results[k] = SpeechRecognitionResult[k].transcript.trim();
+  //   }
+  //   this.log(results);
+  //   cb(results, SpeechRecognitionResult);
+  // }
   
   on(event, cb){
     if('onresult' === event){
-      this.stt.onresult = this.constructor._eventResult.bind(this, event, cb);
+      this.stt.onresult = function _eventResult(eventStt) {
+        var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex],
+            results = [];
+            
+        for (var k = 0; k < SpeechRecognitionResult.length; k++) {
+          results[k] = SpeechRecognitionResult[k].transcript.trim();
+        }
+        cb(results, SpeechRecognitionResult);
+      }
     }
     
     return this;

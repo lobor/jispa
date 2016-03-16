@@ -11,7 +11,7 @@ export function t(trad){
     trad = lang[trad];
   }
   else if(!/function/.test(trad)){
-    console.error('Not trad for: ' + trad);
+    console.warn('Not trad for: ' + trad);
   }
   return trad;
 }
