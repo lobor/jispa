@@ -17,7 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "WNdb": "^3.1.2",
     "angular": "^1.5.0",
     "angular-moment": "^1.0.0-beta.4",
@@ -45,10 +45,10 @@
     "natural": "^0.2.1",
     "picotts": "^0.1.1",
     "q": "^1.4.1",
-    "speakeasy-nlp": "^0.2.2",
-    "stylus": "^0.53.0"
+    "speakeasy-nlp": "^0.2.2"
   },
   "devDependencies": {
+    "stylus": "^0.53.0",
     "babel-loader": "^6.2.2",
     "browserify": "^13.0.0",
     "electron-prebuilt": "^0.36.0",
