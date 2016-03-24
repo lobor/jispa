@@ -54,3 +54,20 @@ app.on('ready', function() {
     // mainWindow = null;
   });
 });
+
+// require('./src/js/app.js');
+// require('./dist/js/script.js');
+
+
+// var Speech = require('electron-speech')
+
+// var recog = Speech({
+//   lang: 'fr-FR',
+//   continuous: true
+// })
+
+// recog.on('text', function (text) {
+//   console.log(text);
+// });
+
+// recog.listen();

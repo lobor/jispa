@@ -34,7 +34,7 @@ export class Speech{
   
   static _endSpeech(){
     let vm = this;
-    vm.log('end speech');
+    // vm.log('end speech');
     // vm.beepTime = setTimeout(function(){
       // vm.beep.play();
       // stt.stt.removeCommands();
@@ -47,7 +47,7 @@ export class Speech{
   
   static _onSpeech(){
     // stt.stt.pause();
-    this.log('start speech');
+    // this.log('start speech');
   }
   
   initPicoTTS(){

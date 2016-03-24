@@ -11,6 +11,10 @@ module.exports = {
       "text": "who's speak",
     },
     {
+      "label": "yes",
+      "text": "tu es là",
+    },
+    {
       "label": "hello",
       "text": "hello"
     },

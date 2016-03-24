@@ -27,16 +27,16 @@ export class IA {
       .setDebug(true);
 
     navigator.webkitGetUserMedia({ audio: true }, function () {
-      var micro = document.getElementById('micro-icon');
-      micro.className = micro.className.replace('-off', '');
+      // var micro = document.getElementById('micro-icon');
+      // micro.className = micro.className.replace('-off', '');
       
       msgUnderstand = t(msgUnderstand);
       vm.listen = new Listen();
       vm
         .listen
         .setDebug(true)
-        .on('onresult', function eventResult(results, SRResult) {
-          vm.parseResults(results, SRResult);
+        .on('text', function eventResult(results) {
+          vm.parseResults(results);
         })
         .start();
     }, function () {
@@ -57,38 +57,27 @@ export class IA {
     }.bind(this), 10000);
   }
 
-  parseResults(results, SRResult) {
+  parseResults(resultSpeeh, SRResult) {
     var vm = this,
       result = msgUnderstand;
-    if(!this.listen.isActive || SRResult.isFinal){
-      for (var i = 0; i < results.length; i++) {
-        var resultSpeeh = results[i];
-        var classifications = this.classifier.classify(resultSpeeh.toLowerCase(), 1);
-        if (classifications.classes.length) {
-          for(var j = 0; j < classifications.classes.length; j++){
-            var result = classifications.classes[j];
-            if ((result && vm.old === result) || (result && SRResult.isFinal)){
-              console.debug('understand:', resultSpeeh);
-              vm.old = undefined;
-              Q(result)
-                .then(function (scope) {
-                  console.log(scope);
-                  if(/^function/.test(scope)) {
-                    var el = Classifiers[vm.themeClassActive]['function'][scope] || Classifiers['app']['function'][scope];
-                    return el.call(vm, resultSpeeh, scope);
-                  }
-                  return scope;
-                })
-                .then(function(scope){
-                  vm.speak(scope);
-                })
+      
+    var classifications = this.classifier.classify(resultSpeeh.toLowerCase(), 1);
+    if (classifications.classes.length) {
+      for(var j = 0; j < classifications.classes.length; j++){
+        var result = classifications.classes[j];
+        console.log('understand:', resultSpeeh);
+        
+        Q(result)
+          .then(function (scope) {
+            if(/^function/.test(scope)) {
+              var el = Classifiers[vm.themeClassActive]['function'][scope] || Classifiers['app']['function'][scope];
+              return el.call(vm, resultSpeeh, scope);
             }
-            else{
-              vm.old = result;
-            }
-          }
-          break;
-        }
+            return scope;
+          })
+          .then(function(scope){
+            vm.speak(scope);
+          })
       }
     }
   }
@@ -110,7 +99,7 @@ export class IA {
       console.error('The commands should return object or string');
       msg = t('an error occurred');
     }
-    console.debug('speak: ', msg);
+    console.log('speak: ', msg);
     this.speech.speak(msg);
   }
   
@@ -171,18 +160,18 @@ export class IA {
         for(var j = 0; j < text.length; j++){
           result.push({
             text: text[j],
-            label: t(test[k].label)
+            // label: t(test[k].label)
+            label: test[k].label
           })
         }
       }
       else{
         result.push({
           text: text,
-          label: t(test[k].label)
+          label: test[k].label
         });
       }
     }
-    console.log(result);
     for(var i = 0; i < result.length; i++){
       this.classifier.trainOnline(result[i].text, result[i].label);
     }

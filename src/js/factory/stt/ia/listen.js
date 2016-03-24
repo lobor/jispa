@@ -1,49 +1,75 @@
 var name = /^(Jaspi|Jasper)/g;
+var Speech = require('electron-speech');
 
 
 export class Listen {
   constructor() {
     var vm = this;
     
-    this.stt = new webkitSpeechRecognition();
-    
-    this.init = false;
-    this.actif = false;
-    this.lastStartedAt = false;
-    
-    // Set the max number of alternative transcripts to try and match with a command
-    this.stt.maxAlternatives = 5;
-
-    // In HTTPS, turn off continuous mode for faster results.
-    // In HTTP,  turn on  continuous mode for much slower results, but no repeating security notices
-    this.stt.continuous = window.location.protocol === 'http:';
-    
-    this.stt.interimResults = true;
-
-    // Sets the language to the default 'en-US'. This can be changed with annyang.setLanguage()
-    this.stt.lang = 'fr-FR';
-    // this.stt.continuous = true;
-
     this.error = false;
-    this.stt.onerror = function(){
-      console.log(arguments);
-      vm.error = true;
-    }
     
-    this.stt.onstart = this.constructor._eventStart.bind(this);
-    this.stt.onend = this.constructor._eventEnd.bind(this);
+    this.stt = Speech({
+      lang: 'fr-FR',
+      continuous: true
+    })
+
+    
+    this.stt.on('error', function(err){
+      clearInterval(vm.interval);
+      this.error = err.error;
+      console.log(this.error);
+    });
+    
+    this.stt.on('ready', function(){
+      clearInterval(vm.interval);
+      vm.setInterval();
+    });
+    
+    this.stt.on('end', function(){
+      if('not-allowed' !== this.error)
+        vm.stt.recognition.start();
+    });
+    
+    
+    console.log(this.stt);
+    // this.stt = new webkitSpeechRecognition();
+    // this.init = false;
+    // this.actif = false;
+    // this.lastStartedAt = false;
+    
+    // // Set the max number of alternative transcripts to try and match with a command
+    // this.stt.maxAlternatives = 5;
+
+    // // In HTTPS, turn off continuous mode for faster results.
+    // // In HTTP,  turn on  continuous mode for much slower results, but no repeating security notices
+    // this.stt.continuous = window.location.protocol === 'http:';
+    
+    // this.stt.interimResults = true;
+
+    // // Sets the language to the default 'en-US'. This can be changed with annyang.setLanguage()
+    // this.stt.lang = 'fr-FR';
+    // // this.stt.continuous = true;
+
+    // this.error = false;
+    // this.stt.onerror = function(){
+    //   console.log(arguments);
+    //   vm.error = true;
+    // }
+    
+    // this.stt.onstart = this.constructor._eventStart.bind(this);
+    // this.stt.onend = this.constructor._eventEnd.bind(this);
     
     
     
     
-    vm.isActive = false;
-    this.stt.onspeechstart = function(){
-      vm.isActive = true;
-    }
+    // vm.isActive = false;
+    // this.stt.onspeechstart = function(){
+    //   vm.isActive = true;
+    // }
     
-    this.stt.onspeechend = function(){
-      vm.isActive = false;
-    }
+    // this.stt.onspeechend = function(){
+    //   vm.isActive = false;
+    // }
     // this.stt.onerror = function(...args){
     //   console.log(...args);
     // };
@@ -55,6 +81,15 @@ export class Listen {
   setActif(state){
     this.actif = state;
     return this;
+  }
+  
+  setInterval() {
+    var vm = this;
+    console.log('set interval');
+    vm.interval = setInterval(function(){
+      clearInterval(vm.interval);
+      vm.stt.recognition.stop();
+    }, 30000);
   }
   
   setIntervalName(){
@@ -78,34 +113,39 @@ export class Listen {
   // }
   
   on(event, cb){
-    if('onresult' === event){
-      this.stt.onresult = function _eventResult(eventStt) {
-        var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex],
-            results = [];
-        for (var k = 0; k < SpeechRecognitionResult.length; k++) {
-          results[k] = SpeechRecognitionResult[k].transcript.trim();
-        }
-        cb(results, SpeechRecognitionResult);
-      }
+    if('text' === event){
+      this.stt.on('text', function (text) {
+        cb(text)
+      });
+    //   this.stt.onresult = function _eventResult(eventStt) {
+    //     var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex],
+    //         results = [];
+    //     for (var k = 0; k < SpeechRecognitionResult.length; k++) {
+    //       results[k] = SpeechRecognitionResult[k].transcript.trim();
+    //     }
+    //     cb(results, SpeechRecognitionResult);
+    //   }
     }
     
     return this;
   }
 
   start() {
-    this.lastStartedAt = new Date().getTime();
-    if (false === this.init) {
-      try {
-        this.init = true;
-        this.stt.start();
-      }
-      catch (e) {
-        this.error('SpeechRecognition already start');
-      }
-    }
-    else {
-      this.error('SpeechRecognition already start');
-    }
+    // this.lastStartedAt = new Date().getTime();
+    // if (false === this.init) {
+    //   try {
+    //     this.init = true;
+    //     this.stt.start();
+    //   }
+    //   catch (e) {
+    //     this.error('SpeechRecognition already start');
+    //   }
+    // }
+    // else {
+    //   this.error('SpeechRecognition already start');
+    // }
+    this.init = true;
+    this.stt.listen();
     return this;
   }
 

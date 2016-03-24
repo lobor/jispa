@@ -5,7 +5,8 @@ var load = require('./load'), lang;
 
 export function t(trad){
   if(undefined === lang){
-    lang = load[window.Settings.lang]
+    lang = load['fr']
+    // lang = load[window.Settings.lang]
   }
   if(undefined !== lang[trad]){
     trad = lang[trad];
