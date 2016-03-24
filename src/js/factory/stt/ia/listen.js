@@ -24,7 +24,9 @@ export class Listen {
 
     this.stt.onstart = this.constructor._eventStart.bind(this);
     this.stt.onend = this.constructor._eventEnd.bind(this);
-    
+    this.stt.onerror = function(){
+      console.log(arguments);
+    }
     
     
     var vm = this;
