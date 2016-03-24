@@ -1,142 +1,259 @@
 var Q = require('q');
-    var responseRamdom = {
-      "usual": [
-        "On fait quoi aujourd'hui ?",
-        "Quoi de neuf ?",
-      ],
-      "state": [
-        "Ca va merci",
-        "Pas très bien aujourd'hui",
-        "Pas très bien",
-        "Bof bof",
-        "Super bien",
-        "Je pète la forme",
-      ],
-      "insulte": [
-        'Je vais être clair, je vais te taper',
-        'Laisse moi tranquil',
-        'Va là-bas',
-        'tchuuiiiip',
-        'tchuip',
-        'tchip',
-      ],
-      "comprehension":[
-        "Je n'ai pas compris",
-        "Tu peux répéter s'il de plait",
-        "Je ne comprends pas",
-        "Comment ?",
-        "Quoi ?",
-      ]
-    };
-    
+
 module.exports = {
   docs: [
     {
-      "label": "je n'ai pas compris",
-      "text": [
-        "vf"
-      ]
+      "label": "hi",
+      "text": "hi",
     },
     {
-      "label": "salut",
-      "text": [
-        "salut",
-        "bonjour"
-      ]
+      "label": "i's me",
+      "text": "who's speak",
+    },
+    {
+      "label": "hello",
+      "text": "hello"
+    },
+    {
+      "label": "fine thank you",
+      "text": "how are you"
+    },
+    {
+      "label": "functionMeet",
+      "text": "rappelle-moi que j'ai rendez-vous à "
+    },
+    {
+      "label": "functionAge",
+      "text": "how old are you"
+    },
+    {
+      "label": "functionBirthday",
+      "text": "when are you born"
     },
     {
       "label": "functionName",
-      "text": "comment tu t'appelles"
+      "text": [
+        "what's your name"
+      ]
     },
     {
-      "label": "je suis en développement",
-      "text": "dans quel etat es tu"
+      "label": "it's you",
+      "text": [
+        "ass hole",
+      ]
+    },
+    {
+      "label": "functionWeather",
+      "text": "give-me the weather"
     },
     {
       "label": "functionOnline",
-      "text": "il y a internet",
-    },
-    {
-      "label": "functionOnline",
-      "text": "test internet",
+      "text": "you are online",
     },
     {
       "label": "functionSearch",
-      "text": "cherche des photos de",
+      "text": "look for on internet"
     },
     {
-      "label": "functionCloseWindow",
-      "text": "ferme la fenetre",
+      "label": "functionBrowseUrl",
+      "text": "go to"
     },
     {
-      "label": "je suis en développement",
-      "text": "dans quel etat es tu"
+      "label": "functionCloseSearch",
+      "text": [
+        "close the window",
+        "close the look for",
+        "leaves search"
+      ]
     },
     {
       "label": "functionCompile",
-      "text": [
-        "compil",
-        "compile",
-        "javascript"
-      ]
+      "text": "build the javascript"
     },
     {
       "label": "functionRestart",
-      "text": [
-        "reboot",
-        "restart",
-        "relance toi"
-      ]
+      "text": "reload the url"
     },
     {
       "label": "functionTime",
-      "text": [
-        "quelle heure il est",
-        "il est quelle heure"
-      ]
-    },
-    {
-      "label": "functionTime",
-      "text": "donne moi l'heure"
+      "text": "what time is it"
     },
   ],
   "function": {
-    functionCloseWindow(result){
-      if(this.win){
-        this.win.destroy();
-        return 'je ferme la fenetre';
+    functionMeet(result, classifier){
+      var defer = Q.defer(),
+          date = result;
+      
+      classifier = this.classifier.backClassify(classifier);
+      for(var i = 0; i < classifier.length; i++){
+        date = date.replace(classifier[i], '');
+      }
+      
+      this.speak({
+        template: "i record your appointments ${date}",
+        values: {
+          date: date
+        }
+      });
+      
+      date = date.replace('h', '');
+      
+      var t = 5 * 60 * 1000;
+      setTimeout(function() {
+        defer.resolve("you are going to be late");
+      }, t);
+      
+      return defer.promise;
+    },
+    
+    functionBirthday(){
+      var result = moment(window.Settings.firstLoad);
+      return {
+        template: "je suis né le ${text} à ${hour} heures ${minutes}",
+        values: {
+          text: result.format('dddd D MMMM YYYY'),
+          hour: result.format('H'),
+          minutes: result.format('m')
+        }
+      };
+    },
+    
+    functionAge(){
+      var result = moment.range(window.Settings.firstLoad, new Date());
+      var text = '';
+      
+      if(result.diff('years')){
+        text += result.diff('years') + ' ans';
+      }
+      else if(result.diff('months')){
+        text += result.diff('months') + ' mois';
+      }
+      else if(result.diff('days')){
+        text += result.diff('days') + ' jours';
+      }
+      else if(result.diff('hours')){
+        text += result.diff('hours') + ' heures';
+      }
+      else if(result.diff('minutes')){
+        text += result.diff('minutes') + ' minutes';
+      }
+      return {
+        template: "i am ${text}",
+        values: {
+          text: text
+        }
+      };
+    },
+    
+    
+    
+    functionWeather(result, classifier){
+      var defer = Q.defer(),
+          ls = this.inject.get('ls'),
+          city = result,
+          dates = [{
+            reg: "demain",
+            
+          }],
+          date, reg;
+          
+          console.log(city);
+      
+      classifier = this.classifier.backClassify(classifier);
+      for(var i = 0; i < classifier.length; i++){
+        city = city.replace(classifier[i], '');
+      }
+      
+      city = city.replace(' à ', '');
+      
+      if('' === city)
+        city = "chelles";
+        
+      ls
+        .get(`meteo::${city}`, {
+            url: `http://api.openweathermap.org/data/2.5/forecast?q=${city}&lang=fr&units=metric&appid=922acb7e29082fc1af198d2040aa4b3d`,
+          }, function(data){
+            var coordination = 'un temps',
+                weather = data.list[0];
+                
+            if(/légères/.test(weather.weather[0].description)){
+              coordination = 'une';
+            }
+            defer.resolve(`Aujourd'hui il fait ${weather.main.temp.toFixed(0)} degrés avec ${coordination} ${weather.weather[0].description}`);
+          }, function(){
+            defer.resolve("i could not retrieve weather");
+          });
+          
+      return defer.promise;
+    },
+    
+    
+    
+    functionCloseSearch(result){
+      this.inject.get('$state').go('home');
+      return 'i close the window';
+    },
+    
+    functionBrowseUrl(result){
+      var query = result.replace(/(va ?)?(sur )?/g, '');
+      var siteName = query
+      
+      this.inject.get('$state').go('home.browse', {url: `https://www.${siteName}.com/`, result: query});
+      
+      return {
+        template: "let's go to ${query}",
+        values: {
+          query: query
+        }
+      };
+    },
+    
+    functionSearch(result){
+      this.speak('i run search');
+      
+      var query = result.replace(/(affiche ?|affiches ?|cherche ?|recherche ?|trouve ?|va ?)?(-moi)?(des |les |la |le |de |une |un |sur )?(photos |images |vidéos |informations )?(de )?/g, '')
+      var params = '';
+      var siteName = '';
+      
+      if(/va/g.test(result)){
+        siteName = query;
       }
       else{
-        return 'aucune fenetre est ouverte';
+        siteName = 'google';
+        var tbm, site; 
+        if(/vidéo/g.test(result)){
+          site = 'imghp';
+          tbm = 'vid';
+        }
+        else if(/(photos|images)/g.test(result)){
+          site = 'imghp';
+          tbm = 'isch';
+        }
+        else{
+          site = '';
+          tbm = '';
+          query = result.replace(/^(affiche ?|affiches ?|cherche ?|recherche ?)?(-moi ?)/g, '');
+        }
+        this.setClassifier('browse');
+        console.log(siteName, tbm, site, query);
+        params = `search?hl=fr&site=${site}&tbm=${tbm}&q=${query}`;
       }
-    },
-    functionSearch(result){
-      this.speech.speak('je lance la recherche');
       
-      if(!this.win){
-        const BrowserWindow = require('electron').remote.BrowserWindow;
-        this.win = new BrowserWindow({ width: 800, height: 600, show: false });
-        this.win.on('closed', function() {
-          this.win = null;
-        }.bind(this));
-      }
-      console.log(result);
-      this.win.loadURL('https://www.google.com/search?hl=fr&site=imghp&tbm=isch&q=' + result.replace('affiche des photos de ', ''));
-      this.win.show();
+      this.inject.get('$state').go('home.browse', {url: `https://www.${siteName}.com/${params}`, result: query});
       return '';
     },
     functionOnline() {
-      return navigator.onLine ? "Il y a internet" : "Il n'y a pas internet";
+      return navigator.onLine ? "yes" : "no";
     },
     functionCompile() {
       var defer = Q.defer();
-      this.speech.speak('je lance la compilation');
+      this.speak('i run the compilation');
       io.emit('launch-cmd', 'npm run compileJS', function(arg){
         if(arg){
-          defer.resolve('La compilation est finit');
+          defer.resolve('the compilation is finished');
         }
         else{
-          defer.resolve('Une erreur est apparue lors de la compilation');
+          defer.resolve('an error occurred while compiling');
         }
       });
       return defer.promise;
@@ -153,7 +270,7 @@ module.exports = {
     },
     
     functionName(){
-      return "Je m'appelle Jaspi";
+      return "Je m'appelle " + window.Settings.name;
     }
   }
 };

@@ -1,4 +1,4 @@
-var BrowserConsoleBuildErrorPlugin = require('browser-console-build-error-webpack-plugin');
+// var BrowserConsoleBuildErrorPlugin = require('browser-console-build-error-webpack-plugin');
  
 module.exports = {
     entry: "./src/js/app.js",
@@ -20,13 +20,12 @@ module.exports = {
     node: {
       fs: "empty",
       child_process: "empty",
-      // jsdom: "empty",
     },
     "target": "atom",
     resolveLoader: {
       root: 'test'
     },
     plugins: [
-        new BrowserConsoleBuildErrorPlugin()
+        // new BrowserConsoleBuildErrorPlugin()
     ]
 };

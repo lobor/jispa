@@ -45,8 +45,7 @@ app.on('ready', function() {
   var webContents = mainWindow.webContents;
   
   webContents.openDevTools();
-  
- 
+  // settings
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows

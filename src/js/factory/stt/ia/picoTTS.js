@@ -1,9 +1,12 @@
+
 export class PicoTTS{
-  constructor(){
-    return this;
+  constructor() {
+    console.log(this);
+    this.toto = 0;
   }
   
-  speak(msg){
-    io.emit('speak', msg);
+  speak(speech){
+    io.emit('speak', speech.text);
+    // return this;
   }
 }
