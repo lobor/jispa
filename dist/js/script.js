@@ -590,6 +590,8 @@
 	  function Listen() {
 	    _classCallCheck(this, Listen);
 	
+	    var vm = this;
+	
 	    this.stt = new webkitSpeechRecognition();
 	
 	    this.init = false;
@@ -610,14 +612,14 @@
 	    // this.stt.continuous = true;
 	
 	    this.error = false;
-	    this.stt.onstart = this.constructor._eventStart.bind(this);
-	    this.stt.onend = this.constructor._eventEnd.bind(this);
 	    this.stt.onerror = function () {
 	      console.log(arguments);
-	      this.error = true;
+	      vm.error = true;
 	    };
 	
-	    var vm = this;
+	    this.stt.onstart = this.constructor._eventStart.bind(this);
+	    this.stt.onend = this.constructor._eventEnd.bind(this);
+	
 	    vm.isActive = false;
 	    this.stt.onspeechstart = function () {
 	      vm.isActive = true;
