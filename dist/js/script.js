@@ -50,10 +50,10 @@
 	
 	window.moment = __webpack_require__(14); // require('./script/annyang/annyang.js');
 	
-	__webpack_require__(206);
+	__webpack_require__(204);
 	__webpack_require__(50);
 	
-	var ElectronSettings = __webpack_require__(207);
+	var ElectronSettings = __webpack_require__(205);
 	
 	var settings = new ElectronSettings({
 	  configDirPath: './'
@@ -98,7 +98,7 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var browserBattery = __webpack_require__(192);
+	var browserBattery = __webpack_require__(190);
 	
 	browserBattery().then(function (battery) {
 	  console.log(battery);
@@ -130,7 +130,7 @@
 	
 	    console.log('Init RaspApp');
 	    // require('angular-moment')
-	    this.angular = __webpack_require__(193).module('raspberrypi', [__webpack_require__(195)]);
+	    this.angular = __webpack_require__(191).module('raspberrypi', [__webpack_require__(193)]);
 	    // .directive('micro', require('./directive/micro/micro.js'))
 	    // .constant('angularMomentConfig', {
 	    //     timezone: 'Europe/Paris'
@@ -167,7 +167,7 @@
 	  }, {
 	    key: 'loadRoutes',
 	    value: function loadRoutes() {
-	      this.angular.config(__webpack_require__(196));
+	      this.angular.config(__webpack_require__(194));
 	      return this;
 	    }
 	  }]);
@@ -189,7 +189,7 @@
 	  factory: __webpack_require__(3)
 	}, {
 	  name: 'ls',
-	  factory: __webpack_require__(191)
+	  factory: __webpack_require__(189)
 	}];
 
 /***/ },
@@ -16253,9 +16253,9 @@
 
 	module.exports = {
 		classifiers: __webpack_require__(116),
-		features: __webpack_require__(156),
-		formats: __webpack_require__(184),
-		utils: __webpack_require__(189),
+		features: __webpack_require__(155),
+		formats: __webpack_require__(183),
+		utils: __webpack_require__(187),
 	}
 
 
@@ -16269,23 +16269,23 @@
 		NeuralNetwork: __webpack_require__(117),
 		Bayesian: __webpack_require__(126),
 	
-		kNN: __webpack_require__(130),
+		kNN: __webpack_require__(129),
 		
-		SvmJs: __webpack_require__(132),
-		SvmPerf: __webpack_require__(134),
-		SvmLinear: __webpack_require__(144),
+		SvmJs: __webpack_require__(131),
+		SvmPerf: __webpack_require__(133),
+		SvmLinear: __webpack_require__(143),
 		
 		//BayesClassifier: require('./apparatus/lib/apparatus/classifier/bayes_classifier'),
 		//LogisticRegressionClassifier: require('./apparatus/lib/apparatus/classifier/logistic_regression_classifier'),
-		Perceptron: __webpack_require__(146),
-		Winnow: __webpack_require__(148),
+		Perceptron: __webpack_require__(145),
+		Winnow: __webpack_require__(147),
 	
-		DecisionTree: __webpack_require__(150),
+		DecisionTree: __webpack_require__(149),
 	
-		multilabel: __webpack_require__(151),
+		multilabel: __webpack_require__(150),
 		
 		// meta classifier:
-		EnhancedClassifier: __webpack_require__(183),
+		EnhancedClassifier: __webpack_require__(182),
 	}
 	
 	//Object.defineProperty(Function.prototype, 'where', {
@@ -18648,7 +18648,7 @@
 /* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(127)._;
+	var _ = __webpack_require__(120)._;
 	
 	/**
 	 * A multi-class single-label Bayes classifier.
@@ -18674,11 +18674,11 @@
 				throw new Error("Redis backend support was dropped, in order to remove dependencies");
 				break;
 			case 'localstorage':
-				this.backend = new (__webpack_require__(128)
+				this.backend = new (__webpack_require__(127)
 											 .LocalStorageBackend)(backend.options);
 				break;
 			default:
-				this.backend = new (__webpack_require__(129).MemoryBackend)();
+				this.backend = new (__webpack_require__(128).MemoryBackend)();
 		}
 	}
 	
@@ -18877,1234 +18877,7 @@
 /* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//     Underscore.js 1.4.3
-	//     http://underscorejs.org
-	//     (c) 2009-2012 Jeremy Ashkenas, DocumentCloud Inc.
-	//     Underscore may be freely distributed under the MIT license.
-	
-	(function() {
-	
-	  // Baseline setup
-	  // --------------
-	
-	  // Establish the root object, `window` in the browser, or `global` on the server.
-	  var root = this;
-	
-	  // Save the previous value of the `_` variable.
-	  var previousUnderscore = root._;
-	
-	  // Establish the object that gets returned to break out of a loop iteration.
-	  var breaker = {};
-	
-	  // Save bytes in the minified (but not gzipped) version:
-	  var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-	
-	  // Create quick reference variables for speed access to core prototypes.
-	  var push             = ArrayProto.push,
-	      slice            = ArrayProto.slice,
-	      concat           = ArrayProto.concat,
-	      toString         = ObjProto.toString,
-	      hasOwnProperty   = ObjProto.hasOwnProperty;
-	
-	  // All **ECMAScript 5** native function implementations that we hope to use
-	  // are declared here.
-	  var
-	    nativeForEach      = ArrayProto.forEach,
-	    nativeMap          = ArrayProto.map,
-	    nativeReduce       = ArrayProto.reduce,
-	    nativeReduceRight  = ArrayProto.reduceRight,
-	    nativeFilter       = ArrayProto.filter,
-	    nativeEvery        = ArrayProto.every,
-	    nativeSome         = ArrayProto.some,
-	    nativeIndexOf      = ArrayProto.indexOf,
-	    nativeLastIndexOf  = ArrayProto.lastIndexOf,
-	    nativeIsArray      = Array.isArray,
-	    nativeKeys         = Object.keys,
-	    nativeBind         = FuncProto.bind;
-	
-	  // Create a safe reference to the Underscore object for use below.
-	  var _ = function(obj) {
-	    if (obj instanceof _) return obj;
-	    if (!(this instanceof _)) return new _(obj);
-	    this._wrapped = obj;
-	  };
-	
-	  // Export the Underscore object for **Node.js**, with
-	  // backwards-compatibility for the old `require()` API. If we're in
-	  // the browser, add `_` as a global object via a string identifier,
-	  // for Closure Compiler "advanced" mode.
-	  if (true) {
-	    if (typeof module !== 'undefined' && module.exports) {
-	      exports = module.exports = _;
-	    }
-	    exports._ = _;
-	  } else {
-	    root._ = _;
-	  }
-	
-	  // Current version.
-	  _.VERSION = '1.4.3';
-	
-	  // Collection Functions
-	  // --------------------
-	
-	  // The cornerstone, an `each` implementation, aka `forEach`.
-	  // Handles objects with the built-in `forEach`, arrays, and raw objects.
-	  // Delegates to **ECMAScript 5**'s native `forEach` if available.
-	  var each = _.each = _.forEach = function(obj, iterator, context) {
-	    if (obj == null) return;
-	    if (nativeForEach && obj.forEach === nativeForEach) {
-	      obj.forEach(iterator, context);
-	    } else if (obj.length === +obj.length) {
-	      for (var i = 0, l = obj.length; i < l; i++) {
-	        if (iterator.call(context, obj[i], i, obj) === breaker) return;
-	      }
-	    } else {
-	      for (var key in obj) {
-	        if (_.has(obj, key)) {
-	          if (iterator.call(context, obj[key], key, obj) === breaker) return;
-	        }
-	      }
-	    }
-	  };
-	
-	  // Return the results of applying the iterator to each element.
-	  // Delegates to **ECMAScript 5**'s native `map` if available.
-	  _.map = _.collect = function(obj, iterator, context) {
-	    var results = [];
-	    if (obj == null) return results;
-	    if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
-	    each(obj, function(value, index, list) {
-	      results[results.length] = iterator.call(context, value, index, list);
-	    });
-	    return results;
-	  };
-	
-	  var reduceError = 'Reduce of empty array with no initial value';
-	
-	  // **Reduce** builds up a single result from a list of values, aka `inject`,
-	  // or `foldl`. Delegates to **ECMAScript 5**'s native `reduce` if available.
-	  _.reduce = _.foldl = _.inject = function(obj, iterator, memo, context) {
-	    var initial = arguments.length > 2;
-	    if (obj == null) obj = [];
-	    if (nativeReduce && obj.reduce === nativeReduce) {
-	      if (context) iterator = _.bind(iterator, context);
-	      return initial ? obj.reduce(iterator, memo) : obj.reduce(iterator);
-	    }
-	    each(obj, function(value, index, list) {
-	      if (!initial) {
-	        memo = value;
-	        initial = true;
-	      } else {
-	        memo = iterator.call(context, memo, value, index, list);
-	      }
-	    });
-	    if (!initial) throw new TypeError(reduceError);
-	    return memo;
-	  };
-	
-	  // The right-associative version of reduce, also known as `foldr`.
-	  // Delegates to **ECMAScript 5**'s native `reduceRight` if available.
-	  _.reduceRight = _.foldr = function(obj, iterator, memo, context) {
-	    var initial = arguments.length > 2;
-	    if (obj == null) obj = [];
-	    if (nativeReduceRight && obj.reduceRight === nativeReduceRight) {
-	      if (context) iterator = _.bind(iterator, context);
-	      return initial ? obj.reduceRight(iterator, memo) : obj.reduceRight(iterator);
-	    }
-	    var length = obj.length;
-	    if (length !== +length) {
-	      var keys = _.keys(obj);
-	      length = keys.length;
-	    }
-	    each(obj, function(value, index, list) {
-	      index = keys ? keys[--length] : --length;
-	      if (!initial) {
-	        memo = obj[index];
-	        initial = true;
-	      } else {
-	        memo = iterator.call(context, memo, obj[index], index, list);
-	      }
-	    });
-	    if (!initial) throw new TypeError(reduceError);
-	    return memo;
-	  };
-	
-	  // Return the first value which passes a truth test. Aliased as `detect`.
-	  _.find = _.detect = function(obj, iterator, context) {
-	    var result;
-	    any(obj, function(value, index, list) {
-	      if (iterator.call(context, value, index, list)) {
-	        result = value;
-	        return true;
-	      }
-	    });
-	    return result;
-	  };
-	
-	  // Return all the elements that pass a truth test.
-	  // Delegates to **ECMAScript 5**'s native `filter` if available.
-	  // Aliased as `select`.
-	  _.filter = _.select = function(obj, iterator, context) {
-	    var results = [];
-	    if (obj == null) return results;
-	    if (nativeFilter && obj.filter === nativeFilter) return obj.filter(iterator, context);
-	    each(obj, function(value, index, list) {
-	      if (iterator.call(context, value, index, list)) results[results.length] = value;
-	    });
-	    return results;
-	  };
-	
-	  // Return all the elements for which a truth test fails.
-	  _.reject = function(obj, iterator, context) {
-	    return _.filter(obj, function(value, index, list) {
-	      return !iterator.call(context, value, index, list);
-	    }, context);
-	  };
-	
-	  // Determine whether all of the elements match a truth test.
-	  // Delegates to **ECMAScript 5**'s native `every` if available.
-	  // Aliased as `all`.
-	  _.every = _.all = function(obj, iterator, context) {
-	    iterator || (iterator = _.identity);
-	    var result = true;
-	    if (obj == null) return result;
-	    if (nativeEvery && obj.every === nativeEvery) return obj.every(iterator, context);
-	    each(obj, function(value, index, list) {
-	      if (!(result = result && iterator.call(context, value, index, list))) return breaker;
-	    });
-	    return !!result;
-	  };
-	
-	  // Determine if at least one element in the object matches a truth test.
-	  // Delegates to **ECMAScript 5**'s native `some` if available.
-	  // Aliased as `any`.
-	  var any = _.some = _.any = function(obj, iterator, context) {
-	    iterator || (iterator = _.identity);
-	    var result = false;
-	    if (obj == null) return result;
-	    if (nativeSome && obj.some === nativeSome) return obj.some(iterator, context);
-	    each(obj, function(value, index, list) {
-	      if (result || (result = iterator.call(context, value, index, list))) return breaker;
-	    });
-	    return !!result;
-	  };
-	
-	  // Determine if the array or object contains a given value (using `===`).
-	  // Aliased as `include`.
-	  _.contains = _.include = function(obj, target) {
-	    if (obj == null) return false;
-	    if (nativeIndexOf && obj.indexOf === nativeIndexOf) return obj.indexOf(target) != -1;
-	    return any(obj, function(value) {
-	      return value === target;
-	    });
-	  };
-	
-	  // Invoke a method (with arguments) on every item in a collection.
-	  _.invoke = function(obj, method) {
-	    var args = slice.call(arguments, 2);
-	    return _.map(obj, function(value) {
-	      return (_.isFunction(method) ? method : value[method]).apply(value, args);
-	    });
-	  };
-	
-	  // Convenience version of a common use case of `map`: fetching a property.
-	  _.pluck = function(obj, key) {
-	    return _.map(obj, function(value){ return value[key]; });
-	  };
-	
-	  // Convenience version of a common use case of `filter`: selecting only objects
-	  // with specific `key:value` pairs.
-	  _.where = function(obj, attrs) {
-	    if (_.isEmpty(attrs)) return [];
-	    return _.filter(obj, function(value) {
-	      for (var key in attrs) {
-	        if (attrs[key] !== value[key]) return false;
-	      }
-	      return true;
-	    });
-	  };
-	
-	  // Return the maximum element or (element-based computation).
-	  // Can't optimize arrays of integers longer than 65,535 elements.
-	  // See: https://bugs.webkit.org/show_bug.cgi?id=80797
-	  _.max = function(obj, iterator, context) {
-	    if (!iterator && _.isArray(obj) && obj[0] === +obj[0] && obj.length < 65535) {
-	      return Math.max.apply(Math, obj);
-	    }
-	    if (!iterator && _.isEmpty(obj)) return -Infinity;
-	    var result = {computed : -Infinity, value: -Infinity};
-	    each(obj, function(value, index, list) {
-	      var computed = iterator ? iterator.call(context, value, index, list) : value;
-	      computed >= result.computed && (result = {value : value, computed : computed});
-	    });
-	    return result.value;
-	  };
-	
-	  // Return the minimum element (or element-based computation).
-	  _.min = function(obj, iterator, context) {
-	    if (!iterator && _.isArray(obj) && obj[0] === +obj[0] && obj.length < 65535) {
-	      return Math.min.apply(Math, obj);
-	    }
-	    if (!iterator && _.isEmpty(obj)) return Infinity;
-	    var result = {computed : Infinity, value: Infinity};
-	    each(obj, function(value, index, list) {
-	      var computed = iterator ? iterator.call(context, value, index, list) : value;
-	      computed < result.computed && (result = {value : value, computed : computed});
-	    });
-	    return result.value;
-	  };
-	
-	  // Shuffle an array.
-	  _.shuffle = function(obj) {
-	    var rand;
-	    var index = 0;
-	    var shuffled = [];
-	    each(obj, function(value) {
-	      rand = _.random(index++);
-	      shuffled[index - 1] = shuffled[rand];
-	      shuffled[rand] = value;
-	    });
-	    return shuffled;
-	  };
-	
-	  // An internal function to generate lookup iterators.
-	  var lookupIterator = function(value) {
-	    return _.isFunction(value) ? value : function(obj){ return obj[value]; };
-	  };
-	
-	  // Sort the object's values by a criterion produced by an iterator.
-	  _.sortBy = function(obj, value, context) {
-	    var iterator = lookupIterator(value);
-	    return _.pluck(_.map(obj, function(value, index, list) {
-	      return {
-	        value : value,
-	        index : index,
-	        criteria : iterator.call(context, value, index, list)
-	      };
-	    }).sort(function(left, right) {
-	      var a = left.criteria;
-	      var b = right.criteria;
-	      if (a !== b) {
-	        if (a > b || a === void 0) return 1;
-	        if (a < b || b === void 0) return -1;
-	      }
-	      return left.index < right.index ? -1 : 1;
-	    }), 'value');
-	  };
-	
-	  // An internal function used for aggregate "group by" operations.
-	  var group = function(obj, value, context, behavior) {
-	    var result = {};
-	    var iterator = lookupIterator(value || _.identity);
-	    each(obj, function(value, index) {
-	      var key = iterator.call(context, value, index, obj);
-	      behavior(result, key, value);
-	    });
-	    return result;
-	  };
-	
-	  // Groups the object's values by a criterion. Pass either a string attribute
-	  // to group by, or a function that returns the criterion.
-	  _.groupBy = function(obj, value, context) {
-	    return group(obj, value, context, function(result, key, value) {
-	      (_.has(result, key) ? result[key] : (result[key] = [])).push(value);
-	    });
-	  };
-	
-	  // Counts instances of an object that group by a certain criterion. Pass
-	  // either a string attribute to count by, or a function that returns the
-	  // criterion.
-	  _.countBy = function(obj, value, context) {
-	    return group(obj, value, context, function(result, key) {
-	      if (!_.has(result, key)) result[key] = 0;
-	      result[key]++;
-	    });
-	  };
-	
-	  // Use a comparator function to figure out the smallest index at which
-	  // an object should be inserted so as to maintain order. Uses binary search.
-	  _.sortedIndex = function(array, obj, iterator, context) {
-	    iterator = iterator == null ? _.identity : lookupIterator(iterator);
-	    var value = iterator.call(context, obj);
-	    var low = 0, high = array.length;
-	    while (low < high) {
-	      var mid = (low + high) >>> 1;
-	      iterator.call(context, array[mid]) < value ? low = mid + 1 : high = mid;
-	    }
-	    return low;
-	  };
-	
-	  // Safely convert anything iterable into a real, live array.
-	  _.toArray = function(obj) {
-	    if (!obj) return [];
-	    if (_.isArray(obj)) return slice.call(obj);
-	    if (obj.length === +obj.length) return _.map(obj, _.identity);
-	    return _.values(obj);
-	  };
-	
-	  // Return the number of elements in an object.
-	  _.size = function(obj) {
-	    if (obj == null) return 0;
-	    return (obj.length === +obj.length) ? obj.length : _.keys(obj).length;
-	  };
-	
-	  // Array Functions
-	  // ---------------
-	
-	  // Get the first element of an array. Passing **n** will return the first N
-	  // values in the array. Aliased as `head` and `take`. The **guard** check
-	  // allows it to work with `_.map`.
-	  _.first = _.head = _.take = function(array, n, guard) {
-	    if (array == null) return void 0;
-	    return (n != null) && !guard ? slice.call(array, 0, n) : array[0];
-	  };
-	
-	  // Returns everything but the last entry of the array. Especially useful on
-	  // the arguments object. Passing **n** will return all the values in
-	  // the array, excluding the last N. The **guard** check allows it to work with
-	  // `_.map`.
-	  _.initial = function(array, n, guard) {
-	    return slice.call(array, 0, array.length - ((n == null) || guard ? 1 : n));
-	  };
-	
-	  // Get the last element of an array. Passing **n** will return the last N
-	  // values in the array. The **guard** check allows it to work with `_.map`.
-	  _.last = function(array, n, guard) {
-	    if (array == null) return void 0;
-	    if ((n != null) && !guard) {
-	      return slice.call(array, Math.max(array.length - n, 0));
-	    } else {
-	      return array[array.length - 1];
-	    }
-	  };
-	
-	  // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-	  // Especially useful on the arguments object. Passing an **n** will return
-	  // the rest N values in the array. The **guard**
-	  // check allows it to work with `_.map`.
-	  _.rest = _.tail = _.drop = function(array, n, guard) {
-	    return slice.call(array, (n == null) || guard ? 1 : n);
-	  };
-	
-	  // Trim out all falsy values from an array.
-	  _.compact = function(array) {
-	    return _.filter(array, _.identity);
-	  };
-	
-	  // Internal implementation of a recursive `flatten` function.
-	  var flatten = function(input, shallow, output) {
-	    each(input, function(value) {
-	      if (_.isArray(value)) {
-	        shallow ? push.apply(output, value) : flatten(value, shallow, output);
-	      } else {
-	        output.push(value);
-	      }
-	    });
-	    return output;
-	  };
-	
-	  // Return a completely flattened version of an array.
-	  _.flatten = function(array, shallow) {
-	    return flatten(array, shallow, []);
-	  };
-	
-	  // Return a version of the array that does not contain the specified value(s).
-	  _.without = function(array) {
-	    return _.difference(array, slice.call(arguments, 1));
-	  };
-	
-	  // Produce a duplicate-free version of the array. If the array has already
-	  // been sorted, you have the option of using a faster algorithm.
-	  // Aliased as `unique`.
-	  _.uniq = _.unique = function(array, isSorted, iterator, context) {
-	    if (_.isFunction(isSorted)) {
-	      context = iterator;
-	      iterator = isSorted;
-	      isSorted = false;
-	    }
-	    var initial = iterator ? _.map(array, iterator, context) : array;
-	    var results = [];
-	    var seen = [];
-	    each(initial, function(value, index) {
-	      if (isSorted ? (!index || seen[seen.length - 1] !== value) : !_.contains(seen, value)) {
-	        seen.push(value);
-	        results.push(array[index]);
-	      }
-	    });
-	    return results;
-	  };
-	
-	  // Produce an array that contains the union: each distinct element from all of
-	  // the passed-in arrays.
-	  _.union = function() {
-	    return _.uniq(concat.apply(ArrayProto, arguments));
-	  };
-	
-	  // Produce an array that contains every item shared between all the
-	  // passed-in arrays.
-	  _.intersection = function(array) {
-	    var rest = slice.call(arguments, 1);
-	    return _.filter(_.uniq(array), function(item) {
-	      return _.every(rest, function(other) {
-	        return _.indexOf(other, item) >= 0;
-	      });
-	    });
-	  };
-	
-	  // Take the difference between one array and a number of other arrays.
-	  // Only the elements present in just the first array will remain.
-	  _.difference = function(array) {
-	    var rest = concat.apply(ArrayProto, slice.call(arguments, 1));
-	    return _.filter(array, function(value){ return !_.contains(rest, value); });
-	  };
-	
-	  // Zip together multiple lists into a single array -- elements that share
-	  // an index go together.
-	  _.zip = function() {
-	    var args = slice.call(arguments);
-	    var length = _.max(_.pluck(args, 'length'));
-	    var results = new Array(length);
-	    for (var i = 0; i < length; i++) {
-	      results[i] = _.pluck(args, "" + i);
-	    }
-	    return results;
-	  };
-	
-	  // Converts lists into objects. Pass either a single array of `[key, value]`
-	  // pairs, or two parallel arrays of the same length -- one of keys, and one of
-	  // the corresponding values.
-	  _.object = function(list, values) {
-	    if (list == null) return {};
-	    var result = {};
-	    for (var i = 0, l = list.length; i < l; i++) {
-	      if (values) {
-	        result[list[i]] = values[i];
-	      } else {
-	        result[list[i][0]] = list[i][1];
-	      }
-	    }
-	    return result;
-	  };
-	
-	  // If the browser doesn't supply us with indexOf (I'm looking at you, **MSIE**),
-	  // we need this function. Return the position of the first occurrence of an
-	  // item in an array, or -1 if the item is not included in the array.
-	  // Delegates to **ECMAScript 5**'s native `indexOf` if available.
-	  // If the array is large and already in sort order, pass `true`
-	  // for **isSorted** to use binary search.
-	  _.indexOf = function(array, item, isSorted) {
-	    if (array == null) return -1;
-	    var i = 0, l = array.length;
-	    if (isSorted) {
-	      if (typeof isSorted == 'number') {
-	        i = (isSorted < 0 ? Math.max(0, l + isSorted) : isSorted);
-	      } else {
-	        i = _.sortedIndex(array, item);
-	        return array[i] === item ? i : -1;
-	      }
-	    }
-	    if (nativeIndexOf && array.indexOf === nativeIndexOf) return array.indexOf(item, isSorted);
-	    for (; i < l; i++) if (array[i] === item) return i;
-	    return -1;
-	  };
-	
-	  // Delegates to **ECMAScript 5**'s native `lastIndexOf` if available.
-	  _.lastIndexOf = function(array, item, from) {
-	    if (array == null) return -1;
-	    var hasIndex = from != null;
-	    if (nativeLastIndexOf && array.lastIndexOf === nativeLastIndexOf) {
-	      return hasIndex ? array.lastIndexOf(item, from) : array.lastIndexOf(item);
-	    }
-	    var i = (hasIndex ? from : array.length);
-	    while (i--) if (array[i] === item) return i;
-	    return -1;
-	  };
-	
-	  // Generate an integer Array containing an arithmetic progression. A port of
-	  // the native Python `range()` function. See
-	  // [the Python documentation](http://docs.python.org/library/functions.html#range).
-	  _.range = function(start, stop, step) {
-	    if (arguments.length <= 1) {
-	      stop = start || 0;
-	      start = 0;
-	    }
-	    step = arguments[2] || 1;
-	
-	    var len = Math.max(Math.ceil((stop - start) / step), 0);
-	    var idx = 0;
-	    var range = new Array(len);
-	
-	    while(idx < len) {
-	      range[idx++] = start;
-	      start += step;
-	    }
-	
-	    return range;
-	  };
-	
-	  // Function (ahem) Functions
-	  // ------------------
-	
-	  // Reusable constructor function for prototype setting.
-	  var ctor = function(){};
-	
-	  // Create a function bound to a given object (assigning `this`, and arguments,
-	  // optionally). Binding with arguments is also known as `curry`.
-	  // Delegates to **ECMAScript 5**'s native `Function.bind` if available.
-	  // We check for `func.bind` first, to fail fast when `func` is undefined.
-	  _.bind = function(func, context) {
-	    var args, bound;
-	    if (func.bind === nativeBind && nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-	    if (!_.isFunction(func)) throw new TypeError;
-	    args = slice.call(arguments, 2);
-	    return bound = function() {
-	      if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
-	      ctor.prototype = func.prototype;
-	      var self = new ctor;
-	      ctor.prototype = null;
-	      var result = func.apply(self, args.concat(slice.call(arguments)));
-	      if (Object(result) === result) return result;
-	      return self;
-	    };
-	  };
-	
-	  // Bind all of an object's methods to that object. Useful for ensuring that
-	  // all callbacks defined on an object belong to it.
-	  _.bindAll = function(obj) {
-	    var funcs = slice.call(arguments, 1);
-	    if (funcs.length == 0) funcs = _.functions(obj);
-	    each(funcs, function(f) { obj[f] = _.bind(obj[f], obj); });
-	    return obj;
-	  };
-	
-	  // Memoize an expensive function by storing its results.
-	  _.memoize = function(func, hasher) {
-	    var memo = {};
-	    hasher || (hasher = _.identity);
-	    return function() {
-	      var key = hasher.apply(this, arguments);
-	      return _.has(memo, key) ? memo[key] : (memo[key] = func.apply(this, arguments));
-	    };
-	  };
-	
-	  // Delays a function for the given number of milliseconds, and then calls
-	  // it with the arguments supplied.
-	  _.delay = function(func, wait) {
-	    var args = slice.call(arguments, 2);
-	    return setTimeout(function(){ return func.apply(null, args); }, wait);
-	  };
-	
-	  // Defers a function, scheduling it to run after the current call stack has
-	  // cleared.
-	  _.defer = function(func) {
-	    return _.delay.apply(_, [func, 1].concat(slice.call(arguments, 1)));
-	  };
-	
-	  // Returns a function, that, when invoked, will only be triggered at most once
-	  // during a given window of time.
-	  _.throttle = function(func, wait) {
-	    var context, args, timeout, result;
-	    var previous = 0;
-	    var later = function() {
-	      previous = new Date;
-	      timeout = null;
-	      result = func.apply(context, args);
-	    };
-	    return function() {
-	      var now = new Date;
-	      var remaining = wait - (now - previous);
-	      context = this;
-	      args = arguments;
-	      if (remaining <= 0) {
-	        clearTimeout(timeout);
-	        timeout = null;
-	        previous = now;
-	        result = func.apply(context, args);
-	      } else if (!timeout) {
-	        timeout = setTimeout(later, remaining);
-	      }
-	      return result;
-	    };
-	  };
-	
-	  // Returns a function, that, as long as it continues to be invoked, will not
-	  // be triggered. The function will be called after it stops being called for
-	  // N milliseconds. If `immediate` is passed, trigger the function on the
-	  // leading edge, instead of the trailing.
-	  _.debounce = function(func, wait, immediate) {
-	    var timeout, result;
-	    return function() {
-	      var context = this, args = arguments;
-	      var later = function() {
-	        timeout = null;
-	        if (!immediate) result = func.apply(context, args);
-	      };
-	      var callNow = immediate && !timeout;
-	      clearTimeout(timeout);
-	      timeout = setTimeout(later, wait);
-	      if (callNow) result = func.apply(context, args);
-	      return result;
-	    };
-	  };
-	
-	  // Returns a function that will be executed at most one time, no matter how
-	  // often you call it. Useful for lazy initialization.
-	  _.once = function(func) {
-	    var ran = false, memo;
-	    return function() {
-	      if (ran) return memo;
-	      ran = true;
-	      memo = func.apply(this, arguments);
-	      func = null;
-	      return memo;
-	    };
-	  };
-	
-	  // Returns the first function passed as an argument to the second,
-	  // allowing you to adjust arguments, run code before and after, and
-	  // conditionally execute the original function.
-	  _.wrap = function(func, wrapper) {
-	    return function() {
-	      var args = [func];
-	      push.apply(args, arguments);
-	      return wrapper.apply(this, args);
-	    };
-	  };
-	
-	  // Returns a function that is the composition of a list of functions, each
-	  // consuming the return value of the function that follows.
-	  _.compose = function() {
-	    var funcs = arguments;
-	    return function() {
-	      var args = arguments;
-	      for (var i = funcs.length - 1; i >= 0; i--) {
-	        args = [funcs[i].apply(this, args)];
-	      }
-	      return args[0];
-	    };
-	  };
-	
-	  // Returns a function that will only be executed after being called N times.
-	  _.after = function(times, func) {
-	    if (times <= 0) return func();
-	    return function() {
-	      if (--times < 1) {
-	        return func.apply(this, arguments);
-	      }
-	    };
-	  };
-	
-	  // Object Functions
-	  // ----------------
-	
-	  // Retrieve the names of an object's properties.
-	  // Delegates to **ECMAScript 5**'s native `Object.keys`
-	  _.keys = nativeKeys || function(obj) {
-	    if (obj !== Object(obj)) throw new TypeError('Invalid object');
-	    var keys = [];
-	    for (var key in obj) if (_.has(obj, key)) keys[keys.length] = key;
-	    return keys;
-	  };
-	
-	  // Retrieve the values of an object's properties.
-	  _.values = function(obj) {
-	    var values = [];
-	    for (var key in obj) if (_.has(obj, key)) values.push(obj[key]);
-	    return values;
-	  };
-	
-	  // Convert an object into a list of `[key, value]` pairs.
-	  _.pairs = function(obj) {
-	    var pairs = [];
-	    for (var key in obj) if (_.has(obj, key)) pairs.push([key, obj[key]]);
-	    return pairs;
-	  };
-	
-	  // Invert the keys and values of an object. The values must be serializable.
-	  _.invert = function(obj) {
-	    var result = {};
-	    for (var key in obj) if (_.has(obj, key)) result[obj[key]] = key;
-	    return result;
-	  };
-	
-	  // Return a sorted list of the function names available on the object.
-	  // Aliased as `methods`
-	  _.functions = _.methods = function(obj) {
-	    var names = [];
-	    for (var key in obj) {
-	      if (_.isFunction(obj[key])) names.push(key);
-	    }
-	    return names.sort();
-	  };
-	
-	  // Extend a given object with all the properties in passed-in object(s).
-	  _.extend = function(obj) {
-	    each(slice.call(arguments, 1), function(source) {
-	      if (source) {
-	        for (var prop in source) {
-	          obj[prop] = source[prop];
-	        }
-	      }
-	    });
-	    return obj;
-	  };
-	
-	  // Return a copy of the object only containing the whitelisted properties.
-	  _.pick = function(obj) {
-	    var copy = {};
-	    var keys = concat.apply(ArrayProto, slice.call(arguments, 1));
-	    each(keys, function(key) {
-	      if (key in obj) copy[key] = obj[key];
-	    });
-	    return copy;
-	  };
-	
-	   // Return a copy of the object without the blacklisted properties.
-	  _.omit = function(obj) {
-	    var copy = {};
-	    var keys = concat.apply(ArrayProto, slice.call(arguments, 1));
-	    for (var key in obj) {
-	      if (!_.contains(keys, key)) copy[key] = obj[key];
-	    }
-	    return copy;
-	  };
-	
-	  // Fill in a given object with default properties.
-	  _.defaults = function(obj) {
-	    each(slice.call(arguments, 1), function(source) {
-	      if (source) {
-	        for (var prop in source) {
-	          if (obj[prop] == null) obj[prop] = source[prop];
-	        }
-	      }
-	    });
-	    return obj;
-	  };
-	
-	  // Create a (shallow-cloned) duplicate of an object.
-	  _.clone = function(obj) {
-	    if (!_.isObject(obj)) return obj;
-	    return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-	  };
-	
-	  // Invokes interceptor with the obj, and then returns obj.
-	  // The primary purpose of this method is to "tap into" a method chain, in
-	  // order to perform operations on intermediate results within the chain.
-	  _.tap = function(obj, interceptor) {
-	    interceptor(obj);
-	    return obj;
-	  };
-	
-	  // Internal recursive comparison function for `isEqual`.
-	  var eq = function(a, b, aStack, bStack) {
-	    // Identical objects are equal. `0 === -0`, but they aren't identical.
-	    // See the Harmony `egal` proposal: http://wiki.ecmascript.org/doku.php?id=harmony:egal.
-	    if (a === b) return a !== 0 || 1 / a == 1 / b;
-	    // A strict comparison is necessary because `null == undefined`.
-	    if (a == null || b == null) return a === b;
-	    // Unwrap any wrapped objects.
-	    if (a instanceof _) a = a._wrapped;
-	    if (b instanceof _) b = b._wrapped;
-	    // Compare `[[Class]]` names.
-	    var className = toString.call(a);
-	    if (className != toString.call(b)) return false;
-	    switch (className) {
-	      // Strings, numbers, dates, and booleans are compared by value.
-	      case '[object String]':
-	        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-	        // equivalent to `new String("5")`.
-	        return a == String(b);
-	      case '[object Number]':
-	        // `NaN`s are equivalent, but non-reflexive. An `egal` comparison is performed for
-	        // other numeric values.
-	        return a != +a ? b != +b : (a == 0 ? 1 / a == 1 / b : a == +b);
-	      case '[object Date]':
-	      case '[object Boolean]':
-	        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-	        // millisecond representations. Note that invalid dates with millisecond representations
-	        // of `NaN` are not equivalent.
-	        return +a == +b;
-	      // RegExps are compared by their source patterns and flags.
-	      case '[object RegExp]':
-	        return a.source == b.source &&
-	               a.global == b.global &&
-	               a.multiline == b.multiline &&
-	               a.ignoreCase == b.ignoreCase;
-	    }
-	    if (typeof a != 'object' || typeof b != 'object') return false;
-	    // Assume equality for cyclic structures. The algorithm for detecting cyclic
-	    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-	    var length = aStack.length;
-	    while (length--) {
-	      // Linear search. Performance is inversely proportional to the number of
-	      // unique nested structures.
-	      if (aStack[length] == a) return bStack[length] == b;
-	    }
-	    // Add the first object to the stack of traversed objects.
-	    aStack.push(a);
-	    bStack.push(b);
-	    var size = 0, result = true;
-	    // Recursively compare objects and arrays.
-	    if (className == '[object Array]') {
-	      // Compare array lengths to determine if a deep comparison is necessary.
-	      size = a.length;
-	      result = size == b.length;
-	      if (result) {
-	        // Deep compare the contents, ignoring non-numeric properties.
-	        while (size--) {
-	          if (!(result = eq(a[size], b[size], aStack, bStack))) break;
-	        }
-	      }
-	    } else {
-	      // Objects with different constructors are not equivalent, but `Object`s
-	      // from different frames are.
-	      var aCtor = a.constructor, bCtor = b.constructor;
-	      if (aCtor !== bCtor && !(_.isFunction(aCtor) && (aCtor instanceof aCtor) &&
-	                               _.isFunction(bCtor) && (bCtor instanceof bCtor))) {
-	        return false;
-	      }
-	      // Deep compare objects.
-	      for (var key in a) {
-	        if (_.has(a, key)) {
-	          // Count the expected number of properties.
-	          size++;
-	          // Deep compare each member.
-	          if (!(result = _.has(b, key) && eq(a[key], b[key], aStack, bStack))) break;
-	        }
-	      }
-	      // Ensure that both objects contain the same number of properties.
-	      if (result) {
-	        for (key in b) {
-	          if (_.has(b, key) && !(size--)) break;
-	        }
-	        result = !size;
-	      }
-	    }
-	    // Remove the first object from the stack of traversed objects.
-	    aStack.pop();
-	    bStack.pop();
-	    return result;
-	  };
-	
-	  // Perform a deep comparison to check if two objects are equal.
-	  _.isEqual = function(a, b) {
-	    return eq(a, b, [], []);
-	  };
-	
-	  // Is a given array, string, or object empty?
-	  // An "empty" object has no enumerable own-properties.
-	  _.isEmpty = function(obj) {
-	    if (obj == null) return true;
-	    if (_.isArray(obj) || _.isString(obj)) return obj.length === 0;
-	    for (var key in obj) if (_.has(obj, key)) return false;
-	    return true;
-	  };
-	
-	  // Is a given value a DOM element?
-	  _.isElement = function(obj) {
-	    return !!(obj && obj.nodeType === 1);
-	  };
-	
-	  // Is a given value an array?
-	  // Delegates to ECMA5's native Array.isArray
-	  _.isArray = nativeIsArray || function(obj) {
-	    return toString.call(obj) == '[object Array]';
-	  };
-	
-	  // Is a given variable an object?
-	  _.isObject = function(obj) {
-	    return obj === Object(obj);
-	  };
-	
-	  // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp.
-	  each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
-	    _['is' + name] = function(obj) {
-	      return toString.call(obj) == '[object ' + name + ']';
-	    };
-	  });
-	
-	  // Define a fallback version of the method in browsers (ahem, IE), where
-	  // there isn't any inspectable "Arguments" type.
-	  if (!_.isArguments(arguments)) {
-	    _.isArguments = function(obj) {
-	      return !!(obj && _.has(obj, 'callee'));
-	    };
-	  }
-	
-	  // Optimize `isFunction` if appropriate.
-	  if (true) {
-	    _.isFunction = function(obj) {
-	      return typeof obj === 'function';
-	    };
-	  }
-	
-	  // Is a given object a finite number?
-	  _.isFinite = function(obj) {
-	    return isFinite(obj) && !isNaN(parseFloat(obj));
-	  };
-	
-	  // Is the given value `NaN`? (NaN is the only number which does not equal itself).
-	  _.isNaN = function(obj) {
-	    return _.isNumber(obj) && obj != +obj;
-	  };
-	
-	  // Is a given value a boolean?
-	  _.isBoolean = function(obj) {
-	    return obj === true || obj === false || toString.call(obj) == '[object Boolean]';
-	  };
-	
-	  // Is a given value equal to null?
-	  _.isNull = function(obj) {
-	    return obj === null;
-	  };
-	
-	  // Is a given variable undefined?
-	  _.isUndefined = function(obj) {
-	    return obj === void 0;
-	  };
-	
-	  // Shortcut function for checking if an object has a given property directly
-	  // on itself (in other words, not on a prototype).
-	  _.has = function(obj, key) {
-	    return hasOwnProperty.call(obj, key);
-	  };
-	
-	  // Utility Functions
-	  // -----------------
-	
-	  // Run Underscore.js in *noConflict* mode, returning the `_` variable to its
-	  // previous owner. Returns a reference to the Underscore object.
-	  _.noConflict = function() {
-	    root._ = previousUnderscore;
-	    return this;
-	  };
-	
-	  // Keep the identity function around for default iterators.
-	  _.identity = function(value) {
-	    return value;
-	  };
-	
-	  // Run a function **n** times.
-	  _.times = function(n, iterator, context) {
-	    var accum = Array(n);
-	    for (var i = 0; i < n; i++) accum[i] = iterator.call(context, i);
-	    return accum;
-	  };
-	
-	  // Return a random integer between min and max (inclusive).
-	  _.random = function(min, max) {
-	    if (max == null) {
-	      max = min;
-	      min = 0;
-	    }
-	    return min + (0 | Math.random() * (max - min + 1));
-	  };
-	
-	  // List of HTML entities for escaping.
-	  var entityMap = {
-	    escape: {
-	      '&': '&amp;',
-	      '<': '&lt;',
-	      '>': '&gt;',
-	      '"': '&quot;',
-	      "'": '&#x27;',
-	      '/': '&#x2F;'
-	    }
-	  };
-	  entityMap.unescape = _.invert(entityMap.escape);
-	
-	  // Regexes containing the keys and values listed immediately above.
-	  var entityRegexes = {
-	    escape:   new RegExp('[' + _.keys(entityMap.escape).join('') + ']', 'g'),
-	    unescape: new RegExp('(' + _.keys(entityMap.unescape).join('|') + ')', 'g')
-	  };
-	
-	  // Functions for escaping and unescaping strings to/from HTML interpolation.
-	  _.each(['escape', 'unescape'], function(method) {
-	    _[method] = function(string) {
-	      if (string == null) return '';
-	      return ('' + string).replace(entityRegexes[method], function(match) {
-	        return entityMap[method][match];
-	      });
-	    };
-	  });
-	
-	  // If the value of the named property is a function then invoke it;
-	  // otherwise, return it.
-	  _.result = function(object, property) {
-	    if (object == null) return null;
-	    var value = object[property];
-	    return _.isFunction(value) ? value.call(object) : value;
-	  };
-	
-	  // Add your own custom functions to the Underscore object.
-	  _.mixin = function(obj) {
-	    each(_.functions(obj), function(name){
-	      var func = _[name] = obj[name];
-	      _.prototype[name] = function() {
-	        var args = [this._wrapped];
-	        push.apply(args, arguments);
-	        return result.call(this, func.apply(_, args));
-	      };
-	    });
-	  };
-	
-	  // Generate a unique integer id (unique within the entire client session).
-	  // Useful for temporary DOM ids.
-	  var idCounter = 0;
-	  _.uniqueId = function(prefix) {
-	    var id = '' + ++idCounter;
-	    return prefix ? prefix + id : id;
-	  };
-	
-	  // By default, Underscore uses ERB-style template delimiters, change the
-	  // following template settings to use alternative delimiters.
-	  _.templateSettings = {
-	    evaluate    : /<%([\s\S]+?)%>/g,
-	    interpolate : /<%=([\s\S]+?)%>/g,
-	    escape      : /<%-([\s\S]+?)%>/g
-	  };
-	
-	  // When customizing `templateSettings`, if you don't want to define an
-	  // interpolation, evaluation or escaping regex, we need one that is
-	  // guaranteed not to match.
-	  var noMatch = /(.)^/;
-	
-	  // Certain characters need to be escaped so that they can be put into a
-	  // string literal.
-	  var escapes = {
-	    "'":      "'",
-	    '\\':     '\\',
-	    '\r':     'r',
-	    '\n':     'n',
-	    '\t':     't',
-	    '\u2028': 'u2028',
-	    '\u2029': 'u2029'
-	  };
-	
-	  var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
-	
-	  // JavaScript micro-templating, similar to John Resig's implementation.
-	  // Underscore templating handles arbitrary delimiters, preserves whitespace,
-	  // and correctly escapes quotes within interpolated code.
-	  _.template = function(text, data, settings) {
-	    settings = _.defaults({}, settings, _.templateSettings);
-	
-	    // Combine delimiters into one regular expression via alternation.
-	    var matcher = new RegExp([
-	      (settings.escape || noMatch).source,
-	      (settings.interpolate || noMatch).source,
-	      (settings.evaluate || noMatch).source
-	    ].join('|') + '|$', 'g');
-	
-	    // Compile the template source, escaping string literals appropriately.
-	    var index = 0;
-	    var source = "__p+='";
-	    text.replace(matcher, function(match, escape, interpolate, evaluate, offset) {
-	      source += text.slice(index, offset)
-	        .replace(escaper, function(match) { return '\\' + escapes[match]; });
-	
-	      if (escape) {
-	        source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'";
-	      }
-	      if (interpolate) {
-	        source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'";
-	      }
-	      if (evaluate) {
-	        source += "';\n" + evaluate + "\n__p+='";
-	      }
-	      index = offset + match.length;
-	      return match;
-	    });
-	    source += "';\n";
-	
-	    // If a variable is not specified, place data values in local scope.
-	    if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-	
-	    source = "var __t,__p='',__j=Array.prototype.join," +
-	      "print=function(){__p+=__j.call(arguments,'');};\n" +
-	      source + "return __p;\n";
-	
-	    try {
-	      var render = new Function(settings.variable || 'obj', '_', source);
-	    } catch (e) {
-	      e.source = source;
-	      throw e;
-	    }
-	
-	    if (data) return render(data, _);
-	    var template = function(data) {
-	      return render.call(this, data, _);
-	    };
-	
-	    // Provide the compiled function source as a convenience for precompilation.
-	    template.source = 'function(' + (settings.variable || 'obj') + '){\n' + source + '}';
-	
-	    return template;
-	  };
-	
-	  // Add a "chain" function, which will delegate to the wrapper.
-	  _.chain = function(obj) {
-	    return _(obj).chain();
-	  };
-	
-	  // OOP
-	  // ---------------
-	  // If Underscore is called as a function, it returns a wrapped object that
-	  // can be used OO-style. This wrapper holds altered versions of all the
-	  // underscore functions. Wrapped objects may be chained.
-	
-	  // Helper function to continue chaining intermediate results.
-	  var result = function(obj) {
-	    return this._chain ? _(obj).chain() : obj;
-	  };
-	
-	  // Add all of the Underscore functions to the wrapper object.
-	  _.mixin(_);
-	
-	  // Add all mutator Array functions to the wrapper.
-	  each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-	    var method = ArrayProto[name];
-	    _.prototype[name] = function() {
-	      var obj = this._wrapped;
-	      method.apply(obj, arguments);
-	      if ((name == 'shift' || name == 'splice') && obj.length === 0) delete obj[0];
-	      return result.call(this, obj);
-	    };
-	  });
-	
-	  // Add all accessor Array functions to the wrapper.
-	  each(['concat', 'join', 'slice'], function(name) {
-	    var method = ArrayProto[name];
-	    _.prototype[name] = function() {
-	      return result.call(this, method.apply(this._wrapped, arguments));
-	    };
-	  });
-	
-	  _.extend(_.prototype, {
-	
-	    // Start chaining a wrapped Underscore object.
-	    chain: function() {
-	      this._chain = true;
-	      return this;
-	    },
-	
-	    // Extracts the result from a wrapped and chained object.
-	    value: function() {
-	      return this._wrapped;
-	    }
-	
-	  });
-	
-	}).call(this);
-
-
-/***/ },
-/* 128 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var _ = __webpack_require__(127)._;
+	var _ = __webpack_require__(120)._;
 	
 	var LocalStorageBackend = function(options) {
 	  options = options || {};
@@ -20190,10 +18963,10 @@
 	exports.LocalStorageBackend = LocalStorageBackend;
 
 /***/ },
-/* 129 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(127)._;
+	var _ = __webpack_require__(120)._;
 	
 	var MemoryBackend = function() {
 	  this.catCounts = {};
@@ -20237,11 +19010,11 @@
 	exports.MemoryBackend = MemoryBackend;
 
 /***/ },
-/* 130 */
+/* 129 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(127)._;
-	var fs = __webpack_require__(131);
+	var _ = __webpack_require__(120)._;
+	var fs = __webpack_require__(130);
 	
 	/**
 	 * kNN classifier
@@ -20398,13 +19171,13 @@
 	module.exports = kNN;
 
 /***/ },
-/* 131 */
+/* 130 */
 /***/ function(module, exports) {
 
 	module.exports = require("fs");
 
 /***/ },
-/* 132 */
+/* 131 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20418,7 +19191,7 @@
 	 * @since 2013-09-09
 	 */
 	
-	var SvmJsBase = __webpack_require__(133).SVM;
+	var SvmJsBase = __webpack_require__(132).SVM;
 	
 	function SvmJs(opts) {
 		this.base = new SvmJsBase();
@@ -20498,7 +19271,7 @@
 
 
 /***/ },
-/* 133 */
+/* 132 */
 /***/ function(module, exports) {
 
 	// MIT License
@@ -20852,7 +19625,7 @@
 
 
 /***/ },
-/* 134 */
+/* 133 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20872,11 +19645,11 @@
 	 *  <li>bias - constant (bias) factor (default: 1).
 	 */
 	
-	var fs   = __webpack_require__(131)
+	var fs   = __webpack_require__(130)
 	  , util  = __webpack_require__(124)
-	  , execSync = __webpack_require__(135).execSync
-	  , svmcommon = __webpack_require__(136)	
-	  , _ = __webpack_require__(127)._;
+	  , execSync = __webpack_require__(134).execSync
+	  , svmcommon = __webpack_require__(135)	
+	  , _ = __webpack_require__(120)._;
 	  
 	
 	function SvmPerf(opts) {
@@ -21041,23 +19814,23 @@
 
 
 /***/ },
-/* 135 */
+/* 134 */
 /***/ function(module, exports) {
 
 	module.exports = require("child_process");
 
 /***/ },
-/* 136 */
+/* 135 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Utilities common to SVM wrappers
 	 */
 	
-	var temp = __webpack_require__(137)
-	  , fs   = __webpack_require__(131)
-	  , svmlight = __webpack_require__(143)
-	  , _ = __webpack_require__(127)._
+	var temp = __webpack_require__(136)
+	  , fs   = __webpack_require__(130)
+	  , svmlight = __webpack_require__(142)
+	  , _ = __webpack_require__(120)._
 	
 	/**
 	 * Writes the given dataset to a file in svm-light format.
@@ -21161,15 +19934,15 @@
 
 
 /***/ },
-/* 137 */
+/* 136 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs   = __webpack_require__(131),
-	    path = __webpack_require__(138),
-	    cnst = __webpack_require__(139);
+	var fs   = __webpack_require__(130),
+	    path = __webpack_require__(137),
+	    cnst = __webpack_require__(138);
 	
-	var rimraf     = __webpack_require__(140),
-	    osTmpdir   = __webpack_require__(142),
+	var rimraf     = __webpack_require__(139),
+	    osTmpdir   = __webpack_require__(141),
 	    rimrafSync = rimraf.sync;
 	
 	/* HELPERS */
@@ -21450,27 +20223,27 @@
 
 
 /***/ },
-/* 138 */
+/* 137 */
 /***/ function(module, exports) {
 
 	module.exports = require("path");
 
 /***/ },
-/* 139 */
+/* 138 */
 /***/ function(module, exports) {
 
 	module.exports = require("constants");
 
 /***/ },
-/* 140 */
+/* 139 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = rimraf
 	rimraf.sync = rimrafSync
 	
-	var assert = __webpack_require__(141)
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(131)
+	var assert = __webpack_require__(140)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(130)
 	
 	// for EMFILE handling
 	var timeout = 0
@@ -21716,13 +20489,13 @@
 
 
 /***/ },
-/* 141 */
+/* 140 */
 /***/ function(module, exports) {
 
 	module.exports = require("assert");
 
 /***/ },
-/* 142 */
+/* 141 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21753,7 +20526,7 @@
 
 
 /***/ },
-/* 143 */
+/* 142 */
 /***/ function(module, exports) {
 
 	/**
@@ -21802,7 +20575,7 @@
 
 
 /***/ },
-/* 144 */
+/* 143 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21849,11 +20622,11 @@
 	};
 	
 	var util  = __webpack_require__(124)
-	  , child_process = __webpack_require__(135)
-	  , exec = __webpack_require__(135).exec
-	  , fs   = __webpack_require__(131)
-	  , svmcommon = __webpack_require__(136)
-	  , _ = __webpack_require__(127)._
+	  , child_process = __webpack_require__(134)
+	  , exec = __webpack_require__(134).exec
+	  , fs   = __webpack_require__(130)
+	  , svmcommon = __webpack_require__(135)
+	  , _ = __webpack_require__(120)._
 	
 	var FIRST_FEATURE_NUMBER=1;  // in lib linear, feature numbers start with 1
 	
@@ -22042,7 +20815,7 @@
 	 * UTILS
 	 */
 	
-	var NEWLINE = __webpack_require__(145).EOL;
+	var NEWLINE = __webpack_require__(144).EOL;
 	
 	var LIB_LINEAR_MODEL_PATTERN = new RegExp(
 			"[\\S\\s]*"+    // skip the beginning of string
@@ -22107,13 +20880,13 @@
 
 
 /***/ },
-/* 145 */
+/* 144 */
 /***/ function(module, exports) {
 
 	module.exports = require("os");
 
 /***/ },
-/* 146 */
+/* 145 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22136,7 +20909,7 @@
 	 * 
 	 */
 	
-	var hash = __webpack_require__(147);
+	var hash = __webpack_require__(146);
 	
 	var PerceptronHash = function(opts) {
 		if (!opts) opts = {};
@@ -22283,7 +21056,7 @@
 
 
 /***/ },
-/* 147 */
+/* 146 */
 /***/ function(module, exports) {
 
 	/**
@@ -22521,7 +21294,7 @@
 
 
 /***/ },
-/* 148 */
+/* 147 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22539,8 +21312,8 @@
 	 *  <li>bias - constant (bias) factor (default: 1).
 	 */
 	 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;  // for explanations
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;  // for explanations
 	
 	function WinnowHash(opts) {
 		if (!opts) opts = {}
@@ -22765,7 +21538,7 @@
 
 
 /***/ },
-/* 149 */
+/* 148 */
 /***/ function(module, exports) {
 
 	/**
@@ -23020,15 +21793,15 @@
 
 
 /***/ },
-/* 150 */
+/* 149 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* Implementation of Decision Tree classifier, ID3 implementation
 	   the code based on https://github.com/bugless/nodejs-decision-tree-id3/blob/master/lib/decision-tree.js
 	 */
-	var _ = __webpack_require__(127);
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;  // for explanations
+	var _ = __webpack_require__(120);
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;  // for explanations
 	
 	function DecisionTree(opts) {
 		if (!opts) opts = {}
@@ -23165,20 +21938,20 @@
 
 
 /***/ },
-/* 151 */
+/* 150 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-		BinaryRelevance:        __webpack_require__(152),
-		PassiveAggressive:      __webpack_require__(154),
-		BinarySegmentation:     __webpack_require__(155),
+		BinaryRelevance:        __webpack_require__(151),
+		PassiveAggressive:      __webpack_require__(153),
+		BinarySegmentation:     __webpack_require__(154),
 		MulticlassSegmentation: __webpack_require__(166),
-		Homer:                  __webpack_require__(168),
-		MetaLabeler:            __webpack_require__(169),
-		CrossLanguageModel:     __webpack_require__(170),
-		ThresholdClassifier:    __webpack_require__(176),
-		Adaboost:  				__webpack_require__(180),
-		PartialClassification:  __webpack_require__(182),
+		Homer:                  __webpack_require__(167),
+		MetaLabeler:            __webpack_require__(168),
+		CrossLanguageModel:     __webpack_require__(169),
+		ThresholdClassifier:    __webpack_require__(175),
+		Adaboost:  				__webpack_require__(179),
+		PartialClassification:  __webpack_require__(181),
 	}
 	
 	// add a "classify and log" method to all classifiers, for demos:
@@ -23191,13 +21964,13 @@
 
 
 /***/ },
-/* 152 */
+/* 151 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
-	var multilabelutils = __webpack_require__(153);
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
+	var multilabelutils = __webpack_require__(152);
 	// var fs = require('fs');
 	
 	/**
@@ -23447,10 +22220,10 @@
 
 
 /***/ },
-/* 153 */
+/* 152 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(127)._;
+	var _ = __webpack_require__(120)._;
 	/**
 	 * A utility function, used by several multi-label classifiers.
 	 * 
@@ -23512,14 +22285,14 @@
 
 
 /***/ },
-/* 154 */
+/* 153 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	var util = __webpack_require__(124);
-	var multilabelutils = __webpack_require__(153);
+	var multilabelutils = __webpack_require__(152);
 	
 	
 	
@@ -23742,13 +22515,13 @@
 
 
 /***/ },
-/* 155 */
+/* 154 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
-	var ftrs = __webpack_require__(156);
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
+	var ftrs = __webpack_require__(155);
 	
 	/**
 	 * BinarySegmentation - Multi-label text classifier, based on a segmentation scheme using base binary classifiers.
@@ -23910,7 +22683,7 @@
 			//	}
 			//}
 	
-			var cheapest_paths = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../node_modules/graph-paths/graph-paths\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())).cheapest_paths;
+			var cheapest_paths = __webpack_require__(165).cheapest_paths;
 	
 	                var mini = Infinity
 	                _(words.length).times(function(nn){
@@ -24104,22 +22877,22 @@
 
 
 /***/ },
-/* 156 */
+/* 155 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-		NGramsFromArray: __webpack_require__(157),
-		NGramsOfWords:  __webpack_require__(158),
-		NGramsOfLetters: __webpack_require__(159),
+		NGramsFromArray: __webpack_require__(156),
+		NGramsOfWords:  __webpack_require__(157),
+		NGramsOfLetters: __webpack_require__(158),
 	
-		Hypernyms: __webpack_require__(160),
-		CollectionOfExtractors: __webpack_require__(161),
-		FeatureLookupTable: __webpack_require__(162),
+		Hypernyms: __webpack_require__(159),
+		CollectionOfExtractors: __webpack_require__(160),
+		FeatureLookupTable: __webpack_require__(161),
 		
-		LowerCaseNormalizer: __webpack_require__(163),
-		RegexpNormalizer: __webpack_require__(164),
+		LowerCaseNormalizer: __webpack_require__(162),
+		RegexpNormalizer: __webpack_require__(163),
 	
-		RegexpSplitter: __webpack_require__(165),
+		RegexpSplitter: __webpack_require__(164),
 	};
 	
 	/**
@@ -24148,7 +22921,7 @@
 
 
 /***/ },
-/* 157 */
+/* 156 */
 /***/ function(module, exports) {
 
 	/**
@@ -24173,14 +22946,14 @@
 
 
 /***/ },
-/* 158 */
+/* 157 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * NGramExtractor - extracts sequences of words in a text as its features.
 	 */
 	
-	var NGramsFromArray = __webpack_require__(157);
+	var NGramsFromArray = __webpack_require__(156);
 	module.exports = function(numOfWords, gap) {
 				return function(sample, features) {
 					var words = sample.split(/[ \t,;:.!?]/).filter(function(a){return !!a}); // all non-empty words
@@ -24190,7 +22963,7 @@
 
 
 /***/ },
-/* 159 */
+/* 158 */
 /***/ function(module, exports) {
 
 	/**
@@ -24223,7 +22996,7 @@
 
 
 /***/ },
-/* 160 */
+/* 159 */
 /***/ function(module, exports) {
 
 	/**
@@ -24278,7 +23051,7 @@
 
 
 /***/ },
-/* 161 */
+/* 160 */
 /***/ function(module, exports) {
 
 	/**
@@ -24316,7 +23089,7 @@
 
 
 /***/ },
-/* 162 */
+/* 161 */
 /***/ function(module, exports) {
 
 	/**
@@ -24451,7 +23224,7 @@
 
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports) {
 
 	/**
@@ -24470,7 +23243,7 @@
 
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports) {
 
 	/**
@@ -24509,7 +23282,7 @@
 
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports) {
 
 	/**
@@ -24552,13 +23325,115 @@
 
 
 /***/ },
+/* 165 */
+/***/ function(module, exports) {
+
+	/**
+	 * Find the shortest / cheapest paths in a dense graph.
+	 * 
+	 * @author Erel Segal-Halevi
+	 * @since 2013-08
+	 * @license GPL
+	 */
+	
+	/**
+	 * @param costs a square matrix, n-by-n, where element (i,j) is the direct cost from node i to node j.
+	 * All costs are assumed to be non-negative.
+	 * @param start one of the nodes (0...n-1).
+	 * @return an array, where element j is: 
+	 * 	{ cost: best_cost_from_i, path: best_path_from_i }
+	 * Uses a simple dynamic programming algorithm. 
+	 */
+	var cheapest_paths = function(costs, start) {
+		var numnodes = costs.length;
+		if (!costs[start])
+			throw new Error("Node "+start+" does not exist in costs matrix");
+		if (costs[start].length!=numnodes)
+			throw new Error("Costs matrix is not square - it has "+numnodes+" rows and "+costs[start].length+" columns");
+	
+		// initialization:
+		var numsteps = 1;
+		var costs_from_start_using_numsteps = [];
+		for (var targetnode=0; targetnode<numnodes; ++targetnode) {
+			costs_from_start_using_numsteps[targetnode] = {
+				cost: costs[start][targetnode],
+				path: targetnode==start? [start]: [start, targetnode]
+			}
+		}
+		for (++numsteps; numsteps<numnodes; ++numsteps) {
+			//console.dir(costs_from_start_using_numsteps);
+			var costs_from_start_using_numsteps_plus_1 = [];
+			for (var targetnode=0; targetnode<numnodes; ++targetnode) {
+				var cost_from_start_through_middle_using_numsteps_plus_1 = [];
+				for (var middlenode=0; middlenode<numnodes; ++middlenode) {
+					cost_from_start_through_middle_using_numsteps_plus_1[middlenode] = 
+						costs_from_start_using_numsteps[middlenode].cost +
+						costs[middlenode][targetnode];
+				}
+				var bestMiddlenode = argmin(cost_from_start_through_middle_using_numsteps_plus_1);
+				if (!costs_from_start_using_numsteps[bestMiddlenode])
+					throw new Error("costs_from_start_using_numsteps["+bestMiddlenode+"] does not exist");
+				var bestcost =   cost_from_start_through_middle_using_numsteps_plus_1[bestMiddlenode];
+				if (bestcost != costs_from_start_using_numsteps[targetnode].cost) {
+					costs_from_start_using_numsteps_plus_1[targetnode] = {
+						cost: cost_from_start_through_middle_using_numsteps_plus_1[bestMiddlenode],
+						path: costs_from_start_using_numsteps[bestMiddlenode].path.concat([targetnode])
+					}
+				} else {
+					costs_from_start_using_numsteps_plus_1[targetnode] = costs_from_start_using_numsteps[targetnode]
+				}
+			}
+			costs_from_start_using_numsteps = costs_from_start_using_numsteps_plus_1;
+		}
+		
+		return costs_from_start_using_numsteps_plus_1;
+	}
+	
+	
+	
+	//UTILS:
+	
+	var argmax = function(array, iterator) {
+		var max = -Infinity;
+		var arg = 0;
+		for (var i=0; i<array.length; ++i) {
+			var element = (iterator? iterator(array[i]): array[i]);
+			if (element>max) {
+				max = element;
+				arg = i;
+			}
+		}
+		return arg;
+	}
+	
+	var argmin = function(array, iterator) {
+		var min = Infinity;
+		var arg = 0;
+		for (var i=0; i<array.length; ++i) {
+			var element = (iterator? iterator(array[i]): array[i]);
+			if (element<min) {
+				min = element;
+				arg = i;
+			}
+		}
+		return arg;
+	}
+	
+	
+	
+	module.exports = {
+		cheapest_paths: cheapest_paths
+	}
+
+
+/***/ },
 /* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var FeaturesUnit = __webpack_require__(156);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	var hash = __webpack_require__(146);
+	var FeaturesUnit = __webpack_require__(155);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	
 	/**
 	 * MulticlassSegmentation - Multi-label text classifier, based on a segmentation scheme using a base multi-class classifier.
@@ -24676,7 +23551,7 @@
 				}
 			}
 			//console.log(words+":  ");		console.log("segmentClassificationCosts");		console.dir(segmentClassificationCosts);
-			var cheapest_paths = __webpack_require__(167).cheapest_paths;
+			var cheapest_paths = __webpack_require__(165).cheapest_paths;
 			cheapestSegmentClassificationCosts = cheapest_paths(segmentClassificationCosts, 0);
 			cheapestSentenceClassificationCost = cheapestSegmentClassificationCosts[words.length];
 			if (!cheapestSentenceClassificationCost)
@@ -24754,115 +23629,13 @@
 
 /***/ },
 /* 167 */
-/***/ function(module, exports) {
-
-	/**
-	 * Find the shortest / cheapest paths in a dense graph.
-	 * 
-	 * @author Erel Segal-Halevi
-	 * @since 2013-08
-	 * @license GPL
-	 */
-	
-	/**
-	 * @param costs a square matrix, n-by-n, where element (i,j) is the direct cost from node i to node j.
-	 * All costs are assumed to be non-negative.
-	 * @param start one of the nodes (0...n-1).
-	 * @return an array, where element j is: 
-	 * 	{ cost: best_cost_from_i, path: best_path_from_i }
-	 * Uses a simple dynamic programming algorithm. 
-	 */
-	var cheapest_paths = function(costs, start) {
-		var numnodes = costs.length;
-		if (!costs[start])
-			throw new Error("Node "+start+" does not exist in costs matrix");
-		if (costs[start].length!=numnodes)
-			throw new Error("Costs matrix is not square - it has "+numnodes+" rows and "+costs[start].length+" columns");
-	
-		// initialization:
-		var numsteps = 1;
-		var costs_from_start_using_numsteps = [];
-		for (var targetnode=0; targetnode<numnodes; ++targetnode) {
-			costs_from_start_using_numsteps[targetnode] = {
-				cost: costs[start][targetnode],
-				path: targetnode==start? [start]: [start, targetnode]
-			}
-		}
-		for (++numsteps; numsteps<numnodes; ++numsteps) {
-			//console.dir(costs_from_start_using_numsteps);
-			var costs_from_start_using_numsteps_plus_1 = [];
-			for (var targetnode=0; targetnode<numnodes; ++targetnode) {
-				var cost_from_start_through_middle_using_numsteps_plus_1 = [];
-				for (var middlenode=0; middlenode<numnodes; ++middlenode) {
-					cost_from_start_through_middle_using_numsteps_plus_1[middlenode] = 
-						costs_from_start_using_numsteps[middlenode].cost +
-						costs[middlenode][targetnode];
-				}
-				var bestMiddlenode = argmin(cost_from_start_through_middle_using_numsteps_plus_1);
-				if (!costs_from_start_using_numsteps[bestMiddlenode])
-					throw new Error("costs_from_start_using_numsteps["+bestMiddlenode+"] does not exist");
-				var bestcost =   cost_from_start_through_middle_using_numsteps_plus_1[bestMiddlenode];
-				if (bestcost != costs_from_start_using_numsteps[targetnode].cost) {
-					costs_from_start_using_numsteps_plus_1[targetnode] = {
-						cost: cost_from_start_through_middle_using_numsteps_plus_1[bestMiddlenode],
-						path: costs_from_start_using_numsteps[bestMiddlenode].path.concat([targetnode])
-					}
-				} else {
-					costs_from_start_using_numsteps_plus_1[targetnode] = costs_from_start_using_numsteps[targetnode]
-				}
-			}
-			costs_from_start_using_numsteps = costs_from_start_using_numsteps_plus_1;
-		}
-		
-		return costs_from_start_using_numsteps_plus_1;
-	}
-	
-	
-	
-	//UTILS:
-	
-	var argmax = function(array, iterator) {
-		var max = -Infinity;
-		var arg = 0;
-		for (var i=0; i<array.length; ++i) {
-			var element = (iterator? iterator(array[i]): array[i]);
-			if (element>max) {
-				max = element;
-				arg = i;
-			}
-		}
-		return arg;
-	}
-	
-	var argmin = function(array, iterator) {
-		var min = Infinity;
-		var arg = 0;
-		for (var i=0; i<array.length; ++i) {
-			var element = (iterator? iterator(array[i]): array[i]);
-			if (element<min) {
-				min = element;
-				arg = i;
-			}
-		}
-		return arg;
-	}
-	
-	
-	
-	module.exports = {
-		cheapest_paths: cheapest_paths
-	}
-
-
-/***/ },
-/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	var util = __webpack_require__(124);
-	var multilabelutils = __webpack_require__(153);
+	var multilabelutils = __webpack_require__(152);
 	
 	
 	/**
@@ -25178,12 +23951,12 @@
 	module.exports = Homer;
 
 /***/ },
-/* 169 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	
 	/**
 	 * MetaLabeler - Multi-label classifier, based on:
@@ -25314,16 +24087,16 @@
 
 
 /***/ },
-/* 170 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__filename) {var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	/* WEBPACK VAR INJECTION */(function(__filename) {var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	var util = __webpack_require__(124);
-	var multilabelutils = __webpack_require__(153);
+	var multilabelutils = __webpack_require__(152);
 	
-	var CrossLanguageModel = __webpack_require__(171).CrossLanguageModel;
+	var CrossLanguageModel = __webpack_require__(170).CrossLanguageModel;
 	
 	
 	
@@ -25480,21 +24253,21 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "/index.js"))
 
 /***/ },
-/* 171 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-		LanguageModel: __webpack_require__(172),
-		CrossLanguageModel: __webpack_require__(175),
+		LanguageModel: __webpack_require__(171),
+		CrossLanguageModel: __webpack_require__(174),
 	}
 
 
 /***/ },
-/* 172 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {var util = __webpack_require__(124);
-	var logSumExp = __webpack_require__(173);
+	var logSumExp = __webpack_require__(172);
 	
 	
 	/**
@@ -25648,7 +24421,7 @@
 			smoothingFactor : 0.9,
 		});
 	
-		var wordcounts = __webpack_require__(174);
+		var wordcounts = __webpack_require__(173);
 		
 		model.trainBatch([
 			wordcounts("I want aa"),
@@ -25675,7 +24448,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "/index.js"))
 
 /***/ },
-/* 173 */
+/* 172 */
 /***/ function(module, exports) {
 
 	/**
@@ -25699,7 +24472,7 @@
 
 
 /***/ },
-/* 174 */
+/* 173 */
 /***/ function(module, exports) {
 
 	/**
@@ -25717,11 +24490,11 @@
 
 
 /***/ },
-/* 175 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__filename) {var LanguageModel = __webpack_require__(172);
-	var logSumExp = __webpack_require__(173);
+	/* WEBPACK VAR INJECTION */(function(__filename) {var LanguageModel = __webpack_require__(171);
+	var logSumExp = __webpack_require__(172);
 	
 	var extend = __webpack_require__(124)._extend;
 	
@@ -25898,7 +24671,7 @@
 			smoothingFactor : 0.9,
 		});
 		
-		var wordcounts = __webpack_require__(174);
+		var wordcounts = __webpack_require__(173);
 		
 		model.trainBatch([
 			{input: wordcounts("I want aa"), output: wordcounts("a")},
@@ -25938,16 +24711,16 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, "/index.js"))
 
 /***/ },
-/* 176 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var multilabelutils = __webpack_require__(153);
-	var _ = __webpack_require__(127)._;
-	var PrecisionRecall = __webpack_require__(177);
-	var partitions = __webpack_require__(178);
-	var ulist = __webpack_require__(179);
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var multilabelutils = __webpack_require__(152);
+	var _ = __webpack_require__(120)._;
+	var PrecisionRecall = __webpack_require__(176);
+	var partitions = __webpack_require__(177);
+	var ulist = __webpack_require__(178);
 	
 	
 	/* ThresholdClassifier - classifier that converts multi-class classifier to multi-label classifier by finding
@@ -26184,12 +24957,12 @@
 
 
 /***/ },
-/* 177 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
 	
 	/**
 	 * PrecisionRecall - an object for tracking results of experiments: precision, recall, f1, and execution time.
@@ -26595,7 +25368,7 @@
 		
 
 /***/ },
-/* 178 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26604,7 +25377,7 @@
 	 * @author Erel Segal-haLevi
 	 * @since 2013-06
 	 */
-	var _ = __webpack_require__(127)._;
+	var _ = __webpack_require__(120)._;
 	
 	
 	/**
@@ -26752,7 +25525,7 @@
 
 
 /***/ },
-/* 179 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26760,7 +25533,7 @@
 	 * 
 	 * @author Vasily Konovalov
 	 */
-	var _ = __webpack_require__(127);
+	var _ = __webpack_require__(120);
 	
 	// Calculating the median of an array basically involves sorting the array and picking the middle number. 
 	// If it’s an even amount of numbers you take the two numbers in the middle and average them.
@@ -26825,16 +25598,16 @@
 
 
 /***/ },
-/* 180 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var hash = __webpack_require__(147);
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
-	var fs = __webpack_require__(131);
-	var partitions = __webpack_require__(178);
-	var crypto = __webpack_require__(181)
-	var execSync = __webpack_require__(135).execSync
+	var hash = __webpack_require__(146);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
+	var fs = __webpack_require__(130);
+	var partitions = __webpack_require__(177);
+	var crypto = __webpack_require__(180)
+	var execSync = __webpack_require__(134).execSync
 	/**
 	 * Adaptive Boosting (Adaboost) is a greedy search for a linear combination of 
 	 * classifiers by overweighting the examples that are misclassified by each 
@@ -26985,18 +25758,18 @@
 
 
 /***/ },
-/* 181 */
+/* 180 */
 /***/ function(module, exports) {
 
 	module.exports = require("crypto");
 
 /***/ },
-/* 182 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var sprintf = __webpack_require__(149).sprintf;
-	var _ = __webpack_require__(127)._;
-	var multilabelutils = __webpack_require__(153);
+	var sprintf = __webpack_require__(148).sprintf;
+	var _ = __webpack_require__(120)._;
+	var multilabelutils = __webpack_require__(152);
 	
 	/**
 	 *  PartialClassification is a test classifier that learns and classifies the components
@@ -27152,18 +25925,18 @@
 
 
 /***/ },
-/* 183 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
 	TODO: SpellChecker should be reorganized
 	*/
 	
-	var ftrs = __webpack_require__(156);
-	var _ = __webpack_require__(127)._;
-	var hash = __webpack_require__(147);
-	var util = __webpack_require__(179);
-	var multilabelutils = __webpack_require__(153);
+	var ftrs = __webpack_require__(155);
+	var _ = __webpack_require__(120)._;
+	var hash = __webpack_require__(146);
+	var util = __webpack_require__(178);
+	var multilabelutils = __webpack_require__(152);
 	
 	/**
 	 * EnhancedClassifier - wraps any classifier with feature-extractors and feature-lookup-tables.
@@ -27699,19 +26472,19 @@
 
 
 /***/ },
-/* 184 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-		arff: __webpack_require__(185),
-		json: __webpack_require__(187),
-		tsv: __webpack_require__(188),
-		svmlight: __webpack_require__(143),
+		arff: __webpack_require__(184),
+		json: __webpack_require__(185),
+		tsv: __webpack_require__(186),
+		svmlight: __webpack_require__(142),
 	}
 
 
 /***/ },
-/* 185 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -27724,8 +26497,9 @@
 	 */
 	
 	
-	var _ = __webpack_require__(127)._;
-	var FeaturesUnit = new __webpack_require__(186)('../features');
+	var _ = __webpack_require__(120)._;
+	// var FeaturesUnit = new require('../features');
+	var FeaturesUnit = __webpack_require__(155);
 	
 	/**
 	 * convert a single dataset to Weka ARFF string.
@@ -27796,7 +26570,7 @@
 	
 		//console.dir(featureLookupTable);
 	
-		var fs = __webpack_require__(131);
+		var fs = __webpack_require__(130);
 		for (var relationName in mapFileNameToDataset) {
 			fs.writeFileSync(outputFolder+"/"+relationName+".arff", 
 				toARFFLocal(mapFileNameToDataset[relationName], relationName, featureLookupTable));
@@ -27840,37 +26614,7 @@
 
 
 /***/ },
-/* 186 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var map = {
-		"./arff": 185,
-		"./arff.js": 185,
-		"./index": 184,
-		"./index.js": 184,
-		"./json": 187,
-		"./json.js": 187,
-		"./svmlight": 143,
-		"./svmlight.js": 143,
-		"./tsv": 188,
-		"./tsv.js": 188
-	};
-	function webpackContext(req) {
-		return __webpack_require__(webpackContextResolve(req));
-	};
-	function webpackContextResolve(req) {
-		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
-	};
-	webpackContext.keys = function webpackContextKeys() {
-		return Object.keys(map);
-	};
-	webpackContext.resolve = webpackContextResolve;
-	module.exports = webpackContext;
-	webpackContext.id = 186;
-
-
-/***/ },
-/* 187 */
+/* 185 */
 /***/ function(module, exports) {
 
 	/**
@@ -27899,7 +26643,7 @@
 
 
 /***/ },
-/* 188 */
+/* 186 */
 /***/ function(module, exports) {
 
 	/**
@@ -27922,14 +26666,14 @@
 
 
 /***/ },
-/* 189 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//var trainAndTest = require("./trainAndTest"); 
 	module.exports = {
-		hash: __webpack_require__(147),
-		partitions: __webpack_require__(178),
-		PrecisionRecall: __webpack_require__(177),
+		hash: __webpack_require__(146),
+		partitions: __webpack_require__(177),
+		PrecisionRecall: __webpack_require__(176),
 	//	bars: require("./bars.js"),
 	//	testLite: trainAndTest.testLite,
 	//	test: trainAndTest.test,
@@ -27941,12 +26685,12 @@
 	//	splitToEasyAndHard: trainAndTest.splitToEasyAndHard,
 		
 	//	writeDataset: require("./trainAndTest").writeDataset,
-		hammingDistance: __webpack_require__(190).hammingDistance,
+		hammingDistance: __webpack_require__(188).hammingDistance,
 	}
 
 
 /***/ },
-/* 190 */
+/* 188 */
 /***/ function(module, exports) {
 
 	/** 
@@ -27977,7 +26721,7 @@
 
 
 /***/ },
-/* 191 */
+/* 189 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28008,7 +26752,7 @@
 	}];
 
 /***/ },
-/* 192 */
+/* 190 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28022,15 +26766,15 @@
 
 
 /***/ },
-/* 193 */
+/* 191 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(194);
+	__webpack_require__(192);
 	module.exports = angular;
 
 
 /***/ },
-/* 194 */
+/* 192 */
 /***/ function(module, exports) {
 
 	/**
@@ -58463,7 +57207,7 @@
 	!window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 195 */
+/* 193 */
 /***/ function(module, exports) {
 
 	/**
@@ -63007,12 +61751,12 @@
 	})(window, window.angular);
 
 /***/ },
-/* 196 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _config = __webpack_require__(197);
+	var _config = __webpack_require__(195);
 	
 	var _config2 = _interopRequireDefault(_config);
 	
@@ -63033,7 +61777,7 @@
 	}];
 
 /***/ },
-/* 197 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63047,16 +61791,16 @@
 	    url: "/",
 	    views: {
 	      "header": {
-	        template: __webpack_require__(198),
-	        controller: __webpack_require__(199)
+	        template: __webpack_require__(196),
+	        controller: __webpack_require__(197)
 	      },
 	      // "footer": {
 	      //   template: require("html!./../controller/footer/templates/layout.html"),
 	      //   controller: require('./footer/footerController.js')
 	      // },
 	      "content@": {
-	        template: __webpack_require__(200),
-	        controller: __webpack_require__(201)
+	        template: __webpack_require__(198),
+	        controller: __webpack_require__(199)
 	      }
 	    }
 	  }
@@ -63066,8 +61810,8 @@
 	    url: 'config',
 	    views: {
 	      "content@": {
-	        template: __webpack_require__(202),
-	        controller: __webpack_require__(203)
+	        template: __webpack_require__(200),
+	        controller: __webpack_require__(201)
 	      }
 	    }
 	  }
@@ -63077,21 +61821,21 @@
 	    url: 'browse/:url/:result',
 	    views: {
 	      "content@": {
-	        template: __webpack_require__(204),
-	        controller: __webpack_require__(205)
+	        template: __webpack_require__(202),
+	        controller: __webpack_require__(203)
 	      }
 	    }
 	  }
 	}];
 
 /***/ },
-/* 198 */
+/* 196 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"bar bar-header bar-stable\">\n  <button class=\"button icon ion-navicon\" ng-click=\"$emit('toggleMenu')\"></button>\n  <h1 class=\"title\">Raspberry Pi</h1>\n  <i id=\"micro-icon\" class=\"button button-icon icon ion-android-microphone-off\"></i>\n</div>\n<div class=\"side-bar-menu\">\n  <div class=\"list\">\n    <a class=\"item\" ui-sref=\"home\" ng-click=\"$emit('toggleMenu')\">\n      home\n    </a>\n    <a class=\"item\" ui-sref=\"home.config\" ng-click=\"$emit('toggleMenu')\">\n      Config\n    </a>\n    <a class=\"item\" ui-sref=\"home.browse\" ng-click=\"$emit('toggleMenu')\">\n      Browser\n    </a>\n  </div>\n</div>";
 
 /***/ },
-/* 199 */
+/* 197 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63103,13 +61847,13 @@
 	}];
 
 /***/ },
-/* 200 */
+/* 198 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"display-flex flex-direction-row justify-content-flex-start height-100 \">\n  <span class=\"wi wi-day-sunny font-size-100-px\" style=\"line-height: 117px\"></span> \n  <div class=\"display-flex flex-direction-column\">\n    <span class=\"font-size-50-px-lheight\">\n      {{temp}}°C {{city}}\n    </span>\n    <span class=\"font-size-50-px-lheight\">\n      {{date}}\n    </span>\n  </div>\n</div>";
 
 /***/ },
-/* 201 */
+/* 199 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63129,13 +61873,13 @@
 	}];
 
 /***/ },
-/* 202 */
+/* 200 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"list\">\n  <div class=\"item item-icon-left item-icon-right\">\n    <i class=\"icon ion-videocamera\"></i>\n    Webcam\n    <input type=\"checkbox\" ng-model=\"webcam\" ng-show=\"false\" />\n    <i class=\"icon ion-checkmark-round balanced\"  ng-if='webcam'></i>\n    <i class=\"icon ion-close-round assertive\"  ng-if='!webcam'></i>\n  </div>\n  <div class=\"item item-icon-left item-icon-right\">\n    <i class=\"icon ion-mic-b\"></i>\n    Micro\n    <input type=\"checkbox\" ng-model=\"micro\" ng-show=\"false\" />\n    <i class=\"icon ion-checkmark-round balanced\" ng-if=\"micro\"></i>\n    <i class=\"icon ion-close-round assertive\" ng-if=\"!micro\"></i>\n  </div>\n</div>";
 
 /***/ },
-/* 203 */
+/* 201 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63153,13 +61897,13 @@
 	}];
 
 /***/ },
-/* 204 */
+/* 202 */
 /***/ function(module, exports) {
 
 	module.exports = "<webview nodeintegration class=\"height-100\"></webview>";
 
 /***/ },
-/* 205 */
+/* 203 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -63178,7 +61922,7 @@
 	}];
 
 /***/ },
-/* 206 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
@@ -63582,14 +62326,14 @@
 
 
 /***/ },
-/* 207 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(208);
+	module.exports = __webpack_require__(206);
 
 
 /***/ },
-/* 208 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63599,7 +62343,7 @@
 	
 	'use strict';
 	
-	let Api = __webpack_require__(209);
+	let Api = __webpack_require__(207);
 	
 	/**
 	 * @class ElectronSettings
@@ -63611,7 +62355,7 @@
 
 
 /***/ },
-/* 209 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63621,7 +62365,7 @@
 	
 	'use strict';
 	
-	let Settings = __webpack_require__(210);
+	let Settings = __webpack_require__(208);
 	
 	/**
 	 * @class Api
@@ -63781,7 +62525,7 @@
 
 
 /***/ },
-/* 210 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63791,27 +62535,27 @@
 	
 	'use strict';
 	
-	const _ = __webpack_require__(211);
-	const deepDiff = __webpack_require__(212);
-	const fs = __webpack_require__(213);
-	const keyMirror = __webpack_require__(262);
-	const minimatch = __webpack_require__(263);
-	const path = __webpack_require__(138);
+	const _ = __webpack_require__(209);
+	const deepDiff = __webpack_require__(210);
+	const fs = __webpack_require__(211);
+	const keyMirror = __webpack_require__(260);
+	const minimatch = __webpack_require__(230);
+	const path = __webpack_require__(137);
 	
 	/**
 	 * Import Watcher.
 	 */
-	const Watcher = __webpack_require__(264);
+	const Watcher = __webpack_require__(261);
 	
 	/**
 	 * Import key path helpers.
 	 */
-	const keyPathHelpers = __webpack_require__(267);
+	const keyPathHelpers = __webpack_require__(264);
 	
 	/**
 	 * Configure debugger.
 	 */
-	const debug = __webpack_require__(268)('electron-settings:settings');
+	const debug = __webpack_require__(265)('electron-settings:settings');
 	
 	/**
 	 * @class Settings
@@ -64440,7 +63184,7 @@
 
 
 /***/ },
-/* 211 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {/**
@@ -76798,7 +75542,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(15)(module)))
 
 /***/ },
-/* 212 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -77207,13 +75951,13 @@
 
 
 /***/ },
-/* 213 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assign = __webpack_require__(214)
+	var assign = __webpack_require__(212)
 	
 	var fse = {}
-	var gfs = __webpack_require__(215)
+	var gfs = __webpack_require__(213)
 	
 	// attach fs methods to fse
 	Object.keys(gfs).forEach(function (key) {
@@ -77222,17 +75966,17 @@
 	
 	var fs = fse
 	
-	assign(fs, __webpack_require__(219))
-	assign(fs, __webpack_require__(226))
-	assign(fs, __webpack_require__(223))
-	assign(fs, __webpack_require__(229))
-	assign(fs, __webpack_require__(243))
-	assign(fs, __webpack_require__(248))
+	assign(fs, __webpack_require__(217))
+	assign(fs, __webpack_require__(224))
+	assign(fs, __webpack_require__(221))
+	assign(fs, __webpack_require__(227))
+	assign(fs, __webpack_require__(241))
+	assign(fs, __webpack_require__(246))
+	assign(fs, __webpack_require__(247))
 	assign(fs, __webpack_require__(249))
-	assign(fs, __webpack_require__(251))
-	assign(fs, __webpack_require__(252))
-	assign(fs, __webpack_require__(258))
-	assign(fs, __webpack_require__(259))
+	assign(fs, __webpack_require__(250))
+	assign(fs, __webpack_require__(256))
+	assign(fs, __webpack_require__(257))
 	
 	module.exports = fs
 	
@@ -77251,7 +75995,7 @@
 
 
 /***/ },
-/* 214 */
+/* 212 */
 /***/ function(module, exports) {
 
 	// simple mutable assign
@@ -77271,12 +76015,12 @@
 
 
 /***/ },
-/* 215 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(131)
-	var polyfills = __webpack_require__(216)
-	var legacy = __webpack_require__(218)
+	var fs = __webpack_require__(130)
+	var polyfills = __webpack_require__(214)
+	var legacy = __webpack_require__(216)
 	var queue = []
 	
 	var util = __webpack_require__(124)
@@ -77296,11 +76040,11 @@
 	if (/\bgfs4\b/i.test(process.env.NODE_DEBUG || '')) {
 	  process.on('exit', function() {
 	    debug(queue)
-	    __webpack_require__(141).equal(queue.length, 0)
+	    __webpack_require__(140).equal(queue.length, 0)
 	  })
 	}
 	
-	module.exports = patch(__webpack_require__(217))
+	module.exports = patch(__webpack_require__(215))
 	if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH) {
 	  module.exports = patch(fs)
 	}
@@ -77530,11 +76274,11 @@
 
 
 /***/ },
-/* 216 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(217)
-	var constants = __webpack_require__(139)
+	var fs = __webpack_require__(215)
+	var constants = __webpack_require__(138)
 	
 	var origCwd = process.cwd
 	var cwd = null
@@ -77788,12 +76532,12 @@
 
 
 /***/ },
-/* 217 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
 	
-	var fs = __webpack_require__(131)
+	var fs = __webpack_require__(130)
 	
 	module.exports = clone(fs)
 	
@@ -77815,7 +76559,7 @@
 
 
 /***/ },
-/* 218 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stream = __webpack_require__(122).Stream
@@ -77939,22 +76683,22 @@
 
 
 /***/ },
-/* 219 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  copy: __webpack_require__(220)
+	  copy: __webpack_require__(218)
 	}
 
 
 /***/ },
-/* 220 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var ncp = __webpack_require__(221)
-	var mkdir = __webpack_require__(223)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var ncp = __webpack_require__(219)
+	var mkdir = __webpack_require__(221)
 	
 	function copy (src, dest, options, callback) {
 	  if (typeof options === 'function' && !callback) {
@@ -77965,12 +76709,6 @@
 	  }
 	  callback = callback || function () {}
 	  options = options || {}
-	
-	  // don't allow src and dest to be the same
-	  var basePath = process.cwd()
-	  var currentPath = path.resolve(basePath, src)
-	  var targetPath = path.resolve(basePath, dest)
-	  if (currentPath === targetPath) return callback(new Error('Source and destination must not be the same.'))
 	
 	  fs.lstat(src, function (err, stats) {
 	    if (err) return callback(err)
@@ -77998,14 +76736,14 @@
 
 
 /***/ },
-/* 221 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// imported from ncp (this is temporary, will rewrite)
 	
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var utimes = __webpack_require__(222)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var utimes = __webpack_require__(220)
 	
 	function ncp (source, dest, options, callback) {
 	  if (!callback) {
@@ -78247,12 +76985,12 @@
 
 
 /***/ },
-/* 222 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var os = __webpack_require__(145)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var os = __webpack_require__(144)
 	
 	// HFS, ext{2,3}, FAT do not, Node.js v0.10 does not
 	function hasMillisResSync () {
@@ -78322,26 +77060,26 @@
 
 
 /***/ },
-/* 223 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  mkdirs: __webpack_require__(224),
-	  mkdirsSync: __webpack_require__(225),
+	  mkdirs: __webpack_require__(222),
+	  mkdirsSync: __webpack_require__(223),
 	  // alias
-	  mkdirp: __webpack_require__(224),
-	  mkdirpSync: __webpack_require__(225),
-	  ensureDir: __webpack_require__(224),
-	  ensureDirSync: __webpack_require__(225)
+	  mkdirp: __webpack_require__(222),
+	  mkdirpSync: __webpack_require__(223),
+	  ensureDir: __webpack_require__(222),
+	  ensureDirSync: __webpack_require__(223)
 	}
 
 
 /***/ },
-/* 224 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
 	
 	var o777 = parseInt('0777', 8)
 	
@@ -78397,11 +77135,11 @@
 
 
 /***/ },
-/* 225 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
 	
 	var o777 = parseInt('0777', 8)
 	
@@ -78452,22 +77190,22 @@
 
 
 /***/ },
-/* 226 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  copySync: __webpack_require__(227)
+	  copySync: __webpack_require__(225)
 	}
 
 
 /***/ },
-/* 227 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var copyFileSync = __webpack_require__(228)
-	var mkdir = __webpack_require__(223)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var copyFileSync = __webpack_require__(226)
+	var mkdir = __webpack_require__(221)
 	
 	function copySync (src, dest, options) {
 	  if (typeof options === 'function' || options instanceof RegExp) {
@@ -78514,10 +77252,10 @@
 
 
 /***/ },
-/* 228 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
+	var fs = __webpack_require__(213)
 	
 	var BUF_LENGTH = 64 * 1024
 	var _buff = new Buffer(BUF_LENGTH)
@@ -78559,10 +77297,10 @@
 
 
 /***/ },
-/* 229 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var rimraf = __webpack_require__(230)
+	var rimraf = __webpack_require__(228)
 	
 	function removeSync (dir) {
 	  return rimraf.sync(dir)
@@ -78579,19 +77317,21 @@
 
 
 /***/ },
-/* 230 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = rimraf
 	rimraf.sync = rimrafSync
 	
-	var assert = __webpack_require__(141)
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(131)
-	var glob = __webpack_require__(231)
+	var assert = __webpack_require__(140)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(130)
+	var glob = __webpack_require__(229)
 	
-	var defaultGlobOpts = {
+	var globOpts = {
 	  nosort: true,
+	  nocomment: true,
+	  nonegate: true,
 	  silent: true
 	}
 	
@@ -78617,11 +77357,7 @@
 	
 	  options.maxBusyTries = options.maxBusyTries || 3
 	  options.emfileWait = options.emfileWait || 1000
-	  if (options.glob === false) {
-	    options.disableGlob = true
-	  }
 	  options.disableGlob = options.disableGlob || false
-	  options.glob = options.glob || defaultGlobOpts
 	}
 	
 	function rimraf (p, options, cb) {
@@ -78649,7 +77385,7 @@
 	    if (!er)
 	      return afterGlob(null, [p])
 	
-	    glob(p, options.glob, afterGlob)
+	    glob(p, globOpts, afterGlob)
 	  })
 	
 	  function next (er) {
@@ -78856,7 +77592,7 @@
 	      fs.lstatSync(p)
 	      results = [p]
 	    } catch (er) {
-	      results = glob.sync(p, options.glob)
+	      results = glob.sync(p, globOpts)
 	    }
 	  }
 	
@@ -78920,7 +77656,7 @@
 
 
 /***/ },
-/* 231 */
+/* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Approach:
@@ -78965,26 +77701,26 @@
 	
 	module.exports = glob
 	
-	var fs = __webpack_require__(131)
-	var minimatch = __webpack_require__(232)
+	var fs = __webpack_require__(130)
+	var minimatch = __webpack_require__(230)
 	var Minimatch = minimatch.Minimatch
 	var inherits = __webpack_require__(123)
-	var EE = __webpack_require__(236).EventEmitter
-	var path = __webpack_require__(138)
-	var assert = __webpack_require__(141)
-	var isAbsolute = __webpack_require__(237)
-	var globSync = __webpack_require__(238)
-	var common = __webpack_require__(239)
+	var EE = __webpack_require__(234).EventEmitter
+	var path = __webpack_require__(137)
+	var assert = __webpack_require__(140)
+	var isAbsolute = __webpack_require__(235)
+	var globSync = __webpack_require__(236)
+	var common = __webpack_require__(237)
 	var alphasort = common.alphasort
 	var alphasorti = common.alphasorti
 	var setopts = common.setopts
 	var ownProp = common.ownProp
-	var inflight = __webpack_require__(240)
+	var inflight = __webpack_require__(238)
 	var util = __webpack_require__(124)
 	var childrenIgnored = common.childrenIgnored
 	var isIgnored = common.isIgnored
 	
-	var once = __webpack_require__(242)
+	var once = __webpack_require__(240)
 	
 	function glob (pattern, options, cb) {
 	  if (typeof options === 'function') cb = options, options = {}
@@ -79497,13 +78233,6 @@
 	    case 'ENOTSUP': // https://github.com/isaacs/node-glob/issues/205
 	    case 'ENOTDIR': // totally normal. means it *does* exist.
 	      this.cache[this._makeAbs(f)] = 'FILE'
-	      if (f === this.cwd) {
-	        var error = new Error(er.code + ' invalid cwd ' + f)
-	        error.path = f
-	        error.code = er.code
-	        this.emit('error', error)
-	        this.abort()
-	      }
 	      break
 	
 	    case 'ENOENT': // not terribly unusual
@@ -79698,7 +78427,7 @@
 
 
 /***/ },
-/* 232 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = minimatch
@@ -79706,11 +78435,11 @@
 	
 	var path = { sep: '/' }
 	try {
-	  path = __webpack_require__(138)
+	  path = __webpack_require__(137)
 	} catch (er) {}
 	
 	var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
-	var expand = __webpack_require__(233)
+	var expand = __webpack_require__(231)
 	
 	// any single thing other than /
 	// don't need to escape / when using new RegExp()
@@ -80616,11 +79345,11 @@
 
 
 /***/ },
-/* 233 */
+/* 231 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var concatMap = __webpack_require__(234);
-	var balanced = __webpack_require__(235);
+	var concatMap = __webpack_require__(232);
+	var balanced = __webpack_require__(233);
 	
 	module.exports = expandTop;
 	
@@ -80813,7 +79542,7 @@
 
 
 /***/ },
-/* 234 */
+/* 232 */
 /***/ function(module, exports) {
 
 	module.exports = function (xs, fn) {
@@ -80832,7 +79561,7 @@
 
 
 /***/ },
-/* 235 */
+/* 233 */
 /***/ function(module, exports) {
 
 	module.exports = balanced;
@@ -80888,13 +79617,13 @@
 
 
 /***/ },
-/* 236 */
+/* 234 */
 /***/ function(module, exports) {
 
 	module.exports = require("events");
 
 /***/ },
-/* 237 */
+/* 235 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -80920,21 +79649,21 @@
 
 
 /***/ },
-/* 238 */
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = globSync
 	globSync.GlobSync = GlobSync
 	
-	var fs = __webpack_require__(131)
-	var minimatch = __webpack_require__(232)
+	var fs = __webpack_require__(130)
+	var minimatch = __webpack_require__(230)
 	var Minimatch = minimatch.Minimatch
-	var Glob = __webpack_require__(231).Glob
+	var Glob = __webpack_require__(229).Glob
 	var util = __webpack_require__(124)
-	var path = __webpack_require__(138)
-	var assert = __webpack_require__(141)
-	var isAbsolute = __webpack_require__(237)
-	var common = __webpack_require__(239)
+	var path = __webpack_require__(137)
+	var assert = __webpack_require__(140)
+	var isAbsolute = __webpack_require__(235)
+	var common = __webpack_require__(237)
 	var alphasort = common.alphasort
 	var alphasorti = common.alphasorti
 	var setopts = common.setopts
@@ -81231,12 +79960,6 @@
 	    case 'ENOTSUP': // https://github.com/isaacs/node-glob/issues/205
 	    case 'ENOTDIR': // totally normal. means it *does* exist.
 	      this.cache[this._makeAbs(f)] = 'FILE'
-	      if (f === this.cwd) {
-	        var error = new Error(er.code + ' invalid cwd ' + f)
-	        error.path = f
-	        error.code = er.code
-	        throw error
-	      }
 	      break
 	
 	    case 'ENOENT': // not terribly unusual
@@ -81392,7 +80115,7 @@
 
 
 /***/ },
-/* 239 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports.alphasort = alphasort
@@ -81409,9 +80132,9 @@
 	  return Object.prototype.hasOwnProperty.call(obj, field)
 	}
 	
-	var path = __webpack_require__(138)
-	var minimatch = __webpack_require__(232)
-	var isAbsolute = __webpack_require__(237)
+	var path = __webpack_require__(137)
+	var minimatch = __webpack_require__(230)
+	var isAbsolute = __webpack_require__(235)
 	var Minimatch = minimatch.Minimatch
 	
 	function alphasorti (a, b) {
@@ -81490,8 +80213,8 @@
 	  if (!ownProp(options, "cwd"))
 	    self.cwd = cwd
 	  else {
-	    self.cwd = path.resolve(options.cwd)
-	    self.changedCwd = self.cwd !== cwd
+	    self.cwd = options.cwd
+	    self.changedCwd = path.resolve(options.cwd) !== cwd
 	  }
 	
 	  self.root = options.root || path.resolve(self.cwd, "/")
@@ -81624,12 +80347,12 @@
 
 
 /***/ },
-/* 240 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var wrappy = __webpack_require__(241)
+	var wrappy = __webpack_require__(239)
 	var reqs = Object.create(null)
-	var once = __webpack_require__(242)
+	var once = __webpack_require__(240)
 	
 	module.exports = wrappy(inflight)
 	
@@ -81674,7 +80397,7 @@
 
 
 /***/ },
-/* 241 */
+/* 239 */
 /***/ function(module, exports) {
 
 	// Returns a wrapper function that returns a wrapped callback
@@ -81713,10 +80436,10 @@
 
 
 /***/ },
-/* 242 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var wrappy = __webpack_require__(241)
+	var wrappy = __webpack_require__(239)
 	module.exports = wrappy(once)
 	
 	once.proto = once(function () {
@@ -81740,25 +80463,25 @@
 
 
 /***/ },
-/* 243 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jsonFile = __webpack_require__(244)
+	var jsonFile = __webpack_require__(242)
 	
-	jsonFile.outputJsonSync = __webpack_require__(246)
-	jsonFile.outputJson = __webpack_require__(247)
+	jsonFile.outputJsonSync = __webpack_require__(244)
+	jsonFile.outputJson = __webpack_require__(245)
 	// aliases
-	jsonFile.outputJSONSync = __webpack_require__(246)
-	jsonFile.outputJSON = __webpack_require__(247)
+	jsonFile.outputJSONSync = __webpack_require__(244)
+	jsonFile.outputJSON = __webpack_require__(245)
 	
 	module.exports = jsonFile
 
 
 /***/ },
-/* 244 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jsonFile = __webpack_require__(245)
+	var jsonFile = __webpack_require__(243)
 	
 	module.exports = {
 	  // jsonfile exports
@@ -81775,10 +80498,10 @@
 
 
 /***/ },
-/* 245 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(131)
+	var fs = __webpack_require__(130)
 	
 	function readFile (file, options, callback) {
 	  if (callback == null) {
@@ -81868,13 +80591,13 @@
 
 
 /***/ },
-/* 246 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var jsonFile = __webpack_require__(244)
-	var mkdir = __webpack_require__(223)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var jsonFile = __webpack_require__(242)
+	var mkdir = __webpack_require__(221)
 	
 	function outputJsonSync (file, data, options) {
 	  var dir = path.dirname(file)
@@ -81890,13 +80613,13 @@
 
 
 /***/ },
-/* 247 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
-	var path = __webpack_require__(138)
-	var jsonFile = __webpack_require__(244)
-	var mkdir = __webpack_require__(223)
+	var fs = __webpack_require__(213)
+	var path = __webpack_require__(137)
+	var jsonFile = __webpack_require__(242)
+	var mkdir = __webpack_require__(221)
 	
 	function outputJson (file, data, options, callback) {
 	  if (typeof options === 'function') {
@@ -81920,7 +80643,7 @@
 
 
 /***/ },
-/* 248 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// most of this code was written by Andrew Kelley
@@ -81929,11 +80652,11 @@
 	
 	// this needs a cleanup
 	
-	var fs = __webpack_require__(215)
-	var ncp = __webpack_require__(221)
-	var path = __webpack_require__(138)
-	var rimraf = __webpack_require__(230)
-	var mkdirp = __webpack_require__(223).mkdirs
+	var fs = __webpack_require__(213)
+	var ncp = __webpack_require__(219)
+	var path = __webpack_require__(137)
+	var rimraf = __webpack_require__(228)
+	var mkdirp = __webpack_require__(221).mkdirs
 	
 	function mv (source, dest, options, callback) {
 	  if (typeof options === 'function') {
@@ -82087,21 +80810,21 @@
 
 
 /***/ },
-/* 249 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  createOutputStream: __webpack_require__(250)
+	  createOutputStream: __webpack_require__(248)
 	}
 
 
 /***/ },
-/* 250 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(131)
-	var mkdir = __webpack_require__(223)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(130)
+	var mkdir = __webpack_require__(221)
 	var WriteStream = fs.WriteStream
 	
 	function createOutputStream (file, options) {
@@ -82145,13 +80868,13 @@
 
 
 /***/ },
-/* 251 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(131)
-	var path = __webpack_require__(138)
-	var mkdir = __webpack_require__(223)
-	var remove = __webpack_require__(229)
+	var fs = __webpack_require__(130)
+	var path = __webpack_require__(137)
+	var mkdir = __webpack_require__(221)
+	var remove = __webpack_require__(227)
 	
 	function emptyDir (dir, callback) {
 	  callback = callback || function () {}
@@ -82198,12 +80921,12 @@
 
 
 /***/ },
-/* 252 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var file = __webpack_require__(253)
-	var link = __webpack_require__(254)
-	var symlink = __webpack_require__(255)
+	var file = __webpack_require__(251)
+	var link = __webpack_require__(252)
+	var symlink = __webpack_require__(253)
 	
 	module.exports = {
 	  // file
@@ -82225,12 +80948,12 @@
 
 
 /***/ },
-/* 253 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(215)
-	var mkdir = __webpack_require__(223)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(213)
+	var mkdir = __webpack_require__(221)
 	
 	function createFile (file, callback) {
 	  function makeFile () {
@@ -82274,12 +80997,12 @@
 
 
 /***/ },
-/* 254 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(215)
-	var mkdir = __webpack_require__(223)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(213)
+	var mkdir = __webpack_require__(221)
 	
 	function createLink (srcpath, dstpath, callback) {
 	  function makeLink (srcpath, dstpath) {
@@ -82338,20 +81061,20 @@
 
 
 /***/ },
-/* 255 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(215)
-	var _mkdirs = __webpack_require__(223)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(213)
+	var _mkdirs = __webpack_require__(221)
 	var mkdirs = _mkdirs.mkdirs
 	var mkdirsSync = _mkdirs.mkdirsSync
 	
-	var _symlinkPaths = __webpack_require__(256)
+	var _symlinkPaths = __webpack_require__(254)
 	var symlinkPaths = _symlinkPaths.symlinkPaths
 	var symlinkPathsSync = _symlinkPaths.symlinkPathsSync
 	
-	var _symlinkType = __webpack_require__(257)
+	var _symlinkType = __webpack_require__(255)
 	var symlinkType = _symlinkType.symlinkType
 	var symlinkTypeSync = _symlinkType.symlinkTypeSync
 	
@@ -82406,13 +81129,13 @@
 
 
 /***/ },
-/* 256 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
+	var path = __webpack_require__(137)
 	// path.isAbsolute shim for Node.js 0.10 support
-	path.isAbsolute = (path.isAbsolute) ? path.isAbsolute : __webpack_require__(237)
-	var fs = __webpack_require__(215)
+	path.isAbsolute = (path.isAbsolute) ? path.isAbsolute : __webpack_require__(235)
+	var fs = __webpack_require__(213)
 	
 	/**
 	 * Function that returns two types of paths, one relative to symlink, and one
@@ -82509,10 +81232,10 @@
 
 
 /***/ },
-/* 257 */
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(215)
+	var fs = __webpack_require__(213)
 	
 	function symlinkType (srcpath, type, callback) {
 	  callback = (typeof type === 'function') ? type : callback
@@ -82542,12 +81265,12 @@
 
 
 /***/ },
-/* 258 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var path = __webpack_require__(138)
-	var fs = __webpack_require__(215)
-	var mkdir = __webpack_require__(223)
+	var path = __webpack_require__(137)
+	var fs = __webpack_require__(213)
+	var mkdir = __webpack_require__(221)
 	
 	function outputFile (file, data, encoding, callback) {
 	  if (typeof encoding === 'function') {
@@ -82583,10 +81306,10 @@
 
 
 /***/ },
-/* 259 */
+/* 257 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var klaw = __webpack_require__(260)
+	var klaw = __webpack_require__(258)
 	
 	module.exports = {
 	  walk: klaw
@@ -82594,15 +81317,15 @@
 
 
 /***/ },
-/* 260 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assert = __webpack_require__(141)
-	var fs = __webpack_require__(131)
-	var path = __webpack_require__(138)
+	var assert = __webpack_require__(140)
+	var fs = __webpack_require__(130)
+	var path = __webpack_require__(137)
 	var Readable = __webpack_require__(122).Readable
 	var util = __webpack_require__(124)
-	var assign = __webpack_require__(261)
+	var assign = __webpack_require__(259)
 	
 	function Walker (dir, options) {
 	  assert.strictEqual(typeof dir, 'string', '`dir` parameter should be of type string. Got type: ' + typeof dir)
@@ -82650,7 +81373,7 @@
 
 
 /***/ },
-/* 261 */
+/* 259 */
 /***/ function(module, exports) {
 
 	// simple mutable assign (extracted from fs-extra)
@@ -82672,7 +81395,7 @@
 
 
 /***/ },
-/* 262 */
+/* 260 */
 /***/ function(module, exports) {
 
 	
@@ -82701,925 +81424,7 @@
 
 
 /***/ },
-/* 263 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = minimatch
-	minimatch.Minimatch = Minimatch
-	
-	var path = { sep: '/' }
-	try {
-	  path = __webpack_require__(138)
-	} catch (er) {}
-	
-	var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
-	var expand = __webpack_require__(233)
-	
-	// any single thing other than /
-	// don't need to escape / when using new RegExp()
-	var qmark = '[^/]'
-	
-	// * => any number of characters
-	var star = qmark + '*?'
-	
-	// ** when dots are allowed.  Anything goes, except .. and .
-	// not (^ or / followed by one or two dots followed by $ or /),
-	// followed by anything, any number of times.
-	var twoStarDot = '(?:(?!(?:\\\/|^)(?:\\.{1,2})($|\\\/)).)*?'
-	
-	// not a ^ or / followed by a dot,
-	// followed by anything, any number of times.
-	var twoStarNoDot = '(?:(?!(?:\\\/|^)\\.).)*?'
-	
-	// characters that need to be escaped in RegExp.
-	var reSpecials = charSet('().*{}+?[]^$\\!')
-	
-	// "abc" -> { a:true, b:true, c:true }
-	function charSet (s) {
-	  return s.split('').reduce(function (set, c) {
-	    set[c] = true
-	    return set
-	  }, {})
-	}
-	
-	// normalizes slashes.
-	var slashSplit = /\/+/
-	
-	minimatch.filter = filter
-	function filter (pattern, options) {
-	  options = options || {}
-	  return function (p, i, list) {
-	    return minimatch(p, pattern, options)
-	  }
-	}
-	
-	function ext (a, b) {
-	  a = a || {}
-	  b = b || {}
-	  var t = {}
-	  Object.keys(b).forEach(function (k) {
-	    t[k] = b[k]
-	  })
-	  Object.keys(a).forEach(function (k) {
-	    t[k] = a[k]
-	  })
-	  return t
-	}
-	
-	minimatch.defaults = function (def) {
-	  if (!def || !Object.keys(def).length) return minimatch
-	
-	  var orig = minimatch
-	
-	  var m = function minimatch (p, pattern, options) {
-	    return orig.minimatch(p, pattern, ext(def, options))
-	  }
-	
-	  m.Minimatch = function Minimatch (pattern, options) {
-	    return new orig.Minimatch(pattern, ext(def, options))
-	  }
-	
-	  return m
-	}
-	
-	Minimatch.defaults = function (def) {
-	  if (!def || !Object.keys(def).length) return Minimatch
-	  return minimatch.defaults(def).Minimatch
-	}
-	
-	function minimatch (p, pattern, options) {
-	  if (typeof pattern !== 'string') {
-	    throw new TypeError('glob pattern string required')
-	  }
-	
-	  if (!options) options = {}
-	
-	  // shortcut: comments match nothing.
-	  if (!options.nocomment && pattern.charAt(0) === '#') {
-	    return false
-	  }
-	
-	  // "" only matches ""
-	  if (pattern.trim() === '') return p === ''
-	
-	  return new Minimatch(pattern, options).match(p)
-	}
-	
-	function Minimatch (pattern, options) {
-	  if (!(this instanceof Minimatch)) {
-	    return new Minimatch(pattern, options)
-	  }
-	
-	  if (typeof pattern !== 'string') {
-	    throw new TypeError('glob pattern string required')
-	  }
-	
-	  if (!options) options = {}
-	  pattern = pattern.trim()
-	
-	  // windows support: need to use /, not \
-	  if (path.sep !== '/') {
-	    pattern = pattern.split(path.sep).join('/')
-	  }
-	
-	  this.options = options
-	  this.set = []
-	  this.pattern = pattern
-	  this.regexp = null
-	  this.negate = false
-	  this.comment = false
-	  this.empty = false
-	
-	  // make the set of regexps etc.
-	  this.make()
-	}
-	
-	Minimatch.prototype.debug = function () {}
-	
-	Minimatch.prototype.make = make
-	function make () {
-	  // don't do it more than once.
-	  if (this._made) return
-	
-	  var pattern = this.pattern
-	  var options = this.options
-	
-	  // empty patterns and comments match nothing.
-	  if (!options.nocomment && pattern.charAt(0) === '#') {
-	    this.comment = true
-	    return
-	  }
-	  if (!pattern) {
-	    this.empty = true
-	    return
-	  }
-	
-	  // step 1: figure out negation, etc.
-	  this.parseNegate()
-	
-	  // step 2: expand braces
-	  var set = this.globSet = this.braceExpand()
-	
-	  if (options.debug) this.debug = console.error
-	
-	  this.debug(this.pattern, set)
-	
-	  // step 3: now we have a set, so turn each one into a series of path-portion
-	  // matching patterns.
-	  // These will be regexps, except in the case of "**", which is
-	  // set to the GLOBSTAR object for globstar behavior,
-	  // and will not contain any / characters
-	  set = this.globParts = set.map(function (s) {
-	    return s.split(slashSplit)
-	  })
-	
-	  this.debug(this.pattern, set)
-	
-	  // glob --> regexps
-	  set = set.map(function (s, si, set) {
-	    return s.map(this.parse, this)
-	  }, this)
-	
-	  this.debug(this.pattern, set)
-	
-	  // filter out everything that didn't compile properly.
-	  set = set.filter(function (s) {
-	    return s.indexOf(false) === -1
-	  })
-	
-	  this.debug(this.pattern, set)
-	
-	  this.set = set
-	}
-	
-	Minimatch.prototype.parseNegate = parseNegate
-	function parseNegate () {
-	  var pattern = this.pattern
-	  var negate = false
-	  var options = this.options
-	  var negateOffset = 0
-	
-	  if (options.nonegate) return
-	
-	  for (var i = 0, l = pattern.length
-	    ; i < l && pattern.charAt(i) === '!'
-	    ; i++) {
-	    negate = !negate
-	    negateOffset++
-	  }
-	
-	  if (negateOffset) this.pattern = pattern.substr(negateOffset)
-	  this.negate = negate
-	}
-	
-	// Brace expansion:
-	// a{b,c}d -> abd acd
-	// a{b,}c -> abc ac
-	// a{0..3}d -> a0d a1d a2d a3d
-	// a{b,c{d,e}f}g -> abg acdfg acefg
-	// a{b,c}d{e,f}g -> abdeg acdeg abdeg abdfg
-	//
-	// Invalid sets are not expanded.
-	// a{2..}b -> a{2..}b
-	// a{b}c -> a{b}c
-	minimatch.braceExpand = function (pattern, options) {
-	  return braceExpand(pattern, options)
-	}
-	
-	Minimatch.prototype.braceExpand = braceExpand
-	
-	function braceExpand (pattern, options) {
-	  if (!options) {
-	    if (this instanceof Minimatch) {
-	      options = this.options
-	    } else {
-	      options = {}
-	    }
-	  }
-	
-	  pattern = typeof pattern === 'undefined'
-	    ? this.pattern : pattern
-	
-	  if (typeof pattern === 'undefined') {
-	    throw new Error('undefined pattern')
-	  }
-	
-	  if (options.nobrace ||
-	    !pattern.match(/\{.*\}/)) {
-	    // shortcut. no need to expand.
-	    return [pattern]
-	  }
-	
-	  return expand(pattern)
-	}
-	
-	// parse a component of the expanded set.
-	// At this point, no pattern may contain "/" in it
-	// so we're going to return a 2d array, where each entry is the full
-	// pattern, split on '/', and then turned into a regular expression.
-	// A regexp is made at the end which joins each array with an
-	// escaped /, and another full one which joins each regexp with |.
-	//
-	// Following the lead of Bash 4.1, note that "**" only has special meaning
-	// when it is the *only* thing in a path portion.  Otherwise, any series
-	// of * is equivalent to a single *.  Globstar behavior is enabled by
-	// default, and can be disabled by setting options.noglobstar.
-	Minimatch.prototype.parse = parse
-	var SUBPARSE = {}
-	function parse (pattern, isSub) {
-	  var options = this.options
-	
-	  // shortcuts
-	  if (!options.noglobstar && pattern === '**') return GLOBSTAR
-	  if (pattern === '') return ''
-	
-	  var re = ''
-	  var hasMagic = !!options.nocase
-	  var escaping = false
-	  // ? => one single character
-	  var patternListStack = []
-	  var negativeLists = []
-	  var plType
-	  var stateChar
-	  var inClass = false
-	  var reClassStart = -1
-	  var classStart = -1
-	  // . and .. never match anything that doesn't start with .,
-	  // even when options.dot is set.
-	  var patternStart = pattern.charAt(0) === '.' ? '' // anything
-	  // not (start or / followed by . or .. followed by / or end)
-	  : options.dot ? '(?!(?:^|\\\/)\\.{1,2}(?:$|\\\/))'
-	  : '(?!\\.)'
-	  var self = this
-	
-	  function clearStateChar () {
-	    if (stateChar) {
-	      // we had some state-tracking character
-	      // that wasn't consumed by this pass.
-	      switch (stateChar) {
-	        case '*':
-	          re += star
-	          hasMagic = true
-	        break
-	        case '?':
-	          re += qmark
-	          hasMagic = true
-	        break
-	        default:
-	          re += '\\' + stateChar
-	        break
-	      }
-	      self.debug('clearStateChar %j %j', stateChar, re)
-	      stateChar = false
-	    }
-	  }
-	
-	  for (var i = 0, len = pattern.length, c
-	    ; (i < len) && (c = pattern.charAt(i))
-	    ; i++) {
-	    this.debug('%s\t%s %s %j', pattern, i, re, c)
-	
-	    // skip over any that are escaped.
-	    if (escaping && reSpecials[c]) {
-	      re += '\\' + c
-	      escaping = false
-	      continue
-	    }
-	
-	    switch (c) {
-	      case '/':
-	        // completely not allowed, even escaped.
-	        // Should already be path-split by now.
-	        return false
-	
-	      case '\\':
-	        clearStateChar()
-	        escaping = true
-	      continue
-	
-	      // the various stateChar values
-	      // for the "extglob" stuff.
-	      case '?':
-	      case '*':
-	      case '+':
-	      case '@':
-	      case '!':
-	        this.debug('%s\t%s %s %j <-- stateChar', pattern, i, re, c)
-	
-	        // all of those are literals inside a class, except that
-	        // the glob [!a] means [^a] in regexp
-	        if (inClass) {
-	          this.debug('  in class')
-	          if (c === '!' && i === classStart + 1) c = '^'
-	          re += c
-	          continue
-	        }
-	
-	        // if we already have a stateChar, then it means
-	        // that there was something like ** or +? in there.
-	        // Handle the stateChar, then proceed with this one.
-	        self.debug('call clearStateChar %j', stateChar)
-	        clearStateChar()
-	        stateChar = c
-	        // if extglob is disabled, then +(asdf|foo) isn't a thing.
-	        // just clear the statechar *now*, rather than even diving into
-	        // the patternList stuff.
-	        if (options.noext) clearStateChar()
-	      continue
-	
-	      case '(':
-	        if (inClass) {
-	          re += '('
-	          continue
-	        }
-	
-	        if (!stateChar) {
-	          re += '\\('
-	          continue
-	        }
-	
-	        plType = stateChar
-	        patternListStack.push({
-	          type: plType,
-	          start: i - 1,
-	          reStart: re.length
-	        })
-	        // negation is (?:(?!js)[^/]*)
-	        re += stateChar === '!' ? '(?:(?!(?:' : '(?:'
-	        this.debug('plType %j %j', stateChar, re)
-	        stateChar = false
-	      continue
-	
-	      case ')':
-	        if (inClass || !patternListStack.length) {
-	          re += '\\)'
-	          continue
-	        }
-	
-	        clearStateChar()
-	        hasMagic = true
-	        re += ')'
-	        var pl = patternListStack.pop()
-	        plType = pl.type
-	        // negation is (?:(?!js)[^/]*)
-	        // The others are (?:<pattern>)<type>
-	        switch (plType) {
-	          case '!':
-	            negativeLists.push(pl)
-	            re += ')[^/]*?)'
-	            pl.reEnd = re.length
-	            break
-	          case '?':
-	          case '+':
-	          case '*':
-	            re += plType
-	            break
-	          case '@': break // the default anyway
-	        }
-	      continue
-	
-	      case '|':
-	        if (inClass || !patternListStack.length || escaping) {
-	          re += '\\|'
-	          escaping = false
-	          continue
-	        }
-	
-	        clearStateChar()
-	        re += '|'
-	      continue
-	
-	      // these are mostly the same in regexp and glob
-	      case '[':
-	        // swallow any state-tracking char before the [
-	        clearStateChar()
-	
-	        if (inClass) {
-	          re += '\\' + c
-	          continue
-	        }
-	
-	        inClass = true
-	        classStart = i
-	        reClassStart = re.length
-	        re += c
-	      continue
-	
-	      case ']':
-	        //  a right bracket shall lose its special
-	        //  meaning and represent itself in
-	        //  a bracket expression if it occurs
-	        //  first in the list.  -- POSIX.2 2.8.3.2
-	        if (i === classStart + 1 || !inClass) {
-	          re += '\\' + c
-	          escaping = false
-	          continue
-	        }
-	
-	        // handle the case where we left a class open.
-	        // "[z-a]" is valid, equivalent to "\[z-a\]"
-	        if (inClass) {
-	          // split where the last [ was, make sure we don't have
-	          // an invalid re. if so, re-walk the contents of the
-	          // would-be class to re-translate any characters that
-	          // were passed through as-is
-	          // TODO: It would probably be faster to determine this
-	          // without a try/catch and a new RegExp, but it's tricky
-	          // to do safely.  For now, this is safe and works.
-	          var cs = pattern.substring(classStart + 1, i)
-	          try {
-	            RegExp('[' + cs + ']')
-	          } catch (er) {
-	            // not a valid class!
-	            var sp = this.parse(cs, SUBPARSE)
-	            re = re.substr(0, reClassStart) + '\\[' + sp[0] + '\\]'
-	            hasMagic = hasMagic || sp[1]
-	            inClass = false
-	            continue
-	          }
-	        }
-	
-	        // finish up the class.
-	        hasMagic = true
-	        inClass = false
-	        re += c
-	      continue
-	
-	      default:
-	        // swallow any state char that wasn't consumed
-	        clearStateChar()
-	
-	        if (escaping) {
-	          // no need
-	          escaping = false
-	        } else if (reSpecials[c]
-	          && !(c === '^' && inClass)) {
-	          re += '\\'
-	        }
-	
-	        re += c
-	
-	    } // switch
-	  } // for
-	
-	  // handle the case where we left a class open.
-	  // "[abc" is valid, equivalent to "\[abc"
-	  if (inClass) {
-	    // split where the last [ was, and escape it
-	    // this is a huge pita.  We now have to re-walk
-	    // the contents of the would-be class to re-translate
-	    // any characters that were passed through as-is
-	    cs = pattern.substr(classStart + 1)
-	    sp = this.parse(cs, SUBPARSE)
-	    re = re.substr(0, reClassStart) + '\\[' + sp[0]
-	    hasMagic = hasMagic || sp[1]
-	  }
-	
-	  // handle the case where we had a +( thing at the *end*
-	  // of the pattern.
-	  // each pattern list stack adds 3 chars, and we need to go through
-	  // and escape any | chars that were passed through as-is for the regexp.
-	  // Go through and escape them, taking care not to double-escape any
-	  // | chars that were already escaped.
-	  for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
-	    var tail = re.slice(pl.reStart + 3)
-	    // maybe some even number of \, then maybe 1 \, followed by a |
-	    tail = tail.replace(/((?:\\{2})*)(\\?)\|/g, function (_, $1, $2) {
-	      if (!$2) {
-	        // the | isn't already escaped, so escape it.
-	        $2 = '\\'
-	      }
-	
-	      // need to escape all those slashes *again*, without escaping the
-	      // one that we need for escaping the | character.  As it works out,
-	      // escaping an even number of slashes can be done by simply repeating
-	      // it exactly after itself.  That's why this trick works.
-	      //
-	      // I am sorry that you have to see this.
-	      return $1 + $1 + $2 + '|'
-	    })
-	
-	    this.debug('tail=%j\n   %s', tail, tail)
-	    var t = pl.type === '*' ? star
-	      : pl.type === '?' ? qmark
-	      : '\\' + pl.type
-	
-	    hasMagic = true
-	    re = re.slice(0, pl.reStart) + t + '\\(' + tail
-	  }
-	
-	  // handle trailing things that only matter at the very end.
-	  clearStateChar()
-	  if (escaping) {
-	    // trailing \\
-	    re += '\\\\'
-	  }
-	
-	  // only need to apply the nodot start if the re starts with
-	  // something that could conceivably capture a dot
-	  var addPatternStart = false
-	  switch (re.charAt(0)) {
-	    case '.':
-	    case '[':
-	    case '(': addPatternStart = true
-	  }
-	
-	  // Hack to work around lack of negative lookbehind in JS
-	  // A pattern like: *.!(x).!(y|z) needs to ensure that a name
-	  // like 'a.xyz.yz' doesn't match.  So, the first negative
-	  // lookahead, has to look ALL the way ahead, to the end of
-	  // the pattern.
-	  for (var n = negativeLists.length - 1; n > -1; n--) {
-	    var nl = negativeLists[n]
-	
-	    var nlBefore = re.slice(0, nl.reStart)
-	    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8)
-	    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd)
-	    var nlAfter = re.slice(nl.reEnd)
-	
-	    nlLast += nlAfter
-	
-	    // Handle nested stuff like *(*.js|!(*.json)), where open parens
-	    // mean that we should *not* include the ) in the bit that is considered
-	    // "after" the negated section.
-	    var openParensBefore = nlBefore.split('(').length - 1
-	    var cleanAfter = nlAfter
-	    for (i = 0; i < openParensBefore; i++) {
-	      cleanAfter = cleanAfter.replace(/\)[+*?]?/, '')
-	    }
-	    nlAfter = cleanAfter
-	
-	    var dollar = ''
-	    if (nlAfter === '' && isSub !== SUBPARSE) {
-	      dollar = '$'
-	    }
-	    var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast
-	    re = newRe
-	  }
-	
-	  // if the re is not "" at this point, then we need to make sure
-	  // it doesn't match against an empty path part.
-	  // Otherwise a/* will match a/, which it should not.
-	  if (re !== '' && hasMagic) {
-	    re = '(?=.)' + re
-	  }
-	
-	  if (addPatternStart) {
-	    re = patternStart + re
-	  }
-	
-	  // parsing just a piece of a larger pattern.
-	  if (isSub === SUBPARSE) {
-	    return [re, hasMagic]
-	  }
-	
-	  // skip the regexp for non-magical patterns
-	  // unescape anything in it, though, so that it'll be
-	  // an exact match against a file etc.
-	  if (!hasMagic) {
-	    return globUnescape(pattern)
-	  }
-	
-	  var flags = options.nocase ? 'i' : ''
-	  var regExp = new RegExp('^' + re + '$', flags)
-	
-	  regExp._glob = pattern
-	  regExp._src = re
-	
-	  return regExp
-	}
-	
-	minimatch.makeRe = function (pattern, options) {
-	  return new Minimatch(pattern, options || {}).makeRe()
-	}
-	
-	Minimatch.prototype.makeRe = makeRe
-	function makeRe () {
-	  if (this.regexp || this.regexp === false) return this.regexp
-	
-	  // at this point, this.set is a 2d array of partial
-	  // pattern strings, or "**".
-	  //
-	  // It's better to use .match().  This function shouldn't
-	  // be used, really, but it's pretty convenient sometimes,
-	  // when you just want to work with a regex.
-	  var set = this.set
-	
-	  if (!set.length) {
-	    this.regexp = false
-	    return this.regexp
-	  }
-	  var options = this.options
-	
-	  var twoStar = options.noglobstar ? star
-	    : options.dot ? twoStarDot
-	    : twoStarNoDot
-	  var flags = options.nocase ? 'i' : ''
-	
-	  var re = set.map(function (pattern) {
-	    return pattern.map(function (p) {
-	      return (p === GLOBSTAR) ? twoStar
-	      : (typeof p === 'string') ? regExpEscape(p)
-	      : p._src
-	    }).join('\\\/')
-	  }).join('|')
-	
-	  // must match entire pattern
-	  // ending in a * or ** will make it less strict.
-	  re = '^(?:' + re + ')$'
-	
-	  // can match anything, as long as it's not this.
-	  if (this.negate) re = '^(?!' + re + ').*$'
-	
-	  try {
-	    this.regexp = new RegExp(re, flags)
-	  } catch (ex) {
-	    this.regexp = false
-	  }
-	  return this.regexp
-	}
-	
-	minimatch.match = function (list, pattern, options) {
-	  options = options || {}
-	  var mm = new Minimatch(pattern, options)
-	  list = list.filter(function (f) {
-	    return mm.match(f)
-	  })
-	  if (mm.options.nonull && !list.length) {
-	    list.push(pattern)
-	  }
-	  return list
-	}
-	
-	Minimatch.prototype.match = match
-	function match (f, partial) {
-	  this.debug('match', f, this.pattern)
-	  // short-circuit in the case of busted things.
-	  // comments, etc.
-	  if (this.comment) return false
-	  if (this.empty) return f === ''
-	
-	  if (f === '/' && partial) return true
-	
-	  var options = this.options
-	
-	  // windows: need to use /, not \
-	  if (path.sep !== '/') {
-	    f = f.split(path.sep).join('/')
-	  }
-	
-	  // treat the test path as a set of pathparts.
-	  f = f.split(slashSplit)
-	  this.debug(this.pattern, 'split', f)
-	
-	  // just ONE of the pattern sets in this.set needs to match
-	  // in order for it to be valid.  If negating, then just one
-	  // match means that we have failed.
-	  // Either way, return on the first hit.
-	
-	  var set = this.set
-	  this.debug(this.pattern, 'set', set)
-	
-	  // Find the basename of the path by looking for the last non-empty segment
-	  var filename
-	  var i
-	  for (i = f.length - 1; i >= 0; i--) {
-	    filename = f[i]
-	    if (filename) break
-	  }
-	
-	  for (i = 0; i < set.length; i++) {
-	    var pattern = set[i]
-	    var file = f
-	    if (options.matchBase && pattern.length === 1) {
-	      file = [filename]
-	    }
-	    var hit = this.matchOne(file, pattern, partial)
-	    if (hit) {
-	      if (options.flipNegate) return true
-	      return !this.negate
-	    }
-	  }
-	
-	  // didn't get any hits.  this is success if it's a negative
-	  // pattern, failure otherwise.
-	  if (options.flipNegate) return false
-	  return this.negate
-	}
-	
-	// set partial to true to test if, for example,
-	// "/a/b" matches the start of "/*/b/*/d"
-	// Partial means, if you run out of file before you run
-	// out of pattern, then that's fine, as long as all
-	// the parts match.
-	Minimatch.prototype.matchOne = function (file, pattern, partial) {
-	  var options = this.options
-	
-	  this.debug('matchOne',
-	    { 'this': this, file: file, pattern: pattern })
-	
-	  this.debug('matchOne', file.length, pattern.length)
-	
-	  for (var fi = 0,
-	      pi = 0,
-	      fl = file.length,
-	      pl = pattern.length
-	      ; (fi < fl) && (pi < pl)
-	      ; fi++, pi++) {
-	    this.debug('matchOne loop')
-	    var p = pattern[pi]
-	    var f = file[fi]
-	
-	    this.debug(pattern, p, f)
-	
-	    // should be impossible.
-	    // some invalid regexp stuff in the set.
-	    if (p === false) return false
-	
-	    if (p === GLOBSTAR) {
-	      this.debug('GLOBSTAR', [pattern, p, f])
-	
-	      // "**"
-	      // a/**/b/**/c would match the following:
-	      // a/b/x/y/z/c
-	      // a/x/y/z/b/c
-	      // a/b/x/b/x/c
-	      // a/b/c
-	      // To do this, take the rest of the pattern after
-	      // the **, and see if it would match the file remainder.
-	      // If so, return success.
-	      // If not, the ** "swallows" a segment, and try again.
-	      // This is recursively awful.
-	      //
-	      // a/**/b/**/c matching a/b/x/y/z/c
-	      // - a matches a
-	      // - doublestar
-	      //   - matchOne(b/x/y/z/c, b/**/c)
-	      //     - b matches b
-	      //     - doublestar
-	      //       - matchOne(x/y/z/c, c) -> no
-	      //       - matchOne(y/z/c, c) -> no
-	      //       - matchOne(z/c, c) -> no
-	      //       - matchOne(c, c) yes, hit
-	      var fr = fi
-	      var pr = pi + 1
-	      if (pr === pl) {
-	        this.debug('** at the end')
-	        // a ** at the end will just swallow the rest.
-	        // We have found a match.
-	        // however, it will not swallow /.x, unless
-	        // options.dot is set.
-	        // . and .. are *never* matched by **, for explosively
-	        // exponential reasons.
-	        for (; fi < fl; fi++) {
-	          if (file[fi] === '.' || file[fi] === '..' ||
-	            (!options.dot && file[fi].charAt(0) === '.')) return false
-	        }
-	        return true
-	      }
-	
-	      // ok, let's see if we can swallow whatever we can.
-	      while (fr < fl) {
-	        var swallowee = file[fr]
-	
-	        this.debug('\nglobstar while', file, fr, pattern, pr, swallowee)
-	
-	        // XXX remove this slice.  Just pass the start index.
-	        if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
-	          this.debug('globstar found match!', fr, fl, swallowee)
-	          // found a match.
-	          return true
-	        } else {
-	          // can't swallow "." or ".." ever.
-	          // can only swallow ".foo" when explicitly asked.
-	          if (swallowee === '.' || swallowee === '..' ||
-	            (!options.dot && swallowee.charAt(0) === '.')) {
-	            this.debug('dot detected!', file, fr, pattern, pr)
-	            break
-	          }
-	
-	          // ** swallows a segment, and continue.
-	          this.debug('globstar swallow a segment, and continue')
-	          fr++
-	        }
-	      }
-	
-	      // no match was found.
-	      // However, in partial mode, we can't say this is necessarily over.
-	      // If there's more *pattern* left, then
-	      if (partial) {
-	        // ran out of file
-	        this.debug('\n>>> no match, partial?', file, fr, pattern, pr)
-	        if (fr === fl) return true
-	      }
-	      return false
-	    }
-	
-	    // something other than **
-	    // non-magic patterns just have to match exactly
-	    // patterns with magic have been turned into regexps.
-	    var hit
-	    if (typeof p === 'string') {
-	      if (options.nocase) {
-	        hit = f.toLowerCase() === p.toLowerCase()
-	      } else {
-	        hit = f === p
-	      }
-	      this.debug('string match', p, f, hit)
-	    } else {
-	      hit = f.match(p)
-	      this.debug('pattern match', p, f, hit)
-	    }
-	
-	    if (!hit) return false
-	  }
-	
-	  // Note: ending in / means that we'll get a final ""
-	  // at the end of the pattern.  This can only match a
-	  // corresponding "" at the end of the file.
-	  // If the file ends in /, then it can only match a
-	  // a pattern that ends in /, unless the pattern just
-	  // doesn't have any more for it. But, a/b/ should *not*
-	  // match "a/b/*", even though "" matches against the
-	  // [^/]*? pattern, except in partial mode, where it might
-	  // simply not be reached yet.
-	  // However, a/b/ should still satisfy a/*
-	
-	  // now either we fell off the end of the pattern, or we're done.
-	  if (fi === fl && pi === pl) {
-	    // ran out of pattern and filename at the same time.
-	    // an exact hit!
-	    return true
-	  } else if (fi === fl) {
-	    // ran out of file, but still had pattern left.
-	    // this is ok if we're doing the match as part of
-	    // a glob fs traversal.
-	    return partial
-	  } else if (pi === pl) {
-	    // ran out of pattern, still have file left.
-	    // this is only acceptable if we're on the very last
-	    // empty segment of a file with a trailing slash.
-	    // a/* should match a/b/
-	    var emptyFileEnd = (fi === fl - 1) && (file[fi] === '')
-	    return emptyFileEnd
-	  }
-	
-	  // should be unreachable.
-	  throw new Error('wtf?')
-	}
-	
-	// replace stuff like \* with *
-	function globUnescape (s) {
-	  return s.replace(/\\(.)/g, '$1')
-	}
-	
-	function regExpEscape (s) {
-	  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&')
-	}
-
-
-/***/ },
-/* 264 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83629,23 +81434,23 @@
 	
 	'use strict';
 	
-	let _ = __webpack_require__(211);
-	let array = __webpack_require__(265);
+	let _ = __webpack_require__(209);
+	let array = __webpack_require__(262);
 	
 	/**
 	 * Import Base.
 	 */
-	let Base = __webpack_require__(266);
+	let Base = __webpack_require__(263);
 	
 	/**
 	 * Import key path helpers.
 	 */
-	let keyPathHelpers = __webpack_require__(267);
+	let keyPathHelpers = __webpack_require__(264);
 	
 	/**
 	 * Configure debugger.
 	 */
-	let debug = __webpack_require__(268)('electron-settings:watcher');
+	let debug = __webpack_require__(265)('electron-settings:watcher');
 	
 	/**
 	 * @class Watcher
@@ -83764,7 +81569,7 @@
 
 
 /***/ },
-/* 265 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (root, factory) {
@@ -83800,7 +81605,7 @@
 
 
 /***/ },
-/* 266 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -83810,7 +81615,7 @@
 	
 	'use strict';
 	
-	let EventEmitter = __webpack_require__(236).EventEmitter;
+	let EventEmitter = __webpack_require__(234).EventEmitter;
 	
 	/**
 	 * @class Base
@@ -83822,7 +81627,7 @@
 
 
 /***/ },
-/* 267 */
+/* 264 */
 /***/ function(module, exports) {
 
 	/**
@@ -83999,7 +81804,7 @@
 
 
 /***/ },
-/* 268 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -84007,7 +81812,7 @@
 	 * Module dependencies.
 	 */
 	
-	var tty = __webpack_require__(269);
+	var tty = __webpack_require__(266);
 	var util = __webpack_require__(124);
 	
 	/**
@@ -84016,7 +81821,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(270);
+	exports = module.exports = __webpack_require__(267);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -84164,14 +81969,14 @@
 	      break;
 	
 	    case 'FILE':
-	      var fs = __webpack_require__(131);
+	      var fs = __webpack_require__(130);
 	      stream = new fs.SyncWriteStream(fd, { autoClose: false });
 	      stream._type = 'fs';
 	      break;
 	
 	    case 'PIPE':
 	    case 'TCP':
-	      var net = __webpack_require__(272);
+	      var net = __webpack_require__(269);
 	      stream = new net.Socket({
 	        fd: fd,
 	        readable: false,
@@ -84214,13 +82019,13 @@
 
 
 /***/ },
-/* 269 */
+/* 266 */
 /***/ function(module, exports) {
 
 	module.exports = require("tty");
 
 /***/ },
-/* 270 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -84236,7 +82041,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(271);
+	exports.humanize = __webpack_require__(268);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -84423,7 +82228,7 @@
 
 
 /***/ },
-/* 271 */
+/* 268 */
 /***/ function(module, exports) {
 
 	/**
@@ -84554,7 +82359,7 @@
 
 
 /***/ },
-/* 272 */
+/* 269 */
 /***/ function(module, exports) {
 
 	module.exports = require("net");
