@@ -16,14 +16,26 @@ export class Listen {
     // In HTTP,  turn on  continuous mode for much slower results, but no repeating security notices
     this.stt.continuous = window.location.protocol === 'http:';
     
-    this.stt.interimResults = false;
+    this.stt.interimResults = true;
 
     // Sets the language to the default 'en-US'. This can be changed with annyang.setLanguage()
     this.stt.lang = 'fr-FR';
-    this.stt.continuous = true;
+    // this.stt.continuous = true;
 
     this.stt.onstart = this.constructor._eventStart.bind(this);
     this.stt.onend = this.constructor._eventEnd.bind(this);
+    
+    
+    
+    var vm = this;
+    vm.isActive = false;
+    this.stt.onspeechstart = function(){
+      vm.isActive = true;
+    }
+    
+    this.stt.onspeechend = function(){
+      vm.isActive = false;
+    }
     // this.stt.onerror = function(...args){
     //   console.log(...args);
     // };
@@ -62,7 +74,6 @@ export class Listen {
       this.stt.onresult = function _eventResult(eventStt) {
         var SpeechRecognitionResult = eventStt.results[eventStt.resultIndex],
             results = [];
-            
         for (var k = 0; k < SpeechRecognitionResult.length; k++) {
           results[k] = SpeechRecognitionResult[k].transcript.trim();
         }

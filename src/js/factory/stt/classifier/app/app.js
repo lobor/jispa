@@ -27,6 +27,10 @@ module.exports = {
       "text": "how old are you"
     },
     {
+      "label": "functionBirthday",
+      "text": "when are you born"
+    },
+    {
       "label": "functionName",
       "text": [
         "what's your name"
@@ -102,6 +106,18 @@ module.exports = {
       return defer.promise;
     },
     
+    functionBirthday(){
+      var result = moment(window.Settings.firstLoad);
+      return {
+        template: "je suis né le ${text} à ${hour} heures ${minutes}",
+        values: {
+          text: result.format('dddd D MMMM YYYY'),
+          hour: result.format('H'),
+          minutes: result.format('m')
+        }
+      };
+    },
+    
     functionAge(){
       var result = moment.range(window.Settings.firstLoad, new Date());
       var text = '';
@@ -152,14 +168,6 @@ module.exports = {
       
       if('' === city)
         city = "chelles";
-      // for(var i = 0; i < dates.length; i++){
-      //   date = dates[i];
-      //   reg = new RegExp(date, 'g');
-      //   if(reg.test(city)){
-      //     date = 
-      //     i = dates.length;
-      //   }
-      // }
         
       ls
         .get(`meteo::${city}`, {
@@ -191,6 +199,7 @@ module.exports = {
       var siteName = query
       
       this.inject.get('$state').go('home.browse', {url: `https://www.${siteName}.com/`, result: query});
+      
       return {
         template: "let's go to ${query}",
         values: {
@@ -225,6 +234,7 @@ module.exports = {
           tbm = '';
           query = result.replace(/^(affiche ?|affiches ?|cherche ?|recherche ?)?(-moi ?)/g, '');
         }
+        this.setClassifier('browse');
         console.log(siteName, tbm, site, query);
         params = `search?hl=fr&site=${site}&tbm=${tbm}&q=${query}`;
       }

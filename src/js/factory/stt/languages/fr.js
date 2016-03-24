@@ -51,17 +51,20 @@ module.exports = {
   ],
   "what time is it": [
     "quelle heure il est",
-    "il est quelle heure",
     "donne-moi l'heure"
   ],
   "how old are you": [
-    "quel age as-tu",
-    "quel age tu as",
-    "tu as quel age",
+    "quel âge as-tu",
+    "quel âge tu as",
+    "tu as quel âge",
     "depuis quand tu existes",
     "tu existes depuis quand",
     "es tu vieux",
+  ],
+  "when are you born": [
     "tu es né quand",
+    "quand est ton anniversaire",
+    "quel ta date de naissance"
   ],
   "i could not retrieve weather": "je n'ai pas pu récupérer la météo",
   "i close the window": "je ferme la fenêtre",

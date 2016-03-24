@@ -1,5 +1,32 @@
 import factory from './factory/config.js';
 
+
+const browserBattery = require('browser-battery');
+
+browserBattery().then(battery => {
+    console.log(battery);
+    /*
+    {
+        charging: false
+        chargingTime: Infinity
+        dischargingTime: 11160
+        level: 0.6
+        onchargingchange: null
+        onchargingtimechange: null
+        ondischargingtimechange: null
+        onlevelchange: null
+    }
+     */
+});
+
+// Use the event listeners
+browserBattery().then(battery => {
+    battery.onlevelchange = function () {
+        console.log(battery.level);
+        //=> 0.89
+    };
+});
+
 export class Rasp{
   constructor(){
     console.log('Init RaspApp');

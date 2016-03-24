@@ -4,6 +4,7 @@
 
 @import "../../node_modules/ionic-sdk/release/css/ionic.css"
 @import "../../node_modules/animate.css/animate.css"
+@import "../../node_modules/weather-icons/css/weather-icons.css"
 
 timeTransitionMenu = 0.5s
 calcDecalage = calc(100% - 45px)
@@ -91,9 +92,36 @@ body
     min-height 40px !important
     flex 0
 
+
+
+
+
+
+
+
+
+
+.font
+  &-size
+    &-3-em
+      font-size 3em
+    &-100-px
+      font-size 100px
+    &-50-px
+      font-size 50px
+      &-lheight
+        font-size 50px
+        line-height 50px
+
 .height
   &-100
     height 100%
+  &-50
+    height 50%
+  &-25
+    height 25%
+  &-0
+    height 0%
 
 .display
   &-flex
@@ -104,7 +132,28 @@ body
     display inline-block
   &-inline
     display inline
-    
+
+.align
+  &-items
+    &-center
+      align-items center
+    &-baseline
+      align-items baseline
+    &-flex
+      &-start
+        align-items flex-start
+      &-end
+        align-items flex-end
+
+.justify
+  &-content
+    &-center
+      justify-content center
+    &-flex-start
+      justify-content flex-start
+    &-flex-end
+      justify-content flex-end
+
 .flex
   &-direction
     &-row

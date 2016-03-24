@@ -3,8 +3,7 @@ import { Speech } from './speech';
 import { Listen } from './listen';
 import { t } from './../languages/utils';
 
-var AppClassifier = require('./../classifier/app/app.js');
-
+var Classifiers = require('./../classifier/load.js');
 var msgUnderstand = "i don't understand",
   path = "./front/src/js/factory/stt/",
   natural = require("limdu"),
@@ -28,6 +27,9 @@ export class IA {
       .setDebug(true);
 
     navigator.webkitGetUserMedia({ audio: true }, function () {
+      var micro = document.getElementById('micro-icon');
+      micro.className = micro.className.replace('-off', '');
+      
       msgUnderstand = t(msgUnderstand);
       vm.listen = new Listen();
       vm
@@ -38,6 +40,7 @@ export class IA {
         })
         .start();
     }, function () {
+      console.log('nok');
       vm.speak("Il n'y a pas de micro");
     })
 
@@ -57,49 +60,37 @@ export class IA {
   parseResults(results, SRResult) {
     var vm = this,
       result = msgUnderstand;
-
-    for (var i = 0; i < results.length; i++) {
-      var resultSpeeh = results[i];
-
-      var classifications = this.classifier.classify(resultSpeeh, 1);
-      console.log(classifications);
-      
-      if (classifications.classes.length) {
-        for(var j = 0; j < classifications.classes.length; j++){
-          var result = classifications.classes[j];
-          
-          if (result){
-            Q(result)
-              .then(function (scope) {
-                console.log(scope);
-                if(/^function/.test(scope)) {
-                  console.log(resultSpeeh);
-                  return AppClassifier['function'][scope].call(vm, resultSpeeh, scope);
-                }
-                return scope;
-              })
-              .then(function(scope){
-                vm.speak(scope);
-              })
+    if(!this.listen.isActive || SRResult.isFinal){
+      for (var i = 0; i < results.length; i++) {
+        var resultSpeeh = results[i];
+        var classifications = this.classifier.classify(resultSpeeh.toLowerCase(), 1);
+        if (classifications.classes.length) {
+          for(var j = 0; j < classifications.classes.length; j++){
+            var result = classifications.classes[j];
+            if ((result && vm.old === result) || (result && SRResult.isFinal)){
+              console.debug('understand:', resultSpeeh);
+              vm.old = undefined;
+              Q(result)
+                .then(function (scope) {
+                  console.log(scope);
+                  if(/^function/.test(scope)) {
+                    var el = Classifiers[vm.themeClassActive]['function'][scope] || Classifiers['app']['function'][scope];
+                    return el.call(vm, resultSpeeh, scope);
+                  }
+                  return scope;
+                })
+                .then(function(scope){
+                  vm.speak(scope);
+                })
+            }
+            else{
+              vm.old = result;
+            }
           }
+          break;
         }
-        break;
       }
     }
-
-    // Q()
-    //   .then(function () {
-    //     if (result && /^function/.test(result)) {
-    //       return AppClassifier['function'][result].call(vm, resultSpeeh, result);
-    //     }
-    //     else {
-    //       return result;
-    //     }
-    //   })
-    //   .then(function (result) {
-    //     if (result)
-    //       vm.speak(result);
-    //   });
   }
   
   speak(msg){
@@ -122,7 +113,7 @@ export class IA {
     console.debug('speak: ', msg);
     this.speech.speak(msg);
   }
-
+  
   initClassifier() {
     var WordExtractor = function (input, features) {
       input.split(" ").forEach(function (word) {
@@ -139,9 +130,18 @@ export class IA {
       featureExtractor: WordExtractor,
       pastTrainingSamples: [],
     });
+    
+    this.setClassifier();
+    return this;
+  }
 
-    var classi = AppClassifier.docs,
-      i = 0, size = classi.length;
+  setClassifier(classifier) {
+    this.themeClassActive = classifier || 'app';
+    console.debug('load classifier:', this.themeClassActive);
+    
+    var classi = Classifiers[this.themeClassActive].docs,
+      i = 0, 
+      size = classi.length;
     var test = [];
     while (i < size) {
       var c = classi[i];
@@ -182,15 +182,11 @@ export class IA {
         });
       }
     }
-    this.setClassifier(result);
-
-    return this;
-  }
-
-  setClassifier(array) {
-    for(var i = 0; i < array.length; i++){
-      this.classifier.trainOnline(array[i].text, array[i].label);
+    console.log(result);
+    for(var i = 0; i < result.length; i++){
+      this.classifier.trainOnline(result[i].text, result[i].label);
     }
+    
     this.classifier.retrain();
   }
 }
