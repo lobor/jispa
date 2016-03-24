@@ -609,10 +609,12 @@
 	    this.stt.lang = 'fr-FR';
 	    // this.stt.continuous = true;
 	
+	    this.error = false;
 	    this.stt.onstart = this.constructor._eventStart.bind(this);
 	    this.stt.onend = this.constructor._eventEnd.bind(this);
 	    this.stt.onerror = function () {
 	      console.log(arguments);
+	      this.error = true;
 	    };
 	
 	    var vm = this;
@@ -735,7 +737,7 @@
 	      // if (timeSinceLastStart < 1000) {
 	      //   setTimeout(this.stt.start, 1000 - timeSinceLastStart);
 	      // } else {
-	      this.stt.start();
+	      if (false === this.error) this.stt.start();
 	    }
 	  }]);
 	
