@@ -5,7 +5,6 @@ import { t } from './../languages/utils';
 
 var Classifiers = require('./../classifier/load.js');
 var msgUnderstand = "i don't understand",
-  path = "./front/src/js/factory/stt/",
   natural = require("limdu"),
   Q = require('q');
 

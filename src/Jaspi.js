@@ -1,13 +1,19 @@
-// require('./script/annyang/annyang.js');
-import { Rasp } from './Rasp';
+import { IA } from './ia/ia.js';
 
-
+var ElectronSettings = require('electron-settings');
 window.moment = require('moment');
 require('moment-range');
 require('moment/locale/fr');
 
 
-var ElectronSettings = require('electron-settings');
+class Rasp{
+  constructor(){
+    console.log('Init RaspApp');
+		this.ia = new IA();
+  }
+}
+
+
 
 let settings = new ElectronSettings({
   configDirPath: './'

@@ -46,14 +46,21 @@
 
 	'use strict';
 	
-	var _Rasp = __webpack_require__(1);
+	var _ia = __webpack_require__(1);
 	
-	window.moment = __webpack_require__(32); // require('./script/annyang/annyang.js');
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	__webpack_require__(215);
-	__webpack_require__(68);
+	var ElectronSettings = __webpack_require__(204);
+	window.moment = __webpack_require__(29);
+	__webpack_require__(263);
+	__webpack_require__(65);
 	
-	var ElectronSettings = __webpack_require__(216);
+	var Rasp = function Rasp() {
+	  _classCallCheck(this, Rasp);
+	
+	  console.log('Init RaspApp');
+	  this.ia = new _ia.IA();
+	};
 	
 	var settings = new ElectronSettings({
 	  configDirPath: './'
@@ -75,148 +82,10 @@
 	
 	window.moment.locale(settings.get('lang'));
 	
-	var app = new _Rasp.Rasp();
+	var app = new Rasp();
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.Rasp = undefined;
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _config = __webpack_require__(2);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	var _ia = __webpack_require__(4);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var ia = new _ia.IA();
-	
-	// const browserBattery = require('browser-battery');
-	
-	// browserBattery().then(battery => {
-	//     console.log(battery);
-	//     /*
-	//     {
-	//         charging: false
-	//         chargingTime: Infinity
-	//         dischargingTime: 11160
-	//         level: 0.6
-	//         onchargingchange: null
-	//         onchargingtimechange: null
-	//         ondischargingtimechange: null
-	//         onlevelchange: null
-	//     }
-	//      */
-	// });
-	
-	// // Use the event listeners
-	// browserBattery().then(battery => {
-	//     battery.onlevelchange = function () {
-	//         console.log(battery.level);
-	//         //=> 0.89
-	//     };
-	// });
-	
-	var Rasp = exports.Rasp = function () {
-	  function Rasp() {
-	    _classCallCheck(this, Rasp);
-	
-	    console.log('Init RaspApp');
-	    // require('angular-moment')
-	    // this.angular = require('angular')
-	    //   .module('raspberrypi', [require('angular-ui-router')]);
-	    //   // .directive('micro', require('./directive/micro/micro.js'))
-	    //   // .constant('angularMomentConfig', {
-	    //   //     timezone: 'Europe/Paris'
-	    //   // });
-	    // // this.loadController()
-	    //   this.loadFactory();
-	    //   this.loadRoutes();
-	    // return this;
-	  }
-	
-	  _createClass(Rasp, [{
-	    key: 'loadController',
-	    value: function loadController() {
-	      console.log('Load Controller');
-	
-	      var i = controller.length - 1;
-	      while (-1 < i) {
-	        this.angular.controller(controller[i].name, controller[i].controller);
-	        i--;
-	      }
-	      return this;
-	    }
-	  }, {
-	    key: 'loadFactory',
-	    value: function loadFactory() {
-	      console.log('Load Factory');
-	      var i = _config2.default.length - 1;
-	      while (-1 < i) {
-	        this.angular.factory(_config2.default[i].name, _config2.default[i].factory);
-	        i--;
-	      }
-	      return this;
-	    }
-	  }, {
-	    key: 'loadRoutes',
-	    value: function loadRoutes() {
-	      this.angular.config(__webpack_require__(205));
-	      return this;
-	    }
-	  }]);
-	
-	  return Rasp;
-	}();
-
-/***/ },
-/* 2 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = [{
-	  name: 'stt',
-	  factory: __webpack_require__(3)
-	}, {
-	  name: 'ls',
-	  factory: __webpack_require__(204)
-	}];
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _ia = __webpack_require__(4);
-	
-	module.exports = ['$injector', function ($injector) {
-	  var ia = new _ia.IA({ inject: $injector });
-	  console.log(ia);
-	
-	  // return {
-	  //   speak: ia.speak
-	  // }
-	  return ia;
-	}];
-
-/***/ },
-/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -231,19 +100,18 @@
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* global ) */
 	
 	
-	var _speech = __webpack_require__(5);
+	var _speech = __webpack_require__(2);
 	
-	var _listen = __webpack_require__(7);
+	var _listen = __webpack_require__(4);
 	
-	var _utils = __webpack_require__(26);
+	var _utils = __webpack_require__(23);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Classifiers = __webpack_require__(29);
+	var Classifiers = __webpack_require__(26);
 	var msgUnderstand = "i don't understand",
-	    path = "./front/src/js/factory/stt/",
 	    natural = __webpack_require__(133),
-	    Q = __webpack_require__(31);
+	    Q = __webpack_require__(28);
 	
 	var IA = exports.IA = function () {
 	  function IA(options) {
@@ -416,7 +284,7 @@
 	}();
 
 /***/ },
-/* 5 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -428,7 +296,7 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _picoTTS = __webpack_require__(6);
+	var _picoTTS = __webpack_require__(3);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -533,7 +401,7 @@
 	}();
 
 /***/ },
-/* 6 */
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -566,7 +434,7 @@
 	}();
 
 /***/ },
-/* 7 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -580,7 +448,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var name = /^(Jaspi|Jasper)/g;
-	var Speech = __webpack_require__(8);
+	var Speech = __webpack_require__(5);
 	
 	var Listen = exports.Listen = function () {
 	  function Listen() {
@@ -792,13 +660,13 @@
 	}();
 
 /***/ },
-/* 8 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var EventEmitter = __webpack_require__(9)
-	var util = __webpack_require__(10)
-	var defined = __webpack_require__(11)
-	var Readable = __webpack_require__(12)
+	var EventEmitter = __webpack_require__(6)
+	var util = __webpack_require__(7)
+	var defined = __webpack_require__(8)
+	var Readable = __webpack_require__(9)
 	
 	module.exports = Speech
 	
@@ -866,19 +734,19 @@
 
 
 /***/ },
-/* 9 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = require("events");
 
 /***/ },
-/* 10 */
+/* 7 */
 /***/ function(module, exports) {
 
 	module.exports = require("util");
 
 /***/ },
-/* 11 */
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = function () {
@@ -889,31 +757,37 @@
 
 
 /***/ },
-/* 12 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Stream = (function (){
 	  try {
-	    return __webpack_require__(13); // hack to fix a circular dependency issue when used with browserify
+	    return __webpack_require__(10); // hack to fix a circular dependency issue when used with browserify
 	  } catch(_){}
 	}());
-	exports = module.exports = __webpack_require__(14);
+	exports = module.exports = __webpack_require__(11);
 	exports.Stream = Stream || exports;
 	exports.Readable = exports;
-	exports.Writable = __webpack_require__(21);
-	exports.Duplex = __webpack_require__(20);
-	exports.Transform = __webpack_require__(24);
-	exports.PassThrough = __webpack_require__(25);
+	exports.Writable = __webpack_require__(18);
+	exports.Duplex = __webpack_require__(17);
+	exports.Transform = __webpack_require__(21);
+	exports.PassThrough = __webpack_require__(22);
+	
+	// inline-process-browser and unreachable-branch-transform make sure this is
+	// removed in browserify builds
+	if (!process.browser && process.env.READABLE_STREAM === 'disable') {
+	  module.exports = __webpack_require__(10);
+	}
 
 
 /***/ },
-/* 13 */
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = require("stream");
 
 /***/ },
-/* 14 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -921,20 +795,20 @@
 	module.exports = Readable;
 	
 	/*<replacement>*/
-	var processNextTick = __webpack_require__(15);
+	var processNextTick = __webpack_require__(12);
 	/*</replacement>*/
 	
 	/*<replacement>*/
-	var isArray = __webpack_require__(16);
+	var isArray = __webpack_require__(13);
 	/*</replacement>*/
 	
 	/*<replacement>*/
-	var Buffer = __webpack_require__(17).Buffer;
+	var Buffer = __webpack_require__(14).Buffer;
 	/*</replacement>*/
 	
 	Readable.ReadableState = ReadableState;
 	
-	var EE = __webpack_require__(9);
+	var EE = __webpack_require__(6);
 	
 	/*<replacement>*/
 	var EElistenerCount = function (emitter, type) {
@@ -946,22 +820,22 @@
 	var Stream;
 	(function () {
 	  try {
-	    Stream = __webpack_require__(13);
+	    Stream = __webpack_require__(10);
 	  } catch (_) {} finally {
-	    if (!Stream) Stream = __webpack_require__(9).EventEmitter;
+	    if (!Stream) Stream = __webpack_require__(6).EventEmitter;
 	  }
 	})();
 	/*</replacement>*/
 	
-	var Buffer = __webpack_require__(17).Buffer;
+	var Buffer = __webpack_require__(14).Buffer;
 	
 	/*<replacement>*/
-	var util = __webpack_require__(18);
-	util.inherits = __webpack_require__(19);
+	var util = __webpack_require__(15);
+	util.inherits = __webpack_require__(16);
 	/*</replacement>*/
 	
 	/*<replacement>*/
-	var debugUtil = __webpack_require__(10);
+	var debugUtil = __webpack_require__(7);
 	var debug = undefined;
 	if (debugUtil && debugUtil.debuglog) {
 	  debug = debugUtil.debuglog('stream');
@@ -976,7 +850,7 @@
 	
 	var Duplex;
 	function ReadableState(options, stream) {
-	  Duplex = Duplex || __webpack_require__(20);
+	  Duplex = Duplex || __webpack_require__(17);
 	
 	  options = options || {};
 	
@@ -1035,7 +909,7 @@
 	  this.decoder = null;
 	  this.encoding = null;
 	  if (options.encoding) {
-	    if (!StringDecoder) StringDecoder = __webpack_require__(23).StringDecoder;
+	    if (!StringDecoder) StringDecoder = __webpack_require__(20).StringDecoder;
 	    this.decoder = new StringDecoder(options.encoding);
 	    this.encoding = options.encoding;
 	  }
@@ -1043,7 +917,7 @@
 	
 	var Duplex;
 	function Readable(options) {
-	  Duplex = Duplex || __webpack_require__(20);
+	  Duplex = Duplex || __webpack_require__(17);
 	
 	  if (!(this instanceof Readable)) return new Readable(options);
 	
@@ -1146,7 +1020,7 @@
 	
 	// backwards compatibility.
 	Readable.prototype.setEncoding = function (enc) {
-	  if (!StringDecoder) StringDecoder = __webpack_require__(23).StringDecoder;
+	  if (!StringDecoder) StringDecoder = __webpack_require__(20).StringDecoder;
 	  this._readableState.decoder = new StringDecoder(enc);
 	  this._readableState.encoding = enc;
 	  return this;
@@ -1798,7 +1672,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1824,7 +1698,7 @@
 
 
 /***/ },
-/* 16 */
+/* 13 */
 /***/ function(module, exports) {
 
 	var toString = {}.toString;
@@ -1835,13 +1709,13 @@
 
 
 /***/ },
-/* 17 */
+/* 14 */
 /***/ function(module, exports) {
 
 	module.exports = require("buffer");
 
 /***/ },
-/* 18 */
+/* 15 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -1954,14 +1828,14 @@
 
 
 /***/ },
-/* 19 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(10).inherits
+	module.exports = __webpack_require__(7).inherits
 
 
 /***/ },
-/* 20 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a duplex stream is just a stream that is both readable and writable.
@@ -1984,16 +1858,16 @@
 	module.exports = Duplex;
 	
 	/*<replacement>*/
-	var processNextTick = __webpack_require__(15);
+	var processNextTick = __webpack_require__(12);
 	/*</replacement>*/
 	
 	/*<replacement>*/
-	var util = __webpack_require__(18);
-	util.inherits = __webpack_require__(19);
+	var util = __webpack_require__(15);
+	util.inherits = __webpack_require__(16);
 	/*</replacement>*/
 	
-	var Readable = __webpack_require__(14);
-	var Writable = __webpack_require__(21);
+	var Readable = __webpack_require__(11);
+	var Writable = __webpack_require__(18);
 	
 	util.inherits(Duplex, Readable);
 	
@@ -2041,7 +1915,7 @@
 	}
 
 /***/ },
-/* 21 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// A bit simpler than readable streams.
@@ -2053,7 +1927,7 @@
 	module.exports = Writable;
 	
 	/*<replacement>*/
-	var processNextTick = __webpack_require__(15);
+	var processNextTick = __webpack_require__(12);
 	/*</replacement>*/
 	
 	/*<replacement>*/
@@ -2061,19 +1935,19 @@
 	/*</replacement>*/
 	
 	/*<replacement>*/
-	var Buffer = __webpack_require__(17).Buffer;
+	var Buffer = __webpack_require__(14).Buffer;
 	/*</replacement>*/
 	
 	Writable.WritableState = WritableState;
 	
 	/*<replacement>*/
-	var util = __webpack_require__(18);
-	util.inherits = __webpack_require__(19);
+	var util = __webpack_require__(15);
+	util.inherits = __webpack_require__(16);
 	/*</replacement>*/
 	
 	/*<replacement>*/
 	var internalUtil = {
-	  deprecate: __webpack_require__(22)
+	  deprecate: __webpack_require__(19)
 	};
 	/*</replacement>*/
 	
@@ -2081,14 +1955,14 @@
 	var Stream;
 	(function () {
 	  try {
-	    Stream = __webpack_require__(13);
+	    Stream = __webpack_require__(10);
 	  } catch (_) {} finally {
-	    if (!Stream) Stream = __webpack_require__(9).EventEmitter;
+	    if (!Stream) Stream = __webpack_require__(6).EventEmitter;
 	  }
 	})();
 	/*</replacement>*/
 	
-	var Buffer = __webpack_require__(17).Buffer;
+	var Buffer = __webpack_require__(14).Buffer;
 	
 	util.inherits(Writable, Stream);
 	
@@ -2103,7 +1977,7 @@
 	
 	var Duplex;
 	function WritableState(options, stream) {
-	  Duplex = Duplex || __webpack_require__(20);
+	  Duplex = Duplex || __webpack_require__(17);
 	
 	  options = options || {};
 	
@@ -2220,7 +2094,7 @@
 	
 	var Duplex;
 	function Writable(options) {
-	  Duplex = Duplex || __webpack_require__(20);
+	  Duplex = Duplex || __webpack_require__(17);
 	
 	  // Writable ctor is applied to Duplexes, though they're not
 	  // instanceof Writable, they're instanceof Readable.
@@ -2562,7 +2436,7 @@
 	}
 
 /***/ },
-/* 22 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -2570,11 +2444,11 @@
 	 * For Node.js, simply re-export the core `util.deprecate` function.
 	 */
 	
-	module.exports = __webpack_require__(10).deprecate;
+	module.exports = __webpack_require__(7).deprecate;
 
 
 /***/ },
-/* 23 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -2598,7 +2472,7 @@
 	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 	// USE OR OTHER DEALINGS IN THE SOFTWARE.
 	
-	var Buffer = __webpack_require__(17).Buffer;
+	var Buffer = __webpack_require__(14).Buffer;
 	
 	var isBufferEncoding = Buffer.isEncoding
 	  || function(encoding) {
@@ -2801,7 +2675,7 @@
 
 
 /***/ },
-/* 24 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a transform stream is a readable/writable stream where you do
@@ -2850,11 +2724,11 @@
 	
 	module.exports = Transform;
 	
-	var Duplex = __webpack_require__(20);
+	var Duplex = __webpack_require__(17);
 	
 	/*<replacement>*/
-	var util = __webpack_require__(18);
-	util.inherits = __webpack_require__(19);
+	var util = __webpack_require__(15);
+	util.inherits = __webpack_require__(16);
 	/*</replacement>*/
 	
 	util.inherits(Transform, Duplex);
@@ -2986,7 +2860,7 @@
 	}
 
 /***/ },
-/* 25 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// a passthrough stream.
@@ -2997,11 +2871,11 @@
 	
 	module.exports = PassThrough;
 	
-	var Transform = __webpack_require__(24);
+	var Transform = __webpack_require__(21);
 	
 	/*<replacement>*/
-	var util = __webpack_require__(18);
-	util.inherits = __webpack_require__(19);
+	var util = __webpack_require__(15);
+	util.inherits = __webpack_require__(16);
 	/*</replacement>*/
 	
 	util.inherits(PassThrough, Transform);
@@ -3017,7 +2891,7 @@
 	};
 
 /***/ },
-/* 26 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3026,7 +2900,7 @@
 	  value: true
 	});
 	exports.t = t;
-	var load = __webpack_require__(27),
+	var load = __webpack_require__(24),
 	    lang;
 	
 	// .lang
@@ -3045,17 +2919,17 @@
 	}
 
 /***/ },
-/* 27 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	module.exports = {
-	  "fr": __webpack_require__(28)
+	  "fr": __webpack_require__(25)
 	};
 
 /***/ },
-/* 28 */
+/* 25 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -3100,23 +2974,23 @@
 	};
 
 /***/ },
-/* 29 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	module.exports = {
-	  "app": __webpack_require__(30),
+	  "app": __webpack_require__(27),
 	  "browse": __webpack_require__(132)
 	};
 
 /***/ },
-/* 30 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var Q = __webpack_require__(31);
+	var Q = __webpack_require__(28);
 	
 	module.exports = {
 	  docs: [{
@@ -3339,7 +3213,7 @@
 	      return '';
 	    },
 	    functionTime: function functionTime() {
-	      var moment = __webpack_require__(32);
+	      var moment = __webpack_require__(29);
 	      return 'Il est ' + moment().format('HH:mm');
 	    },
 	    functionName: function functionName() {
@@ -3349,7 +3223,7 @@
 	};
 
 /***/ },
-/* 31 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// vim:ts=4:sts=4:sw=4:
@@ -5403,11 +5277,11 @@
 
 
 /***/ },
-/* 32 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.12.0
+	//! version : 2.13.0
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -5484,7 +5358,9 @@
 	            invalidMonth    : null,
 	            invalidFormat   : false,
 	            userInvalidated : false,
-	            iso             : false
+	            iso             : false,
+	            parsedDateParts : [],
+	            meridiem        : null
 	        };
 	    }
 	
@@ -5495,9 +5371,30 @@
 	        return m._pf;
 	    }
 	
+	    var some;
+	    if (Array.prototype.some) {
+	        some = Array.prototype.some;
+	    } else {
+	        some = function (fun) {
+	            var t = Object(this);
+	            var len = t.length >>> 0;
+	
+	            for (var i = 0; i < len; i++) {
+	                if (i in t && fun.call(this, t[i], i, t)) {
+	                    return true;
+	                }
+	            }
+	
+	            return false;
+	        };
+	    }
+	
 	    function valid__isValid(m) {
 	        if (m._isValid == null) {
 	            var flags = getParsingFlags(m);
+	            var parsedParts = some.call(flags.parsedDateParts, function (i) {
+	                return i != null;
+	            });
 	            m._isValid = !isNaN(m._d.getTime()) &&
 	                flags.overflow < 0 &&
 	                !flags.empty &&
@@ -5505,7 +5402,8 @@
 	                !flags.invalidWeekday &&
 	                !flags.nullInput &&
 	                !flags.invalidFormat &&
-	                !flags.userInvalidated;
+	                !flags.userInvalidated &&
+	                (!flags.meridiem || (flags.meridiem && parsedParts));
 	
 	            if (m._strict) {
 	                m._isValid = m._isValid &&
@@ -5648,6 +5546,9 @@
 	        var firstTime = true;
 	
 	        return extend(function () {
+	            if (utils_hooks__hooks.deprecationHandler != null) {
+	                utils_hooks__hooks.deprecationHandler(null, msg);
+	            }
 	            if (firstTime) {
 	                warn(msg + '\nArguments: ' + Array.prototype.slice.call(arguments).join(', ') + '\n' + (new Error()).stack);
 	                firstTime = false;
@@ -5659,6 +5560,9 @@
 	    var deprecations = {};
 	
 	    function deprecateSimple(name, msg) {
+	        if (utils_hooks__hooks.deprecationHandler != null) {
+	            utils_hooks__hooks.deprecationHandler(name, msg);
+	        }
 	        if (!deprecations[name]) {
 	            warn(msg);
 	            deprecations[name] = true;
@@ -5666,6 +5570,7 @@
 	    }
 	
 	    utils_hooks__hooks.suppressDeprecationWarnings = false;
+	    utils_hooks__hooks.deprecationHandler = null;
 	
 	    function isFunction(input) {
 	        return input instanceof Function || Object.prototype.toString.call(input) === '[object Function]';
@@ -5715,6 +5620,22 @@
 	        }
 	    }
 	
+	    var keys;
+	
+	    if (Object.keys) {
+	        keys = Object.keys;
+	    } else {
+	        keys = function (obj) {
+	            var i, res = [];
+	            for (i in obj) {
+	                if (hasOwnProp(obj, i)) {
+	                    res.push(i);
+	                }
+	            }
+	            return res;
+	        };
+	    }
+	
 	    // internal storage for locale config files
 	    var locales = {};
 	    var globalLocale;
@@ -5757,7 +5678,7 @@
 	                module && module.exports) {
 	            try {
 	                oldLocale = globalLocale._abbr;
-	                __webpack_require__(34)("./" + name);
+	                __webpack_require__(31)("./" + name);
 	                // because defineLocale currently also sets the global locale, we
 	                // want to undo that for lazy loaded locales
 	                locale_locales__getSetGlobalLocale(oldLocale);
@@ -5869,7 +5790,7 @@
 	    }
 	
 	    function locale_locales__listLocales() {
-	        return Object.keys(locales);
+	        return keys(locales);
 	    }
 	
 	    var aliases = {};
@@ -5948,7 +5869,7 @@
 	            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) + absNumber;
 	    }
 	
-	    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
+	    var formattingTokens = /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|YYYYYY|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g;
 	
 	    var localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g;
 	
@@ -6001,7 +5922,7 @@
 	        }
 	
 	        return function (mom) {
-	            var output = '';
+	            var output = '', i;
 	            for (i = 0; i < length; i++) {
 	                output += array[i] instanceof Function ? array[i].call(mom, format) : array[i];
 	            }
@@ -6130,6 +6051,23 @@
 	    var WEEK = 7;
 	    var WEEKDAY = 8;
 	
+	    var indexOf;
+	
+	    if (Array.prototype.indexOf) {
+	        indexOf = Array.prototype.indexOf;
+	    } else {
+	        indexOf = function (o) {
+	            // I know
+	            var i;
+	            for (i = 0; i < this.length; ++i) {
+	                if (this[i] === o) {
+	                    return i;
+	                }
+	            }
+	            return -1;
+	        };
+	    }
+	
 	    function daysInMonth(year, month) {
 	        return new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
 	    }
@@ -6192,8 +6130,53 @@
 	            this._monthsShort[MONTHS_IN_FORMAT.test(format) ? 'format' : 'standalone'][m.month()];
 	    }
 	
+	    function units_month__handleStrictParse(monthName, format, strict) {
+	        var i, ii, mom, llc = monthName.toLocaleLowerCase();
+	        if (!this._monthsParse) {
+	            // this is not used
+	            this._monthsParse = [];
+	            this._longMonthsParse = [];
+	            this._shortMonthsParse = [];
+	            for (i = 0; i < 12; ++i) {
+	                mom = create_utc__createUTC([2000, i]);
+	                this._shortMonthsParse[i] = this.monthsShort(mom, '').toLocaleLowerCase();
+	                this._longMonthsParse[i] = this.months(mom, '').toLocaleLowerCase();
+	            }
+	        }
+	
+	        if (strict) {
+	            if (format === 'MMM') {
+	                ii = indexOf.call(this._shortMonthsParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else {
+	                ii = indexOf.call(this._longMonthsParse, llc);
+	                return ii !== -1 ? ii : null;
+	            }
+	        } else {
+	            if (format === 'MMM') {
+	                ii = indexOf.call(this._shortMonthsParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._longMonthsParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else {
+	                ii = indexOf.call(this._longMonthsParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._shortMonthsParse, llc);
+	                return ii !== -1 ? ii : null;
+	            }
+	        }
+	    }
+	
 	    function localeMonthsParse (monthName, format, strict) {
 	        var i, mom, regex;
+	
+	        if (this._monthsParseExact) {
+	            return units_month__handleStrictParse.call(this, monthName, format, strict);
+	        }
 	
 	        if (!this._monthsParse) {
 	            this._monthsParse = [];
@@ -6201,6 +6184,9 @@
 	            this._shortMonthsParse = [];
 	        }
 	
+	        // TODO: add sorting
+	        // Sorting makes sure if one month (or abbr) is a prefix of another
+	        // see sorting in computeMonthsParse
 	        for (i = 0; i < 12; i++) {
 	            // make the regex if we don't have it already
 	            mom = create_utc__createUTC([2000, i]);
@@ -6326,8 +6312,8 @@
 	
 	        this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
 	        this._monthsShortRegex = this._monthsRegex;
-	        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')$', 'i');
-	        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')$', 'i');
+	        this._monthsStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+	        this._monthsShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
 	    }
 	
 	    function checkOverflow (m) {
@@ -6554,7 +6540,7 @@
 	
 	    // MOMENTS
 	
-	    var getSetYear = makeGetSet('FullYear', false);
+	    var getSetYear = makeGetSet('FullYear', true);
 	
 	    function getIsLeapYear () {
 	        return isLeapYear(this.year());
@@ -6823,6 +6809,9 @@
 	                config._a[HOUR] > 0) {
 	            getParsingFlags(config).bigHour = undefined;
 	        }
+	
+	        getParsingFlags(config).parsedDateParts = config._a.slice(0);
+	        getParsingFlags(config).meridiem = config._meridiem;
 	        // handle meridiem
 	        config._a[HOUR] = meridiemFixWrap(config._locale, config._a[HOUR], config._meridiem);
 	
@@ -6963,7 +6952,7 @@
 	        if (input === undefined) {
 	            config._d = new Date(utils_hooks__hooks.now());
 	        } else if (isDate(input)) {
-	            config._d = new Date(+input);
+	            config._d = new Date(input.valueOf());
 	        } else if (typeof input === 'string') {
 	            configFromString(config);
 	        } else if (isArray(input)) {
@@ -7083,7 +7072,7 @@
 	        this._milliseconds = +milliseconds +
 	            seconds * 1e3 + // 1000
 	            minutes * 6e4 + // 1000 * 60
-	            hours * 36e5; // 1000 * 60 * 60
+	            hours * 1000 * 60 * 60; //using 1000 * 60 * 60 instead of 36e5 to avoid floating point rounding errors https://github.com/moment/moment/issues/2978
 	        // Because of dateAddRemove treats 24 hours as different from a
 	        // day when working around DST, we need to store them separately
 	        this._days = +days +
@@ -7153,9 +7142,9 @@
 	        var res, diff;
 	        if (model._isUTC) {
 	            res = model.clone();
-	            diff = (isMoment(input) || isDate(input) ? +input : +local__createLocal(input)) - (+res);
+	            diff = (isMoment(input) || isDate(input) ? input.valueOf() : local__createLocal(input).valueOf()) - res.valueOf();
 	            // Use low-level api, because this fn is low-level api.
-	            res._d.setTime(+res._d + diff);
+	            res._d.setTime(res._d.valueOf() + diff);
 	            utils_hooks__hooks.updateOffset(res, false);
 	            return res;
 	        } else {
@@ -7316,7 +7305,7 @@
 	    // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
 	    // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
 	    // and further modified to allow for strings containing both week and day
-	    var isoRegex = /^(-)?P(?:([0-9,.]*)Y)?(?:([0-9,.]*)M)?(?:([0-9,.]*)W)?(?:([0-9,.]*)D)?(?:T(?:([0-9,.]*)H)?(?:([0-9,.]*)M)?(?:([0-9,.]*)S)?)?$/;
+	    var isoRegex = /^(-)?P(?:(-?[0-9,.]*)Y)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)W)?(?:(-?[0-9,.]*)D)?(?:T(?:(-?[0-9,.]*)H)?(?:(-?[0-9,.]*)M)?(?:(-?[0-9,.]*)S)?)?$/;
 	
 	    function create__createDuration (input, key) {
 	        var duration = input,
@@ -7460,7 +7449,7 @@
 	        updateOffset = updateOffset == null ? true : updateOffset;
 	
 	        if (milliseconds) {
-	            mom._d.setTime(+mom._d + milliseconds * isAdding);
+	            mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
 	        }
 	        if (days) {
 	            get_set__set(mom, 'Date', get_set__get(mom, 'Date') + days * isAdding);
@@ -7505,9 +7494,9 @@
 	        }
 	        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
 	        if (units === 'millisecond') {
-	            return +this > +localInput;
+	            return this.valueOf() > localInput.valueOf();
 	        } else {
-	            return +localInput < +this.clone().startOf(units);
+	            return localInput.valueOf() < this.clone().startOf(units).valueOf();
 	        }
 	    }
 	
@@ -7518,14 +7507,16 @@
 	        }
 	        units = normalizeUnits(!isUndefined(units) ? units : 'millisecond');
 	        if (units === 'millisecond') {
-	            return +this < +localInput;
+	            return this.valueOf() < localInput.valueOf();
 	        } else {
-	            return +this.clone().endOf(units) < +localInput;
+	            return this.clone().endOf(units).valueOf() < localInput.valueOf();
 	        }
 	    }
 	
-	    function isBetween (from, to, units) {
-	        return this.isAfter(from, units) && this.isBefore(to, units);
+	    function isBetween (from, to, units, inclusivity) {
+	        inclusivity = inclusivity || '()';
+	        return (inclusivity[0] === '(' ? this.isAfter(from, units) : !this.isBefore(from, units)) &&
+	            (inclusivity[1] === ')' ? this.isBefore(to, units) : !this.isAfter(to, units));
 	    }
 	
 	    function isSame (input, units) {
@@ -7536,10 +7527,10 @@
 	        }
 	        units = normalizeUnits(units || 'millisecond');
 	        if (units === 'millisecond') {
-	            return +this === +localInput;
+	            return this.valueOf() === localInput.valueOf();
 	        } else {
-	            inputMs = +localInput;
-	            return +(this.clone().startOf(units)) <= inputMs && inputMs <= +(this.clone().endOf(units));
+	            inputMs = localInput.valueOf();
+	            return this.clone().startOf(units).valueOf() <= inputMs && inputMs <= this.clone().endOf(units).valueOf();
 	        }
 	    }
 	
@@ -7606,10 +7597,12 @@
 	            adjust = (b - anchor) / (anchor2 - anchor);
 	        }
 	
-	        return -(wholeMonthDiff + adjust);
+	        //check for negative zero, return zero if negative zero
+	        return -(wholeMonthDiff + adjust) || 0;
 	    }
 	
 	    utils_hooks__hooks.defaultFormat = 'YYYY-MM-DDTHH:mm:ssZ';
+	    utils_hooks__hooks.defaultFormatUtc = 'YYYY-MM-DDTHH:mm:ss[Z]';
 	
 	    function toString () {
 	        return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
@@ -7630,7 +7623,10 @@
 	    }
 	
 	    function format (inputString) {
-	        var output = formatMoment(this, inputString || utils_hooks__hooks.defaultFormat);
+	        if (!inputString) {
+	            inputString = this.isUtc() ? utils_hooks__hooks.defaultFormatUtc : utils_hooks__hooks.defaultFormat;
+	        }
+	        var output = formatMoment(this, inputString);
 	        return this.localeData().postformat(output);
 	    }
 	
@@ -7709,6 +7705,7 @@
 	        case 'week':
 	        case 'isoWeek':
 	        case 'day':
+	        case 'date':
 	            this.hours(0);
 	            /* falls through */
 	        case 'hour':
@@ -7742,19 +7739,25 @@
 	        if (units === undefined || units === 'millisecond') {
 	            return this;
 	        }
+	
+	        // 'date' is an alias for 'day', so it should be considered as such.
+	        if (units === 'date') {
+	            units = 'day';
+	        }
+	
 	        return this.startOf(units).add(1, (units === 'isoWeek' ? 'week' : units)).subtract(1, 'ms');
 	    }
 	
 	    function to_type__valueOf () {
-	        return +this._d - ((this._offset || 0) * 60000);
+	        return this._d.valueOf() - ((this._offset || 0) * 60000);
 	    }
 	
 	    function unix () {
-	        return Math.floor(+this / 1000);
+	        return Math.floor(this.valueOf() / 1000);
 	    }
 	
 	    function toDate () {
-	        return this._offset ? new Date(+this) : this._d;
+	        return this._offset ? new Date(this.valueOf()) : this._d;
 	    }
 	
 	    function toArray () {
@@ -8023,9 +8026,15 @@
 	    addRegexToken('d',    match1to2);
 	    addRegexToken('e',    match1to2);
 	    addRegexToken('E',    match1to2);
-	    addRegexToken('dd',   matchWord);
-	    addRegexToken('ddd',  matchWord);
-	    addRegexToken('dddd', matchWord);
+	    addRegexToken('dd',   function (isStrict, locale) {
+	        return locale.weekdaysMinRegex(isStrict);
+	    });
+	    addRegexToken('ddd',   function (isStrict, locale) {
+	        return locale.weekdaysShortRegex(isStrict);
+	    });
+	    addRegexToken('dddd',   function (isStrict, locale) {
+	        return locale.weekdaysRegex(isStrict);
+	    });
 	
 	    addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
 	        var weekday = config._locale.weekdaysParse(input, token, config._strict);
@@ -8078,8 +8087,76 @@
 	        return this._weekdaysMin[m.day()];
 	    }
 	
+	    function day_of_week__handleStrictParse(weekdayName, format, strict) {
+	        var i, ii, mom, llc = weekdayName.toLocaleLowerCase();
+	        if (!this._weekdaysParse) {
+	            this._weekdaysParse = [];
+	            this._shortWeekdaysParse = [];
+	            this._minWeekdaysParse = [];
+	
+	            for (i = 0; i < 7; ++i) {
+	                mom = create_utc__createUTC([2000, 1]).day(i);
+	                this._minWeekdaysParse[i] = this.weekdaysMin(mom, '').toLocaleLowerCase();
+	                this._shortWeekdaysParse[i] = this.weekdaysShort(mom, '').toLocaleLowerCase();
+	                this._weekdaysParse[i] = this.weekdays(mom, '').toLocaleLowerCase();
+	            }
+	        }
+	
+	        if (strict) {
+	            if (format === 'dddd') {
+	                ii = indexOf.call(this._weekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else if (format === 'ddd') {
+	                ii = indexOf.call(this._shortWeekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else {
+	                ii = indexOf.call(this._minWeekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            }
+	        } else {
+	            if (format === 'dddd') {
+	                ii = indexOf.call(this._weekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._shortWeekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._minWeekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else if (format === 'ddd') {
+	                ii = indexOf.call(this._shortWeekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._weekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._minWeekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            } else {
+	                ii = indexOf.call(this._minWeekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._weekdaysParse, llc);
+	                if (ii !== -1) {
+	                    return ii;
+	                }
+	                ii = indexOf.call(this._shortWeekdaysParse, llc);
+	                return ii !== -1 ? ii : null;
+	            }
+	        }
+	    }
+	
 	    function localeWeekdaysParse (weekdayName, format, strict) {
 	        var i, mom, regex;
+	
+	        if (this._weekdaysParseExact) {
+	            return day_of_week__handleStrictParse.call(this, weekdayName, format, strict);
+	        }
 	
 	        if (!this._weekdaysParse) {
 	            this._weekdaysParse = [];
@@ -8091,7 +8168,7 @@
 	        for (i = 0; i < 7; i++) {
 	            // make the regex if we don't have it already
 	
-	            mom = local__createLocal([2000, 1]).day(i);
+	            mom = create_utc__createUTC([2000, 1]).day(i);
 	            if (strict && !this._fullWeekdaysParse[i]) {
 	                this._fullWeekdaysParse[i] = new RegExp('^' + this.weekdays(mom, '').replace('.', '\.?') + '$', 'i');
 	                this._shortWeekdaysParse[i] = new RegExp('^' + this.weekdaysShort(mom, '').replace('.', '\.?') + '$', 'i');
@@ -8147,6 +8224,99 @@
 	        return input == null ? this.day() || 7 : this.day(this.day() % 7 ? input : input - 7);
 	    }
 	
+	    var defaultWeekdaysRegex = matchWord;
+	    function weekdaysRegex (isStrict) {
+	        if (this._weekdaysParseExact) {
+	            if (!hasOwnProp(this, '_weekdaysRegex')) {
+	                computeWeekdaysParse.call(this);
+	            }
+	            if (isStrict) {
+	                return this._weekdaysStrictRegex;
+	            } else {
+	                return this._weekdaysRegex;
+	            }
+	        } else {
+	            return this._weekdaysStrictRegex && isStrict ?
+	                this._weekdaysStrictRegex : this._weekdaysRegex;
+	        }
+	    }
+	
+	    var defaultWeekdaysShortRegex = matchWord;
+	    function weekdaysShortRegex (isStrict) {
+	        if (this._weekdaysParseExact) {
+	            if (!hasOwnProp(this, '_weekdaysRegex')) {
+	                computeWeekdaysParse.call(this);
+	            }
+	            if (isStrict) {
+	                return this._weekdaysShortStrictRegex;
+	            } else {
+	                return this._weekdaysShortRegex;
+	            }
+	        } else {
+	            return this._weekdaysShortStrictRegex && isStrict ?
+	                this._weekdaysShortStrictRegex : this._weekdaysShortRegex;
+	        }
+	    }
+	
+	    var defaultWeekdaysMinRegex = matchWord;
+	    function weekdaysMinRegex (isStrict) {
+	        if (this._weekdaysParseExact) {
+	            if (!hasOwnProp(this, '_weekdaysRegex')) {
+	                computeWeekdaysParse.call(this);
+	            }
+	            if (isStrict) {
+	                return this._weekdaysMinStrictRegex;
+	            } else {
+	                return this._weekdaysMinRegex;
+	            }
+	        } else {
+	            return this._weekdaysMinStrictRegex && isStrict ?
+	                this._weekdaysMinStrictRegex : this._weekdaysMinRegex;
+	        }
+	    }
+	
+	
+	    function computeWeekdaysParse () {
+	        function cmpLenRev(a, b) {
+	            return b.length - a.length;
+	        }
+	
+	        var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [],
+	            i, mom, minp, shortp, longp;
+	        for (i = 0; i < 7; i++) {
+	            // make the regex if we don't have it already
+	            mom = create_utc__createUTC([2000, 1]).day(i);
+	            minp = this.weekdaysMin(mom, '');
+	            shortp = this.weekdaysShort(mom, '');
+	            longp = this.weekdays(mom, '');
+	            minPieces.push(minp);
+	            shortPieces.push(shortp);
+	            longPieces.push(longp);
+	            mixedPieces.push(minp);
+	            mixedPieces.push(shortp);
+	            mixedPieces.push(longp);
+	        }
+	        // Sorting makes sure if one weekday (or abbr) is a prefix of another it
+	        // will match the longer piece.
+	        minPieces.sort(cmpLenRev);
+	        shortPieces.sort(cmpLenRev);
+	        longPieces.sort(cmpLenRev);
+	        mixedPieces.sort(cmpLenRev);
+	        for (i = 0; i < 7; i++) {
+	            shortPieces[i] = regexEscape(shortPieces[i]);
+	            longPieces[i] = regexEscape(longPieces[i]);
+	            mixedPieces[i] = regexEscape(mixedPieces[i]);
+	        }
+	
+	        this._weekdaysRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
+	        this._weekdaysShortRegex = this._weekdaysRegex;
+	        this._weekdaysMinRegex = this._weekdaysRegex;
+	
+	        this._weekdaysStrictRegex = new RegExp('^(' + longPieces.join('|') + ')', 'i');
+	        this._weekdaysShortStrictRegex = new RegExp('^(' + shortPieces.join('|') + ')', 'i');
+	        this._weekdaysMinStrictRegex = new RegExp('^(' + minPieces.join('|') + ')', 'i');
+	    }
+	
 	    // FORMATTING
 	
 	    addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
@@ -8178,8 +8348,13 @@
 	        return this.hours() % 12 || 12;
 	    }
 	
+	    function kFormat() {
+	        return this.hours() || 24;
+	    }
+	
 	    addFormatToken('H', ['HH', 2], 0, 'hour');
 	    addFormatToken('h', ['hh', 2], 0, hFormat);
+	    addFormatToken('k', ['kk', 2], 0, kFormat);
 	
 	    addFormatToken('hmm', 0, 0, function () {
 	        return '' + hFormat.apply(this) + zeroFill(this.minutes(), 2);
@@ -8640,6 +8815,13 @@
 	    prototype__proto._weekdaysShort = defaultLocaleWeekdaysShort;
 	    prototype__proto.weekdaysParse  =        localeWeekdaysParse;
 	
+	    prototype__proto._weekdaysRegex      = defaultWeekdaysRegex;
+	    prototype__proto.weekdaysRegex       =        weekdaysRegex;
+	    prototype__proto._weekdaysShortRegex = defaultWeekdaysShortRegex;
+	    prototype__proto.weekdaysShortRegex  =        weekdaysShortRegex;
+	    prototype__proto._weekdaysMinRegex   = defaultWeekdaysMinRegex;
+	    prototype__proto.weekdaysMinRegex    =        weekdaysMinRegex;
+	
 	    // Hours
 	    prototype__proto.isPM = localeIsPM;
 	    prototype__proto._meridiemParse = defaultLocaleMeridiemParse;
@@ -8651,7 +8833,7 @@
 	        return locale[field](utc, format);
 	    }
 	
-	    function list (format, index, field, count, setter) {
+	    function listMonthsImpl (format, index, field) {
 	        if (typeof format === 'number') {
 	            index = format;
 	            format = undefined;
@@ -8660,35 +8842,79 @@
 	        format = format || '';
 	
 	        if (index != null) {
-	            return lists__get(format, index, field, setter);
+	            return lists__get(format, index, field, 'month');
 	        }
 	
 	        var i;
 	        var out = [];
-	        for (i = 0; i < count; i++) {
-	            out[i] = lists__get(format, i, field, setter);
+	        for (i = 0; i < 12; i++) {
+	            out[i] = lists__get(format, i, field, 'month');
+	        }
+	        return out;
+	    }
+	
+	    // ()
+	    // (5)
+	    // (fmt, 5)
+	    // (fmt)
+	    // (true)
+	    // (true, 5)
+	    // (true, fmt, 5)
+	    // (true, fmt)
+	    function listWeekdaysImpl (localeSorted, format, index, field) {
+	        if (typeof localeSorted === 'boolean') {
+	            if (typeof format === 'number') {
+	                index = format;
+	                format = undefined;
+	            }
+	
+	            format = format || '';
+	        } else {
+	            format = localeSorted;
+	            index = format;
+	            localeSorted = false;
+	
+	            if (typeof format === 'number') {
+	                index = format;
+	                format = undefined;
+	            }
+	
+	            format = format || '';
+	        }
+	
+	        var locale = locale_locales__getLocale(),
+	            shift = localeSorted ? locale._week.dow : 0;
+	
+	        if (index != null) {
+	            return lists__get(format, (index + shift) % 7, field, 'day');
+	        }
+	
+	        var i;
+	        var out = [];
+	        for (i = 0; i < 7; i++) {
+	            out[i] = lists__get(format, (i + shift) % 7, field, 'day');
 	        }
 	        return out;
 	    }
 	
 	    function lists__listMonths (format, index) {
-	        return list(format, index, 'months', 12, 'month');
+	        return listMonthsImpl(format, index, 'months');
 	    }
 	
 	    function lists__listMonthsShort (format, index) {
-	        return list(format, index, 'monthsShort', 12, 'month');
+	        return listMonthsImpl(format, index, 'monthsShort');
 	    }
 	
-	    function lists__listWeekdays (format, index) {
-	        return list(format, index, 'weekdays', 7, 'day');
+	    function lists__listWeekdays (localeSorted, format, index) {
+	        return listWeekdaysImpl(localeSorted, format, index, 'weekdays');
 	    }
 	
-	    function lists__listWeekdaysShort (format, index) {
-	        return list(format, index, 'weekdaysShort', 7, 'day');
+	    function lists__listWeekdaysShort (localeSorted, format, index) {
+	        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysShort');
 	    }
 	
-	    function lists__listWeekdaysMin (format, index) {
-	        return list(format, index, 'weekdaysMin', 7, 'day');
+	    function lists__listWeekdaysMin (localeSorted, format, index) {
+	        return listWeekdaysImpl(localeSorted, format, index, 'weekdaysMin');
 	    }
 	
 	    locale_locales__getSetGlobalLocale('en', {
@@ -9059,7 +9285,7 @@
 	    // Side effect imports
 	
 	
-	    utils_hooks__hooks.version = '2.12.0';
+	    utils_hooks__hooks.version = '2.13.0';
 	
 	    setHookCallback(local__createLocal);
 	
@@ -9094,10 +9320,10 @@
 	    return _moment;
 	
 	}));
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)(module)))
 
 /***/ },
-/* 33 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -9113,200 +9339,206 @@
 
 
 /***/ },
-/* 34 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 35,
-		"./af.js": 35,
-		"./ar": 36,
-		"./ar-ma": 37,
-		"./ar-ma.js": 37,
-		"./ar-sa": 38,
-		"./ar-sa.js": 38,
-		"./ar-tn": 39,
-		"./ar-tn.js": 39,
-		"./ar.js": 36,
-		"./az": 40,
-		"./az.js": 40,
-		"./be": 41,
-		"./be.js": 41,
-		"./bg": 42,
-		"./bg.js": 42,
-		"./bn": 43,
-		"./bn.js": 43,
-		"./bo": 44,
-		"./bo.js": 44,
-		"./br": 45,
-		"./br.js": 45,
-		"./bs": 46,
-		"./bs.js": 46,
-		"./ca": 47,
-		"./ca.js": 47,
-		"./cs": 48,
-		"./cs.js": 48,
-		"./cv": 49,
-		"./cv.js": 49,
-		"./cy": 50,
-		"./cy.js": 50,
-		"./da": 51,
-		"./da.js": 51,
-		"./de": 52,
-		"./de-at": 53,
-		"./de-at.js": 53,
-		"./de.js": 52,
-		"./dv": 54,
-		"./dv.js": 54,
-		"./el": 55,
-		"./el.js": 55,
-		"./en-au": 56,
-		"./en-au.js": 56,
-		"./en-ca": 57,
-		"./en-ca.js": 57,
-		"./en-gb": 58,
-		"./en-gb.js": 58,
-		"./en-ie": 59,
-		"./en-ie.js": 59,
-		"./en-nz": 60,
-		"./en-nz.js": 60,
-		"./eo": 61,
-		"./eo.js": 61,
-		"./es": 62,
-		"./es.js": 62,
-		"./et": 63,
-		"./et.js": 63,
-		"./eu": 64,
-		"./eu.js": 64,
-		"./fa": 65,
-		"./fa.js": 65,
-		"./fi": 66,
-		"./fi.js": 66,
-		"./fo": 67,
-		"./fo.js": 67,
-		"./fr": 68,
-		"./fr-ca": 69,
-		"./fr-ca.js": 69,
-		"./fr-ch": 70,
-		"./fr-ch.js": 70,
-		"./fr.js": 68,
-		"./fy": 71,
-		"./fy.js": 71,
-		"./gd": 72,
-		"./gd.js": 72,
-		"./gl": 73,
-		"./gl.js": 73,
-		"./he": 74,
-		"./he.js": 74,
-		"./hi": 75,
-		"./hi.js": 75,
-		"./hr": 76,
-		"./hr.js": 76,
-		"./hu": 77,
-		"./hu.js": 77,
-		"./hy-am": 78,
-		"./hy-am.js": 78,
-		"./id": 79,
-		"./id.js": 79,
-		"./is": 80,
-		"./is.js": 80,
-		"./it": 81,
-		"./it.js": 81,
-		"./ja": 82,
-		"./ja.js": 82,
-		"./jv": 83,
-		"./jv.js": 83,
-		"./ka": 84,
-		"./ka.js": 84,
-		"./kk": 85,
-		"./kk.js": 85,
-		"./km": 86,
-		"./km.js": 86,
-		"./ko": 87,
-		"./ko.js": 87,
-		"./lb": 88,
-		"./lb.js": 88,
-		"./lo": 89,
-		"./lo.js": 89,
-		"./lt": 90,
-		"./lt.js": 90,
-		"./lv": 91,
-		"./lv.js": 91,
-		"./me": 92,
-		"./me.js": 92,
-		"./mk": 93,
-		"./mk.js": 93,
-		"./ml": 94,
-		"./ml.js": 94,
-		"./mr": 95,
-		"./mr.js": 95,
-		"./ms": 96,
-		"./ms-my": 97,
-		"./ms-my.js": 97,
-		"./ms.js": 96,
-		"./my": 98,
-		"./my.js": 98,
-		"./nb": 99,
-		"./nb.js": 99,
-		"./ne": 100,
-		"./ne.js": 100,
-		"./nl": 101,
-		"./nl.js": 101,
-		"./nn": 102,
-		"./nn.js": 102,
-		"./pa-in": 103,
-		"./pa-in.js": 103,
-		"./pl": 104,
-		"./pl.js": 104,
-		"./pt": 105,
-		"./pt-br": 106,
-		"./pt-br.js": 106,
-		"./pt.js": 105,
-		"./ro": 107,
-		"./ro.js": 107,
-		"./ru": 108,
-		"./ru.js": 108,
-		"./se": 109,
-		"./se.js": 109,
-		"./si": 110,
-		"./si.js": 110,
-		"./sk": 111,
-		"./sk.js": 111,
-		"./sl": 112,
-		"./sl.js": 112,
-		"./sq": 113,
-		"./sq.js": 113,
-		"./sr": 114,
-		"./sr-cyrl": 115,
-		"./sr-cyrl.js": 115,
-		"./sr.js": 114,
-		"./sv": 116,
-		"./sv.js": 116,
-		"./sw": 117,
-		"./sw.js": 117,
-		"./ta": 118,
-		"./ta.js": 118,
-		"./te": 119,
-		"./te.js": 119,
-		"./th": 120,
-		"./th.js": 120,
-		"./tl-ph": 121,
-		"./tl-ph.js": 121,
-		"./tlh": 122,
-		"./tlh.js": 122,
-		"./tr": 123,
-		"./tr.js": 123,
-		"./tzl": 124,
-		"./tzl.js": 124,
-		"./tzm": 125,
-		"./tzm-latn": 126,
-		"./tzm-latn.js": 126,
-		"./tzm.js": 125,
-		"./uk": 127,
-		"./uk.js": 127,
-		"./uz": 128,
-		"./uz.js": 128,
-		"./vi": 129,
-		"./vi.js": 129,
+		"./af": 32,
+		"./af.js": 32,
+		"./ar": 33,
+		"./ar-ma": 34,
+		"./ar-ma.js": 34,
+		"./ar-sa": 35,
+		"./ar-sa.js": 35,
+		"./ar-tn": 36,
+		"./ar-tn.js": 36,
+		"./ar.js": 33,
+		"./az": 37,
+		"./az.js": 37,
+		"./be": 38,
+		"./be.js": 38,
+		"./bg": 39,
+		"./bg.js": 39,
+		"./bn": 40,
+		"./bn.js": 40,
+		"./bo": 41,
+		"./bo.js": 41,
+		"./br": 42,
+		"./br.js": 42,
+		"./bs": 43,
+		"./bs.js": 43,
+		"./ca": 44,
+		"./ca.js": 44,
+		"./cs": 45,
+		"./cs.js": 45,
+		"./cv": 46,
+		"./cv.js": 46,
+		"./cy": 47,
+		"./cy.js": 47,
+		"./da": 48,
+		"./da.js": 48,
+		"./de": 49,
+		"./de-at": 50,
+		"./de-at.js": 50,
+		"./de.js": 49,
+		"./dv": 51,
+		"./dv.js": 51,
+		"./el": 52,
+		"./el.js": 52,
+		"./en-au": 53,
+		"./en-au.js": 53,
+		"./en-ca": 54,
+		"./en-ca.js": 54,
+		"./en-gb": 55,
+		"./en-gb.js": 55,
+		"./en-ie": 56,
+		"./en-ie.js": 56,
+		"./en-nz": 57,
+		"./en-nz.js": 57,
+		"./eo": 58,
+		"./eo.js": 58,
+		"./es": 59,
+		"./es.js": 59,
+		"./et": 60,
+		"./et.js": 60,
+		"./eu": 61,
+		"./eu.js": 61,
+		"./fa": 62,
+		"./fa.js": 62,
+		"./fi": 63,
+		"./fi.js": 63,
+		"./fo": 64,
+		"./fo.js": 64,
+		"./fr": 65,
+		"./fr-ca": 66,
+		"./fr-ca.js": 66,
+		"./fr-ch": 67,
+		"./fr-ch.js": 67,
+		"./fr.js": 65,
+		"./fy": 68,
+		"./fy.js": 68,
+		"./gd": 69,
+		"./gd.js": 69,
+		"./gl": 70,
+		"./gl.js": 70,
+		"./he": 71,
+		"./he.js": 71,
+		"./hi": 72,
+		"./hi.js": 72,
+		"./hr": 73,
+		"./hr.js": 73,
+		"./hu": 74,
+		"./hu.js": 74,
+		"./hy-am": 75,
+		"./hy-am.js": 75,
+		"./id": 76,
+		"./id.js": 76,
+		"./is": 77,
+		"./is.js": 77,
+		"./it": 78,
+		"./it.js": 78,
+		"./ja": 79,
+		"./ja.js": 79,
+		"./jv": 80,
+		"./jv.js": 80,
+		"./ka": 81,
+		"./ka.js": 81,
+		"./kk": 82,
+		"./kk.js": 82,
+		"./km": 83,
+		"./km.js": 83,
+		"./ko": 84,
+		"./ko.js": 84,
+		"./ky": 85,
+		"./ky.js": 85,
+		"./lb": 86,
+		"./lb.js": 86,
+		"./lo": 87,
+		"./lo.js": 87,
+		"./lt": 88,
+		"./lt.js": 88,
+		"./lv": 89,
+		"./lv.js": 89,
+		"./me": 90,
+		"./me.js": 90,
+		"./mk": 91,
+		"./mk.js": 91,
+		"./ml": 92,
+		"./ml.js": 92,
+		"./mr": 93,
+		"./mr.js": 93,
+		"./ms": 94,
+		"./ms-my": 95,
+		"./ms-my.js": 95,
+		"./ms.js": 94,
+		"./my": 96,
+		"./my.js": 96,
+		"./nb": 97,
+		"./nb.js": 97,
+		"./ne": 98,
+		"./ne.js": 98,
+		"./nl": 99,
+		"./nl.js": 99,
+		"./nn": 100,
+		"./nn.js": 100,
+		"./pa-in": 101,
+		"./pa-in.js": 101,
+		"./pl": 102,
+		"./pl.js": 102,
+		"./pt": 103,
+		"./pt-br": 104,
+		"./pt-br.js": 104,
+		"./pt.js": 103,
+		"./ro": 105,
+		"./ro.js": 105,
+		"./ru": 106,
+		"./ru.js": 106,
+		"./se": 107,
+		"./se.js": 107,
+		"./si": 108,
+		"./si.js": 108,
+		"./sk": 109,
+		"./sk.js": 109,
+		"./sl": 110,
+		"./sl.js": 110,
+		"./sq": 111,
+		"./sq.js": 111,
+		"./sr": 112,
+		"./sr-cyrl": 113,
+		"./sr-cyrl.js": 113,
+		"./sr.js": 112,
+		"./ss": 114,
+		"./ss.js": 114,
+		"./sv": 115,
+		"./sv.js": 115,
+		"./sw": 116,
+		"./sw.js": 116,
+		"./ta": 117,
+		"./ta.js": 117,
+		"./te": 118,
+		"./te.js": 118,
+		"./th": 119,
+		"./th.js": 119,
+		"./tl-ph": 120,
+		"./tl-ph.js": 120,
+		"./tlh": 121,
+		"./tlh.js": 121,
+		"./tr": 122,
+		"./tr.js": 122,
+		"./tzl": 123,
+		"./tzl.js": 123,
+		"./tzm": 124,
+		"./tzm-latn": 125,
+		"./tzm-latn.js": 125,
+		"./tzm.js": 124,
+		"./uk": 126,
+		"./uk.js": 126,
+		"./uz": 127,
+		"./uz.js": 127,
+		"./vi": 128,
+		"./vi.js": 128,
+		"./x-pseudo": 129,
+		"./x-pseudo.js": 129,
 		"./zh-cn": 130,
 		"./zh-cn.js": 130,
 		"./zh-tw": 131,
@@ -9323,11 +9555,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 34;
+	webpackContext.id = 31;
 
 
 /***/ },
-/* 35 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9335,7 +9567,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9404,7 +9636,7 @@
 	}));
 
 /***/ },
-/* 36 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9414,7 +9646,7 @@
 	//! Native plural forms: forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9481,6 +9713,7 @@
 	        weekdays : 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
 	        weekdaysShort : 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
 	        weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -9544,7 +9777,7 @@
 	}));
 
 /***/ },
-/* 37 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9553,7 +9786,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9565,6 +9798,7 @@
 	        weekdays : 'الأحد_الإتنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
 	        weekdaysShort : 'احد_اتنين_ثلاثاء_اربعاء_خميس_جمعة_سبت'.split('_'),
 	        weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -9607,7 +9841,7 @@
 	}));
 
 /***/ },
-/* 38 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9615,7 +9849,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9651,6 +9885,7 @@
 	        weekdays : 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
 	        weekdaysShort : 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
 	        weekdaysMin : 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -9714,14 +9949,14 @@
 	}));
 
 /***/ },
-/* 39 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  : Tunisian Arabic (ar-tn)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9733,6 +9968,7 @@
 	        weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
 	        weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
 	        weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat: {
 	            LT: 'HH:mm',
 	            LTS: 'HH:mm:ss',
@@ -9775,7 +10011,7 @@
 	}));
 
 /***/ },
-/* 40 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9783,7 +10019,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -9816,6 +10052,7 @@
 	        weekdays : 'Bazar_Bazar ertəsi_Çərşənbə axşamı_Çərşənbə_Cümə axşamı_Cümə_Şənbə'.split('_'),
 	        weekdaysShort : 'Baz_BzE_ÇAx_Çər_CAx_Cüm_Şən'.split('_'),
 	        weekdaysMin : 'Bz_BE_ÇA_Çə_CA_Cü_Şə'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -9883,7 +10120,7 @@
 	}));
 
 /***/ },
-/* 41 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -9893,7 +10130,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10021,7 +10258,7 @@
 	}));
 
 /***/ },
-/* 42 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10029,7 +10266,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10115,7 +10352,7 @@
 	}));
 
 /***/ },
-/* 43 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10123,7 +10360,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10238,7 +10475,7 @@
 	}));
 
 /***/ },
-/* 44 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10246,7 +10483,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10361,7 +10598,7 @@
 	}));
 
 /***/ },
-/* 45 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10369,7 +10606,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10425,6 +10662,7 @@
 	        weekdays : 'Sul_Lun_Meurzh_Merc\'her_Yaou_Gwener_Sadorn'.split('_'),
 	        weekdaysShort : 'Sul_Lun_Meu_Mer_Yao_Gwe_Sad'.split('_'),
 	        weekdaysMin : 'Su_Lu_Me_Mer_Ya_Gw_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'h[e]mm A',
 	            LTS : 'h[e]mm:ss A',
@@ -10472,7 +10710,7 @@
 	}));
 
 /***/ },
-/* 46 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10481,7 +10719,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10543,9 +10781,11 @@
 	    var bs = moment.defineLocale('bs', {
 	        months : 'januar_februar_mart_april_maj_juni_juli_august_septembar_oktobar_novembar_decembar'.split('_'),
 	        monthsShort : 'jan._feb._mar._apr._maj._jun._jul._aug._sep._okt._nov._dec.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
 	        weekdaysShort : 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
 	        weekdaysMin : 'ne_po_ut_sr_če_pe_su'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -10617,7 +10857,7 @@
 	}));
 
 /***/ },
-/* 47 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10625,7 +10865,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10634,9 +10874,11 @@
 	    var ca = moment.defineLocale('ca', {
 	        months : 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split('_'),
 	        monthsShort : 'gen._febr._mar._abr._mai._jun._jul._ag._set._oct._nov._des.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'.split('_'),
 	        weekdaysShort : 'dg._dl._dt._dc._dj._dv._ds.'.split('_'),
 	        weekdaysMin : 'Dg_Dl_Dt_Dc_Dj_Dv_Ds'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -10700,7 +10942,7 @@
 	}));
 
 /***/ },
-/* 48 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10708,7 +10950,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10875,7 +11117,7 @@
 	}));
 
 /***/ },
-/* 49 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10883,7 +11125,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10942,7 +11184,7 @@
 	}));
 
 /***/ },
-/* 50 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -10950,7 +11192,7 @@
 	//! author : Robert Allen
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -10962,6 +11204,7 @@
 	        weekdays: 'Dydd Sul_Dydd Llun_Dydd Mawrth_Dydd Mercher_Dydd Iau_Dydd Gwener_Dydd Sadwrn'.split('_'),
 	        weekdaysShort: 'Sul_Llun_Maw_Mer_Iau_Gwe_Sad'.split('_'),
 	        weekdaysMin: 'Su_Ll_Ma_Me_Ia_Gw_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        // time formats are the same as en-gb
 	        longDateFormat: {
 	            LT: 'HH:mm',
@@ -11025,7 +11268,7 @@
 	}));
 
 /***/ },
-/* 51 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11033,7 +11276,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11089,7 +11332,7 @@
 	}));
 
 /***/ },
-/* 52 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11099,7 +11342,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11122,9 +11365,11 @@
 	    var de = moment.defineLocale('de', {
 	        months : 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
 	        monthsShort : 'Jan._Febr._Mrz._Apr._Mai_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
 	        weekdaysShort : 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
 	        weekdaysMin : 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT: 'HH:mm',
 	            LTS: 'HH:mm:ss',
@@ -11169,7 +11414,7 @@
 	}));
 
 /***/ },
-/* 53 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11180,7 +11425,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11203,9 +11448,11 @@
 	    var de_at = moment.defineLocale('de-at', {
 	        months : 'Jänner_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
 	        monthsShort : 'Jän._Febr._Mrz._Apr._Mai_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split('_'),
 	        weekdaysShort : 'So._Mo._Di._Mi._Do._Fr._Sa.'.split('_'),
 	        weekdaysMin : 'So_Mo_Di_Mi_Do_Fr_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT: 'HH:mm',
 	            LTS: 'HH:mm:ss',
@@ -11250,7 +11497,7 @@
 	}));
 
 /***/ },
-/* 54 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11258,7 +11505,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11353,7 +11600,7 @@
 	}));
 
 /***/ },
-/* 55 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11361,7 +11608,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11455,14 +11702,14 @@
 	}));
 
 /***/ },
-/* 56 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : australian english (en-au)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11525,7 +11772,7 @@
 	}));
 
 /***/ },
-/* 57 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11533,7 +11780,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11592,7 +11839,7 @@
 	}));
 
 /***/ },
-/* 58 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11600,7 +11847,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11663,7 +11910,7 @@
 	}));
 
 /***/ },
-/* 59 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11671,7 +11918,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11734,14 +11981,14 @@
 	}));
 
 /***/ },
-/* 60 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : New Zealand english (en-nz)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11804,7 +12051,7 @@
 	}));
 
 /***/ },
-/* 61 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11814,7 +12061,7 @@
 	//!          Se ne, bonvolu korekti kaj avizi min por ke mi povas lerni!
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11881,7 +12128,7 @@
 	}));
 
 /***/ },
-/* 62 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11889,7 +12136,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -11907,9 +12154,11 @@
 	                return monthsShortDot[m.month()];
 	            }
 	        },
+	        monthsParseExact : true,
 	        weekdays : 'domingo_lunes_martes_miércoles_jueves_viernes_sábado'.split('_'),
 	        weekdaysShort : 'dom._lun._mar._mié._jue._vie._sáb.'.split('_'),
 	        weekdaysMin : 'do_lu_ma_mi_ju_vi_sá'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -11964,7 +12213,7 @@
 	}));
 
 /***/ },
-/* 63 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -11973,7 +12222,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12048,7 +12297,7 @@
 	}));
 
 /***/ },
-/* 64 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12056,7 +12305,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12065,9 +12314,11 @@
 	    var eu = moment.defineLocale('eu', {
 	        months : 'urtarrila_otsaila_martxoa_apirila_maiatza_ekaina_uztaila_abuztua_iraila_urria_azaroa_abendua'.split('_'),
 	        monthsShort : 'urt._ots._mar._api._mai._eka._uzt._abu._ira._urr._aza._abe.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'igandea_astelehena_asteartea_asteazkena_osteguna_ostirala_larunbata'.split('_'),
 	        weekdaysShort : 'ig._al._ar._az._og._ol._lr.'.split('_'),
 	        weekdaysMin : 'ig_al_ar_az_og_ol_lr'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12116,7 +12367,7 @@
 	}));
 
 /***/ },
-/* 65 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12124,7 +12375,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12160,6 +12411,7 @@
 	        weekdays : 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
 	        weekdaysShort : 'یک\u200cشنبه_دوشنبه_سه\u200cشنبه_چهارشنبه_پنج\u200cشنبه_جمعه_شنبه'.split('_'),
 	        weekdaysMin : 'ی_د_س_چ_پ_ج_ش'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12225,7 +12477,7 @@
 	}));
 
 /***/ },
-/* 66 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12233,7 +12485,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12336,7 +12588,7 @@
 	}));
 
 /***/ },
-/* 67 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12344,7 +12596,7 @@
 	//! author : Ragnar Johannesen : https://github.com/ragnar123
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12400,7 +12652,7 @@
 	}));
 
 /***/ },
-/* 68 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12408,7 +12660,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12417,9 +12669,11 @@
 	    var fr = moment.defineLocale('fr', {
 	        months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
 	        monthsShort : 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
 	        weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
 	        weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12466,7 +12720,7 @@
 	}));
 
 /***/ },
-/* 69 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12474,7 +12728,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12483,9 +12737,11 @@
 	    var fr_ca = moment.defineLocale('fr-ca', {
 	        months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
 	        monthsShort : 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
 	        weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
 	        weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12528,7 +12784,7 @@
 	}));
 
 /***/ },
-/* 70 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12536,7 +12792,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12545,9 +12801,11 @@
 	    var fr_ch = moment.defineLocale('fr-ch', {
 	        months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
 	        monthsShort : 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
 	        weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
 	        weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12594,7 +12852,7 @@
 	}));
 
 /***/ },
-/* 71 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12602,7 +12860,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12620,9 +12878,11 @@
 	                return monthsShortWithDots[m.month()];
 	            }
 	        },
+	        monthsParseExact : true,
 	        weekdays : 'snein_moandei_tiisdei_woansdei_tongersdei_freed_sneon'.split('_'),
 	        weekdaysShort : 'si._mo._ti._wo._to._fr._so.'.split('_'),
 	        weekdaysMin : 'Si_Mo_Ti_Wo_To_Fr_So'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -12669,7 +12929,7 @@
 	}));
 
 /***/ },
-/* 72 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12677,7 +12937,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12749,7 +13009,7 @@
 	}));
 
 /***/ },
-/* 73 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12757,7 +13017,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12766,9 +13026,11 @@
 	    var gl = moment.defineLocale('gl', {
 	        months : 'Xaneiro_Febreiro_Marzo_Abril_Maio_Xuño_Xullo_Agosto_Setembro_Outubro_Novembro_Decembro'.split('_'),
 	        monthsShort : 'Xan._Feb._Mar._Abr._Mai._Xuñ._Xul._Ago._Set._Out._Nov._Dec.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'Domingo_Luns_Martes_Mércores_Xoves_Venres_Sábado'.split('_'),
 	        weekdaysShort : 'Dom._Lun._Mar._Mér._Xov._Ven._Sáb.'.split('_'),
 	        weekdaysMin : 'Do_Lu_Ma_Mé_Xo_Ve_Sá'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -12828,7 +13090,7 @@
 	}));
 
 /***/ },
-/* 74 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12838,7 +13100,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12931,7 +13193,7 @@
 	}));
 
 /***/ },
-/* 75 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -12939,7 +13201,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -12973,6 +13235,7 @@
 	    var hi = moment.defineLocale('hi', {
 	        months : 'जनवरी_फ़रवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितम्बर_अक्टूबर_नवम्बर_दिसम्बर'.split('_'),
 	        monthsShort : 'जन._फ़र._मार्च_अप्रै._मई_जून_जुल._अग._सित._अक्टू._नव._दिस.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'रविवार_सोमवार_मंगलवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
 	        weekdaysShort : 'रवि_सोम_मंगल_बुध_गुरू_शुक्र_शनि'.split('_'),
 	        weekdaysMin : 'र_सो_मं_बु_गु_शु_श'.split('_'),
@@ -13058,7 +13321,7 @@
 	}));
 
 /***/ },
-/* 76 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13066,7 +13329,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13131,9 +13394,11 @@
 	            standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_')
 	        },
 	        monthsShort : 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
 	        weekdaysShort : 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
 	        weekdaysMin : 'ne_po_ut_sr_če_pe_su'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -13205,7 +13470,7 @@
 	}));
 
 /***/ },
-/* 77 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13213,7 +13478,7 @@
 	//! author : Adam Brunner : https://github.com/adambrunner
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13318,7 +13583,7 @@
 	}));
 
 /***/ },
-/* 78 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13326,7 +13591,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13417,7 +13682,7 @@
 	}));
 
 /***/ },
-/* 79 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13426,7 +13691,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13504,7 +13769,7 @@
 	}));
 
 /***/ },
-/* 80 */
+/* 77 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13512,7 +13777,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13635,7 +13900,7 @@
 	}));
 
 /***/ },
-/* 81 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13644,7 +13909,7 @@
 	//! author: Mattia Larentis: https://github.com/nostalgiaz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13709,7 +13974,7 @@
 	}));
 
 /***/ },
-/* 82 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13717,7 +13982,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13789,7 +14054,7 @@
 	}));
 
 /***/ },
-/* 83 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13798,7 +14063,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13876,7 +14141,7 @@
 	}));
 
 /***/ },
-/* 84 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13884,7 +14149,7 @@
 	//! author : Irakli Janiashvili : https://github.com/irakli-janiashvili
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -13969,7 +14234,7 @@
 	}));
 
 /***/ },
-/* 85 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -13977,7 +14242,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14007,11 +14272,11 @@
 	    };
 	
 	    var kk = moment.defineLocale('kk', {
-	        months : 'Қаңтар_Ақпан_Наурыз_Сәуір_Мамыр_Маусым_Шілде_Тамыз_Қыркүйек_Қазан_Қараша_Желтоқсан'.split('_'),
-	        monthsShort : 'Қаң_Ақп_Нау_Сәу_Мам_Мау_Шіл_Там_Қыр_Қаз_Қар_Жел'.split('_'),
-	        weekdays : 'Жексенбі_Дүйсенбі_Сейсенбі_Сәрсенбі_Бейсенбі_Жұма_Сенбі'.split('_'),
-	        weekdaysShort : 'Жек_Дүй_Сей_Сәр_Бей_Жұм_Сен'.split('_'),
-	        weekdaysMin : 'Жк_Дй_Сй_Ср_Бй_Жм_Сн'.split('_'),
+	        months : 'қаңтар_ақпан_наурыз_сәуір_мамыр_маусым_шілде_тамыз_қыркүйек_қазан_қараша_желтоқсан'.split('_'),
+	        monthsShort : 'қаң_ақп_нау_сәу_мам_мау_шіл_там_қыр_қаз_қар_жел'.split('_'),
+	        weekdays : 'жексенбі_дүйсенбі_сейсенбі_сәрсенбі_бейсенбі_жұма_сенбі'.split('_'),
+	        weekdaysShort : 'жек_дүй_сей_сәр_бей_жұм_сен'.split('_'),
+	        weekdaysMin : 'жк_дй_сй_ср_бй_жм_сн'.split('_'),
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -14060,7 +14325,7 @@
 	}));
 
 /***/ },
-/* 86 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14068,15 +14333,15 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
 	
 	
 	    var km = moment.defineLocale('km', {
-	        months: 'មករា_កុម្ភៈ_មិនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
-	        monthsShort: 'មករា_កុម្ភៈ_មិនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
+	        months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
+	        monthsShort: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split('_'),
 	        weekdays: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
 	        weekdaysShort: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
 	        weekdaysMin: 'អាទិត្យ_ច័ន្ទ_អង្គារ_ពុធ_ព្រហស្បតិ៍_សុក្រ_សៅរ៍'.split('_'),
@@ -14122,7 +14387,7 @@
 	}));
 
 /***/ },
-/* 87 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14134,7 +14399,7 @@
 	//! - Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14165,17 +14430,17 @@
 	        relativeTime : {
 	            future : '%s 후',
 	            past : '%s 전',
-	            s : '몇초',
+	            s : '몇 초',
 	            ss : '%d초',
 	            m : '일분',
 	            mm : '%d분',
-	            h : '한시간',
+	            h : '한 시간',
 	            hh : '%d시간',
 	            d : '하루',
 	            dd : '%d일',
-	            M : '한달',
+	            M : '한 달',
 	            MM : '%d달',
-	            y : '일년',
+	            y : '일 년',
 	            yy : '%d년'
 	        },
 	        ordinalParse : /\d{1,2}일/,
@@ -14194,7 +14459,99 @@
 	}));
 
 /***/ },
-/* 88 */
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : kyrgyz (ky)
+	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(29)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	
+	    var suffixes = {
+	        0: '-чү',
+	        1: '-чи',
+	        2: '-чи',
+	        3: '-чү',
+	        4: '-чү',
+	        5: '-чи',
+	        6: '-чы',
+	        7: '-чи',
+	        8: '-чи',
+	        9: '-чу',
+	        10: '-чу',
+	        20: '-чы',
+	        30: '-чу',
+	        40: '-чы',
+	        50: '-чү',
+	        60: '-чы',
+	        70: '-чи',
+	        80: '-чи',
+	        90: '-чу',
+	        100: '-чү'
+	    };
+	
+	    var ky = moment.defineLocale('ky', {
+	        months : 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_'),
+	        monthsShort : 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_'),
+	        weekdays : 'Жекшемби_Дүйшөмбү_Шейшемби_Шаршемби_Бейшемби_Жума_Ишемби'.split('_'),
+	        weekdaysShort : 'Жек_Дүй_Шей_Шар_Бей_Жум_Ише'.split('_'),
+	        weekdaysMin : 'Жк_Дй_Шй_Шр_Бй_Жм_Иш'.split('_'),
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            LTS : 'HH:mm:ss',
+	            L : 'DD.MM.YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[Бүгүн саат] LT',
+	            nextDay : '[Эртең саат] LT',
+	            nextWeek : 'dddd [саат] LT',
+	            lastDay : '[Кече саат] LT',
+	            lastWeek : '[Өткен аптанын] dddd [күнү] [саат] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : '%s ичинде',
+	            past : '%s мурун',
+	            s : 'бирнече секунд',
+	            m : 'бир мүнөт',
+	            mm : '%d мүнөт',
+	            h : 'бир саат',
+	            hh : '%d саат',
+	            d : 'бир күн',
+	            dd : '%d күн',
+	            M : 'бир ай',
+	            MM : '%d ай',
+	            y : 'бир жыл',
+	            yy : '%d жыл'
+	        },
+	        ordinalParse: /\d{1,2}-(чи|чы|чү|чу)/,
+	        ordinal : function (number) {
+	            var a = number % 10,
+	                b = number >= 100 ? 100 : null;
+	            return number + (suffixes[number] || suffixes[a] || suffixes[b]);
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 7  // The week that contains Jan 1st is the first week of the year.
+	        }
+	    });
+	
+	    return ky;
+	
+	}));
+
+/***/ },
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14202,7 +14559,7 @@
 	//! author : mweimerskirch : https://github.com/mweimerskirch, David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14276,9 +14633,11 @@
 	    var lb = moment.defineLocale('lb', {
 	        months: 'Januar_Februar_Mäerz_Abrëll_Mee_Juni_Juli_August_September_Oktober_November_Dezember'.split('_'),
 	        monthsShort: 'Jan._Febr._Mrz._Abr._Mee_Jun._Jul._Aug._Sept._Okt._Nov._Dez.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays: 'Sonndeg_Méindeg_Dënschdeg_Mëttwoch_Donneschdeg_Freideg_Samschdeg'.split('_'),
 	        weekdaysShort: 'So._Mé._Dë._Më._Do._Fr._Sa.'.split('_'),
 	        weekdaysMin: 'So_Mé_Dë_Më_Do_Fr_Sa'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat: {
 	            LT: 'H:mm [Auer]',
 	            LTS: 'H:mm:ss [Auer]',
@@ -14332,7 +14691,7 @@
 	}));
 
 /***/ },
-/* 89 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14340,7 +14699,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14352,6 +14711,7 @@
 	        weekdays : 'ອາທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
 	        weekdaysShort : 'ທິດ_ຈັນ_ອັງຄານ_ພຸດ_ພະຫັດ_ສຸກ_ເສົາ'.split('_'),
 	        weekdaysMin : 'ທ_ຈ_ອຄ_ພ_ພຫ_ສກ_ສ'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -14405,7 +14765,7 @@
 	}));
 
 /***/ },
-/* 90 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14413,7 +14773,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14474,6 +14834,7 @@
 	        },
 	        weekdaysShort : 'Sek_Pir_Ant_Tre_Ket_Pen_Šeš'.split('_'),
 	        weekdaysMin : 'S_P_A_T_K_Pn_Š'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -14524,7 +14885,7 @@
 	}));
 
 /***/ },
-/* 91 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14533,7 +14894,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14580,6 +14941,7 @@
 	        weekdays : 'svētdiena_pirmdiena_otrdiena_trešdiena_ceturtdiena_piektdiena_sestdiena'.split('_'),
 	        weekdaysShort : 'Sv_P_O_T_C_Pk_S'.split('_'),
 	        weekdaysMin : 'Sv_P_O_T_C_Pk_S'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -14624,7 +14986,7 @@
 	}));
 
 /***/ },
-/* 92 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14632,7 +14994,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14662,11 +15024,13 @@
 	    };
 	
 	    var me = moment.defineLocale('me', {
-	        months: ['januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'],
-	        monthsShort: ['jan.', 'feb.', 'mar.', 'apr.', 'maj', 'jun', 'jul', 'avg.', 'sep.', 'okt.', 'nov.', 'dec.'],
-	        weekdays: ['nedjelja', 'ponedjeljak', 'utorak', 'srijeda', 'četvrtak', 'petak', 'subota'],
-	        weekdaysShort: ['ned.', 'pon.', 'uto.', 'sri.', 'čet.', 'pet.', 'sub.'],
-	        weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
+	        months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split('_'),
+	        monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split('_'),
+	        monthsParseExact : true,
+	        weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split('_'),
+	        weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+	        weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat: {
 	            LT: 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -14737,7 +15101,7 @@
 	}));
 
 /***/ },
-/* 93 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14745,7 +15109,7 @@
 	//! author : Borislav Mickov : https://github.com/B0k0
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14831,7 +15195,7 @@
 	}));
 
 /***/ },
-/* 94 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14839,7 +15203,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14848,6 +15212,7 @@
 	    var ml = moment.defineLocale('ml', {
 	        months : 'ജനുവരി_ഫെബ്രുവരി_മാർച്ച്_ഏപ്രിൽ_മേയ്_ജൂൺ_ജൂലൈ_ഓഗസ്റ്റ്_സെപ്റ്റംബർ_ഒക്ടോബർ_നവംബർ_ഡിസംബർ'.split('_'),
 	        monthsShort : 'ജനു._ഫെബ്രു._മാർ._ഏപ്രി._മേയ്_ജൂൺ_ജൂലൈ._ഓഗ._സെപ്റ്റ._ഒക്ടോ._നവം._ഡിസം.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'ഞായറാഴ്ച_തിങ്കളാഴ്ച_ചൊവ്വാഴ്ച_ബുധനാഴ്ച_വ്യാഴാഴ്ച_വെള്ളിയാഴ്ച_ശനിയാഴ്ച'.split('_'),
 	        weekdaysShort : 'ഞായർ_തിങ്കൾ_ചൊവ്വ_ബുധൻ_വ്യാഴം_വെള്ളി_ശനി'.split('_'),
 	        weekdaysMin : 'ഞാ_തി_ചൊ_ബു_വ്യാ_വെ_ശ'.split('_'),
@@ -14915,7 +15280,7 @@
 	}));
 
 /***/ },
-/* 95 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -14924,7 +15289,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -14994,6 +15359,7 @@
 	    var mr = moment.defineLocale('mr', {
 	        months : 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split('_'),
 	        monthsShort: 'जाने._फेब्रु._मार्च._एप्रि._मे._जून._जुलै._ऑग._सप्टें._ऑक्टो._नोव्हें._डिसें.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'रविवार_सोमवार_मंगळवार_बुधवार_गुरूवार_शुक्रवार_शनिवार'.split('_'),
 	        weekdaysShort : 'रवि_सोम_मंगळ_बुध_गुरू_शुक्र_शनि'.split('_'),
 	        weekdaysMin : 'र_सो_मं_बु_गु_शु_श'.split('_'),
@@ -15077,7 +15443,7 @@
 	}));
 
 /***/ },
-/* 96 */
+/* 94 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15085,7 +15451,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15163,7 +15529,7 @@
 	}));
 
 /***/ },
-/* 97 */
+/* 95 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15171,7 +15537,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15249,7 +15615,7 @@
 	}));
 
 /***/ },
-/* 98 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15257,7 +15623,7 @@
 	//! author : Squar team, mysquar.com
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15346,7 +15712,7 @@
 	}));
 
 /***/ },
-/* 99 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15355,7 +15721,7 @@
 	//!           Sigurd Gartmann : https://github.com/sigurdga
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15364,9 +15730,11 @@
 	    var nb = moment.defineLocale('nb', {
 	        months : 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split('_'),
 	        monthsShort : 'jan._feb._mars_april_mai_juni_juli_aug._sep._okt._nov._des.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag'.split('_'),
 	        weekdaysShort : 'sø._ma._ti._on._to._fr._lø.'.split('_'),
 	        weekdaysMin : 'sø_ma_ti_on_to_fr_lø'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -15385,7 +15753,7 @@
 	        },
 	        relativeTime : {
 	            future : 'om %s',
-	            past : 'for %s siden',
+	            past : '%s siden',
 	            s : 'noen sekunder',
 	            m : 'ett minutt',
 	            mm : '%d minutter',
@@ -15411,7 +15779,7 @@
 	}));
 
 /***/ },
-/* 100 */
+/* 98 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15419,7 +15787,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15453,9 +15821,11 @@
 	    var ne = moment.defineLocale('ne', {
 	        months : 'जनवरी_फेब्रुवरी_मार्च_अप्रिल_मई_जुन_जुलाई_अगष्ट_सेप्टेम्बर_अक्टोबर_नोभेम्बर_डिसेम्बर'.split('_'),
 	        monthsShort : 'जन._फेब्रु._मार्च_अप्रि._मई_जुन_जुलाई._अग._सेप्ट._अक्टो._नोभे._डिसे.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'आइतबार_सोमबार_मङ्गलबार_बुधबार_बिहिबार_शुक्रबार_शनिबार'.split('_'),
 	        weekdaysShort : 'आइत._सोम._मङ्गल._बुध._बिहि._शुक्र._शनि.'.split('_'),
 	        weekdaysMin : 'आ._सो._मं._बु._बि._शु._श.'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'Aको h:mm बजे',
 	            LTS : 'Aको h:mm:ss बजे',
@@ -15536,7 +15906,7 @@
 	}));
 
 /***/ },
-/* 101 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15544,7 +15914,7 @@
 	//! author : Joris Röling : https://github.com/jjupiter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15562,9 +15932,11 @@
 	                return monthsShortWithDots[m.month()];
 	            }
 	        },
+	        monthsParseExact : true,
 	        weekdays : 'zondag_maandag_dinsdag_woensdag_donderdag_vrijdag_zaterdag'.split('_'),
 	        weekdaysShort : 'zo._ma._di._wo._do._vr._za.'.split('_'),
 	        weekdaysMin : 'Zo_Ma_Di_Wo_Do_Vr_Za'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -15611,7 +15983,7 @@
 	}));
 
 /***/ },
-/* 102 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15619,7 +15991,7 @@
 	//! author : https://github.com/mechuwind
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15649,7 +16021,7 @@
 	        },
 	        relativeTime : {
 	            future : 'om %s',
-	            past : 'for %s sidan',
+	            past : '%s sidan',
 	            s : 'nokre sekund',
 	            m : 'eit minutt',
 	            mm : '%d minutt',
@@ -15675,7 +16047,7 @@
 	}));
 
 /***/ },
-/* 103 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15683,7 +16055,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15803,7 +16175,7 @@
 	}));
 
 /***/ },
-/* 104 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15811,7 +16183,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15912,7 +16284,7 @@
 	}));
 
 /***/ },
-/* 105 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15920,7 +16292,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -15932,6 +16304,7 @@
 	        weekdays : 'Domingo_Segunda-Feira_Terça-Feira_Quarta-Feira_Quinta-Feira_Sexta-Feira_Sábado'.split('_'),
 	        weekdaysShort : 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
 	        weekdaysMin : 'Dom_2ª_3ª_4ª_5ª_6ª_Sáb'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -15980,7 +16353,7 @@
 	}));
 
 /***/ },
-/* 106 */
+/* 104 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -15988,7 +16361,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16000,6 +16373,7 @@
 	        weekdays : 'Domingo_Segunda-feira_Terça-feira_Quarta-feira_Quinta-feira_Sexta-feira_Sábado'.split('_'),
 	        weekdaysShort : 'Dom_Seg_Ter_Qua_Qui_Sex_Sáb'.split('_'),
 	        weekdaysMin : 'Dom_2ª_3ª_4ª_5ª_6ª_Sáb'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -16044,7 +16418,7 @@
 	}));
 
 /***/ },
-/* 107 */
+/* 105 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16053,7 +16427,7 @@
 	//! author : Valentin Agachi : https://github.com/avaly
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16077,6 +16451,7 @@
 	    var ro = moment.defineLocale('ro', {
 	        months : 'ianuarie_februarie_martie_aprilie_mai_iunie_iulie_august_septembrie_octombrie_noiembrie_decembrie'.split('_'),
 	        monthsShort : 'ian._febr._mart._apr._mai_iun._iul._aug._sept._oct._nov._dec.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'duminică_luni_marți_miercuri_joi_vineri_sâmbătă'.split('_'),
 	        weekdaysShort : 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'.split('_'),
 	        weekdaysMin : 'Du_Lu_Ma_Mi_Jo_Vi_Sâ'.split('_'),
@@ -16122,7 +16497,7 @@
 	}));
 
 /***/ },
-/* 108 */
+/* 106 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16132,7 +16507,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16157,17 +16532,20 @@
 	            return number + ' ' + plural(format[key], +number);
 	        }
 	    }
-	    var monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[й|я]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
+	    var monthsParse = [/^янв/i, /^фев/i, /^мар/i, /^апр/i, /^ма[йя]/i, /^июн/i, /^июл/i, /^авг/i, /^сен/i, /^окт/i, /^ноя/i, /^дек/i];
 	
 	    // http://new.gramota.ru/spravka/rules/139-prop : § 103
+	    // Сокращения месяцев: http://new.gramota.ru/spravka/buro/search-answer?s=242637
+	    // CLDR data:          http://www.unicode.org/cldr/charts/28/summary/ru.html#1753
 	    var ru = moment.defineLocale('ru', {
 	        months : {
 	            format: 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split('_'),
 	            standalone: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split('_')
 	        },
 	        monthsShort : {
-	            format: 'янв_фев_мар_апр_мая_июня_июля_авг_сен_окт_ноя_дек'.split('_'),
-	            standalone: 'янв_фев_март_апр_май_июнь_июль_авг_сен_окт_ноя_дек'.split('_')
+	            // по CLDR именно "июл." и "июн.", но какой смысл менять букву на точку ?
+	            format: 'янв._февр._мар._апр._мая_июня_июля_авг._сент._окт._нояб._дек.'.split('_'),
+	            standalone: 'янв._февр._март_апр._май_июнь_июль_авг._сент._окт._нояб._дек.'.split('_')
 	        },
 	        weekdays : {
 	            standalone: 'воскресенье_понедельник_вторник_среда_четверг_пятница_суббота'.split('_'),
@@ -16179,6 +16557,10 @@
 	        monthsParse : monthsParse,
 	        longMonthsParse : monthsParse,
 	        shortMonthsParse : monthsParse,
+	        monthsRegex: /^(сентябр[яь]|октябр[яь]|декабр[яь]|феврал[яь]|январ[яь]|апрел[яь]|августа?|ноябр[яь]|сент\.|февр\.|нояб\.|июнь|янв.|июль|дек.|авг.|апр.|марта|мар[.т]|окт.|июн[яь]|июл[яь]|ма[яй])/i,
+	        monthsShortRegex: /^(сентябр[яь]|октябр[яь]|декабр[яь]|феврал[яь]|январ[яь]|апрел[яь]|августа?|ноябр[яь]|сент\.|февр\.|нояб\.|июнь|янв.|июль|дек.|авг.|апр.|марта|мар[.т]|окт.|июн[яь]|июл[яь]|ма[яй])/i,
+	        monthsStrictRegex: /^(сентябр[яь]|октябр[яь]|декабр[яь]|феврал[яь]|январ[яь]|апрел[яь]|августа?|ноябр[яь]|марта?|июн[яь]|июл[яь]|ма[яй])/i,
+	        monthsShortStrictRegex: /^(нояб\.|февр\.|сент\.|июль|янв\.|июн[яь]|мар[.т]|авг\.|апр\.|окт\.|дек\.|ма[яй])/i,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -16294,7 +16676,7 @@
 	}));
 
 /***/ },
-/* 109 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16302,7 +16684,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16359,7 +16741,7 @@
 	}));
 
 /***/ },
-/* 110 */
+/* 108 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16367,7 +16749,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16380,6 +16762,7 @@
 	        weekdays : 'ඉරිදා_සඳුදා_අඟහරුවාදා_බදාදා_බ්‍රහස්පතින්දා_සිකුරාදා_සෙනසුරාදා'.split('_'),
 	        weekdaysShort : 'ඉරි_සඳු_අඟ_බදා_බ්‍රහ_සිකු_සෙන'.split('_'),
 	        weekdaysMin : 'ඉ_ස_අ_බ_බ්‍ර_සි_සෙ'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'a h:mm',
 	            LTS : 'a h:mm:ss',
@@ -16433,7 +16816,7 @@
 	}));
 
 /***/ },
-/* 111 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16442,7 +16825,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16587,7 +16970,7 @@
 	}));
 
 /***/ },
-/* 112 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16595,7 +16978,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16675,9 +17058,11 @@
 	    var sl = moment.defineLocale('sl', {
 	        months : 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split('_'),
 	        monthsShort : 'jan._feb._mar._apr._maj._jun._jul._avg._sep._okt._nov._dec.'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'nedelja_ponedeljek_torek_sreda_četrtek_petek_sobota'.split('_'),
 	        weekdaysShort : 'ned._pon._tor._sre._čet._pet._sob.'.split('_'),
 	        weekdaysMin : 'ne_po_to_sr_če_pe_so'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -16751,7 +17136,7 @@
 	}));
 
 /***/ },
-/* 113 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16761,7 +17146,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd (fixes)
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16773,6 +17158,7 @@
 	        weekdays : 'E Diel_E Hënë_E Martë_E Mërkurë_E Enjte_E Premte_E Shtunë'.split('_'),
 	        weekdaysShort : 'Die_Hën_Mar_Mër_Enj_Pre_Sht'.split('_'),
 	        weekdaysMin : 'D_H_Ma_Më_E_P_Sh'.split('_'),
+	        weekdaysParseExact : true,
 	        meridiemParse: /PD|MD/,
 	        isPM: function (input) {
 	            return input.charAt(0) === 'M';
@@ -16824,7 +17210,7 @@
 	}));
 
 /***/ },
-/* 114 */
+/* 112 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16832,7 +17218,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16862,11 +17248,13 @@
 	    };
 	
 	    var sr = moment.defineLocale('sr', {
-	        months: ['januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'],
-	        monthsShort: ['jan.', 'feb.', 'mar.', 'apr.', 'maj', 'jun', 'jul', 'avg.', 'sep.', 'okt.', 'nov.', 'dec.'],
-	        weekdays: ['nedelja', 'ponedeljak', 'utorak', 'sreda', 'četvrtak', 'petak', 'subota'],
-	        weekdaysShort: ['ned.', 'pon.', 'uto.', 'sre.', 'čet.', 'pet.', 'sub.'],
-	        weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
+	        months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split('_'),
+	        monthsShort: 'jan._feb._mar._apr._maj_jun_jul_avg._sep._okt._nov._dec.'.split('_'),
+	        monthsParseExact: true,
+	        weekdays: 'nedelja_ponedeljak_utorak_sreda_četvrtak_petak_subota'.split('_'),
+	        weekdaysShort: 'ned._pon._uto._sre._čet._pet._sub.'.split('_'),
+	        weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat: {
 	            LT: 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -16936,7 +17324,7 @@
 	}));
 
 /***/ },
-/* 115 */
+/* 113 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -16944,7 +17332,7 @@
 	//! author : Milan Janačković<milanjanackovic@gmail.com> : https://github.com/milan-j
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -16974,11 +17362,13 @@
 	    };
 	
 	    var sr_cyrl = moment.defineLocale('sr-cyrl', {
-	        months: ['јануар', 'фебруар', 'март', 'април', 'мај', 'јун', 'јул', 'август', 'септембар', 'октобар', 'новембар', 'децембар'],
-	        monthsShort: ['јан.', 'феб.', 'мар.', 'апр.', 'мај', 'јун', 'јул', 'авг.', 'сеп.', 'окт.', 'нов.', 'дец.'],
-	        weekdays: ['недеља', 'понедељак', 'уторак', 'среда', 'четвртак', 'петак', 'субота'],
-	        weekdaysShort: ['нед.', 'пон.', 'уто.', 'сре.', 'чет.', 'пет.', 'суб.'],
-	        weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
+	        months: 'јануар_фебруар_март_април_мај_јун_јул_август_септембар_октобар_новембар_децембар'.split('_'),
+	        monthsShort: 'јан._феб._мар._апр._мај_јун_јул_авг._сеп._окт._нов._дец.'.split('_'),
+	        monthsParseExact: true,
+	        weekdays: 'недеља_понедељак_уторак_среда_четвртак_петак_субота'.split('_'),
+	        weekdaysShort: 'нед._пон._уто._сре._чет._пет._суб.'.split('_'),
+	        weekdaysMin: 'не_по_ут_ср_че_пе_су'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat: {
 	            LT: 'H:mm',
 	            LTS : 'H:mm:ss',
@@ -17048,7 +17438,100 @@
 	}));
 
 /***/ },
-/* 116 */
+/* 114 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : siSwati (ss)
+	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(29)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	
+	    var ss = moment.defineLocale('ss', {
+	        months : "Bhimbidvwane_Indlovana_Indlov'lenkhulu_Mabasa_Inkhwekhweti_Inhlaba_Kholwane_Ingci_Inyoni_Imphala_Lweti_Ingongoni".split('_'),
+	        monthsShort : 'Bhi_Ina_Inu_Mab_Ink_Inh_Kho_Igc_Iny_Imp_Lwe_Igo'.split('_'),
+	        weekdays : 'Lisontfo_Umsombuluko_Lesibili_Lesitsatfu_Lesine_Lesihlanu_Umgcibelo'.split('_'),
+	        weekdaysShort : 'Lis_Umb_Lsb_Les_Lsi_Lsh_Umg'.split('_'),
+	        weekdaysMin : 'Li_Us_Lb_Lt_Ls_Lh_Ug'.split('_'),
+	        weekdaysParseExact : true,
+	        longDateFormat : {
+	            LT : 'h:mm A',
+	            LTS : 'h:mm:ss A',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY h:mm A',
+	            LLLL : 'dddd, D MMMM YYYY h:mm A'
+	        },
+	        calendar : {
+	            sameDay : '[Namuhla nga] LT',
+	            nextDay : '[Kusasa nga] LT',
+	            nextWeek : 'dddd [nga] LT',
+	            lastDay : '[Itolo nga] LT',
+	            lastWeek : 'dddd [leliphelile] [nga] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'nga %s',
+	            past : 'wenteka nga %s',
+	            s : 'emizuzwana lomcane',
+	            m : 'umzuzu',
+	            mm : '%d emizuzu',
+	            h : 'lihora',
+	            hh : '%d emahora',
+	            d : 'lilanga',
+	            dd : '%d emalanga',
+	            M : 'inyanga',
+	            MM : '%d tinyanga',
+	            y : 'umnyaka',
+	            yy : '%d iminyaka'
+	        },
+	        meridiemParse: /ekuseni|emini|entsambama|ebusuku/,
+	        meridiem : function (hours, minutes, isLower) {
+	            if (hours < 11) {
+	                return 'ekuseni';
+	            } else if (hours < 15) {
+	                return 'emini';
+	            } else if (hours < 19) {
+	                return 'entsambama';
+	            } else {
+	                return 'ebusuku';
+	            }
+	        },
+	        meridiemHour : function (hour, meridiem) {
+	            if (hour === 12) {
+	                hour = 0;
+	            }
+	            if (meridiem === 'ekuseni') {
+	                return hour;
+	            } else if (meridiem === 'emini') {
+	                return hour >= 11 ? hour : hour + 12;
+	            } else if (meridiem === 'entsambama' || meridiem === 'ebusuku') {
+	                if (hour === 0) {
+	                    return 0;
+	                }
+	                return hour + 12;
+	            }
+	        },
+	        ordinalParse: /\d{1,2}/,
+	        ordinal : '%d',
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return ss;
+	
+	}));
+
+/***/ },
+/* 115 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17056,7 +17539,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17073,8 +17556,10 @@
 	            LTS : 'HH:mm:ss',
 	            L : 'YYYY-MM-DD',
 	            LL : 'D MMMM YYYY',
-	            LLL : 'D MMMM YYYY HH:mm',
-	            LLLL : 'dddd D MMMM YYYY HH:mm'
+	            LLL : 'D MMMM YYYY [kl.] HH:mm',
+	            LLLL : 'dddd D MMMM YYYY [kl.] HH:mm',
+	            lll : 'D MMM YYYY HH:mm',
+	            llll : 'ddd D MMM YYYY HH:mm'
 	        },
 	        calendar : {
 	            sameDay: '[Idag] LT',
@@ -17119,7 +17604,7 @@
 	}));
 
 /***/ },
-/* 117 */
+/* 116 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17127,7 +17612,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17139,6 +17624,7 @@
 	        weekdays : 'Jumapili_Jumatatu_Jumanne_Jumatano_Alhamisi_Ijumaa_Jumamosi'.split('_'),
 	        weekdaysShort : 'Jpl_Jtat_Jnne_Jtan_Alh_Ijm_Jmos'.split('_'),
 	        weekdaysMin : 'J2_J3_J4_J5_Al_Ij_J1'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'HH:mm',
 	            LTS : 'HH:mm:ss',
@@ -17181,7 +17667,7 @@
 	}));
 
 /***/ },
-/* 118 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17189,7 +17675,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17314,7 +17800,7 @@
 	}));
 
 /***/ },
-/* 119 */
+/* 118 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17322,7 +17808,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17331,6 +17817,7 @@
 	    var te = moment.defineLocale('te', {
 	        months : 'జనవరి_ఫిబ్రవరి_మార్చి_ఏప్రిల్_మే_జూన్_జూలై_ఆగస్టు_సెప్టెంబర్_అక్టోబర్_నవంబర్_డిసెంబర్'.split('_'),
 	        monthsShort : 'జన._ఫిబ్ర._మార్చి_ఏప్రి._మే_జూన్_జూలై_ఆగ._సెప్._అక్టో._నవ._డిసె.'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'ఆదివారం_సోమవారం_మంగళవారం_బుధవారం_గురువారం_శుక్రవారం_శనివారం'.split('_'),
 	        weekdaysShort : 'ఆది_సోమ_మంగళ_బుధ_గురు_శుక్ర_శని'.split('_'),
 	        weekdaysMin : 'ఆ_సో_మం_బు_గు_శు_శ'.split('_'),
@@ -17406,7 +17893,7 @@
 	}));
 
 /***/ },
-/* 120 */
+/* 119 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17414,7 +17901,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17423,9 +17910,11 @@
 	    var th = moment.defineLocale('th', {
 	        months : 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิกายน_ธันวาคม'.split('_'),
 	        monthsShort : 'มกรา_กุมภา_มีนา_เมษา_พฤษภา_มิถุนา_กรกฎา_สิงหา_กันยา_ตุลา_พฤศจิกา_ธันวา'.split('_'),
+	        monthsParseExact: true,
 	        weekdays : 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัสบดี_ศุกร์_เสาร์'.split('_'),
 	        weekdaysShort : 'อาทิตย์_จันทร์_อังคาร_พุธ_พฤหัส_ศุกร์_เสาร์'.split('_'), // yes, three characters difference
 	        weekdaysMin : 'อา._จ._อ._พ._พฤ._ศ._ส.'.split('_'),
+	        weekdaysParseExact : true,
 	        longDateFormat : {
 	            LT : 'H นาฬิกา m นาที',
 	            LTS : 'H นาฬิกา m นาที s วินาที',
@@ -17475,7 +17964,7 @@
 	}));
 
 /***/ },
-/* 121 */
+/* 120 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17483,7 +17972,7 @@
 	//! author : Dan Hagman
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17541,7 +18030,7 @@
 	}));
 
 /***/ },
-/* 122 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17549,7 +18038,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17617,6 +18106,7 @@
 	    var tlh = moment.defineLocale('tlh', {
 	        months : 'tera’ jar wa’_tera’ jar cha’_tera’ jar wej_tera’ jar loS_tera’ jar vagh_tera’ jar jav_tera’ jar Soch_tera’ jar chorgh_tera’ jar Hut_tera’ jar wa’maH_tera’ jar wa’maH wa’_tera’ jar wa’maH cha’'.split('_'),
 	        monthsShort : 'jar wa’_jar cha’_jar wej_jar loS_jar vagh_jar jav_jar Soch_jar chorgh_jar Hut_jar wa’maH_jar wa’maH wa’_jar wa’maH cha’'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
 	        weekdaysShort : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
 	        weekdaysMin : 'lojmItjaj_DaSjaj_povjaj_ghItlhjaj_loghjaj_buqjaj_ghInjaj'.split('_'),
@@ -17664,7 +18154,7 @@
 	}));
 
 /***/ },
-/* 123 */
+/* 122 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17673,7 +18163,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17758,7 +18248,7 @@
 	}));
 
 /***/ },
-/* 124 */
+/* 123 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17766,7 +18256,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v with the help of Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17853,7 +18343,7 @@
 	}));
 
 /***/ },
-/* 125 */
+/* 124 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17861,7 +18351,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17915,7 +18405,7 @@
 	}));
 
 /***/ },
-/* 126 */
+/* 125 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17923,7 +18413,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -17977,7 +18467,7 @@
 	}));
 
 /***/ },
-/* 127 */
+/* 126 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -17986,7 +18476,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -18127,7 +18617,7 @@
 	}));
 
 /***/ },
-/* 128 */
+/* 127 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -18135,7 +18625,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -18189,7 +18679,7 @@
 	}));
 
 /***/ },
-/* 129 */
+/* 128 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -18197,7 +18687,7 @@
 	//! author : Bang Nguyen : https://github.com/bangnk
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -18206,9 +18696,11 @@
 	    var vi = moment.defineLocale('vi', {
 	        months : 'tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12'.split('_'),
 	        monthsShort : 'Th01_Th02_Th03_Th04_Th05_Th06_Th07_Th08_Th09_Th10_Th11_Th12'.split('_'),
+	        monthsParseExact : true,
 	        weekdays : 'chủ nhật_thứ hai_thứ ba_thứ tư_thứ năm_thứ sáu_thứ bảy'.split('_'),
 	        weekdaysShort : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
 	        weekdaysMin : 'CN_T2_T3_T4_T5_T6_T7'.split('_'),
+	        weekdaysParseExact : true,
 	        meridiemParse: /sa|ch/i,
 	        isPM : function (input) {
 	            return /^ch$/i.test(input);
@@ -18270,6 +18762,78 @@
 	}));
 
 /***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+	//! moment.js locale configuration
+	//! locale : pseudo (x-pseudo)
+	//! author : Andrew Hood : https://github.com/andrewhood125
+	
+	;(function (global, factory) {
+	    true ? factory(__webpack_require__(29)) :
+	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
+	   factory(global.moment)
+	}(this, function (moment) { 'use strict';
+	
+	
+	    var x_pseudo = moment.defineLocale('x-pseudo', {
+	        months : 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split('_'),
+	        monthsShort : 'J~áñ_~Féb_~Már_~Ápr_~Máý_~Júñ_~Júl_~Áúg_~Sép_~Óct_~Ñóv_~Déc'.split('_'),
+	        monthsParseExact : true,
+	        weekdays : 'S~úñdá~ý_Mó~ñdáý~_Túé~sdáý~_Wéd~ñésd~áý_T~húrs~dáý_~Fríd~áý_S~átúr~dáý'.split('_'),
+	        weekdaysShort : 'S~úñ_~Móñ_~Túé_~Wéd_~Thú_~Frí_~Sát'.split('_'),
+	        weekdaysMin : 'S~ú_Mó~_Tú_~Wé_T~h_Fr~_Sá'.split('_'),
+	        weekdaysParseExact : true,
+	        longDateFormat : {
+	            LT : 'HH:mm',
+	            L : 'DD/MM/YYYY',
+	            LL : 'D MMMM YYYY',
+	            LLL : 'D MMMM YYYY HH:mm',
+	            LLLL : 'dddd, D MMMM YYYY HH:mm'
+	        },
+	        calendar : {
+	            sameDay : '[T~ódá~ý át] LT',
+	            nextDay : '[T~ómó~rró~w át] LT',
+	            nextWeek : 'dddd [át] LT',
+	            lastDay : '[Ý~ést~érdá~ý át] LT',
+	            lastWeek : '[L~ást] dddd [át] LT',
+	            sameElse : 'L'
+	        },
+	        relativeTime : {
+	            future : 'í~ñ %s',
+	            past : '%s á~gó',
+	            s : 'á ~féw ~sécó~ñds',
+	            m : 'á ~míñ~úté',
+	            mm : '%d m~íñú~tés',
+	            h : 'á~ñ hó~úr',
+	            hh : '%d h~óúrs',
+	            d : 'á ~dáý',
+	            dd : '%d d~áýs',
+	            M : 'á ~móñ~th',
+	            MM : '%d m~óñt~hs',
+	            y : 'á ~ýéár',
+	            yy : '%d ý~éárs'
+	        },
+	        ordinalParse: /\d{1,2}(th|st|nd|rd)/,
+	        ordinal : function (number) {
+	            var b = number % 10,
+	                output = (~~(number % 100 / 10) === 1) ? 'th' :
+	                (b === 1) ? 'st' :
+	                (b === 2) ? 'nd' :
+	                (b === 3) ? 'rd' : 'th';
+	            return number + output;
+	        },
+	        week : {
+	            dow : 1, // Monday is the first day of the week.
+	            doy : 4  // The week that contains Jan 4th is the first week of the year.
+	        }
+	    });
+	
+	    return x_pseudo;
+	
+	}));
+
+/***/ },
 /* 130 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -18279,7 +18843,7 @@
 	//! author : Zeno Zeng : https://github.com/zenozeng
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -18347,7 +18911,7 @@
 	            nextWeek : function () {
 	                var startOfWeek, prefix;
 	                startOfWeek = moment().startOf('week');
-	                prefix = this.unix() - startOfWeek.unix() >= 7 * 24 * 3600 ? '[下]' : '[本]';
+	                prefix = this.diff(startOfWeek, 'days') >= 7 ? '[下]' : '[本]';
 	                return this.minutes() === 0 ? prefix + 'dddAh点整' : prefix + 'dddAh点mm';
 	            },
 	            lastWeek : function () {
@@ -18409,7 +18973,7 @@
 	//! author : Ben : https://github.com/ben-lin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(32)) :
+	    true ? factory(__webpack_require__(29)) :
 	   typeof define === 'function' && define.amd ? define(['moment'], factory) :
 	   factory(global.moment)
 	}(this, function (moment) { 'use strict';
@@ -18488,15 +19052,15 @@
 	            future : '%s內',
 	            past : '%s前',
 	            s : '幾秒',
-	            m : '一分鐘',
+	            m : '1分鐘',
 	            mm : '%d分鐘',
-	            h : '一小時',
+	            h : '1小時',
 	            hh : '%d小時',
-	            d : '一天',
+	            d : '1天',
 	            dd : '%d天',
-	            M : '一個月',
+	            M : '1個月',
 	            MM : '%d個月',
-	            y : '一年',
+	            y : '1年',
 	            yy : '%d年'
 	        }
 	    });
@@ -18511,7 +19075,7 @@
 
 	"use strict";
 	
-	var Q = __webpack_require__(31);
+	var Q = __webpack_require__(28);
 	
 	module.exports = {
 	  docs: [{
@@ -18620,8 +19184,8 @@
 
 	var _ = __webpack_require__(138),
 	    lookup = __webpack_require__(139),
-	    Writable = __webpack_require__(13).Writable,
-	    inherits = __webpack_require__(19);
+	    Writable = __webpack_require__(10).Writable,
+	    inherits = __webpack_require__(16);
 	
 	var NeuralNetwork = function(options) {
 	  options = options || {};
@@ -21905,7 +22469,7 @@
 	 */
 	
 	var fs   = __webpack_require__(145)
-	  , util  = __webpack_require__(10)
+	  , util  = __webpack_require__(7)
 	  , execSync = __webpack_require__(149).execSync
 	  , svmcommon = __webpack_require__(150)	
 	  , _ = __webpack_require__(138)._;
@@ -21926,12 +22490,14 @@
 	}
 	
 	SvmPerf.isInstalled = function() {
-	    try {
-	        var result = execSync("svm_perf_learn -c 1 a");
-	        return true;
+	/*    try {
+	      var result = execSync("svm_perf_learn -c 1 a");
+	    return true;
 	    } catch (err) {
-	        return false;
+	      return false;
 	    }
+	*/
+	return true
 	}
 	
 	var FIRST_FEATURE_NUMBER=1;  // in svm perf, feature numbers start with 1, not 0!
@@ -22866,21 +23432,30 @@
 		this.bias = opts.bias || 1.0;
 		this.multiclass = opts.multiclass || false;
 		this.debug = opts.debug||false;
-	  	this.train_command = opts.train_command //|| 'liblinear_train'
-	  	this.test_command = opts.test_command //|| 'liblinear_test'
+	  	this.train_command = opts.train_command || 'liblinear_train'
+	  	this.test_command = opts.test_command || 'liblinear_test'
 	  	this.timestamp = ""
+	
+		if (!SvmLinear.isInstalled()) {
+	                var msg = "Cannot find the executable 'liblinear_train'. Please download it from the LibLinear website, and put a link to it in your path.";
+	                console.error(msg)
+	                throw new Error(msg);
+	        }
 	}
 	
 	SvmLinear.isInstalled = function() {
-	    try {
-	        var result = execSync("liblinear_train");
+	/*    try {
+	        var result = execSync(this.train_command);
 	        return true;
 	    } catch (err) {
-	        return false;
-	    }
+		if (!('stderr' in err))
+			return true
+	        return err["stderr"].length == 0
+	    }*/
+		return true
 	};
 	
-	var util  = __webpack_require__(10)
+	var util  = __webpack_require__(7)
 	  , child_process = __webpack_require__(149)
 	  , exec = __webpack_require__(149).exec
 	  , fs   = __webpack_require__(145)
@@ -22959,6 +23534,8 @@
 			},
 			
 			getModelWeights: function() {
+				if (!this.mapLabelToMapFeatureToWeight)
+	                                this.setModel(this.modelFileString)
 				return (this.multiclass? this.mapLabelToMapFeatureToWeight: this.mapLabelToMapFeatureToWeight[1]);
 			},
 		
@@ -24550,7 +25127,7 @@
 	var hash = __webpack_require__(161);
 	var sprintf = __webpack_require__(163).sprintf;
 	var _ = __webpack_require__(138)._;
-	var util = __webpack_require__(10);
+	var util = __webpack_require__(7);
 	var multilabelutils = __webpack_require__(167);
 	
 	
@@ -25893,7 +26470,7 @@
 	var hash = __webpack_require__(161);
 	var sprintf = __webpack_require__(163).sprintf;
 	var _ = __webpack_require__(138)._;
-	var util = __webpack_require__(10);
+	var util = __webpack_require__(7);
 	var multilabelutils = __webpack_require__(167);
 	
 	
@@ -26352,7 +26929,7 @@
 	/* WEBPACK VAR INJECTION */(function(__filename) {var hash = __webpack_require__(161);
 	var sprintf = __webpack_require__(163).sprintf;
 	var _ = __webpack_require__(138)._;
-	var util = __webpack_require__(10);
+	var util = __webpack_require__(7);
 	var multilabelutils = __webpack_require__(167);
 	
 	var CrossLanguageModel = __webpack_require__(185).CrossLanguageModel;
@@ -26525,7 +27102,7 @@
 /* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__filename) {var util = __webpack_require__(10);
+	/* WEBPACK VAR INJECTION */(function(__filename) {var util = __webpack_require__(7);
 	var logSumExp = __webpack_require__(187);
 	
 	
@@ -26755,7 +27332,7 @@
 	/* WEBPACK VAR INJECTION */(function(__filename) {var LanguageModel = __webpack_require__(186);
 	var logSumExp = __webpack_require__(187);
 	
-	var extend = __webpack_require__(10)._extend;
+	var extend = __webpack_require__(7)._extend;
 	
 	/**
 	 * This class represents a model for two different languages - input language and output language.
@@ -28757,7 +29334,6 @@
 	
 	
 	var _ = __webpack_require__(138)._;
-	// var FeaturesUnit = new require('../features');
 	var FeaturesUnit = __webpack_require__(170);
 	
 	/**
@@ -28981,619 +29557,13 @@
 
 /***/ },
 /* 204 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-	
-	module.exports = ['$http', function ($http) {
-	  var local = window.localStorage;
-	  var ls = {
-	    get: function get(name, options, success, error) {
-	      var t = local.getItem(name);
-	
-	      if (/^meteo::/.test(name)) {
-	        var dr = moment.range(new Date(local.getItem(name + '::expire')), new Date());
-	        if (t && !dr.diff('days')) {
-	          success(JSON.parse(t));
-	        } else {
-	          $http(options).then(function (response) {
-	            var date = new Date().getTime() + 24 * 3600 * 1000;
-	            local.setItem(name, JSON.stringify(response.data));
-	            local.setItem(name + '::expire', date);
-	            success(response.data);
-	          }, error);
-	        }
-	      }
-	    }
-	  };
-	
-	  return ls;
-	}];
+	module.exports = __webpack_require__(205);
+
 
 /***/ },
 /* 205 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _config = __webpack_require__(206);
-	
-	var _config2 = _interopRequireDefault(_config);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	module.exports = ['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider, $locationProvider) {
-	  $locationProvider.html5Mode({
-	    enabled: true,
-	    requireBase: false
-	  });
-	  $urlRouterProvider.otherwise("/");
-	
-	  var i = _config2.default.length - 1;
-	  while (-1 < i) {
-	    $stateProvider.state(_config2.default[i].state, _config2.default[i].conf);
-	    i--;
-	  }
-	}];
-
-/***/ },
-/* 206 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = [{
-	  state: 'home',
-	  conf: {
-	    url: "/",
-	    views: {
-	      "header": {
-	        template: __webpack_require__(207),
-	        controller: __webpack_require__(208)
-	      },
-	      // "footer": {
-	      //   template: require("html!./../controller/footer/templates/layout.html"),
-	      //   controller: require('./footer/footerController.js')
-	      // },
-	      "content@": {
-	        template: __webpack_require__(209),
-	        controller: __webpack_require__(210)
-	      }
-	    }
-	  }
-	}, {
-	  state: "home.config",
-	  conf: {
-	    url: 'config',
-	    views: {
-	      "content@": {
-	        template: __webpack_require__(211),
-	        controller: __webpack_require__(212)
-	      }
-	    }
-	  }
-	}, {
-	  state: "home.browse",
-	  conf: {
-	    url: 'browse/:url/:result',
-	    views: {
-	      "content@": {
-	        template: __webpack_require__(213),
-	        controller: __webpack_require__(214)
-	      }
-	    }
-	  }
-	}];
-
-/***/ },
-/* 207 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"bar bar-header bar-stable\">\n  <button class=\"button icon ion-navicon\" ng-click=\"$emit('toggleMenu')\"></button>\n  <h1 class=\"title\">Raspberry Pi</h1>\n  <i id=\"micro-icon\" class=\"button button-icon icon ion-android-microphone-off\"></i>\n</div>\n<div class=\"side-bar-menu\">\n  <div class=\"list\">\n    <a class=\"item\" ui-sref=\"home\" ng-click=\"$emit('toggleMenu')\">\n      home\n    </a>\n    <a class=\"item\" ui-sref=\"home.config\" ng-click=\"$emit('toggleMenu')\">\n      Config\n    </a>\n    <a class=\"item\" ui-sref=\"home.browse\" ng-click=\"$emit('toggleMenu')\">\n      Browser\n    </a>\n  </div>\n</div>";
-
-/***/ },
-/* 208 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = ['$scope', 'stt', function ($scope, stt) {
-	  $scope.$on('toggleMenu', function () {
-	    $scope.$root.openMenu = $scope.$root.openMenu ? false : true;
-	  });
-	}];
-
-/***/ },
-/* 209 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"display-flex flex-direction-row justify-content-flex-start height-100 \">\n  <span class=\"wi wi-day-sunny font-size-100-px\" style=\"line-height: 117px\"></span> \n  <div class=\"display-flex flex-direction-column\">\n    <span class=\"font-size-50-px-lheight\">\n      {{temp}}°C {{city}}\n    </span>\n    <span class=\"font-size-50-px-lheight\">\n      {{date}}\n    </span>\n  </div>\n</div>";
-
-/***/ },
-/* 210 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = ['ls', '$scope', function (ls, $scope) {
-	  $scope.date = moment().format('MM MMM YYYY');
-	  $scope.city = 'chelles';
-	  ls.get('meteo::chelles', {
-	    url: 'http://api.openweathermap.org/data/2.5/forecast?q=chelles&lang=fr&units=metric&appid=922acb7e29082fc1af198d2040aa4b3d'
-	  }, function (data) {
-	    var weather = data.list[0].weather[0],
-	        temp = data.list[0].main.temp;
-	    $scope.temp = temp;
-	  }, function () {
-	    console.error('meteo probleme controller home');
-	  });
-	}];
-
-/***/ },
-/* 211 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"list\">\n  <div class=\"item item-icon-left item-icon-right\">\n    <i class=\"icon ion-videocamera\"></i>\n    Webcam\n    <input type=\"checkbox\" ng-model=\"webcam\" ng-show=\"false\" />\n    <i class=\"icon ion-checkmark-round balanced\"  ng-if='webcam'></i>\n    <i class=\"icon ion-close-round assertive\"  ng-if='!webcam'></i>\n  </div>\n  <div class=\"item item-icon-left item-icon-right\">\n    <i class=\"icon ion-mic-b\"></i>\n    Micro\n    <input type=\"checkbox\" ng-model=\"micro\" ng-show=\"false\" />\n    <i class=\"icon ion-checkmark-round balanced\" ng-if=\"micro\"></i>\n    <i class=\"icon ion-close-round assertive\" ng-if=\"!micro\"></i>\n  </div>\n</div>";
-
-/***/ },
-/* 212 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = ['$scope', 'st', function ($scope, st) {
-	  var vm = $scope;
-	  st.emit('st', {}, { $scope: $scope }, function (data) {
-	    var config = ['webcam', 'micro'],
-	        i = config.length - 1;
-	    while (i >= 0) {
-	      vm[config[i]] = data[config[i]];
-	      i--;
-	    }
-	  });
-	}];
-
-/***/ },
-/* 213 */
-/***/ function(module, exports) {
-
-	module.exports = "<webview nodeintegration class=\"height-100\"></webview>";
-
-/***/ },
-/* 214 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = ['$scope', '$stateParams', 'stt', function ($scope, $stateParams, stt) {
-	  var webview = document.getElementsByTagName('webview')[0];
-	
-	  if ($stateParams.url) webview.src = $stateParams.url;
-	
-	  webview.addEventListener("did-fail-load", function () {
-	    stt.speak("je n'ai pas trouvé la page, voici les résultats de la recherche sur google");
-	    webview.src = "http://www.google.com/search?q=" + $stateParams.result;
-	  });
-	
-	  console.log(webview);
-	}];
-
-/***/ },
-/* 215 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
-	  if (true) {
-	    // AMD. Register as an anonymous module unless amdModuleId is set
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(32)], __WEBPACK_AMD_DEFINE_RESULT__ = function (a0) {
-	      return (root['DateRange'] = factory(a0));
-	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  } else if (typeof exports === 'object') {
-	    // Node. Does not work with strict CommonJS, but
-	    // only CommonJS-like environments that support module.exports,
-	    // like Node.
-	    module.exports = factory(require("moment"));
-	  } else {
-	    root['DateRange'] = factory(moment);
-	  }
-	}(this, function (moment) {
-	
-	//-----------------------------------------------------------------------------
-	// Contstants
-	//-----------------------------------------------------------------------------
-	
-	
-	
-	var INTERVALS = {
-	  year:   true,
-	  month:  true,
-	  week:   true,
-	  day:    true,
-	  hour:   true,
-	  minute: true,
-	  second: true
-	};
-	
-	
-	//-----------------------------------------------------------------------------
-	// Date Ranges
-	//-----------------------------------------------------------------------------
-	
-	/**
-	 * DateRange class to store ranges and query dates.
-	 *
-	 * @constructor
-	 * @param {(Moment|Date)} start Start of interval
-	 * @param {(Moment|Date)} end End of interval
-	 *//**
-	 * DateRange class to store ranges and query dates.
-	 *
-	 * @constructor
-	 * @param {!Array} range Array containing start and end dates.
-	 *//**
-	 * DateRange class to store ranges and query dates.
-	 *
-	 * @constructor
-	 * @param {!String} range String formatted as an IS0 8601 time interval
-	 */
-	function DateRange(start, end) {
-	  var parts;
-	  var s = start;
-	  var e = end;
-	
-	  if (arguments.length === 1 || end === undefined) {
-	    if (typeof start === 'object' && start.length === 2) {
-	      s = start[0];
-	      e = start[1];
-	    }
-	    else if (typeof start === 'string') {
-	      parts = start.split('/');
-	      s = parts[0];
-	      e = parts[1];
-	    }
-	  }
-	
-	  this.start = (s === null) ? moment(-8640000000000000) : moment(s);
-	  this.end   = (e === null) ? moment(8640000000000000) : moment(e);
-	}
-	
-	/**
-	 * Constructor for prototype.
-	 *
-	 * @type {DateRange}
-	 */
-	DateRange.prototype.constructor = DateRange;
-	
-	/**
-	 * Deep clone range.
-	 *
-	 * @return {!DateRange}
-	 */
-	DateRange.prototype.clone = function() {
-	  return moment().range(this.start, this.end);
-	};
-	
-	/**
-	 * Determine if the current interval contains a given moment/date/range.
-	 *
-	 * @param {(Moment|Date|DateRange)} other Date to check
-	 * @param {!boolean} exclusive True if the to value is exclusive
-	 *
-	 * @return {!boolean}
-	 */
-	DateRange.prototype.contains = function(other, exclusive) {
-	  var start = this.start;
-	  var end   = this.end;
-	
-	  if (other instanceof DateRange) {
-	    return start <= other.start && (end > other.end || (end.isSame(other.end) && !exclusive));
-	  }
-	  else {
-	    return start <= other && (end > other || (end.isSame(other) && !exclusive));
-	  }
-	};
-	
-	/**
-	 * Determine if the current date range overlaps a given date range.
-	 *
-	 * @param {!DateRange} range Date range to check
-	 *
-	 * @return {!boolean}
-	 */
-	DateRange.prototype.overlaps = function(range) {
-	  return this.intersect(range) !== null;
-	};
-	
-	/**
-	 * Determine the intersecting periods from one or more date ranges.
-	 *
-	 * @param {!DateRange} other A date range to intersect with this one
-	 *
-	 * @return {DateRange} Returns the intersecting date or `null` if the ranges do
-	 *                     not intersect
-	 */
-	DateRange.prototype.intersect = function(other) {
-	  var start = this.start;
-	  var end   = this.end;
-	
-	  if ((start <= other.start) && (other.start < end) && (end < other.end)) {
-	    return new DateRange(other.start, end);
-	  }
-	  else if ((other.start < start) && (start < other.end) && (other.end <= end)) {
-	    return new DateRange(start, other.end);
-	  }
-	  else if ((other.start < start) && (start <= end) && (end < other.end)) {
-	    return this;
-	  }
-	  else if ((start <= other.start) && (other.start <= other.end) && (other.end <= end)) {
-	    return other;
-	  }
-	
-	  return null;
-	};
-	
-	/**
-	 * Merge date ranges if they intersect.
-	 *
-	 * @param {!DateRange} other A date range to add to this one
-	 *
-	 * @return {DateRange} Returns the new `DateRange` or `null` if they do not
-	 *                     overlap
-	 */
-	DateRange.prototype.add = function(other) {
-	  if (this.overlaps(other)) {
-	    return new DateRange(moment.min(this.start, other.start), moment.max(this.end, other.end));
-	  }
-	
-	  return null;
-	};
-	
-	/**
-	 * Subtract one range from another.
-	 *
-	 * @param {!DateRange} other A date range to substract from this one
-	 *
-	 * @return {!Array<DateRange>}
-	 */
-	DateRange.prototype.subtract = function(other) {
-	  var start = this.start;
-	  var end   = this.end;
-	
-	  if (this.intersect(other) === null) {
-	    return [this];
-	  }
-	  else if ((other.start <= start) && (start < end) && (end <= other.end)) {
-	    return [];
-	  }
-	  else if ((other.start <= start) && (start < other.end) && (other.end < end)) {
-	    return [new DateRange(other.end, end)];
-	  }
-	  else if ((start < other.start) && (other.start < end) && (end <= other.end)) {
-	    return [new DateRange(start, other.start)];
-	  }
-	  else if ((start < other.start) && (other.start < other.end) && (other.end < end)) {
-	    return [new DateRange(start, other.start), new DateRange(other.end, end)];
-	  }
-	  else if ((start < other.start) && (other.start < end) && (other.end < end)) {
-	    return [new DateRange(start, other.start), new DateRange(other.start, end)];
-	  }
-	};
-	
-	/**
-	 * Build a n array of dates.
-	 *
-	 * @param {(!DateRange|String)} range Date range to be used for iteration or
-	 *                                    shorthand string (shorthands:
-	 *                                    http://momentjs.com/docs/#/manipulating/add/)
-	 * @param {!boolean} exclusive Indicate that the end of the range should not
-	 *                             be included in the iter.
-	 *
-	 * @return {!Array}
-	 */
-	DateRange.prototype.toArray = function(by, exclusive) {
-	  var acc = [];
-	  this.by(by, function(unit) {
-	    acc.push(unit);
-	  }, exclusive);
-	  return acc;
-	};
-	
-	/**
-	 * Iterate over the date range by a given date range, executing a function
-	 * for each sub-range.
-	 *
-	 * @param {(!DateRange|String)} range Date range to be used for iteration or
-	 *                                    shorthand string (shorthands:
-	 *                                    http://momentjs.com/docs/#/manipulating/add/)
-	 * @param {!DateRange~by} hollaback Callback
-	 * @param {!boolean} exclusive Indicate that the end of the range should not
-	 *                             be included in the iter.
-	 *
-	 * @return {DateRange} `this`
-	 */
-	DateRange.prototype.by = function(range, hollaback, exclusive) {
-	  if (typeof range === 'string') {
-	    _byString.call(this, range, hollaback, exclusive);
-	  }
-	  else {
-	    _byRange.call(this, range, hollaback, exclusive);
-	  }
-	  return this;
-	};
-	
-	
-	/**
-	 * Callback executed for each sub-range.
-	 *
-	 * @callback DateRange~by
-	 *
-	 * @param {!Moment} current Current moment object for iteration
-	 */
-	
-	/**
-	 * @private
-	 */
-	function _byString(interval, hollaback, exclusive) {
-	  var current = moment(this.start);
-	
-	  while (this.contains(current, exclusive)) {
-	    hollaback.call(this, current.clone());
-	    current.add(1, interval);
-	  }
-	}
-	
-	/**
-	 * @private
-	 */
-	function _byRange(interval, hollaback, exclusive) {
-	  var div = this / interval;
-	  var l = Math.floor(div);
-	
-	  if (l === Infinity) { return; }
-	  if (l === div && exclusive) {
-	    l--;
-	  }
-	
-	  for (var i = 0; i <= l; i++) {
-	    hollaback.call(this, moment(this.start.valueOf() + interval.valueOf() * i));
-	  }
-	}
-	
-	/**
-	 * Date range formatted as an [ISO8601 Time
-	 * Interval](http://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
-	 *
-	 * @return {!String}
-	 */
-	DateRange.prototype.toString = function() {
-	  return this.start.format() + '/' + this.end.format();
-	};
-	
-	/**
-	 * Date range in milliseconds. Allows basic coercion math of date ranges.
-	 *
-	 * @return {!number}
-	 */
-	DateRange.prototype.valueOf = function() {
-	  return this.end - this.start;
-	};
-	
-	/**
-	 * Center date of the range.
-	 *
-	 * @return {!Moment}
-	 */
-	DateRange.prototype.center = function() {
-	  var center = this.start + this.diff() / 2;
-	  return moment(center);
-	};
-	
-	/**
-	 * Date range toDate
-	 *
-	 * @return {!Array<Date>}
-	 */
-	DateRange.prototype.toDate = function() {
-	  return [this.start.toDate(), this.end.toDate()];
-	};
-	
-	/**
-	 * Determine if this date range is the same as another.
-	 *
-	 * @param {!DateRange} other Another date range to compare to
-	 *
-	 * @return {!boolean}
-	 */
-	DateRange.prototype.isSame = function(other) {
-	  return this.start.isSame(other.start) && this.end.isSame(other.end);
-	};
-	
-	/**
-	 * The difference of the end vs start.
-	 *
-	 * @param {number} unit Unit of difference, if no unit is passed in
-	 *                      milliseconds are returned. E.g.: `"days"`, `"months"`,
-	 *                      etc...
-	 *
-	 * @return {!number}
-	 */
-	DateRange.prototype.diff = function(unit) {
-	  return this.end.diff(this.start, unit);
-	};
-	
-	
-	//-----------------------------------------------------------------------------
-	// Moment Extensions
-	//-----------------------------------------------------------------------------
-	
-	/**
-	 * Build a date range.
-	 *
-	 * @param {(Moment|Date)} start Start of range
-	 * @param {(Moment|Date)} end End of range
-	 *
-	 * @this {Moment}
-	 *
-	 * @return {!DateRange}
-	 */
-	moment.range = function(start, end) {
-	  if (start in INTERVALS) {
-	    return new DateRange(moment(this).startOf(start), moment(this).endOf(start));
-	  }
-	  else {
-	    return new DateRange(start, end);
-	  }
-	};
-	
-	/**
-	 * Expose constructor
-	 *
-	 * @const
-	 */
-	moment.range.constructor = DateRange;
-	
-	/**
-	 * @deprecated
-	 */
-	moment.fn.range = moment.range;
-	
-	/**
-	 * Check if the current moment is within a given date range.
-	 *
-	 * @param {!DateRange} range Date range to check
-	 *
-	 * @this {Moment}
-	 *
-	 * @return {!boolean}
-	 */
-	moment.fn.within = function(range) {
-	  return range.contains(this._d);
-	};
-	
-	
-	//-----------------------------------------------------------------------------
-	// Export
-	//-----------------------------------------------------------------------------
-	
-	
-	
-	return DateRange;
-	
-	}));
-
-
-/***/ },
-/* 216 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(217);
-
-
-/***/ },
-/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29603,7 +29573,7 @@
 	
 	'use strict';
 	
-	let Api = __webpack_require__(218);
+	let Api = __webpack_require__(206);
 	
 	/**
 	 * @class ElectronSettings
@@ -29615,7 +29585,7 @@
 
 
 /***/ },
-/* 218 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29625,7 +29595,7 @@
 	
 	'use strict';
 	
-	let Settings = __webpack_require__(219);
+	let Settings = __webpack_require__(207);
 	
 	/**
 	 * @class Api
@@ -29698,6 +29668,20 @@
 	  }
 	
 	  /**
+	   * Watches a key path or array of key paths and calls the handler function
+	   * when any are changed.
+	   *
+	   * @see Watcher._watch
+	   * @returns this
+	   * @access public
+	   */
+	  addWatcher() {
+	    this._watch.apply(this, arguments);
+	
+	    return this;
+	  }
+	
+	  /**
 	   * Removes a watcher or array of watchers defined with the given key path.
 	   *
 	   * @see Watcher._unwatch
@@ -29705,6 +29689,19 @@
 	   * @access public
 	   */
 	  unwatch() {
+	    this._unwatch.apply(this, arguments);
+	
+	    return this;
+	  }
+	
+	  /**
+	   * Removes a watcher or array of watchers defined with the given key path.
+	   *
+	   * @see Watcher._unwatch
+	   * @returns this
+	   * @access public
+	   */
+	  removeWatcher() {
 	    this._unwatch.apply(this, arguments);
 	
 	    return this;
@@ -29785,37 +29782,37 @@
 
 
 /***/ },
-/* 219 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/**
+	/* WEBPACK VAR INJECTION */(function(__dirname) {/**
 	 * @fileoverview ElectronSettings Settings class definition.
 	 * @author Nathan Buchar
 	 */
 	
 	'use strict';
 	
-	const _ = __webpack_require__(220);
-	const deepDiff = __webpack_require__(221);
-	const fs = __webpack_require__(222);
-	const keyMirror = __webpack_require__(270);
-	const minimatch = __webpack_require__(241);
+	const _ = __webpack_require__(208);
+	const deepDiff = __webpack_require__(209);
+	const fs = __webpack_require__(210);
+	const keyMirror = __webpack_require__(247);
+	const minimatch = __webpack_require__(248);
 	const path = __webpack_require__(152);
 	
 	/**
 	 * Import Watcher.
 	 */
-	const Watcher = __webpack_require__(271);
+	const Watcher = __webpack_require__(252);
 	
 	/**
 	 * Import key path helpers.
 	 */
-	const keyPathHelpers = __webpack_require__(274);
+	const keyPathHelpers = __webpack_require__(255);
 	
 	/**
 	 * Configure debugger.
 	 */
-	const debug = __webpack_require__(275)('electron-settings:settings');
+	const debug = __webpack_require__(256)('electron-settings:settings');
 	
 	/**
 	 * @class Settings
@@ -29827,7 +29824,6 @@
 	   * Settings class constructor.
 	   *
 	   * @param {Object} [options]
-	   * @constructor
 	   */
 	  constructor(options) {
 	    super();
@@ -30314,7 +30310,8 @@
 	   */
 	  _getConfigDirPath() {
 	    try {
-	      let app = require('electron').app || require('app');
+	      let remote = __webpack_require__(261).remote;
+	      let app = !!remote ? remote.app : (__webpack_require__(261).app || __webpack_require__(262));
 	      let userDataPath = app.getPath('userData');
 	
 	      return path.join(userDataPath, 'electron-settings');
@@ -30441,10 +30438,11 @@
 	};
 	
 	module.exports = Settings;
-
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ },
-/* 220 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module) {/**
@@ -42799,10 +42797,10 @@
 	  }
 	}.call(this));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(30)(module)))
 
 /***/ },
-/* 221 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -43211,13 +43209,13 @@
 
 
 /***/ },
-/* 222 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var assign = __webpack_require__(223)
+	var assign = __webpack_require__(211)
 	
 	var fse = {}
-	var gfs = __webpack_require__(224)
+	var gfs = __webpack_require__(212)
 	
 	// attach fs methods to fse
 	Object.keys(gfs).forEach(function (key) {
@@ -43226,17 +43224,17 @@
 	
 	var fs = fse
 	
-	assign(fs, __webpack_require__(228))
-	assign(fs, __webpack_require__(235))
+	assign(fs, __webpack_require__(216))
+	assign(fs, __webpack_require__(223))
+	assign(fs, __webpack_require__(220))
+	assign(fs, __webpack_require__(226))
+	assign(fs, __webpack_require__(227))
 	assign(fs, __webpack_require__(232))
-	assign(fs, __webpack_require__(238))
-	assign(fs, __webpack_require__(251))
-	assign(fs, __webpack_require__(256))
-	assign(fs, __webpack_require__(257))
-	assign(fs, __webpack_require__(259))
-	assign(fs, __webpack_require__(260))
-	assign(fs, __webpack_require__(266))
-	assign(fs, __webpack_require__(267))
+	assign(fs, __webpack_require__(233))
+	assign(fs, __webpack_require__(235))
+	assign(fs, __webpack_require__(236))
+	assign(fs, __webpack_require__(243))
+	assign(fs, __webpack_require__(244))
 	
 	module.exports = fs
 	
@@ -43255,7 +43253,7 @@
 
 
 /***/ },
-/* 223 */
+/* 211 */
 /***/ function(module, exports) {
 
 	// simple mutable assign
@@ -43275,15 +43273,15 @@
 
 
 /***/ },
-/* 224 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var fs = __webpack_require__(145)
-	var polyfills = __webpack_require__(225)
-	var legacy = __webpack_require__(227)
+	var polyfills = __webpack_require__(213)
+	var legacy = __webpack_require__(215)
 	var queue = []
 	
-	var util = __webpack_require__(10)
+	var util = __webpack_require__(7)
 	
 	function noop () {}
 	
@@ -43304,7 +43302,7 @@
 	  })
 	}
 	
-	module.exports = patch(__webpack_require__(226))
+	module.exports = patch(__webpack_require__(214))
 	if (process.env.TEST_GRACEFUL_FS_GLOBAL_PATCH) {
 	  module.exports = patch(fs)
 	}
@@ -43534,10 +43532,10 @@
 
 
 /***/ },
-/* 225 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(226)
+	var fs = __webpack_require__(214)
 	var constants = __webpack_require__(153)
 	
 	var origCwd = process.cwd
@@ -43792,7 +43790,7 @@
 
 
 /***/ },
-/* 226 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict'
@@ -43819,10 +43817,10 @@
 
 
 /***/ },
-/* 227 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Stream = __webpack_require__(13).Stream
+	var Stream = __webpack_require__(10).Stream
 	
 	module.exports = legacy
 	
@@ -43943,22 +43941,22 @@
 
 
 /***/ },
-/* 228 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  copy: __webpack_require__(229)
+	  copy: __webpack_require__(217)
 	}
 
 
 /***/ },
-/* 229 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
-	var ncp = __webpack_require__(230)
-	var mkdir = __webpack_require__(232)
+	var ncp = __webpack_require__(218)
+	var mkdir = __webpack_require__(220)
 	
 	function copy (src, dest, options, callback) {
 	  if (typeof options === 'function' && !callback) {
@@ -43969,6 +43967,12 @@
 	  }
 	  callback = callback || function () {}
 	  options = options || {}
+	
+	  // don't allow src and dest to be the same
+	  var basePath = process.cwd()
+	  var currentPath = path.resolve(basePath, src)
+	  var targetPath = path.resolve(basePath, dest)
+	  if (currentPath === targetPath) return callback(new Error('Source and destination must not be the same.'))
 	
 	  fs.lstat(src, function (err, stats) {
 	    if (err) return callback(err)
@@ -43996,14 +44000,14 @@
 
 
 /***/ },
-/* 230 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// imported from ncp (this is temporary, will rewrite)
 	
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
-	var utimes = __webpack_require__(231)
+	var utimes = __webpack_require__(219)
 	
 	function ncp (source, dest, options, callback) {
 	  if (!callback) {
@@ -44245,10 +44249,10 @@
 
 
 /***/ },
-/* 231 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
 	var os = __webpack_require__(159)
 	
@@ -44320,25 +44324,25 @@
 
 
 /***/ },
-/* 232 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  mkdirs: __webpack_require__(233),
-	  mkdirsSync: __webpack_require__(234),
+	  mkdirs: __webpack_require__(221),
+	  mkdirsSync: __webpack_require__(222),
 	  // alias
-	  mkdirp: __webpack_require__(233),
-	  mkdirpSync: __webpack_require__(234),
-	  ensureDir: __webpack_require__(233),
-	  ensureDirSync: __webpack_require__(234)
+	  mkdirp: __webpack_require__(221),
+	  mkdirpSync: __webpack_require__(222),
+	  ensureDir: __webpack_require__(221),
+	  ensureDirSync: __webpack_require__(222)
 	}
 
 
 /***/ },
-/* 233 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
 	
 	var o777 = parseInt('0777', 8)
@@ -44395,10 +44399,10 @@
 
 
 /***/ },
-/* 234 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
 	
 	var o777 = parseInt('0777', 8)
@@ -44450,22 +44454,22 @@
 
 
 /***/ },
-/* 235 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = {
-	  copySync: __webpack_require__(236)
+	  copySync: __webpack_require__(224)
 	}
 
 
 /***/ },
-/* 236 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	var path = __webpack_require__(152)
-	var copyFileSync = __webpack_require__(237)
-	var mkdir = __webpack_require__(232)
+	var copyFileSync = __webpack_require__(225)
+	var mkdir = __webpack_require__(220)
 	
 	function copySync (src, dest, options) {
 	  if (typeof options === 'function' || options instanceof RegExp) {
@@ -44512,10 +44516,10 @@
 
 
 /***/ },
-/* 237 */
+/* 225 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var fs = __webpack_require__(224)
+	var fs = __webpack_require__(212)
 	
 	var BUF_LENGTH = 64 * 1024
 	var _buff = new Buffer(BUF_LENGTH)
@@ -44557,10 +44561,10 @@
 
 
 /***/ },
-/* 238 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var rimraf = __webpack_require__(239)
+	var rimraf = __webpack_require__(154)
 	
 	function removeSync (dir) {
 	  return rimraf.sync(dir)
@@ -44577,341 +44581,699 @@
 
 
 /***/ },
-/* 239 */
+/* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = rimraf
-	rimraf.sync = rimrafSync
+	var jsonFile = __webpack_require__(228)
 	
-	var assert = __webpack_require__(155)
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(145)
-	var glob = __webpack_require__(240)
+	jsonFile.outputJsonSync = __webpack_require__(230)
+	jsonFile.outputJson = __webpack_require__(231)
+	// aliases
+	jsonFile.outputJSONSync = __webpack_require__(230)
+	jsonFile.outputJSON = __webpack_require__(231)
 	
-	var globOpts = {
-	  nosort: true,
-	  nocomment: true,
-	  nonegate: true,
-	  silent: true
+	module.exports = jsonFile
+
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jsonFile = __webpack_require__(229)
+	
+	module.exports = {
+	  // jsonfile exports
+	  readJson: jsonFile.readFile,
+	  readJSON: jsonFile.readFile,
+	  readJsonSync: jsonFile.readFileSync,
+	  readJSONSync: jsonFile.readFileSync,
+	  writeJson: jsonFile.writeFile,
+	  writeJSON: jsonFile.writeFile,
+	  writeJsonSync: jsonFile.writeFileSync,
+	  writeJSONSync: jsonFile.writeFileSync,
+	  spaces: 2 // default in fs-extra
 	}
+
+
+/***/ },
+/* 229 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var _fs = __webpack_require__(145)
 	
-	// for EMFILE handling
-	var timeout = 0
-	
-	var isWindows = (process.platform === "win32")
-	
-	function defaults (options) {
-	  var methods = [
-	    'unlink',
-	    'chmod',
-	    'stat',
-	    'lstat',
-	    'rmdir',
-	    'readdir'
-	  ]
-	  methods.forEach(function(m) {
-	    options[m] = options[m] || fs[m]
-	    m = m + 'Sync'
-	    options[m] = options[m] || fs[m]
-	  })
-	
-	  options.maxBusyTries = options.maxBusyTries || 3
-	  options.emfileWait = options.emfileWait || 1000
-	  options.disableGlob = options.disableGlob || false
-	}
-	
-	function rimraf (p, options, cb) {
-	  if (typeof options === 'function') {
-	    cb = options
+	function readFile (file, options, callback) {
+	  if (callback == null) {
+	    callback = options
 	    options = {}
 	  }
 	
-	  assert(p, 'rimraf: missing path')
-	  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-	  assert(options, 'rimraf: missing options')
-	  assert.equal(typeof options, 'object', 'rimraf: options should be object')
-	  assert.equal(typeof cb, 'function', 'rimraf: callback function required')
-	
-	  defaults(options)
-	
-	  var busyTries = 0
-	  var errState = null
-	  var n = 0
-	
-	  if (options.disableGlob || !glob.hasMagic(p))
-	    return afterGlob(null, [p])
-	
-	  fs.lstat(p, function (er, stat) {
-	    if (!er)
-	      return afterGlob(null, [p])
-	
-	    glob(p, globOpts, afterGlob)
-	  })
-	
-	  function next (er) {
-	    errState = errState || er
-	    if (--n === 0)
-	      cb(errState)
+	  if (typeof options === 'string') {
+	    options = {encoding: options}
 	  }
 	
-	  function afterGlob (er, results) {
-	    if (er)
-	      return cb(er)
+	  options = options || {}
+	  var fs = options.fs || _fs
 	
-	    n = results.length
-	    if (n === 0)
-	      return cb()
+	  var shouldThrow = true
+	  // DO NOT USE 'passParsingErrors' THE NAME WILL CHANGE!!!, use 'throws' instead
+	  if ('passParsingErrors' in options) {
+	    shouldThrow = options.passParsingErrors
+	  } else if ('throws' in options) {
+	    shouldThrow = options.throws
+	  }
 	
-	    results.forEach(function (p) {
-	      rimraf_(p, options, function CB (er) {
-	        if (er) {
-	          if (isWindows && (er.code === "EBUSY" || er.code === "ENOTEMPTY" || er.code === "EPERM") &&
-	              busyTries < options.maxBusyTries) {
-	            busyTries ++
-	            var time = busyTries * 100
-	            // try again, with the same exact callback as this one.
-	            return setTimeout(function () {
-	              rimraf_(p, options, CB)
-	            }, time)
-	          }
+	  fs.readFile(file, options, function (err, data) {
+	    if (err) return callback(err)
 	
-	          // this one won't happen if graceful-fs is used.
-	          if (er.code === "EMFILE" && timeout < options.emfileWait) {
-	            return setTimeout(function () {
-	              rimraf_(p, options, CB)
-	            }, timeout ++)
-	          }
+	    var obj
+	    try {
+	      obj = JSON.parse(data, options ? options.reviver : null)
+	    } catch (err2) {
+	      if (shouldThrow) {
+	        err2.message = file + ': ' + err2.message
+	        return callback(err2)
+	      } else {
+	        return callback(null, null)
+	      }
+	    }
 	
-	          // already gone
-	          if (er.code === "ENOENT") er = null
+	    callback(null, obj)
+	  })
+	}
+	
+	function readFileSync (file, options) {
+	  options = options || {}
+	  if (typeof options === 'string') {
+	    options = {encoding: options}
+	  }
+	
+	  var fs = options.fs || _fs
+	
+	  var shouldThrow = true
+	  // DO NOT USE 'passParsingErrors' THE NAME WILL CHANGE!!!, use 'throws' instead
+	  if ('passParsingErrors' in options) {
+	    shouldThrow = options.passParsingErrors
+	  } else if ('throws' in options) {
+	    shouldThrow = options.throws
+	  }
+	
+	  var content = fs.readFileSync(file, options)
+	
+	  try {
+	    return JSON.parse(content, options.reviver)
+	  } catch (err) {
+	    if (shouldThrow) {
+	      err.message = file + ': ' + err.message
+	      throw err
+	    } else {
+	      return null
+	    }
+	  }
+	}
+	
+	function writeFile (file, obj, options, callback) {
+	  if (callback == null) {
+	    callback = options
+	    options = {}
+	  }
+	  options = options || {}
+	  var fs = options.fs || _fs
+	
+	  var spaces = typeof options === 'object' && options !== null
+	    ? 'spaces' in options
+	    ? options.spaces : this.spaces
+	    : this.spaces
+	
+	  var str = ''
+	  try {
+	    str = JSON.stringify(obj, options ? options.replacer : null, spaces) + '\n'
+	  } catch (err) {
+	    if (callback) return callback(err, null)
+	  }
+	
+	  fs.writeFile(file, str, options, callback)
+	}
+	
+	function writeFileSync (file, obj, options) {
+	  options = options || {}
+	  var fs = options.fs || _fs
+	
+	  var spaces = typeof options === 'object' && options !== null
+	    ? 'spaces' in options
+	    ? options.spaces : this.spaces
+	    : this.spaces
+	
+	  var str = JSON.stringify(obj, options.replacer, spaces) + '\n'
+	  // not sure if fs.writeFileSync returns anything, but just in case
+	  return fs.writeFileSync(file, str, options)
+	}
+	
+	var jsonfile = {
+	  spaces: null,
+	  readFile: readFile,
+	  readFileSync: readFileSync,
+	  writeFile: writeFile,
+	  writeFileSync: writeFileSync
+	}
+	
+	module.exports = jsonfile
+
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var fs = __webpack_require__(212)
+	var path = __webpack_require__(152)
+	var jsonFile = __webpack_require__(228)
+	var mkdir = __webpack_require__(220)
+	
+	function outputJsonSync (file, data, options) {
+	  var dir = path.dirname(file)
+	
+	  if (!fs.existsSync(dir)) {
+	    mkdir.mkdirsSync(dir)
+	  }
+	
+	  jsonFile.writeJsonSync(file, data, options)
+	}
+	
+	module.exports = outputJsonSync
+
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var fs = __webpack_require__(212)
+	var path = __webpack_require__(152)
+	var jsonFile = __webpack_require__(228)
+	var mkdir = __webpack_require__(220)
+	
+	function outputJson (file, data, options, callback) {
+	  if (typeof options === 'function') {
+	    callback = options
+	    options = {}
+	  }
+	
+	  var dir = path.dirname(file)
+	
+	  fs.exists(dir, function (itDoes) {
+	    if (itDoes) return jsonFile.writeJson(file, data, options, callback)
+	
+	    mkdir.mkdirs(dir, function (err) {
+	      if (err) return callback(err)
+	      jsonFile.writeJson(file, data, options, callback)
+	    })
+	  })
+	}
+	
+	module.exports = outputJson
+
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// most of this code was written by Andrew Kelley
+	// licensed under the BSD license: see
+	// https://github.com/andrewrk/node-mv/blob/master/package.json
+	
+	// this needs a cleanup
+	
+	var fs = __webpack_require__(212)
+	var ncp = __webpack_require__(218)
+	var path = __webpack_require__(152)
+	var rimraf = __webpack_require__(154)
+	var mkdirp = __webpack_require__(220).mkdirs
+	
+	function mv (source, dest, options, callback) {
+	  if (typeof options === 'function') {
+	    callback = options
+	    options = {}
+	  }
+	
+	  var shouldMkdirp = ('mkdirp' in options) ? options.mkdirp : true
+	  var clobber = ('clobber' in options) ? options.clobber : false
+	
+	  var limit = options.limit || 16
+	
+	  if (shouldMkdirp) {
+	    mkdirs()
+	  } else {
+	    doRename()
+	  }
+	
+	  function mkdirs () {
+	    mkdirp(path.dirname(dest), function (err) {
+	      if (err) return callback(err)
+	      doRename()
+	    })
+	  }
+	
+	  function doRename () {
+	    if (clobber) {
+	      fs.rename(source, dest, function (err) {
+	        if (!err) return callback()
+	
+	        if (err.code === 'ENOTEMPTY' || err.code === 'EEXIST') {
+	          rimraf(dest, function (err) {
+	            if (err) return callback(err)
+	            options.clobber = false // just clobbered it, no need to do it again
+	            mv(source, dest, options, callback)
+	          })
+	          return
 	        }
 	
-	        timeout = 0
-	        next(er)
-	      })
-	    })
-	  }
-	}
-	
-	// Two possible strategies.
-	// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
-	// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
-	//
-	// Both result in an extra syscall when you guess wrong.  However, there
-	// are likely far more normal files in the world than directories.  This
-	// is based on the assumption that a the average number of files per
-	// directory is >= 1.
-	//
-	// If anyone ever complains about this, then I guess the strategy could
-	// be made configurable somehow.  But until then, YAGNI.
-	function rimraf_ (p, options, cb) {
-	  assert(p)
-	  assert(options)
-	  assert(typeof cb === 'function')
-	
-	  // sunos lets the root user unlink directories, which is... weird.
-	  // so we have to lstat here and make sure it's not a dir.
-	  options.lstat(p, function (er, st) {
-	    if (er && er.code === "ENOENT")
-	      return cb(null)
-	
-	    if (st && st.isDirectory())
-	      return rmdir(p, options, er, cb)
-	
-	    options.unlink(p, function (er) {
-	      if (er) {
-	        if (er.code === "ENOENT")
-	          return cb(null)
-	        if (er.code === "EPERM")
-	          return (isWindows)
-	            ? fixWinEPERM(p, options, er, cb)
-	            : rmdir(p, options, er, cb)
-	        if (er.code === "EISDIR")
-	          return rmdir(p, options, er, cb)
-	      }
-	      return cb(er)
-	    })
-	  })
-	}
-	
-	function fixWinEPERM (p, options, er, cb) {
-	  assert(p)
-	  assert(options)
-	  assert(typeof cb === 'function')
-	  if (er)
-	    assert(er instanceof Error)
-	
-	  options.chmod(p, 666, function (er2) {
-	    if (er2)
-	      cb(er2.code === "ENOENT" ? null : er)
-	    else
-	      options.stat(p, function(er3, stats) {
-	        if (er3)
-	          cb(er3.code === "ENOENT" ? null : er)
-	        else if (stats.isDirectory())
-	          rmdir(p, options, er, cb)
-	        else
-	          options.unlink(p, cb)
-	      })
-	  })
-	}
-	
-	function fixWinEPERMSync (p, options, er) {
-	  assert(p)
-	  assert(options)
-	  if (er)
-	    assert(er instanceof Error)
-	
-	  try {
-	    options.chmodSync(p, 666)
-	  } catch (er2) {
-	    if (er2.code === "ENOENT")
-	      return
-	    else
-	      throw er
-	  }
-	
-	  try {
-	    var stats = options.statSync(p)
-	  } catch (er3) {
-	    if (er3.code === "ENOENT")
-	      return
-	    else
-	      throw er
-	  }
-	
-	  if (stats.isDirectory())
-	    rmdirSync(p, options, er)
-	  else
-	    options.unlinkSync(p)
-	}
-	
-	function rmdir (p, options, originalEr, cb) {
-	  assert(p)
-	  assert(options)
-	  if (originalEr)
-	    assert(originalEr instanceof Error)
-	  assert(typeof cb === 'function')
-	
-	  // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
-	  // if we guessed wrong, and it's not a directory, then
-	  // raise the original error.
-	  options.rmdir(p, function (er) {
-	    if (er && (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM"))
-	      rmkids(p, options, cb)
-	    else if (er && er.code === "ENOTDIR")
-	      cb(originalEr)
-	    else
-	      cb(er)
-	  })
-	}
-	
-	function rmkids(p, options, cb) {
-	  assert(p)
-	  assert(options)
-	  assert(typeof cb === 'function')
-	
-	  options.readdir(p, function (er, files) {
-	    if (er)
-	      return cb(er)
-	    var n = files.length
-	    if (n === 0)
-	      return options.rmdir(p, cb)
-	    var errState
-	    files.forEach(function (f) {
-	      rimraf(path.join(p, f), options, function (er) {
-	        if (errState)
+	        // weird Windows shit
+	        if (err.code === 'EPERM') {
+	          setTimeout(function () {
+	            rimraf(dest, function (err) {
+	              if (err) return callback(err)
+	              options.clobber = false
+	              mv(source, dest, options, callback)
+	            })
+	          }, 200)
 	          return
-	        if (er)
-	          return cb(errState = er)
-	        if (--n === 0)
-	          options.rmdir(p, cb)
+	        }
+	
+	        if (err.code !== 'EXDEV') return callback(err)
+	        moveAcrossDevice(source, dest, clobber, limit, callback)
+	      })
+	    } else {
+	      fs.link(source, dest, function (err) {
+	        if (err) {
+	          if (err.code === 'EXDEV' || err.code === 'EISDIR' || err.code === 'EPERM') {
+	            moveAcrossDevice(source, dest, clobber, limit, callback)
+	            return
+	          }
+	          callback(err)
+	          return
+	        }
+	        fs.unlink(source, callback)
+	      })
+	    }
+	  }
+	}
+	
+	function moveAcrossDevice (source, dest, clobber, limit, callback) {
+	  fs.stat(source, function (err, stat) {
+	    if (err) {
+	      callback(err)
+	      return
+	    }
+	
+	    if (stat.isDirectory()) {
+	      moveDirAcrossDevice(source, dest, clobber, limit, callback)
+	    } else {
+	      moveFileAcrossDevice(source, dest, clobber, limit, callback)
+	    }
+	  })
+	}
+	
+	function moveFileAcrossDevice (source, dest, clobber, limit, callback) {
+	  var outFlags = clobber ? 'w' : 'wx'
+	  var ins = fs.createReadStream(source)
+	  var outs = fs.createWriteStream(dest, {flags: outFlags})
+	
+	  ins.on('error', function (err) {
+	    ins.destroy()
+	    outs.destroy()
+	    outs.removeListener('close', onClose)
+	
+	    // may want to create a directory but `out` line above
+	    // creates an empty file for us: See #108
+	    // don't care about error here
+	    fs.unlink(dest, function () {
+	      // note: `err` here is from the input stream errror
+	      if (err.code === 'EISDIR' || err.code === 'EPERM') {
+	        moveDirAcrossDevice(source, dest, clobber, limit, callback)
+	      } else {
+	        callback(err)
+	      }
+	    })
+	  })
+	
+	  outs.on('error', function (err) {
+	    ins.destroy()
+	    outs.destroy()
+	    outs.removeListener('close', onClose)
+	    callback(err)
+	  })
+	
+	  outs.once('close', onClose)
+	  ins.pipe(outs)
+	
+	  function onClose () {
+	    fs.unlink(source, callback)
+	  }
+	}
+	
+	function moveDirAcrossDevice (source, dest, clobber, limit, callback) {
+	  var options = {
+	    stopOnErr: true,
+	    clobber: false,
+	    limit: limit
+	  }
+	
+	  function startNcp () {
+	    ncp(source, dest, options, function (errList) {
+	      if (errList) return callback(errList[0])
+	      rimraf(source, callback)
+	    })
+	  }
+	
+	  if (clobber) {
+	    rimraf(dest, function (err) {
+	      if (err) return callback(err)
+	      startNcp()
+	    })
+	  } else {
+	    startNcp()
+	  }
+	}
+	
+	module.exports = {
+	  move: mv
+	}
+
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = {
+	  createOutputStream: __webpack_require__(234)
+	}
+
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var path = __webpack_require__(152)
+	var fs = __webpack_require__(145)
+	var mkdir = __webpack_require__(220)
+	var WriteStream = fs.WriteStream
+	
+	function createOutputStream (file, options) {
+	  var dirExists = false
+	  var dir = path.dirname(file)
+	  options = options || {}
+	
+	  // if fd is set with an actual number, file is created, hence directory is too
+	  if (options.fd) {
+	    return fs.createWriteStream(file, options)
+	  } else {
+	    // this hacks the WriteStream constructor from calling open()
+	    options.fd = -1
+	  }
+	
+	  var ws = new WriteStream(file, options)
+	
+	  var oldOpen = ws.open
+	  ws.open = function () {
+	    ws.fd = null // set actual fd
+	    if (dirExists) return oldOpen.call(ws)
+	
+	    // this only runs once on first write
+	    mkdir.mkdirs(dir, function (err) {
+	      if (err) {
+	        ws.destroy()
+	        ws.emit('error', err)
+	        return
+	      }
+	      dirExists = true
+	      oldOpen.call(ws)
+	    })
+	  }
+	
+	  ws.open()
+	
+	  return ws
+	}
+	
+	module.exports = createOutputStream
+
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var fs = __webpack_require__(145)
+	var path = __webpack_require__(152)
+	var mkdir = __webpack_require__(220)
+	var remove = __webpack_require__(226)
+	
+	function emptyDir (dir, callback) {
+	  callback = callback || function () {}
+	  fs.readdir(dir, function (err, items) {
+	    if (err) return mkdir.mkdirs(dir, callback)
+	
+	    items = items.map(function (item) {
+	      return path.join(dir, item)
+	    })
+	
+	    deleteItem()
+	
+	    function deleteItem () {
+	      var item = items.pop()
+	      if (!item) return callback()
+	      remove.remove(item, function (err) {
+	        if (err) return callback(err)
+	        deleteItem()
+	      })
+	    }
+	  })
+	}
+	
+	function emptyDirSync (dir) {
+	  var items
+	  try {
+	    items = fs.readdirSync(dir)
+	  } catch (err) {
+	    return mkdir.mkdirsSync(dir)
+	  }
+	
+	  items.forEach(function (item) {
+	    item = path.join(dir, item)
+	    remove.removeSync(item)
+	  })
+	}
+	
+	module.exports = {
+	  emptyDirSync: emptyDirSync,
+	  emptydirSync: emptyDirSync,
+	  emptyDir: emptyDir,
+	  emptydir: emptyDir
+	}
+
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var file = __webpack_require__(237)
+	var link = __webpack_require__(238)
+	var symlink = __webpack_require__(239)
+	
+	module.exports = {
+	  // file
+	  createFile: file.createFile,
+	  createFileSync: file.createFileSync,
+	  ensureFile: file.createFile,
+	  ensureFileSync: file.createFileSync,
+	  // link
+	  createLink: link.createLink,
+	  createLinkSync: link.createLinkSync,
+	  ensureLink: link.createLink,
+	  ensureLinkSync: link.createLinkSync,
+	  // symlink
+	  createSymlink: symlink.createSymlink,
+	  createSymlinkSync: symlink.createSymlinkSync,
+	  ensureSymlink: symlink.createSymlink,
+	  ensureSymlinkSync: symlink.createSymlinkSync
+	}
+
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var path = __webpack_require__(152)
+	var fs = __webpack_require__(212)
+	var mkdir = __webpack_require__(220)
+	
+	function createFile (file, callback) {
+	  function makeFile () {
+	    fs.writeFile(file, '', function (err) {
+	      if (err) return callback(err)
+	      callback()
+	    })
+	  }
+	
+	  fs.exists(file, function (fileExists) {
+	    if (fileExists) return callback()
+	    var dir = path.dirname(file)
+	    fs.exists(dir, function (dirExists) {
+	      if (dirExists) return makeFile()
+	      mkdir.mkdirs(dir, function (err) {
+	        if (err) return callback(err)
+	        makeFile()
 	      })
 	    })
 	  })
 	}
 	
-	// this looks simpler, and is strictly *faster*, but will
-	// tie up the JavaScript thread and fail on excessively
-	// deep directory trees.
-	function rimrafSync (p, options) {
-	  options = options || {}
-	  defaults(options)
+	function createFileSync (file) {
+	  if (fs.existsSync(file)) return
 	
-	  assert(p, 'rimraf: missing path')
-	  assert.equal(typeof p, 'string', 'rimraf: path should be a string')
-	  assert(options, 'rimraf: missing options')
-	  assert.equal(typeof options, 'object', 'rimraf: options should be object')
-	
-	  var results
-	
-	  if (options.disableGlob || !glob.hasMagic(p)) {
-	    results = [p]
-	  } else {
-	    try {
-	      fs.lstatSync(p)
-	      results = [p]
-	    } catch (er) {
-	      results = glob.sync(p, globOpts)
-	    }
+	  var dir = path.dirname(file)
+	  if (!fs.existsSync(dir)) {
+	    mkdir.mkdirsSync(dir)
 	  }
 	
-	  if (!results.length)
-	    return
-	
-	  for (var i = 0; i < results.length; i++) {
-	    var p = results[i]
-	
-	    try {
-	      var st = options.lstatSync(p)
-	    } catch (er) {
-	      if (er.code === "ENOENT")
-	        return
-	    }
-	
-	    try {
-	      // sunos lets the root user unlink directories, which is... weird.
-	      if (st && st.isDirectory())
-	        rmdirSync(p, options, null)
-	      else
-	        options.unlinkSync(p)
-	    } catch (er) {
-	      if (er.code === "ENOENT")
-	        return
-	      if (er.code === "EPERM")
-	        return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er)
-	      if (er.code !== "EISDIR")
-	        throw er
-	      rmdirSync(p, options, er)
-	    }
-	  }
+	  fs.writeFileSync(file, '')
 	}
 	
-	function rmdirSync (p, options, originalEr) {
-	  assert(p)
-	  assert(options)
-	  if (originalEr)
-	    assert(originalEr instanceof Error)
+	module.exports = {
+	  createFile: createFile,
+	  createFileSync: createFileSync,
+	  // alias
+	  ensureFile: createFile,
+	  ensureFileSync: createFileSync
+	}
+
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var path = __webpack_require__(152)
+	var fs = __webpack_require__(212)
+	var mkdir = __webpack_require__(220)
+	
+	function createLink (srcpath, dstpath, callback) {
+	  function makeLink (srcpath, dstpath) {
+	    fs.link(srcpath, dstpath, function (err) {
+	      if (err) return callback(err)
+	      callback(null)
+	    })
+	  }
+	
+	  fs.exists(dstpath, function (destinationExists) {
+	    if (destinationExists) return callback(null)
+	    fs.lstat(srcpath, function (err, stat) {
+	      if (err) {
+	        err.message = err.message.replace('lstat', 'ensureLink')
+	        return callback(err)
+	      }
+	
+	      var dir = path.dirname(dstpath)
+	      fs.exists(dir, function (dirExists) {
+	        if (dirExists) return makeLink(srcpath, dstpath)
+	        mkdir.mkdirs(dir, function (err) {
+	          if (err) return callback(err)
+	          makeLink(srcpath, dstpath)
+	        })
+	      })
+	    })
+	  })
+	}
+	
+	function createLinkSync (srcpath, dstpath, callback) {
+	  var destinationExists = fs.existsSync(dstpath)
+	  if (destinationExists) return undefined
 	
 	  try {
-	    options.rmdirSync(p)
-	  } catch (er) {
-	    if (er.code === "ENOENT")
-	      return
-	    if (er.code === "ENOTDIR")
-	      throw originalEr
-	    if (er.code === "ENOTEMPTY" || er.code === "EEXIST" || er.code === "EPERM")
-	      rmkidsSync(p, options)
+	    fs.lstatSync(srcpath)
+	  } catch (err) {
+	    err.message = err.message.replace('lstat', 'ensureLink')
+	    throw err
 	  }
+	
+	  var dir = path.dirname(dstpath)
+	  var dirExists = fs.existsSync(dir)
+	  if (dirExists) return fs.linkSync(srcpath, dstpath)
+	  mkdir.mkdirsSync(dir)
+	
+	  return fs.linkSync(srcpath, dstpath)
 	}
 	
-	function rmkidsSync (p, options) {
-	  assert(p)
-	  assert(options)
-	  options.readdirSync(p).forEach(function (f) {
-	    rimrafSync(path.join(p, f), options)
+	module.exports = {
+	  createLink: createLink,
+	  createLinkSync: createLinkSync,
+	  // alias
+	  ensureLink: createLink,
+	  ensureLinkSync: createLinkSync
+	}
+
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var path = __webpack_require__(152)
+	var fs = __webpack_require__(212)
+	var _mkdirs = __webpack_require__(220)
+	var mkdirs = _mkdirs.mkdirs
+	var mkdirsSync = _mkdirs.mkdirsSync
+	
+	var _symlinkPaths = __webpack_require__(240)
+	var symlinkPaths = _symlinkPaths.symlinkPaths
+	var symlinkPathsSync = _symlinkPaths.symlinkPathsSync
+	
+	var _symlinkType = __webpack_require__(242)
+	var symlinkType = _symlinkType.symlinkType
+	var symlinkTypeSync = _symlinkType.symlinkTypeSync
+	
+	function createSymlink (srcpath, dstpath, type, callback) {
+	  callback = (typeof type === 'function') ? type : callback
+	  type = (typeof type === 'function') ? false : type
+	
+	  fs.exists(dstpath, function (destinationExists) {
+	    if (destinationExists) return callback(null)
+	    symlinkPaths(srcpath, dstpath, function (err, relative) {
+	      if (err) return callback(err)
+	      srcpath = relative.toDst
+	      symlinkType(relative.toCwd, type, function (err, type) {
+	        if (err) return callback(err)
+	        var dir = path.dirname(dstpath)
+	        fs.exists(dir, function (dirExists) {
+	          if (dirExists) return fs.symlink(srcpath, dstpath, type, callback)
+	          mkdirs(dir, function (err) {
+	            if (err) return callback(err)
+	            fs.symlink(srcpath, dstpath, type, callback)
+	          })
+	        })
+	      })
+	    })
 	  })
-	  options.rmdirSync(p, options)
+	}
+	
+	function createSymlinkSync (srcpath, dstpath, type, callback) {
+	  callback = (typeof type === 'function') ? type : callback
+	  type = (typeof type === 'function') ? false : type
+	
+	  var destinationExists = fs.existsSync(dstpath)
+	  if (destinationExists) return undefined
+	
+	  var relative = symlinkPathsSync(srcpath, dstpath)
+	  srcpath = relative.toDst
+	  type = symlinkTypeSync(relative.toCwd, type)
+	  var dir = path.dirname(dstpath)
+	  var exists = fs.existsSync(dir)
+	  if (exists) return fs.symlinkSync(srcpath, dstpath, type)
+	  mkdirsSync(dir)
+	  return fs.symlinkSync(srcpath, dstpath, type)
+	}
+	
+	module.exports = {
+	  createSymlink: createSymlink,
+	  createSymlinkSync: createSymlinkSync,
+	  // alias
+	  ensureSymlink: createSymlink,
+	  ensureSymlinkSync: createSymlinkSync
 	}
 
 
@@ -44919,775 +45281,326 @@
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// Approach:
-	//
-	// 1. Get the minimatch set
-	// 2. For each pattern in the set, PROCESS(pattern, false)
-	// 3. Store matches per-set, then uniq them
-	//
-	// PROCESS(pattern, inGlobStar)
-	// Get the first [n] items from pattern that are all strings
-	// Join these together.  This is PREFIX.
-	//   If there is no more remaining, then stat(PREFIX) and
-	//   add to matches if it succeeds.  END.
-	//
-	// If inGlobStar and PREFIX is symlink and points to dir
-	//   set ENTRIES = []
-	// else readdir(PREFIX) as ENTRIES
-	//   If fail, END
-	//
-	// with ENTRIES
-	//   If pattern[n] is GLOBSTAR
-	//     // handle the case where the globstar match is empty
-	//     // by pruning it out, and testing the resulting pattern
-	//     PROCESS(pattern[0..n] + pattern[n+1 .. $], false)
-	//     // handle other cases.
-	//     for ENTRY in ENTRIES (not dotfiles)
-	//       // attach globstar + tail onto the entry
-	//       // Mark that this entry is a globstar match
-	//       PROCESS(pattern[0..n] + ENTRY + pattern[n .. $], true)
-	//
-	//   else // not globstar
-	//     for ENTRY in ENTRIES (not dotfiles, unless pattern[n] is dot)
-	//       Test ENTRY against pattern[n]
-	//       If fails, continue
-	//       If passes, PROCESS(pattern[0..n] + item + pattern[n+1 .. $])
-	//
-	// Caveat:
-	//   Cache all stats and readdirs results to minimize syscall.  Since all
-	//   we ever care about is existence and directory-ness, we can just keep
-	//   `true` for files, and [children,...] for directories, or `false` for
-	//   things that don't exist.
-	
-	module.exports = glob
-	
-	var fs = __webpack_require__(145)
-	var minimatch = __webpack_require__(241)
-	var Minimatch = minimatch.Minimatch
-	var inherits = __webpack_require__(19)
-	var EE = __webpack_require__(9).EventEmitter
 	var path = __webpack_require__(152)
-	var assert = __webpack_require__(155)
-	var isAbsolute = __webpack_require__(245)
-	var globSync = __webpack_require__(246)
-	var common = __webpack_require__(247)
-	var alphasort = common.alphasort
-	var alphasorti = common.alphasorti
-	var setopts = common.setopts
-	var ownProp = common.ownProp
-	var inflight = __webpack_require__(248)
-	var util = __webpack_require__(10)
-	var childrenIgnored = common.childrenIgnored
-	var isIgnored = common.isIgnored
+	// path.isAbsolute shim for Node.js 0.10 support
+	path.isAbsolute = (path.isAbsolute) ? path.isAbsolute : __webpack_require__(241)
+	var fs = __webpack_require__(212)
 	
-	var once = __webpack_require__(250)
+	/**
+	 * Function that returns two types of paths, one relative to symlink, and one
+	 * relative to the current working directory. Checks if path is absolute or
+	 * relative. If the path is relative, this function checks if the path is
+	 * relative to symlink or relative to current working directory. This is an
+	 * initiative to find a smarter `srcpath` to supply when building symlinks.
+	 * This allows you to determine which path to use out of one of three possible
+	 * types of source paths. The first is an absolute path. This is detected by
+	 * `path.isAbsolute()`. When an absolute path is provided, it is checked to
+	 * see if it exists. If it does it's used, if not an error is returned
+	 * (callback)/ thrown (sync). The other two options for `srcpath` are a
+	 * relative url. By default Node's `fs.symlink` works by creating a symlink
+	 * using `dstpath` and expects the `srcpath` to be relative to the newly
+	 * created symlink. If you provide a `srcpath` that does not exist on the file
+	 * system it results in a broken symlink. To minimize this, the function
+	 * checks to see if the 'relative to symlink' source file exists, and if it
+	 * does it will use it. If it does not, it checks if there's a file that
+	 * exists that is relative to the current working directory, if does its used.
+	 * This preserves the expectations of the original fs.symlink spec and adds
+	 * the ability to pass in `relative to current working direcotry` paths.
+	 */
 	
-	function glob (pattern, options, cb) {
-	  if (typeof options === 'function') cb = options, options = {}
-	  if (!options) options = {}
-	
-	  if (options.sync) {
-	    if (cb)
-	      throw new TypeError('callback provided to sync glob')
-	    return globSync(pattern, options)
-	  }
-	
-	  return new Glob(pattern, options, cb)
-	}
-	
-	glob.sync = globSync
-	var GlobSync = glob.GlobSync = globSync.GlobSync
-	
-	// old api surface
-	glob.glob = glob
-	
-	function extend (origin, add) {
-	  if (add === null || typeof add !== 'object') {
-	    return origin
-	  }
-	
-	  var keys = Object.keys(add)
-	  var i = keys.length
-	  while (i--) {
-	    origin[keys[i]] = add[keys[i]]
-	  }
-	  return origin
-	}
-	
-	glob.hasMagic = function (pattern, options_) {
-	  var options = extend({}, options_)
-	  options.noprocess = true
-	
-	  var g = new Glob(pattern, options)
-	  var set = g.minimatch.set
-	  if (set.length > 1)
-	    return true
-	
-	  for (var j = 0; j < set[0].length; j++) {
-	    if (typeof set[0][j] !== 'string')
-	      return true
-	  }
-	
-	  return false
-	}
-	
-	glob.Glob = Glob
-	inherits(Glob, EE)
-	function Glob (pattern, options, cb) {
-	  if (typeof options === 'function') {
-	    cb = options
-	    options = null
-	  }
-	
-	  if (options && options.sync) {
-	    if (cb)
-	      throw new TypeError('callback provided to sync glob')
-	    return new GlobSync(pattern, options)
-	  }
-	
-	  if (!(this instanceof Glob))
-	    return new Glob(pattern, options, cb)
-	
-	  setopts(this, pattern, options)
-	  this._didRealPath = false
-	
-	  // process each pattern in the minimatch set
-	  var n = this.minimatch.set.length
-	
-	  // The matches are stored as {<filename>: true,...} so that
-	  // duplicates are automagically pruned.
-	  // Later, we do an Object.keys() on these.
-	  // Keep them as a list so we can fill in when nonull is set.
-	  this.matches = new Array(n)
-	
-	  if (typeof cb === 'function') {
-	    cb = once(cb)
-	    this.on('error', cb)
-	    this.on('end', function (matches) {
-	      cb(null, matches)
-	    })
-	  }
-	
-	  var self = this
-	  var n = this.minimatch.set.length
-	  this._processing = 0
-	  this.matches = new Array(n)
-	
-	  this._emitQueue = []
-	  this._processQueue = []
-	  this.paused = false
-	
-	  if (this.noprocess)
-	    return this
-	
-	  if (n === 0)
-	    return done()
-	
-	  for (var i = 0; i < n; i ++) {
-	    this._process(this.minimatch.set[i], i, false, done)
-	  }
-	
-	  function done () {
-	    --self._processing
-	    if (self._processing <= 0)
-	      self._finish()
-	  }
-	}
-	
-	Glob.prototype._finish = function () {
-	  assert(this instanceof Glob)
-	  if (this.aborted)
-	    return
-	
-	  if (this.realpath && !this._didRealpath)
-	    return this._realpath()
-	
-	  common.finish(this)
-	  this.emit('end', this.found)
-	}
-	
-	Glob.prototype._realpath = function () {
-	  if (this._didRealpath)
-	    return
-	
-	  this._didRealpath = true
-	
-	  var n = this.matches.length
-	  if (n === 0)
-	    return this._finish()
-	
-	  var self = this
-	  for (var i = 0; i < this.matches.length; i++)
-	    this._realpathSet(i, next)
-	
-	  function next () {
-	    if (--n === 0)
-	      self._finish()
-	  }
-	}
-	
-	Glob.prototype._realpathSet = function (index, cb) {
-	  var matchset = this.matches[index]
-	  if (!matchset)
-	    return cb()
-	
-	  var found = Object.keys(matchset)
-	  var self = this
-	  var n = found.length
-	
-	  if (n === 0)
-	    return cb()
-	
-	  var set = this.matches[index] = Object.create(null)
-	  found.forEach(function (p, i) {
-	    // If there's a problem with the stat, then it means that
-	    // one or more of the links in the realpath couldn't be
-	    // resolved.  just return the abs value in that case.
-	    p = self._makeAbs(p)
-	    fs.realpath(p, self.realpathCache, function (er, real) {
-	      if (!er)
-	        set[real] = true
-	      else if (er.syscall === 'stat')
-	        set[p] = true
-	      else
-	        self.emit('error', er) // srsly wtf right here
-	
-	      if (--n === 0) {
-	        self.matches[index] = set
-	        cb()
+	function symlinkPaths (srcpath, dstpath, callback) {
+	  if (path.isAbsolute(srcpath)) {
+	    return fs.lstat(srcpath, function (err, stat) {
+	      if (err) {
+	        err.message = err.message.replace('lstat', 'ensureSymlink')
+	        return callback(err)
 	      }
-	    })
-	  })
-	}
-	
-	Glob.prototype._mark = function (p) {
-	  return common.mark(this, p)
-	}
-	
-	Glob.prototype._makeAbs = function (f) {
-	  return common.makeAbs(this, f)
-	}
-	
-	Glob.prototype.abort = function () {
-	  this.aborted = true
-	  this.emit('abort')
-	}
-	
-	Glob.prototype.pause = function () {
-	  if (!this.paused) {
-	    this.paused = true
-	    this.emit('pause')
-	  }
-	}
-	
-	Glob.prototype.resume = function () {
-	  if (this.paused) {
-	    this.emit('resume')
-	    this.paused = false
-	    if (this._emitQueue.length) {
-	      var eq = this._emitQueue.slice(0)
-	      this._emitQueue.length = 0
-	      for (var i = 0; i < eq.length; i ++) {
-	        var e = eq[i]
-	        this._emitMatch(e[0], e[1])
-	      }
-	    }
-	    if (this._processQueue.length) {
-	      var pq = this._processQueue.slice(0)
-	      this._processQueue.length = 0
-	      for (var i = 0; i < pq.length; i ++) {
-	        var p = pq[i]
-	        this._processing--
-	        this._process(p[0], p[1], p[2], p[3])
-	      }
-	    }
-	  }
-	}
-	
-	Glob.prototype._process = function (pattern, index, inGlobStar, cb) {
-	  assert(this instanceof Glob)
-	  assert(typeof cb === 'function')
-	
-	  if (this.aborted)
-	    return
-	
-	  this._processing++
-	  if (this.paused) {
-	    this._processQueue.push([pattern, index, inGlobStar, cb])
-	    return
-	  }
-	
-	  //console.error('PROCESS %d', this._processing, pattern)
-	
-	  // Get the first [n] parts of pattern that are all strings.
-	  var n = 0
-	  while (typeof pattern[n] === 'string') {
-	    n ++
-	  }
-	  // now n is the index of the first one that is *not* a string.
-	
-	  // see if there's anything else
-	  var prefix
-	  switch (n) {
-	    // if not, then this is rather simple
-	    case pattern.length:
-	      this._processSimple(pattern.join('/'), index, cb)
-	      return
-	
-	    case 0:
-	      // pattern *starts* with some non-trivial item.
-	      // going to readdir(cwd), but not include the prefix in matches.
-	      prefix = null
-	      break
-	
-	    default:
-	      // pattern has some string bits in the front.
-	      // whatever it starts with, whether that's 'absolute' like /foo/bar,
-	      // or 'relative' like '../baz'
-	      prefix = pattern.slice(0, n).join('/')
-	      break
-	  }
-	
-	  var remain = pattern.slice(n)
-	
-	  // get the list of entries.
-	  var read
-	  if (prefix === null)
-	    read = '.'
-	  else if (isAbsolute(prefix) || isAbsolute(pattern.join('/'))) {
-	    if (!prefix || !isAbsolute(prefix))
-	      prefix = '/' + prefix
-	    read = prefix
-	  } else
-	    read = prefix
-	
-	  var abs = this._makeAbs(read)
-	
-	  //if ignored, skip _processing
-	  if (childrenIgnored(this, read))
-	    return cb()
-	
-	  var isGlobStar = remain[0] === minimatch.GLOBSTAR
-	  if (isGlobStar)
-	    this._processGlobStar(prefix, read, abs, remain, index, inGlobStar, cb)
-	  else
-	    this._processReaddir(prefix, read, abs, remain, index, inGlobStar, cb)
-	}
-	
-	Glob.prototype._processReaddir = function (prefix, read, abs, remain, index, inGlobStar, cb) {
-	  var self = this
-	  this._readdir(abs, inGlobStar, function (er, entries) {
-	    return self._processReaddir2(prefix, read, abs, remain, index, inGlobStar, entries, cb)
-	  })
-	}
-	
-	Glob.prototype._processReaddir2 = function (prefix, read, abs, remain, index, inGlobStar, entries, cb) {
-	
-	  // if the abs isn't a dir, then nothing can match!
-	  if (!entries)
-	    return cb()
-	
-	  // It will only match dot entries if it starts with a dot, or if
-	  // dot is set.  Stuff like @(.foo|.bar) isn't allowed.
-	  var pn = remain[0]
-	  var negate = !!this.minimatch.negate
-	  var rawGlob = pn._glob
-	  var dotOk = this.dot || rawGlob.charAt(0) === '.'
-	
-	  var matchedEntries = []
-	  for (var i = 0; i < entries.length; i++) {
-	    var e = entries[i]
-	    if (e.charAt(0) !== '.' || dotOk) {
-	      var m
-	      if (negate && !prefix) {
-	        m = !e.match(pn)
-	      } else {
-	        m = e.match(pn)
-	      }
-	      if (m)
-	        matchedEntries.push(e)
-	    }
-	  }
-	
-	  //console.error('prd2', prefix, entries, remain[0]._glob, matchedEntries)
-	
-	  var len = matchedEntries.length
-	  // If there are no matched entries, then nothing matches.
-	  if (len === 0)
-	    return cb()
-	
-	  // if this is the last remaining pattern bit, then no need for
-	  // an additional stat *unless* the user has specified mark or
-	  // stat explicitly.  We know they exist, since readdir returned
-	  // them.
-	
-	  if (remain.length === 1 && !this.mark && !this.stat) {
-	    if (!this.matches[index])
-	      this.matches[index] = Object.create(null)
-	
-	    for (var i = 0; i < len; i ++) {
-	      var e = matchedEntries[i]
-	      if (prefix) {
-	        if (prefix !== '/')
-	          e = prefix + '/' + e
-	        else
-	          e = prefix + e
-	      }
-	
-	      if (e.charAt(0) === '/' && !this.nomount) {
-	        e = path.join(this.root, e)
-	      }
-	      this._emitMatch(index, e)
-	    }
-	    // This was the last one, and no stats were needed
-	    return cb()
-	  }
-	
-	  // now test all matched entries as stand-ins for that part
-	  // of the pattern.
-	  remain.shift()
-	  for (var i = 0; i < len; i ++) {
-	    var e = matchedEntries[i]
-	    var newPattern
-	    if (prefix) {
-	      if (prefix !== '/')
-	        e = prefix + '/' + e
-	      else
-	        e = prefix + e
-	    }
-	    this._process([e].concat(remain), index, inGlobStar, cb)
-	  }
-	  cb()
-	}
-	
-	Glob.prototype._emitMatch = function (index, e) {
-	  if (this.aborted)
-	    return
-	
-	  if (this.matches[index][e])
-	    return
-	
-	  if (isIgnored(this, e))
-	    return
-	
-	  if (this.paused) {
-	    this._emitQueue.push([index, e])
-	    return
-	  }
-	
-	  var abs = this._makeAbs(e)
-	
-	  if (this.nodir) {
-	    var c = this.cache[abs]
-	    if (c === 'DIR' || Array.isArray(c))
-	      return
-	  }
-	
-	  if (this.mark)
-	    e = this._mark(e)
-	
-	  this.matches[index][e] = true
-	
-	  var st = this.statCache[abs]
-	  if (st)
-	    this.emit('stat', e, st)
-	
-	  this.emit('match', e)
-	}
-	
-	Glob.prototype._readdirInGlobStar = function (abs, cb) {
-	  if (this.aborted)
-	    return
-	
-	  // follow all symlinked directories forever
-	  // just proceed as if this is a non-globstar situation
-	  if (this.follow)
-	    return this._readdir(abs, false, cb)
-	
-	  var lstatkey = 'lstat\0' + abs
-	  var self = this
-	  var lstatcb = inflight(lstatkey, lstatcb_)
-	
-	  if (lstatcb)
-	    fs.lstat(abs, lstatcb)
-	
-	  function lstatcb_ (er, lstat) {
-	    if (er)
-	      return cb()
-	
-	    var isSym = lstat.isSymbolicLink()
-	    self.symlinks[abs] = isSym
-	
-	    // If it's not a symlink or a dir, then it's definitely a regular file.
-	    // don't bother doing a readdir in that case.
-	    if (!isSym && !lstat.isDirectory()) {
-	      self.cache[abs] = 'FILE'
-	      cb()
-	    } else
-	      self._readdir(abs, false, cb)
-	  }
-	}
-	
-	Glob.prototype._readdir = function (abs, inGlobStar, cb) {
-	  if (this.aborted)
-	    return
-	
-	  cb = inflight('readdir\0'+abs+'\0'+inGlobStar, cb)
-	  if (!cb)
-	    return
-	
-	  //console.error('RD %j %j', +inGlobStar, abs)
-	  if (inGlobStar && !ownProp(this.symlinks, abs))
-	    return this._readdirInGlobStar(abs, cb)
-	
-	  if (ownProp(this.cache, abs)) {
-	    var c = this.cache[abs]
-	    if (!c || c === 'FILE')
-	      return cb()
-	
-	    if (Array.isArray(c))
-	      return cb(null, c)
-	  }
-	
-	  var self = this
-	  fs.readdir(abs, readdirCb(this, abs, cb))
-	}
-	
-	function readdirCb (self, abs, cb) {
-	  return function (er, entries) {
-	    if (er)
-	      self._readdirError(abs, er, cb)
-	    else
-	      self._readdirEntries(abs, entries, cb)
-	  }
-	}
-	
-	Glob.prototype._readdirEntries = function (abs, entries, cb) {
-	  if (this.aborted)
-	    return
-	
-	  // if we haven't asked to stat everything, then just
-	  // assume that everything in there exists, so we can avoid
-	  // having to stat it a second time.
-	  if (!this.mark && !this.stat) {
-	    for (var i = 0; i < entries.length; i ++) {
-	      var e = entries[i]
-	      if (abs === '/')
-	        e = abs + e
-	      else
-	        e = abs + '/' + e
-	      this.cache[e] = true
-	    }
-	  }
-	
-	  this.cache[abs] = entries
-	  return cb(null, entries)
-	}
-	
-	Glob.prototype._readdirError = function (f, er, cb) {
-	  if (this.aborted)
-	    return
-	
-	  // handle errors, and cache the information
-	  switch (er.code) {
-	    case 'ENOTSUP': // https://github.com/isaacs/node-glob/issues/205
-	    case 'ENOTDIR': // totally normal. means it *does* exist.
-	      this.cache[this._makeAbs(f)] = 'FILE'
-	      break
-	
-	    case 'ENOENT': // not terribly unusual
-	    case 'ELOOP':
-	    case 'ENAMETOOLONG':
-	    case 'UNKNOWN':
-	      this.cache[this._makeAbs(f)] = false
-	      break
-	
-	    default: // some unusual error.  Treat as failure.
-	      this.cache[this._makeAbs(f)] = false
-	      if (this.strict) {
-	        this.emit('error', er)
-	        // If the error is handled, then we abort
-	        // if not, we threw out of here
-	        this.abort()
-	      }
-	      if (!this.silent)
-	        console.error('glob error', er)
-	      break
-	  }
-	
-	  return cb()
-	}
-	
-	Glob.prototype._processGlobStar = function (prefix, read, abs, remain, index, inGlobStar, cb) {
-	  var self = this
-	  this._readdir(abs, inGlobStar, function (er, entries) {
-	    self._processGlobStar2(prefix, read, abs, remain, index, inGlobStar, entries, cb)
-	  })
-	}
-	
-	
-	Glob.prototype._processGlobStar2 = function (prefix, read, abs, remain, index, inGlobStar, entries, cb) {
-	  //console.error('pgs2', prefix, remain[0], entries)
-	
-	  // no entries means not a dir, so it can never have matches
-	  // foo.txt/** doesn't match foo.txt
-	  if (!entries)
-	    return cb()
-	
-	  // test without the globstar, and with every child both below
-	  // and replacing the globstar.
-	  var remainWithoutGlobStar = remain.slice(1)
-	  var gspref = prefix ? [ prefix ] : []
-	  var noGlobStar = gspref.concat(remainWithoutGlobStar)
-	
-	  // the noGlobStar pattern exits the inGlobStar state
-	  this._process(noGlobStar, index, false, cb)
-	
-	  var isSym = this.symlinks[abs]
-	  var len = entries.length
-	
-	  // If it's a symlink, and we're in a globstar, then stop
-	  if (isSym && inGlobStar)
-	    return cb()
-	
-	  for (var i = 0; i < len; i++) {
-	    var e = entries[i]
-	    if (e.charAt(0) === '.' && !this.dot)
-	      continue
-	
-	    // these two cases enter the inGlobStar state
-	    var instead = gspref.concat(entries[i], remainWithoutGlobStar)
-	    this._process(instead, index, true, cb)
-	
-	    var below = gspref.concat(entries[i], remain)
-	    this._process(below, index, true, cb)
-	  }
-	
-	  cb()
-	}
-	
-	Glob.prototype._processSimple = function (prefix, index, cb) {
-	  // XXX review this.  Shouldn't it be doing the mounting etc
-	  // before doing stat?  kinda weird?
-	  var self = this
-	  this._stat(prefix, function (er, exists) {
-	    self._processSimple2(prefix, index, er, exists, cb)
-	  })
-	}
-	Glob.prototype._processSimple2 = function (prefix, index, er, exists, cb) {
-	
-	  //console.error('ps2', prefix, exists)
-	
-	  if (!this.matches[index])
-	    this.matches[index] = Object.create(null)
-	
-	  // If it doesn't exist, then just mark the lack of results
-	  if (!exists)
-	    return cb()
-	
-	  if (prefix && isAbsolute(prefix) && !this.nomount) {
-	    var trail = /[\/\\]$/.test(prefix)
-	    if (prefix.charAt(0) === '/') {
-	      prefix = path.join(this.root, prefix)
-	    } else {
-	      prefix = path.resolve(this.root, prefix)
-	      if (trail)
-	        prefix += '/'
-	    }
-	  }
-	
-	  if (process.platform === 'win32')
-	    prefix = prefix.replace(/\\/g, '/')
-	
-	  // Mark this as a match
-	  this._emitMatch(index, prefix)
-	  cb()
-	}
-	
-	// Returns either 'DIR', 'FILE', or false
-	Glob.prototype._stat = function (f, cb) {
-	  var abs = this._makeAbs(f)
-	  var needDir = f.slice(-1) === '/'
-	
-	  if (f.length > this.maxLength)
-	    return cb()
-	
-	  if (!this.stat && ownProp(this.cache, abs)) {
-	    var c = this.cache[abs]
-	
-	    if (Array.isArray(c))
-	      c = 'DIR'
-	
-	    // It exists, but maybe not how we need it
-	    if (!needDir || c === 'DIR')
-	      return cb(null, c)
-	
-	    if (needDir && c === 'FILE')
-	      return cb()
-	
-	    // otherwise we have to stat, because maybe c=true
-	    // if we know it exists, but not what it is.
-	  }
-	
-	  var exists
-	  var stat = this.statCache[abs]
-	  if (stat !== undefined) {
-	    if (stat === false)
-	      return cb(null, stat)
-	    else {
-	      var type = stat.isDirectory() ? 'DIR' : 'FILE'
-	      if (needDir && type === 'FILE')
-	        return cb()
-	      else
-	        return cb(null, type, stat)
-	    }
-	  }
-	
-	  var self = this
-	  var statcb = inflight('stat\0' + abs, lstatcb_)
-	  if (statcb)
-	    fs.lstat(abs, statcb)
-	
-	  function lstatcb_ (er, lstat) {
-	    if (lstat && lstat.isSymbolicLink()) {
-	      // If it's a symlink, then treat it as the target, unless
-	      // the target does not exist, then treat it as a file.
-	      return fs.stat(abs, function (er, stat) {
-	        if (er)
-	          self._stat2(f, abs, null, lstat, cb)
-	        else
-	          self._stat2(f, abs, er, stat, cb)
+	      return callback(null, {
+	        'toCwd': srcpath,
+	        'toDst': srcpath
 	      })
+	    })
+	  } else {
+	    var dstdir = path.dirname(dstpath)
+	    var relativeToDst = path.join(dstdir, srcpath)
+	    return fs.exists(relativeToDst, function (exists) {
+	      if (exists) {
+	        return callback(null, {
+	          'toCwd': relativeToDst,
+	          'toDst': srcpath
+	        })
+	      } else {
+	        return fs.lstat(srcpath, function (err, stat) {
+	          if (err) {
+	            err.message = err.message.replace('lstat', 'ensureSymlink')
+	            return callback(err)
+	          }
+	          return callback(null, {
+	            'toCwd': srcpath,
+	            'toDst': path.relative(dstdir, srcpath)
+	          })
+	        })
+	      }
+	    })
+	  }
+	}
+	
+	function symlinkPathsSync (srcpath, dstpath) {
+	  var exists
+	  if (path.isAbsolute(srcpath)) {
+	    exists = fs.existsSync(srcpath)
+	    if (!exists) throw new Error('absolute srcpath does not exist')
+	    return {
+	      'toCwd': srcpath,
+	      'toDst': srcpath
+	    }
+	  } else {
+	    var dstdir = path.dirname(dstpath)
+	    var relativeToDst = path.join(dstdir, srcpath)
+	    exists = fs.existsSync(relativeToDst)
+	    if (exists) {
+	      return {
+	        'toCwd': relativeToDst,
+	        'toDst': srcpath
+	      }
 	    } else {
-	      self._stat2(f, abs, er, lstat, cb)
+	      exists = fs.existsSync(srcpath)
+	      if (!exists) throw new Error('relative srcpath does not exist')
+	      return {
+	        'toCwd': srcpath,
+	        'toDst': path.relative(dstdir, srcpath)
+	      }
 	    }
 	  }
 	}
 	
-	Glob.prototype._stat2 = function (f, abs, er, stat, cb) {
-	  if (er) {
-	    this.statCache[abs] = false
-	    return cb()
-	  }
-	
-	  var needDir = f.slice(-1) === '/'
-	  this.statCache[abs] = stat
-	
-	  if (abs.slice(-1) === '/' && !stat.isDirectory())
-	    return cb(null, false, stat)
-	
-	  var c = stat.isDirectory() ? 'DIR' : 'FILE'
-	  this.cache[abs] = this.cache[abs] || c
-	
-	  if (needDir && c !== 'DIR')
-	    return cb()
-	
-	  return cb(null, c, stat)
+	module.exports = {
+	  'symlinkPaths': symlinkPaths,
+	  'symlinkPathsSync': symlinkPathsSync
 	}
 
 
 /***/ },
 /* 241 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	function posix(path) {
+		return path.charAt(0) === '/';
+	};
+	
+	function win32(path) {
+		// https://github.com/joyent/node/blob/b3fcc245fb25539909ef1d5eaa01dbf92e168633/lib/path.js#L56
+		var splitDeviceRe = /^([a-zA-Z]:|[\\\/]{2}[^\\\/]+[\\\/]+[^\\\/]+)?([\\\/])?([\s\S]*?)$/;
+		var result = splitDeviceRe.exec(path);
+		var device = result[1] || '';
+		var isUnc = !!device && device.charAt(1) !== ':';
+	
+		// UNC paths are always absolute
+		return !!result[2] || isUnc;
+	};
+	
+	module.exports = process.platform === 'win32' ? win32 : posix;
+	module.exports.posix = posix;
+	module.exports.win32 = win32;
+
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var fs = __webpack_require__(212)
+	
+	function symlinkType (srcpath, type, callback) {
+	  callback = (typeof type === 'function') ? type : callback
+	  type = (typeof type === 'function') ? false : type
+	  if (type) return callback(null, type)
+	  fs.lstat(srcpath, function (err, stats) {
+	    if (err) return callback(null, 'file')
+	    type = (stats && stats.isDirectory()) ? 'dir' : 'file'
+	    callback(null, type)
+	  })
+	}
+	
+	function symlinkTypeSync (srcpath, type) {
+	  if (type) return type
+	  try {
+	    var stats = fs.lstatSync(srcpath)
+	  } catch (e) {
+	    return 'file'
+	  }
+	  return (stats && stats.isDirectory()) ? 'dir' : 'file'
+	}
+	
+	module.exports = {
+	  symlinkType: symlinkType,
+	  symlinkTypeSync: symlinkTypeSync
+	}
+
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var path = __webpack_require__(152)
+	var fs = __webpack_require__(212)
+	var mkdir = __webpack_require__(220)
+	
+	function outputFile (file, data, encoding, callback) {
+	  if (typeof encoding === 'function') {
+	    callback = encoding
+	    encoding = 'utf8'
+	  }
+	
+	  var dir = path.dirname(file)
+	  fs.exists(dir, function (itDoes) {
+	    if (itDoes) return fs.writeFile(file, data, encoding, callback)
+	
+	    mkdir.mkdirs(dir, function (err) {
+	      if (err) return callback(err)
+	
+	      fs.writeFile(file, data, encoding, callback)
+	    })
+	  })
+	}
+	
+	function outputFileSync (file, data, encoding) {
+	  var dir = path.dirname(file)
+	  if (fs.existsSync(dir)) {
+	    return fs.writeFileSync.apply(fs, arguments)
+	  }
+	  mkdir.mkdirsSync(dir)
+	  fs.writeFileSync.apply(fs, arguments)
+	}
+	
+	module.exports = {
+	  outputFile: outputFile,
+	  outputFileSync: outputFileSync
+	}
+
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var klaw = __webpack_require__(245)
+	
+	module.exports = {
+	  walk: klaw
+	}
+
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var assert = __webpack_require__(155)
+	var fs = __webpack_require__(145)
+	var path = __webpack_require__(152)
+	var Readable = __webpack_require__(10).Readable
+	var util = __webpack_require__(7)
+	var assign = __webpack_require__(246)
+	
+	function Walker (dir, options) {
+	  assert.strictEqual(typeof dir, 'string', '`dir` parameter should be of type string. Got type: ' + typeof dir)
+	  var defaultStreamOptions = { objectMode: true }
+	  var defaultOpts = { queueMethod: 'shift', pathSorter: undefined }
+	  options = assign(defaultOpts, options, defaultStreamOptions)
+	
+	  Readable.call(this, options)
+	  this.root = path.resolve(dir)
+	  this.paths = [this.root]
+	  this.options = options
+	  this.fs = options.fs || fs // mock-fs
+	}
+	util.inherits(Walker, Readable)
+	
+	Walker.prototype._read = function () {
+	  if (this.paths.length === 0) return this.push(null)
+	  var self = this
+	  var pathItem = this.paths[this.options.queueMethod]()
+	
+	  self.fs.lstat(pathItem, function (err, stats) {
+	    var item = { path: pathItem, stats: stats }
+	    if (err) return self.emit('error', err, item)
+	    if (!stats.isDirectory()) return self.push(item)
+	
+	    self.fs.readdir(pathItem, function (err, pathItems) {
+	      if (err) {
+	        self.push(item)
+	        return self.emit('error', err, item)
+	      }
+	
+	      pathItems = pathItems.map(function (part) { return path.join(pathItem, part) })
+	      if (self.options.pathSorter) pathItems.sort(self.options.pathSorter)
+	      pathItems.forEach(function (pi) { self.paths.push(pi) })
+	
+	      self.push(item)
+	    })
+	  })
+	}
+	
+	function walk (root, options) {
+	  return new Walker(root, options)
+	}
+	
+	module.exports = walk
+
+
+/***/ },
+/* 246 */
+/***/ function(module, exports) {
+
+	// simple mutable assign (extracted from fs-extra)
+	// I really like object-assign package, but I wanted a lean package with zero deps
+	function _assign () {
+	  var args = [].slice.call(arguments).filter(function (i) { return i })
+	  var dest = args.shift()
+	  args.forEach(function (src) {
+	    Object.keys(src).forEach(function (key) {
+	      dest[key] = src[key]
+	    })
+	  })
+	
+	  return dest
+	}
+	
+	// thank you baby Jesus for Node v4 and Object.assign
+	module.exports = Object.assign || _assign
+
+
+/***/ },
+/* 247 */
+/***/ function(module, exports) {
+
+	
+	'use strict';
+	
+	module.exports =
+	
+	    /**
+	     * Takes in a {key:val} and returns a key:key
+	     *  
+	     * @param object {key1 : val1 ... keyn:valn}
+	     */
+	    function(obj) {
+	        var key;
+	        var mirrored = {};
+	
+	        if ( obj && typeof obj === 'object' ) {
+	            for (key in obj) {
+	                if (obj.hasOwnProperty(key)) {
+	                    mirrored[key] = key;
+	                }
+	            }
+	        }
+	        return mirrored;
+	    };
+
+
+/***/ },
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports = minimatch
@@ -45699,7 +45612,7 @@
 	} catch (er) {}
 	
 	var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {}
-	var expand = __webpack_require__(242)
+	var expand = __webpack_require__(249)
 	
 	// any single thing other than /
 	// don't need to escape / when using new RegExp()
@@ -46605,11 +46518,11 @@
 
 
 /***/ },
-/* 242 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var concatMap = __webpack_require__(243);
-	var balanced = __webpack_require__(244);
+	var concatMap = __webpack_require__(250);
+	var balanced = __webpack_require__(251);
 	
 	module.exports = expandTop;
 	
@@ -46802,7 +46715,7 @@
 
 
 /***/ },
-/* 243 */
+/* 250 */
 /***/ function(module, exports) {
 
 	module.exports = function (xs, fn) {
@@ -46821,7 +46734,7 @@
 
 
 /***/ },
-/* 244 */
+/* 251 */
 /***/ function(module, exports) {
 
 	module.exports = balanced;
@@ -46877,1808 +46790,7 @@
 
 
 /***/ },
-/* 245 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	function posix(path) {
-		return path.charAt(0) === '/';
-	};
-	
-	function win32(path) {
-		// https://github.com/joyent/node/blob/b3fcc245fb25539909ef1d5eaa01dbf92e168633/lib/path.js#L56
-		var splitDeviceRe = /^([a-zA-Z]:|[\\\/]{2}[^\\\/]+[\\\/]+[^\\\/]+)?([\\\/])?([\s\S]*?)$/;
-		var result = splitDeviceRe.exec(path);
-		var device = result[1] || '';
-		var isUnc = !!device && device.charAt(1) !== ':';
-	
-		// UNC paths are always absolute
-		return !!result[2] || isUnc;
-	};
-	
-	module.exports = process.platform === 'win32' ? win32 : posix;
-	module.exports.posix = posix;
-	module.exports.win32 = win32;
-
-
-/***/ },
-/* 246 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = globSync
-	globSync.GlobSync = GlobSync
-	
-	var fs = __webpack_require__(145)
-	var minimatch = __webpack_require__(241)
-	var Minimatch = minimatch.Minimatch
-	var Glob = __webpack_require__(240).Glob
-	var util = __webpack_require__(10)
-	var path = __webpack_require__(152)
-	var assert = __webpack_require__(155)
-	var isAbsolute = __webpack_require__(245)
-	var common = __webpack_require__(247)
-	var alphasort = common.alphasort
-	var alphasorti = common.alphasorti
-	var setopts = common.setopts
-	var ownProp = common.ownProp
-	var childrenIgnored = common.childrenIgnored
-	
-	function globSync (pattern, options) {
-	  if (typeof options === 'function' || arguments.length === 3)
-	    throw new TypeError('callback provided to sync glob\n'+
-	                        'See: https://github.com/isaacs/node-glob/issues/167')
-	
-	  return new GlobSync(pattern, options).found
-	}
-	
-	function GlobSync (pattern, options) {
-	  if (!pattern)
-	    throw new Error('must provide pattern')
-	
-	  if (typeof options === 'function' || arguments.length === 3)
-	    throw new TypeError('callback provided to sync glob\n'+
-	                        'See: https://github.com/isaacs/node-glob/issues/167')
-	
-	  if (!(this instanceof GlobSync))
-	    return new GlobSync(pattern, options)
-	
-	  setopts(this, pattern, options)
-	
-	  if (this.noprocess)
-	    return this
-	
-	  var n = this.minimatch.set.length
-	  this.matches = new Array(n)
-	  for (var i = 0; i < n; i ++) {
-	    this._process(this.minimatch.set[i], i, false)
-	  }
-	  this._finish()
-	}
-	
-	GlobSync.prototype._finish = function () {
-	  assert(this instanceof GlobSync)
-	  if (this.realpath) {
-	    var self = this
-	    this.matches.forEach(function (matchset, index) {
-	      var set = self.matches[index] = Object.create(null)
-	      for (var p in matchset) {
-	        try {
-	          p = self._makeAbs(p)
-	          var real = fs.realpathSync(p, self.realpathCache)
-	          set[real] = true
-	        } catch (er) {
-	          if (er.syscall === 'stat')
-	            set[self._makeAbs(p)] = true
-	          else
-	            throw er
-	        }
-	      }
-	    })
-	  }
-	  common.finish(this)
-	}
-	
-	
-	GlobSync.prototype._process = function (pattern, index, inGlobStar) {
-	  assert(this instanceof GlobSync)
-	
-	  // Get the first [n] parts of pattern that are all strings.
-	  var n = 0
-	  while (typeof pattern[n] === 'string') {
-	    n ++
-	  }
-	  // now n is the index of the first one that is *not* a string.
-	
-	  // See if there's anything else
-	  var prefix
-	  switch (n) {
-	    // if not, then this is rather simple
-	    case pattern.length:
-	      this._processSimple(pattern.join('/'), index)
-	      return
-	
-	    case 0:
-	      // pattern *starts* with some non-trivial item.
-	      // going to readdir(cwd), but not include the prefix in matches.
-	      prefix = null
-	      break
-	
-	    default:
-	      // pattern has some string bits in the front.
-	      // whatever it starts with, whether that's 'absolute' like /foo/bar,
-	      // or 'relative' like '../baz'
-	      prefix = pattern.slice(0, n).join('/')
-	      break
-	  }
-	
-	  var remain = pattern.slice(n)
-	
-	  // get the list of entries.
-	  var read
-	  if (prefix === null)
-	    read = '.'
-	  else if (isAbsolute(prefix) || isAbsolute(pattern.join('/'))) {
-	    if (!prefix || !isAbsolute(prefix))
-	      prefix = '/' + prefix
-	    read = prefix
-	  } else
-	    read = prefix
-	
-	  var abs = this._makeAbs(read)
-	
-	  //if ignored, skip processing
-	  if (childrenIgnored(this, read))
-	    return
-	
-	  var isGlobStar = remain[0] === minimatch.GLOBSTAR
-	  if (isGlobStar)
-	    this._processGlobStar(prefix, read, abs, remain, index, inGlobStar)
-	  else
-	    this._processReaddir(prefix, read, abs, remain, index, inGlobStar)
-	}
-	
-	
-	GlobSync.prototype._processReaddir = function (prefix, read, abs, remain, index, inGlobStar) {
-	  var entries = this._readdir(abs, inGlobStar)
-	
-	  // if the abs isn't a dir, then nothing can match!
-	  if (!entries)
-	    return
-	
-	  // It will only match dot entries if it starts with a dot, or if
-	  // dot is set.  Stuff like @(.foo|.bar) isn't allowed.
-	  var pn = remain[0]
-	  var negate = !!this.minimatch.negate
-	  var rawGlob = pn._glob
-	  var dotOk = this.dot || rawGlob.charAt(0) === '.'
-	
-	  var matchedEntries = []
-	  for (var i = 0; i < entries.length; i++) {
-	    var e = entries[i]
-	    if (e.charAt(0) !== '.' || dotOk) {
-	      var m
-	      if (negate && !prefix) {
-	        m = !e.match(pn)
-	      } else {
-	        m = e.match(pn)
-	      }
-	      if (m)
-	        matchedEntries.push(e)
-	    }
-	  }
-	
-	  var len = matchedEntries.length
-	  // If there are no matched entries, then nothing matches.
-	  if (len === 0)
-	    return
-	
-	  // if this is the last remaining pattern bit, then no need for
-	  // an additional stat *unless* the user has specified mark or
-	  // stat explicitly.  We know they exist, since readdir returned
-	  // them.
-	
-	  if (remain.length === 1 && !this.mark && !this.stat) {
-	    if (!this.matches[index])
-	      this.matches[index] = Object.create(null)
-	
-	    for (var i = 0; i < len; i ++) {
-	      var e = matchedEntries[i]
-	      if (prefix) {
-	        if (prefix.slice(-1) !== '/')
-	          e = prefix + '/' + e
-	        else
-	          e = prefix + e
-	      }
-	
-	      if (e.charAt(0) === '/' && !this.nomount) {
-	        e = path.join(this.root, e)
-	      }
-	      this.matches[index][e] = true
-	    }
-	    // This was the last one, and no stats were needed
-	    return
-	  }
-	
-	  // now test all matched entries as stand-ins for that part
-	  // of the pattern.
-	  remain.shift()
-	  for (var i = 0; i < len; i ++) {
-	    var e = matchedEntries[i]
-	    var newPattern
-	    if (prefix)
-	      newPattern = [prefix, e]
-	    else
-	      newPattern = [e]
-	    this._process(newPattern.concat(remain), index, inGlobStar)
-	  }
-	}
-	
-	
-	GlobSync.prototype._emitMatch = function (index, e) {
-	  var abs = this._makeAbs(e)
-	  if (this.mark)
-	    e = this._mark(e)
-	
-	  if (this.matches[index][e])
-	    return
-	
-	  if (this.nodir) {
-	    var c = this.cache[this._makeAbs(e)]
-	    if (c === 'DIR' || Array.isArray(c))
-	      return
-	  }
-	
-	  this.matches[index][e] = true
-	  if (this.stat)
-	    this._stat(e)
-	}
-	
-	
-	GlobSync.prototype._readdirInGlobStar = function (abs) {
-	  // follow all symlinked directories forever
-	  // just proceed as if this is a non-globstar situation
-	  if (this.follow)
-	    return this._readdir(abs, false)
-	
-	  var entries
-	  var lstat
-	  var stat
-	  try {
-	    lstat = fs.lstatSync(abs)
-	  } catch (er) {
-	    // lstat failed, doesn't exist
-	    return null
-	  }
-	
-	  var isSym = lstat.isSymbolicLink()
-	  this.symlinks[abs] = isSym
-	
-	  // If it's not a symlink or a dir, then it's definitely a regular file.
-	  // don't bother doing a readdir in that case.
-	  if (!isSym && !lstat.isDirectory())
-	    this.cache[abs] = 'FILE'
-	  else
-	    entries = this._readdir(abs, false)
-	
-	  return entries
-	}
-	
-	GlobSync.prototype._readdir = function (abs, inGlobStar) {
-	  var entries
-	
-	  if (inGlobStar && !ownProp(this.symlinks, abs))
-	    return this._readdirInGlobStar(abs)
-	
-	  if (ownProp(this.cache, abs)) {
-	    var c = this.cache[abs]
-	    if (!c || c === 'FILE')
-	      return null
-	
-	    if (Array.isArray(c))
-	      return c
-	  }
-	
-	  try {
-	    return this._readdirEntries(abs, fs.readdirSync(abs))
-	  } catch (er) {
-	    this._readdirError(abs, er)
-	    return null
-	  }
-	}
-	
-	GlobSync.prototype._readdirEntries = function (abs, entries) {
-	  // if we haven't asked to stat everything, then just
-	  // assume that everything in there exists, so we can avoid
-	  // having to stat it a second time.
-	  if (!this.mark && !this.stat) {
-	    for (var i = 0; i < entries.length; i ++) {
-	      var e = entries[i]
-	      if (abs === '/')
-	        e = abs + e
-	      else
-	        e = abs + '/' + e
-	      this.cache[e] = true
-	    }
-	  }
-	
-	  this.cache[abs] = entries
-	
-	  // mark and cache dir-ness
-	  return entries
-	}
-	
-	GlobSync.prototype._readdirError = function (f, er) {
-	  // handle errors, and cache the information
-	  switch (er.code) {
-	    case 'ENOTSUP': // https://github.com/isaacs/node-glob/issues/205
-	    case 'ENOTDIR': // totally normal. means it *does* exist.
-	      this.cache[this._makeAbs(f)] = 'FILE'
-	      break
-	
-	    case 'ENOENT': // not terribly unusual
-	    case 'ELOOP':
-	    case 'ENAMETOOLONG':
-	    case 'UNKNOWN':
-	      this.cache[this._makeAbs(f)] = false
-	      break
-	
-	    default: // some unusual error.  Treat as failure.
-	      this.cache[this._makeAbs(f)] = false
-	      if (this.strict)
-	        throw er
-	      if (!this.silent)
-	        console.error('glob error', er)
-	      break
-	  }
-	}
-	
-	GlobSync.prototype._processGlobStar = function (prefix, read, abs, remain, index, inGlobStar) {
-	
-	  var entries = this._readdir(abs, inGlobStar)
-	
-	  // no entries means not a dir, so it can never have matches
-	  // foo.txt/** doesn't match foo.txt
-	  if (!entries)
-	    return
-	
-	  // test without the globstar, and with every child both below
-	  // and replacing the globstar.
-	  var remainWithoutGlobStar = remain.slice(1)
-	  var gspref = prefix ? [ prefix ] : []
-	  var noGlobStar = gspref.concat(remainWithoutGlobStar)
-	
-	  // the noGlobStar pattern exits the inGlobStar state
-	  this._process(noGlobStar, index, false)
-	
-	  var len = entries.length
-	  var isSym = this.symlinks[abs]
-	
-	  // If it's a symlink, and we're in a globstar, then stop
-	  if (isSym && inGlobStar)
-	    return
-	
-	  for (var i = 0; i < len; i++) {
-	    var e = entries[i]
-	    if (e.charAt(0) === '.' && !this.dot)
-	      continue
-	
-	    // these two cases enter the inGlobStar state
-	    var instead = gspref.concat(entries[i], remainWithoutGlobStar)
-	    this._process(instead, index, true)
-	
-	    var below = gspref.concat(entries[i], remain)
-	    this._process(below, index, true)
-	  }
-	}
-	
-	GlobSync.prototype._processSimple = function (prefix, index) {
-	  // XXX review this.  Shouldn't it be doing the mounting etc
-	  // before doing stat?  kinda weird?
-	  var exists = this._stat(prefix)
-	
-	  if (!this.matches[index])
-	    this.matches[index] = Object.create(null)
-	
-	  // If it doesn't exist, then just mark the lack of results
-	  if (!exists)
-	    return
-	
-	  if (prefix && isAbsolute(prefix) && !this.nomount) {
-	    var trail = /[\/\\]$/.test(prefix)
-	    if (prefix.charAt(0) === '/') {
-	      prefix = path.join(this.root, prefix)
-	    } else {
-	      prefix = path.resolve(this.root, prefix)
-	      if (trail)
-	        prefix += '/'
-	    }
-	  }
-	
-	  if (process.platform === 'win32')
-	    prefix = prefix.replace(/\\/g, '/')
-	
-	  // Mark this as a match
-	  this.matches[index][prefix] = true
-	}
-	
-	// Returns either 'DIR', 'FILE', or false
-	GlobSync.prototype._stat = function (f) {
-	  var abs = this._makeAbs(f)
-	  var needDir = f.slice(-1) === '/'
-	
-	  if (f.length > this.maxLength)
-	    return false
-	
-	  if (!this.stat && ownProp(this.cache, abs)) {
-	    var c = this.cache[abs]
-	
-	    if (Array.isArray(c))
-	      c = 'DIR'
-	
-	    // It exists, but maybe not how we need it
-	    if (!needDir || c === 'DIR')
-	      return c
-	
-	    if (needDir && c === 'FILE')
-	      return false
-	
-	    // otherwise we have to stat, because maybe c=true
-	    // if we know it exists, but not what it is.
-	  }
-	
-	  var exists
-	  var stat = this.statCache[abs]
-	  if (!stat) {
-	    var lstat
-	    try {
-	      lstat = fs.lstatSync(abs)
-	    } catch (er) {
-	      return false
-	    }
-	
-	    if (lstat.isSymbolicLink()) {
-	      try {
-	        stat = fs.statSync(abs)
-	      } catch (er) {
-	        stat = lstat
-	      }
-	    } else {
-	      stat = lstat
-	    }
-	  }
-	
-	  this.statCache[abs] = stat
-	
-	  var c = stat.isDirectory() ? 'DIR' : 'FILE'
-	  this.cache[abs] = this.cache[abs] || c
-	
-	  if (needDir && c !== 'DIR')
-	    return false
-	
-	  return c
-	}
-	
-	GlobSync.prototype._mark = function (p) {
-	  return common.mark(this, p)
-	}
-	
-	GlobSync.prototype._makeAbs = function (f) {
-	  return common.makeAbs(this, f)
-	}
-
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports.alphasort = alphasort
-	exports.alphasorti = alphasorti
-	exports.setopts = setopts
-	exports.ownProp = ownProp
-	exports.makeAbs = makeAbs
-	exports.finish = finish
-	exports.mark = mark
-	exports.isIgnored = isIgnored
-	exports.childrenIgnored = childrenIgnored
-	
-	function ownProp (obj, field) {
-	  return Object.prototype.hasOwnProperty.call(obj, field)
-	}
-	
-	var path = __webpack_require__(152)
-	var minimatch = __webpack_require__(241)
-	var isAbsolute = __webpack_require__(245)
-	var Minimatch = minimatch.Minimatch
-	
-	function alphasorti (a, b) {
-	  return a.toLowerCase().localeCompare(b.toLowerCase())
-	}
-	
-	function alphasort (a, b) {
-	  return a.localeCompare(b)
-	}
-	
-	function setupIgnores (self, options) {
-	  self.ignore = options.ignore || []
-	
-	  if (!Array.isArray(self.ignore))
-	    self.ignore = [self.ignore]
-	
-	  if (self.ignore.length) {
-	    self.ignore = self.ignore.map(ignoreMap)
-	  }
-	}
-	
-	// ignore patterns are always in dot:true mode.
-	function ignoreMap (pattern) {
-	  var gmatcher = null
-	  if (pattern.slice(-3) === '/**') {
-	    var gpattern = pattern.replace(/(\/\*\*)+$/, '')
-	    gmatcher = new Minimatch(gpattern, { dot: true })
-	  }
-	
-	  return {
-	    matcher: new Minimatch(pattern, { dot: true }),
-	    gmatcher: gmatcher
-	  }
-	}
-	
-	function setopts (self, pattern, options) {
-	  if (!options)
-	    options = {}
-	
-	  // base-matching: just use globstar for that.
-	  if (options.matchBase && -1 === pattern.indexOf("/")) {
-	    if (options.noglobstar) {
-	      throw new Error("base matching requires globstar")
-	    }
-	    pattern = "**/" + pattern
-	  }
-	
-	  self.silent = !!options.silent
-	  self.pattern = pattern
-	  self.strict = options.strict !== false
-	  self.realpath = !!options.realpath
-	  self.realpathCache = options.realpathCache || Object.create(null)
-	  self.follow = !!options.follow
-	  self.dot = !!options.dot
-	  self.mark = !!options.mark
-	  self.nodir = !!options.nodir
-	  if (self.nodir)
-	    self.mark = true
-	  self.sync = !!options.sync
-	  self.nounique = !!options.nounique
-	  self.nonull = !!options.nonull
-	  self.nosort = !!options.nosort
-	  self.nocase = !!options.nocase
-	  self.stat = !!options.stat
-	  self.noprocess = !!options.noprocess
-	
-	  self.maxLength = options.maxLength || Infinity
-	  self.cache = options.cache || Object.create(null)
-	  self.statCache = options.statCache || Object.create(null)
-	  self.symlinks = options.symlinks || Object.create(null)
-	
-	  setupIgnores(self, options)
-	
-	  self.changedCwd = false
-	  var cwd = process.cwd()
-	  if (!ownProp(options, "cwd"))
-	    self.cwd = cwd
-	  else {
-	    self.cwd = options.cwd
-	    self.changedCwd = path.resolve(options.cwd) !== cwd
-	  }
-	
-	  self.root = options.root || path.resolve(self.cwd, "/")
-	  self.root = path.resolve(self.root)
-	  if (process.platform === "win32")
-	    self.root = self.root.replace(/\\/g, "/")
-	
-	  self.nomount = !!options.nomount
-	
-	  // disable comments and negation in Minimatch.
-	  // Note that they are not supported in Glob itself anyway.
-	  options.nonegate = true
-	  options.nocomment = true
-	
-	  self.minimatch = new Minimatch(pattern, options)
-	  self.options = self.minimatch.options
-	}
-	
-	function finish (self) {
-	  var nou = self.nounique
-	  var all = nou ? [] : Object.create(null)
-	
-	  for (var i = 0, l = self.matches.length; i < l; i ++) {
-	    var matches = self.matches[i]
-	    if (!matches || Object.keys(matches).length === 0) {
-	      if (self.nonull) {
-	        // do like the shell, and spit out the literal glob
-	        var literal = self.minimatch.globSet[i]
-	        if (nou)
-	          all.push(literal)
-	        else
-	          all[literal] = true
-	      }
-	    } else {
-	      // had matches
-	      var m = Object.keys(matches)
-	      if (nou)
-	        all.push.apply(all, m)
-	      else
-	        m.forEach(function (m) {
-	          all[m] = true
-	        })
-	    }
-	  }
-	
-	  if (!nou)
-	    all = Object.keys(all)
-	
-	  if (!self.nosort)
-	    all = all.sort(self.nocase ? alphasorti : alphasort)
-	
-	  // at *some* point we statted all of these
-	  if (self.mark) {
-	    for (var i = 0; i < all.length; i++) {
-	      all[i] = self._mark(all[i])
-	    }
-	    if (self.nodir) {
-	      all = all.filter(function (e) {
-	        return !(/\/$/.test(e))
-	      })
-	    }
-	  }
-	
-	  if (self.ignore.length)
-	    all = all.filter(function(m) {
-	      return !isIgnored(self, m)
-	    })
-	
-	  self.found = all
-	}
-	
-	function mark (self, p) {
-	  var abs = makeAbs(self, p)
-	  var c = self.cache[abs]
-	  var m = p
-	  if (c) {
-	    var isDir = c === 'DIR' || Array.isArray(c)
-	    var slash = p.slice(-1) === '/'
-	
-	    if (isDir && !slash)
-	      m += '/'
-	    else if (!isDir && slash)
-	      m = m.slice(0, -1)
-	
-	    if (m !== p) {
-	      var mabs = makeAbs(self, m)
-	      self.statCache[mabs] = self.statCache[abs]
-	      self.cache[mabs] = self.cache[abs]
-	    }
-	  }
-	
-	  return m
-	}
-	
-	// lotta situps...
-	function makeAbs (self, f) {
-	  var abs = f
-	  if (f.charAt(0) === '/') {
-	    abs = path.join(self.root, f)
-	  } else if (isAbsolute(f) || f === '') {
-	    abs = f
-	  } else if (self.changedCwd) {
-	    abs = path.resolve(self.cwd, f)
-	  } else {
-	    abs = path.resolve(f)
-	  }
-	  return abs
-	}
-	
-	
-	// Return true, if pattern ends with globstar '**', for the accompanying parent directory.
-	// Ex:- If node_modules/** is the pattern, add 'node_modules' to ignore list along with it's contents
-	function isIgnored (self, path) {
-	  if (!self.ignore.length)
-	    return false
-	
-	  return self.ignore.some(function(item) {
-	    return item.matcher.match(path) || !!(item.gmatcher && item.gmatcher.match(path))
-	  })
-	}
-	
-	function childrenIgnored (self, path) {
-	  if (!self.ignore.length)
-	    return false
-	
-	  return self.ignore.some(function(item) {
-	    return !!(item.gmatcher && item.gmatcher.match(path))
-	  })
-	}
-
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var wrappy = __webpack_require__(249)
-	var reqs = Object.create(null)
-	var once = __webpack_require__(250)
-	
-	module.exports = wrappy(inflight)
-	
-	function inflight (key, cb) {
-	  if (reqs[key]) {
-	    reqs[key].push(cb)
-	    return null
-	  } else {
-	    reqs[key] = [cb]
-	    return makeres(key)
-	  }
-	}
-	
-	function makeres (key) {
-	  return once(function RES () {
-	    var cbs = reqs[key]
-	    var len = cbs.length
-	    var args = slice(arguments)
-	    for (var i = 0; i < len; i++) {
-	      cbs[i].apply(null, args)
-	    }
-	    if (cbs.length > len) {
-	      // added more in the interim.
-	      // de-zalgo, just in case, but don't call again.
-	      cbs.splice(0, len)
-	      process.nextTick(function () {
-	        RES.apply(null, args)
-	      })
-	    } else {
-	      delete reqs[key]
-	    }
-	  })
-	}
-	
-	function slice (args) {
-	  var length = args.length
-	  var array = []
-	
-	  for (var i = 0; i < length; i++) array[i] = args[i]
-	  return array
-	}
-
-
-/***/ },
-/* 249 */
-/***/ function(module, exports) {
-
-	// Returns a wrapper function that returns a wrapped callback
-	// The wrapper function should do some stuff, and return a
-	// presumably different callback function.
-	// This makes sure that own properties are retained, so that
-	// decorations and such are not lost along the way.
-	module.exports = wrappy
-	function wrappy (fn, cb) {
-	  if (fn && cb) return wrappy(fn)(cb)
-	
-	  if (typeof fn !== 'function')
-	    throw new TypeError('need wrapper function')
-	
-	  Object.keys(fn).forEach(function (k) {
-	    wrapper[k] = fn[k]
-	  })
-	
-	  return wrapper
-	
-	  function wrapper() {
-	    var args = new Array(arguments.length)
-	    for (var i = 0; i < args.length; i++) {
-	      args[i] = arguments[i]
-	    }
-	    var ret = fn.apply(this, args)
-	    var cb = args[args.length-1]
-	    if (typeof ret === 'function' && ret !== cb) {
-	      Object.keys(cb).forEach(function (k) {
-	        ret[k] = cb[k]
-	      })
-	    }
-	    return ret
-	  }
-	}
-
-
-/***/ },
-/* 250 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var wrappy = __webpack_require__(249)
-	module.exports = wrappy(once)
-	
-	once.proto = once(function () {
-	  Object.defineProperty(Function.prototype, 'once', {
-	    value: function () {
-	      return once(this)
-	    },
-	    configurable: true
-	  })
-	})
-	
-	function once (fn) {
-	  var f = function () {
-	    if (f.called) return f.value
-	    f.called = true
-	    return f.value = fn.apply(this, arguments)
-	  }
-	  f.called = false
-	  return f
-	}
-
-
-/***/ },
-/* 251 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var jsonFile = __webpack_require__(252)
-	
-	jsonFile.outputJsonSync = __webpack_require__(254)
-	jsonFile.outputJson = __webpack_require__(255)
-	// aliases
-	jsonFile.outputJSONSync = __webpack_require__(254)
-	jsonFile.outputJSON = __webpack_require__(255)
-	
-	module.exports = jsonFile
-
-
-/***/ },
 /* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var jsonFile = __webpack_require__(253)
-	
-	module.exports = {
-	  // jsonfile exports
-	  readJson: jsonFile.readFile,
-	  readJSON: jsonFile.readFile,
-	  readJsonSync: jsonFile.readFileSync,
-	  readJSONSync: jsonFile.readFileSync,
-	  writeJson: jsonFile.writeFile,
-	  writeJSON: jsonFile.writeFile,
-	  writeJsonSync: jsonFile.writeFileSync,
-	  writeJSONSync: jsonFile.writeFileSync,
-	  spaces: 2 // default in fs-extra
-	}
-
-
-/***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var fs = __webpack_require__(145)
-	
-	function readFile (file, options, callback) {
-	  if (callback == null) {
-	    callback = options
-	    options = {}
-	  }
-	
-	  fs.readFile(file, options, function (err, data) {
-	    if (err) return callback(err)
-	
-	    var obj
-	    try {
-	      obj = JSON.parse(data, options ? options.reviver : null)
-	    } catch (err2) {
-	      err2.message = file + ': ' + err2.message
-	      return callback(err2)
-	    }
-	
-	    callback(null, obj)
-	  })
-	}
-	
-	function readFileSync (file, options) {
-	  options = options || {}
-	  if (typeof options === 'string') {
-	    options = {encoding: options}
-	  }
-	
-	  var shouldThrow = 'throws' in options ? options.throws : true
-	  var content = fs.readFileSync(file, options)
-	
-	  try {
-	    return JSON.parse(content, options.reviver)
-	  } catch (err) {
-	    if (shouldThrow) {
-	      err.message = file + ': ' + err.message
-	      throw err
-	    } else {
-	      return null
-	    }
-	  }
-	}
-	
-	function writeFile (file, obj, options, callback) {
-	  if (callback == null) {
-	    callback = options
-	    options = {}
-	  }
-	
-	  var spaces = typeof options === 'object' && options !== null
-	    ? 'spaces' in options
-	    ? options.spaces : this.spaces
-	    : this.spaces
-	
-	  var str = ''
-	  try {
-	    str = JSON.stringify(obj, options ? options.replacer : null, spaces) + '\n'
-	  } catch (err) {
-	    if (callback) return callback(err, null)
-	  }
-	
-	  fs.writeFile(file, str, options, callback)
-	}
-	
-	function writeFileSync (file, obj, options) {
-	  options = options || {}
-	
-	  var spaces = typeof options === 'object' && options !== null
-	    ? 'spaces' in options
-	    ? options.spaces : this.spaces
-	    : this.spaces
-	
-	  var str = JSON.stringify(obj, options.replacer, spaces) + '\n'
-	  // not sure if fs.writeFileSync returns anything, but just in case
-	  return fs.writeFileSync(file, str, options)
-	}
-	
-	var jsonfile = {
-	  spaces: null,
-	  readFile: readFile,
-	  readFileSync: readFileSync,
-	  writeFile: writeFile,
-	  writeFileSync: writeFileSync
-	}
-	
-	module.exports = jsonfile
-
-
-/***/ },
-/* 254 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var fs = __webpack_require__(224)
-	var path = __webpack_require__(152)
-	var jsonFile = __webpack_require__(252)
-	var mkdir = __webpack_require__(232)
-	
-	function outputJsonSync (file, data, options) {
-	  var dir = path.dirname(file)
-	
-	  if (!fs.existsSync(dir)) {
-	    mkdir.mkdirsSync(dir)
-	  }
-	
-	  jsonFile.writeJsonSync(file, data, options)
-	}
-	
-	module.exports = outputJsonSync
-
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var fs = __webpack_require__(224)
-	var path = __webpack_require__(152)
-	var jsonFile = __webpack_require__(252)
-	var mkdir = __webpack_require__(232)
-	
-	function outputJson (file, data, options, callback) {
-	  if (typeof options === 'function') {
-	    callback = options
-	    options = {}
-	  }
-	
-	  var dir = path.dirname(file)
-	
-	  fs.exists(dir, function (itDoes) {
-	    if (itDoes) return jsonFile.writeJson(file, data, options, callback)
-	
-	    mkdir.mkdirs(dir, function (err) {
-	      if (err) return callback(err)
-	      jsonFile.writeJson(file, data, options, callback)
-	    })
-	  })
-	}
-	
-	module.exports = outputJson
-
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// most of this code was written by Andrew Kelley
-	// licensed under the BSD license: see
-	// https://github.com/andrewrk/node-mv/blob/master/package.json
-	
-	// this needs a cleanup
-	
-	var fs = __webpack_require__(224)
-	var ncp = __webpack_require__(230)
-	var path = __webpack_require__(152)
-	var rimraf = __webpack_require__(239)
-	var mkdirp = __webpack_require__(232).mkdirs
-	
-	function mv (source, dest, options, callback) {
-	  if (typeof options === 'function') {
-	    callback = options
-	    options = {}
-	  }
-	
-	  var shouldMkdirp = ('mkdirp' in options) ? options.mkdirp : true
-	  var clobber = ('clobber' in options) ? options.clobber : false
-	
-	  var limit = options.limit || 16
-	
-	  if (shouldMkdirp) {
-	    mkdirs()
-	  } else {
-	    doRename()
-	  }
-	
-	  function mkdirs () {
-	    mkdirp(path.dirname(dest), function (err) {
-	      if (err) return callback(err)
-	      doRename()
-	    })
-	  }
-	
-	  function doRename () {
-	    if (clobber) {
-	      fs.rename(source, dest, function (err) {
-	        if (!err) return callback()
-	
-	        if (err.code === 'ENOTEMPTY' || err.code === 'EEXIST') {
-	          rimraf(dest, function (err) {
-	            if (err) return callback(err)
-	            options.clobber = false // just clobbered it, no need to do it again
-	            mv(source, dest, options, callback)
-	          })
-	          return
-	        }
-	
-	        // weird Windows shit
-	        if (err.code === 'EPERM') {
-	          setTimeout(function () {
-	            rimraf(dest, function (err) {
-	              if (err) return callback(err)
-	              options.clobber = false
-	              mv(source, dest, options, callback)
-	            })
-	          }, 200)
-	          return
-	        }
-	
-	        if (err.code !== 'EXDEV') return callback(err)
-	        moveAcrossDevice(source, dest, clobber, limit, callback)
-	      })
-	    } else {
-	      fs.link(source, dest, function (err) {
-	        if (err) {
-	          if (err.code === 'EXDEV' || err.code === 'EISDIR' || err.code === 'EPERM') {
-	            moveAcrossDevice(source, dest, clobber, limit, callback)
-	            return
-	          }
-	          callback(err)
-	          return
-	        }
-	        fs.unlink(source, callback)
-	      })
-	    }
-	  }
-	}
-	
-	function moveAcrossDevice (source, dest, clobber, limit, callback) {
-	  fs.stat(source, function (err, stat) {
-	    if (err) {
-	      callback(err)
-	      return
-	    }
-	
-	    if (stat.isDirectory()) {
-	      moveDirAcrossDevice(source, dest, clobber, limit, callback)
-	    } else {
-	      moveFileAcrossDevice(source, dest, clobber, limit, callback)
-	    }
-	  })
-	}
-	
-	function moveFileAcrossDevice (source, dest, clobber, limit, callback) {
-	  var outFlags = clobber ? 'w' : 'wx'
-	  var ins = fs.createReadStream(source)
-	  var outs = fs.createWriteStream(dest, {flags: outFlags})
-	
-	  ins.on('error', function (err) {
-	    ins.destroy()
-	    outs.destroy()
-	    outs.removeListener('close', onClose)
-	
-	    // may want to create a directory but `out` line above
-	    // creates an empty file for us: See #108
-	    // don't care about error here
-	    fs.unlink(dest, function () {
-	      // note: `err` here is from the input stream errror
-	      if (err.code === 'EISDIR' || err.code === 'EPERM') {
-	        moveDirAcrossDevice(source, dest, clobber, limit, callback)
-	      } else {
-	        callback(err)
-	      }
-	    })
-	  })
-	
-	  outs.on('error', function (err) {
-	    ins.destroy()
-	    outs.destroy()
-	    outs.removeListener('close', onClose)
-	    callback(err)
-	  })
-	
-	  outs.once('close', onClose)
-	  ins.pipe(outs)
-	
-	  function onClose () {
-	    fs.unlink(source, callback)
-	  }
-	}
-	
-	function moveDirAcrossDevice (source, dest, clobber, limit, callback) {
-	  var options = {
-	    stopOnErr: true,
-	    clobber: false,
-	    limit: limit
-	  }
-	
-	  function startNcp () {
-	    ncp(source, dest, options, function (errList) {
-	      if (errList) return callback(errList[0])
-	      rimraf(source, callback)
-	    })
-	  }
-	
-	  if (clobber) {
-	    rimraf(dest, function (err) {
-	      if (err) return callback(err)
-	      startNcp()
-	    })
-	  } else {
-	    startNcp()
-	  }
-	}
-	
-	module.exports = {
-	  move: mv
-	}
-
-
-/***/ },
-/* 257 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = {
-	  createOutputStream: __webpack_require__(258)
-	}
-
-
-/***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(145)
-	var mkdir = __webpack_require__(232)
-	var WriteStream = fs.WriteStream
-	
-	function createOutputStream (file, options) {
-	  var dirExists = false
-	  var dir = path.dirname(file)
-	  options = options || {}
-	
-	  // if fd is set with an actual number, file is created, hence directory is too
-	  if (options.fd) {
-	    return fs.createWriteStream(file, options)
-	  } else {
-	    // this hacks the WriteStream constructor from calling open()
-	    options.fd = -1
-	  }
-	
-	  var ws = new WriteStream(file, options)
-	
-	  var oldOpen = ws.open
-	  ws.open = function () {
-	    ws.fd = null // set actual fd
-	    if (dirExists) return oldOpen.call(ws)
-	
-	    // this only runs once on first write
-	    mkdir.mkdirs(dir, function (err) {
-	      if (err) {
-	        ws.destroy()
-	        ws.emit('error', err)
-	        return
-	      }
-	      dirExists = true
-	      oldOpen.call(ws)
-	    })
-	  }
-	
-	  ws.open()
-	
-	  return ws
-	}
-	
-	module.exports = createOutputStream
-
-
-/***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var fs = __webpack_require__(145)
-	var path = __webpack_require__(152)
-	var mkdir = __webpack_require__(232)
-	var remove = __webpack_require__(238)
-	
-	function emptyDir (dir, callback) {
-	  callback = callback || function () {}
-	  fs.readdir(dir, function (err, items) {
-	    if (err) return mkdir.mkdirs(dir, callback)
-	
-	    items = items.map(function (item) {
-	      return path.join(dir, item)
-	    })
-	
-	    deleteItem()
-	
-	    function deleteItem () {
-	      var item = items.pop()
-	      if (!item) return callback()
-	      remove.remove(item, function (err) {
-	        if (err) return callback(err)
-	        deleteItem()
-	      })
-	    }
-	  })
-	}
-	
-	function emptyDirSync (dir) {
-	  var items
-	  try {
-	    items = fs.readdirSync(dir)
-	  } catch (err) {
-	    return mkdir.mkdirsSync(dir)
-	  }
-	
-	  items.forEach(function (item) {
-	    item = path.join(dir, item)
-	    remove.removeSync(item)
-	  })
-	}
-	
-	module.exports = {
-	  emptyDirSync: emptyDirSync,
-	  emptydirSync: emptyDirSync,
-	  emptyDir: emptyDir,
-	  emptydir: emptyDir
-	}
-
-
-/***/ },
-/* 260 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var file = __webpack_require__(261)
-	var link = __webpack_require__(262)
-	var symlink = __webpack_require__(263)
-	
-	module.exports = {
-	  // file
-	  createFile: file.createFile,
-	  createFileSync: file.createFileSync,
-	  ensureFile: file.createFile,
-	  ensureFileSync: file.createFileSync,
-	  // link
-	  createLink: link.createLink,
-	  createLinkSync: link.createLinkSync,
-	  ensureLink: link.createLink,
-	  ensureLinkSync: link.createLinkSync,
-	  // symlink
-	  createSymlink: symlink.createSymlink,
-	  createSymlinkSync: symlink.createSymlinkSync,
-	  ensureSymlink: symlink.createSymlink,
-	  ensureSymlinkSync: symlink.createSymlinkSync
-	}
-
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(224)
-	var mkdir = __webpack_require__(232)
-	
-	function createFile (file, callback) {
-	  function makeFile () {
-	    fs.writeFile(file, '', function (err) {
-	      if (err) return callback(err)
-	      callback()
-	    })
-	  }
-	
-	  fs.exists(file, function (fileExists) {
-	    if (fileExists) return callback()
-	    var dir = path.dirname(file)
-	    fs.exists(dir, function (dirExists) {
-	      if (dirExists) return makeFile()
-	      mkdir.mkdirs(dir, function (err) {
-	        if (err) return callback(err)
-	        makeFile()
-	      })
-	    })
-	  })
-	}
-	
-	function createFileSync (file) {
-	  if (fs.existsSync(file)) return
-	
-	  var dir = path.dirname(file)
-	  if (!fs.existsSync(dir)) {
-	    mkdir.mkdirsSync(dir)
-	  }
-	
-	  fs.writeFileSync(file, '')
-	}
-	
-	module.exports = {
-	  createFile: createFile,
-	  createFileSync: createFileSync,
-	  // alias
-	  ensureFile: createFile,
-	  ensureFileSync: createFileSync
-	}
-
-
-/***/ },
-/* 262 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(224)
-	var mkdir = __webpack_require__(232)
-	
-	function createLink (srcpath, dstpath, callback) {
-	  function makeLink (srcpath, dstpath) {
-	    fs.link(srcpath, dstpath, function (err) {
-	      if (err) return callback(err)
-	      callback(null)
-	    })
-	  }
-	
-	  fs.exists(dstpath, function (destinationExists) {
-	    if (destinationExists) return callback(null)
-	    fs.lstat(srcpath, function (err, stat) {
-	      if (err) {
-	        err.message = err.message.replace('lstat', 'ensureLink')
-	        return callback(err)
-	      }
-	
-	      var dir = path.dirname(dstpath)
-	      fs.exists(dir, function (dirExists) {
-	        if (dirExists) return makeLink(srcpath, dstpath)
-	        mkdir.mkdirs(dir, function (err) {
-	          if (err) return callback(err)
-	          makeLink(srcpath, dstpath)
-	        })
-	      })
-	    })
-	  })
-	}
-	
-	function createLinkSync (srcpath, dstpath, callback) {
-	  var destinationExists = fs.existsSync(dstpath)
-	  if (destinationExists) return undefined
-	
-	  try {
-	    fs.lstatSync(srcpath)
-	  } catch (err) {
-	    err.message = err.message.replace('lstat', 'ensureLink')
-	    throw err
-	  }
-	
-	  var dir = path.dirname(dstpath)
-	  var dirExists = fs.existsSync(dir)
-	  if (dirExists) return fs.linkSync(srcpath, dstpath)
-	  mkdir.mkdirsSync(dir)
-	
-	  return fs.linkSync(srcpath, dstpath)
-	}
-	
-	module.exports = {
-	  createLink: createLink,
-	  createLinkSync: createLinkSync,
-	  // alias
-	  ensureLink: createLink,
-	  ensureLinkSync: createLinkSync
-	}
-
-
-/***/ },
-/* 263 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(224)
-	var _mkdirs = __webpack_require__(232)
-	var mkdirs = _mkdirs.mkdirs
-	var mkdirsSync = _mkdirs.mkdirsSync
-	
-	var _symlinkPaths = __webpack_require__(264)
-	var symlinkPaths = _symlinkPaths.symlinkPaths
-	var symlinkPathsSync = _symlinkPaths.symlinkPathsSync
-	
-	var _symlinkType = __webpack_require__(265)
-	var symlinkType = _symlinkType.symlinkType
-	var symlinkTypeSync = _symlinkType.symlinkTypeSync
-	
-	function createSymlink (srcpath, dstpath, type, callback) {
-	  callback = (typeof type === 'function') ? type : callback
-	  type = (typeof type === 'function') ? false : type
-	
-	  fs.exists(dstpath, function (destinationExists) {
-	    if (destinationExists) return callback(null)
-	    symlinkPaths(srcpath, dstpath, function (err, relative) {
-	      if (err) return callback(err)
-	      srcpath = relative.toDst
-	      symlinkType(relative.toCwd, type, function (err, type) {
-	        if (err) return callback(err)
-	        var dir = path.dirname(dstpath)
-	        fs.exists(dir, function (dirExists) {
-	          if (dirExists) return fs.symlink(srcpath, dstpath, type, callback)
-	          mkdirs(dir, function (err) {
-	            if (err) return callback(err)
-	            fs.symlink(srcpath, dstpath, type, callback)
-	          })
-	        })
-	      })
-	    })
-	  })
-	}
-	
-	function createSymlinkSync (srcpath, dstpath, type, callback) {
-	  callback = (typeof type === 'function') ? type : callback
-	  type = (typeof type === 'function') ? false : type
-	
-	  var destinationExists = fs.existsSync(dstpath)
-	  if (destinationExists) return undefined
-	
-	  var relative = symlinkPathsSync(srcpath, dstpath)
-	  srcpath = relative.toDst
-	  type = symlinkTypeSync(relative.toCwd, type)
-	  var dir = path.dirname(dstpath)
-	  var exists = fs.existsSync(dir)
-	  if (exists) return fs.symlinkSync(srcpath, dstpath, type)
-	  mkdirsSync(dir)
-	  return fs.symlinkSync(srcpath, dstpath, type)
-	}
-	
-	module.exports = {
-	  createSymlink: createSymlink,
-	  createSymlinkSync: createSymlinkSync,
-	  // alias
-	  ensureSymlink: createSymlink,
-	  ensureSymlinkSync: createSymlinkSync
-	}
-
-
-/***/ },
-/* 264 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	// path.isAbsolute shim for Node.js 0.10 support
-	path.isAbsolute = (path.isAbsolute) ? path.isAbsolute : __webpack_require__(245)
-	var fs = __webpack_require__(224)
-	
-	/**
-	 * Function that returns two types of paths, one relative to symlink, and one
-	 * relative to the current working directory. Checks if path is absolute or
-	 * relative. If the path is relative, this function checks if the path is
-	 * relative to symlink or relative to current working directory. This is an
-	 * initiative to find a smarter `srcpath` to supply when building symlinks.
-	 * This allows you to determine which path to use out of one of three possible
-	 * types of source paths. The first is an absolute path. This is detected by
-	 * `path.isAbsolute()`. When an absolute path is provided, it is checked to
-	 * see if it exists. If it does it's used, if not an error is returned
-	 * (callback)/ thrown (sync). The other two options for `srcpath` are a
-	 * relative url. By default Node's `fs.symlink` works by creating a symlink
-	 * using `dstpath` and expects the `srcpath` to be relative to the newly
-	 * created symlink. If you provide a `srcpath` that does not exist on the file
-	 * system it results in a broken symlink. To minimize this, the function
-	 * checks to see if the 'relative to symlink' source file exists, and if it
-	 * does it will use it. If it does not, it checks if there's a file that
-	 * exists that is relative to the current working directory, if does its used.
-	 * This preserves the expectations of the original fs.symlink spec and adds
-	 * the ability to pass in `relative to current working direcotry` paths.
-	 */
-	
-	function symlinkPaths (srcpath, dstpath, callback) {
-	  if (path.isAbsolute(srcpath)) {
-	    return fs.lstat(srcpath, function (err, stat) {
-	      if (err) {
-	        err.message = err.message.replace('lstat', 'ensureSymlink')
-	        return callback(err)
-	      }
-	      return callback(null, {
-	        'toCwd': srcpath,
-	        'toDst': srcpath
-	      })
-	    })
-	  } else {
-	    var dstdir = path.dirname(dstpath)
-	    var relativeToDst = path.join(dstdir, srcpath)
-	    return fs.exists(relativeToDst, function (exists) {
-	      if (exists) {
-	        return callback(null, {
-	          'toCwd': relativeToDst,
-	          'toDst': srcpath
-	        })
-	      } else {
-	        return fs.lstat(srcpath, function (err, stat) {
-	          if (err) {
-	            err.message = err.message.replace('lstat', 'ensureSymlink')
-	            return callback(err)
-	          }
-	          return callback(null, {
-	            'toCwd': srcpath,
-	            'toDst': path.relative(dstdir, srcpath)
-	          })
-	        })
-	      }
-	    })
-	  }
-	}
-	
-	function symlinkPathsSync (srcpath, dstpath) {
-	  var exists
-	  if (path.isAbsolute(srcpath)) {
-	    exists = fs.existsSync(srcpath)
-	    if (!exists) throw new Error('absolute srcpath does not exist')
-	    return {
-	      'toCwd': srcpath,
-	      'toDst': srcpath
-	    }
-	  } else {
-	    var dstdir = path.dirname(dstpath)
-	    var relativeToDst = path.join(dstdir, srcpath)
-	    exists = fs.existsSync(relativeToDst)
-	    if (exists) {
-	      return {
-	        'toCwd': relativeToDst,
-	        'toDst': srcpath
-	      }
-	    } else {
-	      exists = fs.existsSync(srcpath)
-	      if (!exists) throw new Error('relative srcpath does not exist')
-	      return {
-	        'toCwd': srcpath,
-	        'toDst': path.relative(dstdir, srcpath)
-	      }
-	    }
-	  }
-	}
-	
-	module.exports = {
-	  'symlinkPaths': symlinkPaths,
-	  'symlinkPathsSync': symlinkPathsSync
-	}
-
-
-/***/ },
-/* 265 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var fs = __webpack_require__(224)
-	
-	function symlinkType (srcpath, type, callback) {
-	  callback = (typeof type === 'function') ? type : callback
-	  type = (typeof type === 'function') ? false : type
-	  if (type) return callback(null, type)
-	  fs.lstat(srcpath, function (err, stats) {
-	    if (err) return callback(null, 'file')
-	    type = (stats && stats.isDirectory()) ? 'dir' : 'file'
-	    callback(null, type)
-	  })
-	}
-	
-	function symlinkTypeSync (srcpath, type) {
-	  if (type) return type
-	  try {
-	    var stats = fs.lstatSync(srcpath)
-	  } catch (e) {
-	    return 'file'
-	  }
-	  return (stats && stats.isDirectory()) ? 'dir' : 'file'
-	}
-	
-	module.exports = {
-	  symlinkType: symlinkType,
-	  symlinkTypeSync: symlinkTypeSync
-	}
-
-
-/***/ },
-/* 266 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var path = __webpack_require__(152)
-	var fs = __webpack_require__(224)
-	var mkdir = __webpack_require__(232)
-	
-	function outputFile (file, data, encoding, callback) {
-	  if (typeof encoding === 'function') {
-	    callback = encoding
-	    encoding = 'utf8'
-	  }
-	
-	  var dir = path.dirname(file)
-	  fs.exists(dir, function (itDoes) {
-	    if (itDoes) return fs.writeFile(file, data, encoding, callback)
-	
-	    mkdir.mkdirs(dir, function (err) {
-	      if (err) return callback(err)
-	
-	      fs.writeFile(file, data, encoding, callback)
-	    })
-	  })
-	}
-	
-	function outputFileSync (file, data, encoding) {
-	  var dir = path.dirname(file)
-	  if (fs.existsSync(dir)) {
-	    return fs.writeFileSync.apply(fs, arguments)
-	  }
-	  mkdir.mkdirsSync(dir)
-	  fs.writeFileSync.apply(fs, arguments)
-	}
-	
-	module.exports = {
-	  outputFile: outputFile,
-	  outputFileSync: outputFileSync
-	}
-
-
-/***/ },
-/* 267 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var klaw = __webpack_require__(268)
-	
-	module.exports = {
-	  walk: klaw
-	}
-
-
-/***/ },
-/* 268 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var assert = __webpack_require__(155)
-	var fs = __webpack_require__(145)
-	var path = __webpack_require__(152)
-	var Readable = __webpack_require__(13).Readable
-	var util = __webpack_require__(10)
-	var assign = __webpack_require__(269)
-	
-	function Walker (dir, options) {
-	  assert.strictEqual(typeof dir, 'string', '`dir` parameter should be of type string. Got type: ' + typeof dir)
-	  var defaultStreamOptions = { objectMode: true }
-	  var defaultOpts = { queueMethod: 'shift', pathSorter: undefined }
-	  options = assign(defaultOpts, options, defaultStreamOptions)
-	
-	  Readable.call(this, options)
-	  this.root = path.resolve(dir)
-	  this.paths = [this.root]
-	  this.options = options
-	}
-	util.inherits(Walker, Readable)
-	
-	Walker.prototype._read = function () {
-	  if (this.paths.length === 0) return this.push(null)
-	  var self = this
-	  var pathItem = this.paths[this.options.queueMethod]()
-	
-	  fs.lstat(pathItem, function (err, stats) {
-	    var item = { path: pathItem, stats: stats }
-	    if (err) return self.emit('error', err, item)
-	    if (!stats.isDirectory()) return self.push(item)
-	
-	    fs.readdir(pathItem, function (err, pathItems) {
-	      if (err) {
-	        self.push(item)
-	        return self.emit('error', err, item)
-	      }
-	
-	      pathItems = pathItems.map(function (part) { return path.join(pathItem, part) })
-	      if (self.options.pathSorter) pathItems.sort(self.options.pathSorter)
-	      pathItems.forEach(function (pi) { self.paths.push(pi) })
-	
-	      self.push(item)
-	    })
-	  })
-	}
-	
-	function walk (root, options) {
-	  return new Walker(root, options)
-	}
-	
-	module.exports = walk
-
-
-/***/ },
-/* 269 */
-/***/ function(module, exports) {
-
-	// simple mutable assign (extracted from fs-extra)
-	// I really like object-assign package, but I wanted a lean package with zero deps
-	function _assign () {
-	  var args = [].slice.call(arguments).filter(function (i) { return i })
-	  var dest = args.shift()
-	  args.forEach(function (src) {
-	    Object.keys(src).forEach(function (key) {
-	      dest[key] = src[key]
-	    })
-	  })
-	
-	  return dest
-	}
-	
-	// thank you baby Jesus for Node v4 and Object.assign
-	module.exports = Object.assign || _assign
-
-
-/***/ },
-/* 270 */
-/***/ function(module, exports) {
-
-	
-	'use strict';
-	
-	module.exports =
-	
-	    /**
-	     * Takes in a {key:val} and returns a key:key
-	     *  
-	     * @param object {key1 : val1 ... keyn:valn}
-	     */
-	    function(obj) {
-	        var key;
-	        var mirrored = {};
-	
-	        if ( obj && typeof obj === 'object' ) {
-	            for (key in obj) {
-	                if (obj.hasOwnProperty(key)) {
-	                    mirrored[key] = key;
-	                }
-	            }
-	        }
-	        return mirrored;
-	    };
-
-
-/***/ },
-/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48688,23 +46800,23 @@
 	
 	'use strict';
 	
-	let _ = __webpack_require__(220);
-	let array = __webpack_require__(272);
+	let _ = __webpack_require__(208);
+	let array = __webpack_require__(253);
 	
 	/**
 	 * Import Base.
 	 */
-	let Base = __webpack_require__(273);
+	let Base = __webpack_require__(254);
 	
 	/**
 	 * Import key path helpers.
 	 */
-	let keyPathHelpers = __webpack_require__(274);
+	let keyPathHelpers = __webpack_require__(255);
 	
 	/**
 	 * Configure debugger.
 	 */
-	let debug = __webpack_require__(275)('electron-settings:watcher');
+	let debug = __webpack_require__(256)('electron-settings:watcher');
 	
 	/**
 	 * @class Watcher
@@ -48714,8 +46826,6 @@
 	
 	  /**
 	   * Watcher class constructor.
-	   *
-	   * @constructor
 	   */
 	  constructor() {
 	    super();
@@ -48801,7 +46911,7 @@
 	   * @private
 	   */
 	  _removeFromWatchList(key) {
-	    debug('removed ' + key + ' from watch list');
+	    debug('removed "' + key + '" from watch list');
 	
 	    this._watchList.delete(key);
 	  }
@@ -48823,7 +46933,7 @@
 
 
 /***/ },
-/* 272 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	(function (root, factory) {
@@ -48859,7 +46969,7 @@
 
 
 /***/ },
-/* 273 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -48869,7 +46979,7 @@
 	
 	'use strict';
 	
-	let EventEmitter = __webpack_require__(9).EventEmitter;
+	let EventEmitter = __webpack_require__(6).EventEmitter;
 	
 	/**
 	 * @class Base
@@ -48881,11 +46991,12 @@
 
 
 /***/ },
-/* 274 */
+/* 255 */
 /***/ function(module, exports) {
 
 	/**
-	 * @fileoverview Key-path helpers. Adapted from atom/key-path-helpers.
+	 * Key-path helpers. Adapted from atom/key-path-helpers.
+	 *
 	 * @see {@link https://github.com/atom/key-path-helpers}
 	 */
 	
@@ -49058,7 +47169,7 @@
 
 
 /***/ },
-/* 275 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -49066,8 +47177,8 @@
 	 * Module dependencies.
 	 */
 	
-	var tty = __webpack_require__(276);
-	var util = __webpack_require__(10);
+	var tty = __webpack_require__(257);
+	var util = __webpack_require__(7);
 	
 	/**
 	 * This is the Node.js implementation of `debug()`.
@@ -49075,7 +47186,7 @@
 	 * Expose `debug()` as the module.
 	 */
 	
-	exports = module.exports = __webpack_require__(277);
+	exports = module.exports = __webpack_require__(258);
 	exports.log = log;
 	exports.formatArgs = formatArgs;
 	exports.save = save;
@@ -49230,7 +47341,7 @@
 	
 	    case 'PIPE':
 	    case 'TCP':
-	      var net = __webpack_require__(279);
+	      var net = __webpack_require__(260);
 	      stream = new net.Socket({
 	        fd: fd,
 	        readable: false,
@@ -49273,13 +47384,13 @@
 
 
 /***/ },
-/* 276 */
+/* 257 */
 /***/ function(module, exports) {
 
 	module.exports = require("tty");
 
 /***/ },
-/* 277 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -49295,7 +47406,7 @@
 	exports.disable = disable;
 	exports.enable = enable;
 	exports.enabled = enabled;
-	exports.humanize = __webpack_require__(278);
+	exports.humanize = __webpack_require__(259);
 	
 	/**
 	 * The currently active debug mode names, and names to skip.
@@ -49482,7 +47593,7 @@
 
 
 /***/ },
-/* 278 */
+/* 259 */
 /***/ function(module, exports) {
 
 	/**
@@ -49613,10 +47724,426 @@
 
 
 /***/ },
-/* 279 */
+/* 260 */
 /***/ function(module, exports) {
 
 	module.exports = require("net");
+
+/***/ },
+/* 261 */
+/***/ function(module, exports) {
+
+	module.exports = require("electron");
+
+/***/ },
+/* 262 */
+/***/ function(module, exports) {
+
+	module.exports = require("app");
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	  if (true) {
+	    // AMD. Register as an anonymous module unless amdModuleId is set
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(29)], __WEBPACK_AMD_DEFINE_RESULT__ = function (a0) {
+	      return (root['DateRange'] = factory(a0));
+	    }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (typeof exports === 'object') {
+	    // Node. Does not work with strict CommonJS, but
+	    // only CommonJS-like environments that support module.exports,
+	    // like Node.
+	    module.exports = factory(require("moment"));
+	  } else {
+	    root['DateRange'] = factory(moment);
+	  }
+	}(this, function (moment) {
+	
+	//-----------------------------------------------------------------------------
+	// Contstants
+	//-----------------------------------------------------------------------------
+	
+	
+	
+	var INTERVALS = {
+	  year:   true,
+	  month:  true,
+	  week:   true,
+	  day:    true,
+	  hour:   true,
+	  minute: true,
+	  second: true
+	};
+	
+	
+	//-----------------------------------------------------------------------------
+	// Date Ranges
+	//-----------------------------------------------------------------------------
+	
+	/**
+	 * DateRange class to store ranges and query dates.
+	 *
+	 * @constructor
+	 * @param {(Moment|Date)} start Start of interval
+	 * @param {(Moment|Date)} end End of interval
+	 *//**
+	 * DateRange class to store ranges and query dates.
+	 *
+	 * @constructor
+	 * @param {!Array} range Array containing start and end dates.
+	 *//**
+	 * DateRange class to store ranges and query dates.
+	 *
+	 * @constructor
+	 * @param {!String} range String formatted as an IS0 8601 time interval
+	 */
+	function DateRange(start, end) {
+	  var parts;
+	  var s = start;
+	  var e = end;
+	
+	  if (arguments.length === 1 || end === undefined) {
+	    if (typeof start === 'object' && start.length === 2) {
+	      s = start[0];
+	      e = start[1];
+	    }
+	    else if (typeof start === 'string') {
+	      parts = start.split('/');
+	      s = parts[0];
+	      e = parts[1];
+	    }
+	  }
+	
+	  this.start = (s === null) ? moment(-8640000000000000) : moment(s);
+	  this.end   = (e === null) ? moment(8640000000000000) : moment(e);
+	}
+	
+	/**
+	 * Constructor for prototype.
+	 *
+	 * @type {DateRange}
+	 */
+	DateRange.prototype.constructor = DateRange;
+	
+	/**
+	 * Deep clone range.
+	 *
+	 * @return {!DateRange}
+	 */
+	DateRange.prototype.clone = function() {
+	  return moment().range(this.start, this.end);
+	};
+	
+	/**
+	 * Determine if the current interval contains a given moment/date/range.
+	 *
+	 * @param {(Moment|Date|DateRange)} other Date to check
+	 * @param {!boolean} exclusive True if the to value is exclusive
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.contains = function(other, exclusive) {
+	  var start = this.start;
+	  var end   = this.end;
+	
+	  if (other instanceof DateRange) {
+	    return start <= other.start && (end > other.end || (end.isSame(other.end) && !exclusive));
+	  }
+	  else {
+	    return start <= other && (end > other || (end.isSame(other) && !exclusive));
+	  }
+	};
+	
+	/**
+	 * Determine if the current date range overlaps a given date range.
+	 *
+	 * @param {!DateRange} range Date range to check
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.overlaps = function(range) {
+	  return this.intersect(range) !== null;
+	};
+	
+	/**
+	 * Determine the intersecting periods from one or more date ranges.
+	 *
+	 * @param {!DateRange} other A date range to intersect with this one
+	 *
+	 * @return {DateRange} Returns the intersecting date or `null` if the ranges do
+	 *                     not intersect
+	 */
+	DateRange.prototype.intersect = function(other) {
+	  var start = this.start;
+	  var end   = this.end;
+	
+	  if ((start <= other.start) && (other.start < end) && (end < other.end)) {
+	    return new DateRange(other.start, end);
+	  }
+	  else if ((other.start < start) && (start < other.end) && (other.end <= end)) {
+	    return new DateRange(start, other.end);
+	  }
+	  else if ((other.start < start) && (start <= end) && (end < other.end)) {
+	    return this;
+	  }
+	  else if ((start <= other.start) && (other.start <= other.end) && (other.end <= end)) {
+	    return other;
+	  }
+	
+	  return null;
+	};
+	
+	/**
+	 * Merge date ranges if they intersect.
+	 *
+	 * @param {!DateRange} other A date range to add to this one
+	 *
+	 * @return {DateRange} Returns the new `DateRange` or `null` if they do not
+	 *                     overlap
+	 */
+	DateRange.prototype.add = function(other) {
+	  if (this.overlaps(other)) {
+	    return new DateRange(moment.min(this.start, other.start), moment.max(this.end, other.end));
+	  }
+	
+	  return null;
+	};
+	
+	/**
+	 * Subtract one range from another.
+	 *
+	 * @param {!DateRange} other A date range to substract from this one
+	 *
+	 * @return {!Array<DateRange>}
+	 */
+	DateRange.prototype.subtract = function(other) {
+	  var start = this.start;
+	  var end   = this.end;
+	
+	  if (this.intersect(other) === null) {
+	    return [this];
+	  }
+	  else if ((other.start <= start) && (start < end) && (end <= other.end)) {
+	    return [];
+	  }
+	  else if ((other.start <= start) && (start < other.end) && (other.end < end)) {
+	    return [new DateRange(other.end, end)];
+	  }
+	  else if ((start < other.start) && (other.start < end) && (end <= other.end)) {
+	    return [new DateRange(start, other.start)];
+	  }
+	  else if ((start < other.start) && (other.start < other.end) && (other.end < end)) {
+	    return [new DateRange(start, other.start), new DateRange(other.end, end)];
+	  }
+	  else if ((start < other.start) && (other.start < end) && (other.end < end)) {
+	    return [new DateRange(start, other.start), new DateRange(other.start, end)];
+	  }
+	};
+	
+	/**
+	 * Build a n array of dates.
+	 *
+	 * @param {(!DateRange|String)} range Date range to be used for iteration or
+	 *                                    shorthand string (shorthands:
+	 *                                    http://momentjs.com/docs/#/manipulating/add/)
+	 * @param {!boolean} exclusive Indicate that the end of the range should not
+	 *                             be included in the iter.
+	 *
+	 * @return {!Array}
+	 */
+	DateRange.prototype.toArray = function(by, exclusive) {
+	  var acc = [];
+	  this.by(by, function(unit) {
+	    acc.push(unit);
+	  }, exclusive);
+	  return acc;
+	};
+	
+	/**
+	 * Iterate over the date range by a given date range, executing a function
+	 * for each sub-range.
+	 *
+	 * @param {(!DateRange|String)} range Date range to be used for iteration or
+	 *                                    shorthand string (shorthands:
+	 *                                    http://momentjs.com/docs/#/manipulating/add/)
+	 * @param {!DateRange~by} hollaback Callback
+	 * @param {!boolean} exclusive Indicate that the end of the range should not
+	 *                             be included in the iter.
+	 *
+	 * @return {DateRange} `this`
+	 */
+	DateRange.prototype.by = function(range, hollaback, exclusive) {
+	  if (typeof range === 'string') {
+	    _byString.call(this, range, hollaback, exclusive);
+	  }
+	  else {
+	    _byRange.call(this, range, hollaback, exclusive);
+	  }
+	  return this;
+	};
+	
+	
+	/**
+	 * Callback executed for each sub-range.
+	 *
+	 * @callback DateRange~by
+	 *
+	 * @param {!Moment} current Current moment object for iteration
+	 */
+	
+	/**
+	 * @private
+	 */
+	function _byString(interval, hollaback, exclusive) {
+	  var current = moment(this.start);
+	
+	  while (this.contains(current, exclusive)) {
+	    hollaback.call(this, current.clone());
+	    current.add(1, interval);
+	  }
+	}
+	
+	/**
+	 * @private
+	 */
+	function _byRange(interval, hollaback, exclusive) {
+	  var div = this / interval;
+	  var l = Math.floor(div);
+	
+	  if (l === Infinity) { return; }
+	  if (l === div && exclusive) {
+	    l--;
+	  }
+	
+	  for (var i = 0; i <= l; i++) {
+	    hollaback.call(this, moment(this.start.valueOf() + interval.valueOf() * i));
+	  }
+	}
+	
+	/**
+	 * Date range formatted as an [ISO8601 Time
+	 * Interval](http://en.wikipedia.org/wiki/ISO_8601#Time_intervals).
+	 *
+	 * @return {!String}
+	 */
+	DateRange.prototype.toString = function() {
+	  return this.start.format() + '/' + this.end.format();
+	};
+	
+	/**
+	 * Date range in milliseconds. Allows basic coercion math of date ranges.
+	 *
+	 * @return {!number}
+	 */
+	DateRange.prototype.valueOf = function() {
+	  return this.end - this.start;
+	};
+	
+	/**
+	 * Center date of the range.
+	 *
+	 * @return {!Moment}
+	 */
+	DateRange.prototype.center = function() {
+	  var center = this.start + this.diff() / 2;
+	  return moment(center);
+	};
+	
+	/**
+	 * Date range toDate
+	 *
+	 * @return {!Array<Date>}
+	 */
+	DateRange.prototype.toDate = function() {
+	  return [this.start.toDate(), this.end.toDate()];
+	};
+	
+	/**
+	 * Determine if this date range is the same as another.
+	 *
+	 * @param {!DateRange} other Another date range to compare to
+	 *
+	 * @return {!boolean}
+	 */
+	DateRange.prototype.isSame = function(other) {
+	  return this.start.isSame(other.start) && this.end.isSame(other.end);
+	};
+	
+	/**
+	 * The difference of the end vs start.
+	 *
+	 * @param {number} unit Unit of difference, if no unit is passed in
+	 *                      milliseconds are returned. E.g.: `"days"`, `"months"`,
+	 *                      etc...
+	 *
+	 * @return {!number}
+	 */
+	DateRange.prototype.diff = function(unit) {
+	  return this.end.diff(this.start, unit);
+	};
+	
+	
+	//-----------------------------------------------------------------------------
+	// Moment Extensions
+	//-----------------------------------------------------------------------------
+	
+	/**
+	 * Build a date range.
+	 *
+	 * @param {(Moment|Date)} start Start of range
+	 * @param {(Moment|Date)} end End of range
+	 *
+	 * @this {Moment}
+	 *
+	 * @return {!DateRange}
+	 */
+	moment.range = function(start, end) {
+	  if (start in INTERVALS) {
+	    return new DateRange(moment(this).startOf(start), moment(this).endOf(start));
+	  }
+	  else {
+	    return new DateRange(start, end);
+	  }
+	};
+	
+	/**
+	 * Expose constructor
+	 *
+	 * @const
+	 */
+	moment.range.constructor = DateRange;
+	
+	/**
+	 * @deprecated
+	 */
+	moment.fn.range = moment.range;
+	
+	/**
+	 * Check if the current moment is within a given date range.
+	 *
+	 * @param {!DateRange} range Date range to check
+	 *
+	 * @this {Moment}
+	 *
+	 * @return {!boolean}
+	 */
+	moment.fn.within = function(range) {
+	  return range.contains(this._d);
+	};
+	
+	
+	//-----------------------------------------------------------------------------
+	// Export
+	//-----------------------------------------------------------------------------
+	
+	
+	
+	return DateRange;
+	
+	}));
+
 
 /***/ }
 /******/ ]);

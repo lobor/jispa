@@ -1,16 +1,13 @@
 // var BrowserConsoleBuildErrorPlugin = require('browser-console-build-error-webpack-plugin');
  
 module.exports = {
-    entry: "./src/js/app.js",
+    entry: "./src/Jaspi.js",
     output: {
         path: __dirname,
         filename: "./dist/js/script.js",
     },
     devtool: 'source-map',
     module: {
-      noParse: [
-        /XModule[\\\/]angular-moment\.js$/	
-      ],
       loaders: [
         { test: "\.html$", loader: "html" },
         { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"},

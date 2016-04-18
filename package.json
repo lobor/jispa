@@ -4,10 +4,8 @@
   "description": "Rasp",
   "main": "electron.js",
   "scripts": {
-    "build": "npm run compileJS && npm start",
-    "start": "electron electron.js",
-    "compileJS": "webpack --config webpack.config.js",
-    "compileCSS": "stylus src/styl/style.styl --out dist/css/style.css"
+    "start": "electron-spawn index.js",
+    "build": "webpack --config webpack.config.js"
   },
   "babel": {
     "presets": [
@@ -17,19 +15,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "animate.css": "^3.5.1",
-    "browser-battery": "^2.0.0",
-    "electron-speech": "^1.0.3",
-    "ionic-sdk": "github:driftyco/ionic",
-    "ionicons": "^3.0.0-alpha.3",
-    "weather-icons": "^1.3.2"
-  },
   "devDependencies": {
-    "angular": "^1.5.0",
+    "electron-spawn": "^4.1.1",
     "moment-range": "^2.2.0",
     "q": "^1.4.1",
-    "angular-ui-router": "^0.2.18",
     "electron-settings": "^1.0.2",
     "is-online": "^5.1.1",
     "moment": "^2.12.0",
@@ -44,6 +33,10 @@
     "stylus": "^0.53.0",
     "babel-loader": "^6.2.2",
     "electron-prebuilt": "^0.36.0",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "electron-speech": "^1.0.3"
+  },
+  "dependencies": {
+    "limdu": "github:erelsgl/limdu"
   }
 }
